@@ -21,17 +21,45 @@ As developers, we've all started countless projects that seemed exciting at firs
 
 ## Getting Started
 
-Installation
+1. Clone the repo
+
+```bash
+git clone https://github.com/Juniors-Dev/Frontend-Productivity-Graveyard.git
+cd frontend-productivity-graveyard
+```
+
+2. Install Dependencies
 
 ```bash
 npm install
 ```
 
-Running the project
+3. Set up development tools
 
 ```bash
-#Start the development server
+# Husky will be installed automatically via the prepare script
+# Verify Husky installation
+npx husky --version
+```
+
+### Development
+
+1. Start the development server
+
+```bash
 npm run start
+```
+
+2. Run linting
+
+```bash
+npm run lint
+```
+
+3. Format code
+
+```bash
+npm run format
 ```
 
 ### Development Workflow
@@ -41,6 +69,17 @@ The project uses several tools to ensure code quality:
 - ESLint: For JavaScript linting
 - Prettier: For code formatting
 - Husky: For pre-commit hooks that run linting and formatting
+
+When you commit changes, Husky will automatically:
+
+- Run ESLint on JavaScript files
+- Format all code with Prettier
+
+If you encounter any issues with the pre-commit hooks, check that Husky is properly installed:
+
+```bash
+npm run prepare
+```
 
 ## Project Structure
 
@@ -82,5 +121,4 @@ The project uses several tools to ensure code quality:
 ## Author
 
 This project is created by the Juniors-Dev collaborative group, a team of web developer students at Noroff.
-
 https://github.com/Juniors-Dev
