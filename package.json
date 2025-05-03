@@ -9,11 +9,6 @@
     "lint": "eslint .",
     "prepare": "husky install"
   },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
-  },
   "keywords": [],
   "author": "",
   "license": "ISC",
@@ -26,10 +21,10 @@
     "lint-staged": "^15.5.1"
   },
   "lint-staged": {
-    "*.{js,html,md,css,js}": [
+    "*.{html,css,md}": "prettier --write",
+    "*.js": [
+      "eslint --cache --fix",
       "prettier --write"
-    ],
-    "*.js": "eslint --cache --fix",
-    "*.{js,css,md}": "prettier --write"
+    ]
   }
 }
