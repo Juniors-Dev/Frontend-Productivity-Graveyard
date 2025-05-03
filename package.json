@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "format": "prettier --write .",
     "lint": "eslint .",
-    "prepare": "husky && husky install"
+    "prepare": "husky install"
   },
   "keywords": [],
   "author": "",
@@ -19,6 +19,11 @@
     "prettier": "^3.5.3",
     "husky": "^9.1.7",
     "lint-staged": "^15.5.1"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
   },
   "lint-staged": {
     "*.{js,html,md,css,js}": [
