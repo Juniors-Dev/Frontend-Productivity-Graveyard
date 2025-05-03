@@ -57,7 +57,6 @@ The project uses several tools to ensure code quality:
 
 ### Available Scripts
 
-- npm run start - Start the development server
 - npm run lint - Run ESLint to check code quality
 - npm run format - Run Prettier to format code
 
