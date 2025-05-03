@@ -40,10 +40,11 @@ The project uses several tools to ensure code quality:
 
 - ESLint: For JavaScript linting
 - Prettier: For code formatting
-- Husky (planned): For pre-commit hooks that run linting and formatting
+- Husky: For pre-commit hooks that run linting and formatting
 
 ## Project Structure
 
+```bash
 ├── assets/ # Fonts and images
 ├── css/ # Global styles
 ├── src/
@@ -54,11 +55,12 @@ The project uses several tools to ensure code quality:
 │ └── projects/
 ├── index.html # Main entry point
 └── profile.html # User profile page
+```
 
 ### Available Scripts
 
-- npm run lint - Run ESLint to check code quality
 - npm run format - Run Prettier to format code
+- npm run lint - Run ESLint to check code quality
 
 ## Technologies
 
@@ -67,6 +69,7 @@ The project uses several tools to ensure code quality:
 - JavaScript (ES6+, Modules)
 - ESLint
 - Prettier
+- Husky
 
 ### Future Enhancements (possible)
 

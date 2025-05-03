@@ -9,7 +9,7 @@ function createHeader() {
   header.appendChild(h1);
   const h2 = document.createElement("h2");
   h2.textContent = "This test is going so well?";
-  h1.appendChild(h3);
+  h1.appendChild(h2);
   return header;
 }
 
