@@ -21,12 +21,12 @@
     "lint-staged": "^15.5.1"
   },
   "lint-staged": {
+    "*.{js,html,md,css,js}": [
+      "prettier -- write"
+    ],
     "*.js": [
       "prettier --write",
       "eslint --cache --fix"
-    ],
-    "*.{js,html,md,css,js}": [
-      "prettier -- write"
     ]
   }
 }
