@@ -28,10 +28,10 @@ git clone https://github.com/Juniors-Dev/Frontend-Productivity-Graveyard.git
 cd frontend-productivity-graveyard
 ```
 
-2. Install Dependencies
+2. Install all dependencies & Husky hooks
 
 ```bash
-npm install
+npm run setup 
 ```
 
 3. Set up development tools
@@ -46,21 +46,16 @@ npx husky --version
 
 1. Start the development server
 
-```bash
-npm run start
-```
-
-2. Run linting
+To start the development environment, use:
 
 ```bash
-npm run lint
+npm run dev
 ```
 
-3. Format code
-
-```bash
-npm run format
-```
+This will: 
+1. Lint all JavaScript files using ESLint to catch errors and enforce code quality.
+2. Format code using Prettier.
+3. Start the development server on http://localhost:3000 using http-server.
 
 ### Development Workflow
 
