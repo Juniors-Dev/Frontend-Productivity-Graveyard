@@ -8,3 +8,5 @@ function createHeader() {
 
 // Example usage:
 document.body.prepend(createHeader());
+
+// Header component
