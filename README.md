@@ -31,7 +31,7 @@ cd frontend-productivity-graveyard
 2. Install all dependencies & Husky hooks
 
 ```bash
-npm run setup 
+npm run setup
 ```
 
 3. Set up development tools
@@ -52,7 +52,8 @@ To start the development environment, use:
 npm run dev
 ```
 
-This will: 
+This will:
+
 1. Lint all JavaScript files using ESLint to catch errors and enforce code quality.
 2. Format code using Prettier.
 3. Start the development server on http://localhost:3000 using http-server.
