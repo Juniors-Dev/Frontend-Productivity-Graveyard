@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Profile - Productivity-Graveyard</title>
+    <link rel="stylesheet" href="./css/style.css" />
+    <script src="./src/components/profile/profile.js" defer></script>
+    <script src="./src/components/projects/project.js" defer></script>
+  </head>
+
+  <body>
+    <main>
+      <h1>PROFILE</h1>
+      <section>
+        <div class="container">
+          <div class="profile-container">
+            <img
+              src=""
+              alt="Profile Picture"
+              class="profile-picture"
+              id="profile-picture"
+            />
+            <div class="profile-info">
+              <span class="profile-name" id="profile-name"></span>
+              <p id="profile-nickname"></p>
+            </div>
+            <div class="location" id="profile-location"></div>
+            <div class="burried" id="profile-burried"></div>
+            <div class="member-since" id="profile-member-since"></div>
+          </div>
+          <div class="recent-funerals">
+            <div class="recent-headings">
+              <h2>Your recent funerals</h2>
+              <a href="#">View All...</a>
+            </div>
+            <!-- Projects will be dynamically rendered here -->
+          </div>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>
