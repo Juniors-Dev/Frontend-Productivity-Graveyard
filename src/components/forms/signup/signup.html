@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Signup</title>
+  </head>
+  <body>
+    <main>
+      <div class="container">
+        <div class="form-container">
+          <h1>Signup</h1>
+          <p class="tagline">Final resting place of good intentions.</p>
+
+          <form id="signup-form" novalidate>
+            <div class="form-group">
+              <label for="username" class="visually-hidden">Username</label>
+              <div class="input-wrapper">
+                <span
+                  class="input-icon username-icon"
+                  aria-hidden="true"
+                ></span>
+                <input
+                  type="text"
+                  id="username"
+                  name="username"
+                  placeholder="username"
+                  required
+                  autocomplete="username"
+                />
+                <span class="error-message" id="username-error"></span>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="email" class="visually-hidden">Email</label>
+              <div class="input-wrapper">
+                <span class="input-icon email-icon" aria-hidden="true"></span>
+                <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  placeholder="Email"
+                  required
+                  autocomplete="email"
+                />
+                <span class="error-message" id="email-error"></span>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="password" class="visually-hidden">Password</label>
+              <div class="input-wrapper">
+                <span
+                  class="input-icon password-icon"
+                  aria-hidden="true"
+                ></span>
+                <input
+                  type="password"
+                  id="password"
+                  name="password"
+                  placeholder="Password"
+                  required
+                  autocomplete="new-password"
+                />
+                <span class="error-message" id="password-error"></span>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="confirm-password" class="visually-hidden"
+                >Confirm Password</label
+              >
+              <div class="input-wrapper">
+                <span
+                  class="input-icon password-icon"
+                  aria-hidden="true"
+                ></span>
+                <input
+                  type="password"
+                  id="confirm-password"
+                  name="confirmPassword"
+                  placeholder="Password"
+                  required
+                  autocomplete="new-password"
+                />
+                <span class="error-message" id="confirm-password-error"></span>
+              </div>
+            </div>
+
+            <div class="form-group checkbox-group">
+              <div class="custom-checkbox">
+                <input type="checkbox" id="terms" name="terms" required />
+                <label for="terms">Accept terms and conditions</label>
+              </div>
+              <span class="error-message" id="terms-error"></span>
+            </div>
+
+            <button type="submit" class="signup-button">Signup</button>
+          </form>
+        </div>
+      </div>
+
+      <div class="grim-reaper left"></div>
+      <div class="grim-reaper right"></div>
+    </main>
+
+    <script src="./validation.js"></script>
+    <script src="./formHandler.js"></script>
+  </body>
+</html>
