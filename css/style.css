@@ -1,18 +1,25 @@
-@import url('./../src/components/header/header.css');
-@import url('./../src/components/footer/footer.css');
-@import url('./../src/components/forms/forms.css');
-@import url('./../src/components/profile/profile.css');
-@import url('./../src/components/projects/projects.css');
+@import url("./../src/components/header/header.css");
+@import url("./../src/components/footer/footer.css");
+@import url("./../src/components/forms/forms.css");
+@import url("./../src/components/profile/profile.css");
+@import url("./../src/components/projects/projects.css");
+@import url("./../src/components/forms/forms.css");
 
 @font-face {
-  font-family: 'pirate';
-  src: url('../assets/fonts/PirateShip.ttf') format('truetype');
+  font-family: "pirate";
+  src: url("../assets/fonts/PirateShip.ttf") format("truetype");
 }
 
 @font-face {
-  font-family: 'roboto', sans-serif;
-  src: url('../assets/fonts/Roboto-Regular.ttf') format('truetype');
+  font-family: "roboto";
+  src: url("../assets/fonts/Roboto-Regular.ttf") format("truetype");
 }
+
+@font-face {
+  font-family: "bebaskai";
+  src: url("../assets/fonts/BebasKai.ttf") format("truetype");
+}
+
 :root {
   --green-dark: #202829;
   --grey-normal: #a5a5a5;
@@ -32,7 +39,7 @@ body {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  padding-top: 160px;
+  /* padding-top: 160px; */
   padding-bottom: 160px;
   margin: 0 auto;
 }
