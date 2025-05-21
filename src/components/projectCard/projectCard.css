@@ -1,0 +1,82 @@
+.project-header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.card-left {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  width: 100;
+  padding: 20px 30px 20px 30px;
+  border-radius: 30px;
+  margin: 10px;
+  position: relative;
+  background: transparent;
+}
+
+.card-left::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: -10px;
+  border: 3px solid var(--grey-normal);
+  border-radius: 30px;
+  transform: rotate(-3deg);
+  z-index: 1;
+  pointer-events: none;
+}
+
+.timeauthor {
+  display: flex;
+  width: 100%;
+  margin: 0px auto;
+  align-items: center;
+  flex-direction: row;
+  gap: 10px;
+  justify-content: space-between;
+}
+
+.project-card {
+  display: flex;
+  max-width: 650px;
+  width: fit-content;
+  text-align: center;
+  margin-top: 20px;
+  gap: 15px;
+  padding: 25px;
+  background: linear-gradient(to bottom, #2f3b3d, #273234);
+  border-radius: 20px;
+  color: var(--grey-normal);
+}
+
+.card-right {
+  display: flex;
+  text-align: left;
+  flex-direction: column;
+  justify-content: space-between;
+  padding-top: 10px;
+  color: var(--grey-normal);
+}
+.btn-new-funeral {
+  border-radius: 16px;
+  padding: 12px 17px;
+  font-size: 20px;
+  font-weight: bold;
+  color: var(--green-dark);
+  background-color: var(--beige-normal);
+  align-self: flex-end;
+}
+
+.btn-new-funeral:hover {
+  background-color: var(--beige-normal-hover);
+  color: var(--green-dark);
+  cursor: pointer;
+}
+.project-info {
+  flex: 0 0 70%;
+}

@@ -3,7 +3,7 @@ const HEADER_CONFIG = {
   MOON_SIZE: 300,
   NAV_LINKS: [
     { text: "HOME", href: "index.html" },
-    { text: "GRAVYARD", href: "gravyard.html" },
+    { text: "GRAVEYARD", href: "graveyard.html" },
     { text: "BURY", href: "bury.html" },
     { text: "PROFILE", href: "profile.html" },
     { text: "LOGIN", href: "login.html" },
