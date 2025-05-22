@@ -1,3 +1,5 @@
+import { createFormHandler } from "../formHandler.js";
+
 /**
  * Renders a basic login form and returns the main container element
  * @param {HTMLElement} [targetElement=null] - Optional target element to append to
@@ -91,6 +93,9 @@ export function renderLoginForm(targetElement = null) {
     document.body.appendChild(mainElement);
   }
 
+  // Initialize validation and handlers for this form
+  createFormHandler("#login-form").init();
+
   return mainElement;
 }
 
@@ -104,26 +109,34 @@ export function renderLoginForm(targetElement = null) {
  * @returns {HTMLDivElement} - Form group element
  */
 function createFormField(id, type, placeholder, autocomplete, name = id) {
-  // Create form group
+  // create form group
   const formGroup = document.createElement("div");
   formGroup.className = "form-group";
 
-  // Create label
+  // create label
   const label = document.createElement("label");
   label.setAttribute("for", id);
   label.className = "visually-hidden";
   label.textContent = placeholder;
 
-  // Create input wrapper
+  // create input wrapper
   const inputWrapper = document.createElement("div");
   inputWrapper.className = "input-wrapper";
 
-  // Create icon
+  // create icon and input container
+  const iconInputContainer = document.createElement("div");
+  iconInputContainer.className = "input-icon-container";
+  iconInputContainer.style.position = "relative";
+  iconInputContainer.style.width = "100%";
+  iconInputContainer.style.display = "flex";
+  iconInputContainer.style.alignItems = "center";
+
+  // create icon
   const icon = document.createElement("span");
   icon.className = `input-icon ${id}-icon`;
   icon.setAttribute("aria-hidden", "true");
 
-  // Create input
+  // create input
   const input = document.createElement("input");
   input.type = type;
   input.id = id;
@@ -132,14 +145,15 @@ function createFormField(id, type, placeholder, autocomplete, name = id) {
   input.required = true;
   input.autocomplete = autocomplete;
 
-  // Create error message
+  // create error message
   const errorMessage = document.createElement("span");
   errorMessage.className = "error-message";
   errorMessage.id = `${id}-error`;
 
-  // Build structure
-  inputWrapper.appendChild(icon);
-  inputWrapper.appendChild(input);
+  // build structure
+  iconInputContainer.appendChild(icon);
+  iconInputContainer.appendChild(input);
+  inputWrapper.appendChild(iconInputContainer);
   inputWrapper.appendChild(errorMessage);
 
   formGroup.appendChild(label);

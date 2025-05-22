@@ -1,3 +1,5 @@
+import { createFormHandler } from "../formHandler.js";
+
 /**
  * Renders a complete signup form and returns the main container element
  * @param {HTMLElement} [targetElement=null] - Optional target element to append to
@@ -81,10 +83,13 @@ export function renderSignupForm(targetElement = null) {
     // Clear the target element first
     targetElement.innerHTML = "";
     targetElement.appendChild(mainElement);
+  } else {
+    document.body.appendChild(mainElement);
   }
 
-  // Initialize validation if available
-  // Note: This assumes these are available as global modules
+  // Initialize validation and handlers for this form
+  createFormHandler("#signup-form").init();
+
   // Consider also exporting these functions if using strict modules
   setTimeout(() => {
     if (typeof window.formValidation !== "undefined") {
@@ -123,6 +128,14 @@ function createFormField(id, type, placeholder, autocomplete, name = id) {
   const inputWrapper = document.createElement("div");
   inputWrapper.className = "input-wrapper";
 
+  // create icon and input container
+  const iconInputContainer = document.createElement("div");
+  iconInputContainer.className = "input-icon-container";
+  iconInputContainer.style.position = "relative";
+  iconInputContainer.style.width = "100%";
+  iconInputContainer.style.display = "flex";
+  iconInputContainer.style.alignItems = "center";
+
   // create icon
   const icon = document.createElement("span");
   icon.className = `input-icon ${id}-icon`;
@@ -143,8 +156,9 @@ function createFormField(id, type, placeholder, autocomplete, name = id) {
   errorMessage.id = `${id}-error`;
 
   // build structure
-  inputWrapper.appendChild(icon);
-  inputWrapper.appendChild(input);
+  iconInputContainer.appendChild(icon);
+  iconInputContainer.appendChild(input);
+  inputWrapper.appendChild(iconInputContainer);
   inputWrapper.appendChild(errorMessage);
 
   formGroup.appendChild(label);
