@@ -1,6 +1,6 @@
 import { renderProject } from "../src/components/projects/project.js";
 import { renderProfile } from "../src/components/profile/profile.js";
-import { renderLoginForm } from "../src/components/forms/login/loginForm.js";
+import { renderLoginForm } from "../src/components/forms/login/renderLoginForm.js";
 
 export function router() {
   const pathname = window.location.pathname;
