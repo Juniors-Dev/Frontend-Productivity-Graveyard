@@ -19,7 +19,7 @@
   --color-accent: #f2c94c;
 
   /* Fonts from design system */
-  --font-heading: "Pirate Ship", "Roboto", sans-serif;
+  --font-heading: "pirate", "Roboto", sans-serif;
   --font-body: "Roboto", sans-serif;
   --font-tagline: "bebaskai", sans-serif;
 
@@ -77,15 +77,16 @@ body {
 }
 
 .terms-content h2 {
-  font-family: var(--font-heading);
+  font-family: var(--font-tagline);
   color: var(--color-primary);
   margin-top: 2rem;
   margin-bottom: 1rem;
   font-size: 1.8rem;
+  text-wrap-style: balance;
 }
 
 .terms-content h3 {
-  font-family: var(--font-heading);
+  font-family: var(--font-tagline);
   color: var(--color-primary);
   margin-top: 1.5rem;
   margin-bottom: 0.75rem;
@@ -181,7 +182,6 @@ body {
   background-repeat: no-repeat;
   background-position: top right;
   opacity: 0.4;
-  background-image: url("../assets/img/moon.png");
 }
 
 /* Active section highlighting */

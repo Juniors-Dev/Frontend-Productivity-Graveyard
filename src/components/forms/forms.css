@@ -297,6 +297,7 @@ input.is-valid {
   font-size: 0.9rem;
   color: var(--color-text-secondary);
   user-select: none;
+  text-wrap-style: balance;
 }
 .custom-checkbox label:before {
   content: "";
@@ -415,6 +416,7 @@ input.is-valid {
   }
   .tagline {
     font-size: 0.9rem;
+    text-wrap-style: balance;
   }
   .form-container {
     padding: 1.5rem 1rem;
