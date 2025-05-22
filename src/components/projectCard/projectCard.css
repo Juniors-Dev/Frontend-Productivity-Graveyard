@@ -106,7 +106,9 @@
     padding-left: 2vw;
     padding-right: 2vw;
   }
-
+  .project-info {
+    padding-top: 30px;
+  }
   .btn-new-funeral {
     border-radius: 16px;
     padding: 12px 17px;
