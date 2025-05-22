@@ -46,6 +46,12 @@ main {
   padding: 2rem;
 }
 
+/* to keep the forms up top despite of the main having a 220px margin top inside the header.css file*/
+.container,
+.form-container {
+  margin-top: -220px;
+}
+
 .container {
   width: 100%;
   max-width: 450px;
@@ -360,7 +366,7 @@ input.is-valid {
   z-index: 1;
   background-image: url("../../../assets/img/grimreaper.png");
 }
-.moon {
+/* .moon {
   position: absolute;
   top: -50px;
   left: -100px;
@@ -373,7 +379,7 @@ input.is-valid {
   z-index: 900;
   transform: translate(-30%, -30%);
   pointer-events: none;
-}
+} */
 
 /* Loading spinner */
 .loading {
