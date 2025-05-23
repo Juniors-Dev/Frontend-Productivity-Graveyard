@@ -64,9 +64,6 @@ export function renderSignupForm(targetElement = null) {
   const grimReaper = document.createElement("div");
   grimReaper.className = "grim-reaper";
 
-  const moonElement = document.createElement("div");
-  moonElement.className = "moon";
-
   // build the DOM structure
   formContainerDiv.appendChild(heading);
   formContainerDiv.appendChild(tagline);
@@ -76,7 +73,6 @@ export function renderSignupForm(targetElement = null) {
 
   mainElement.appendChild(containerDiv);
   mainElement.appendChild(grimReaper);
-  mainElement.appendChild(moonElement);
 
   // If a target element is provided, append or replace
   if (targetElement) {
