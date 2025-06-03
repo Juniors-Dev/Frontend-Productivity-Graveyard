@@ -1,0 +1,141 @@
+/* Reset & Base Styles */
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background-color: #1a1e23;
+  color: #e6d4ad;
+}
+
+main {
+  margin-top: 220px;
+}
+
+/* Navigation Container */
+.nav-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  padding: 0 20px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+/* Navigation Links */
+.nav-links {
+  list-style: none;
+  padding: 35px 0px 0px 0px;
+  margin: 0;
+  display: flex;
+  gap: 0px;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+  height: 60px;
+}
+
+.nav-links li {
+  padding: 0 8px;
+}
+
+.nav-links a {
+  color: #a5a5a5;
+  text-decoration: none;
+  font-size: 16px;
+  transition: color 0.3s ease;
+  border: 2px solid #4d525b;
+  border-radius: 80px;
+  padding: 8px 20px;
+}
+
+.nav-links a:hover {
+  color: #e0c79e;
+}
+
+.nav-links a.active {
+  background: #e0c79e;
+  color: #202829; /* dark text for contrast */
+  border-color: #e0c79e;
+}
+
+.moon {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 300px;
+  height: 300px;
+  background-color: #e6d4ad;
+  border-radius: 50%;
+  opacity: 0.9;
+  box-shadow: 0 0 50px rgba(230, 212, 173, 0.5);
+  z-index: 900;
+  transform: translate(-30%, -30%);
+  pointer-events: none;
+}
+
+.menu-toggle {
+  background: none;
+  border: none;
+  color: #fff; /* White icon */
+  font-size: 2.2rem;
+  cursor: pointer;
+  margin-left: 16px;
+  z-index: 1100;
+  display: none; /* hidden by default, shown on mobile */
+  box-shadow: none;
+  outline: none;
+}
+
+.menu-toggle:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+.mobile-menu {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  position: absolute;
+  top: 70px;
+  right: 20px;
+  background: #222;
+  border-radius: 16px;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.4);
+  padding: 20px 0;
+  z-index: 1050;
+  min-width: 180px;
+}
+
+.mobile-menu li {
+  padding: 12px 24px;
+  text-align: right;
+  display: block;
+}
+
+.mobile-menu a {
+  display: block;
+  color: #a5a5a5;
+  text-decoration: none;
+  font-size: 20px;
+  border: none;
+  background: none;
+  margin-bottom: 8px;
+}
+
+.mobile-menu a.active {
+  background: #e0c79e;
+  color: #202829;
+  border-radius: 80px;
+  padding: 8px 20px;
+}
+
+@media (max-width: 815px) {
+  .nav-links {
+    display: none !important;
+  }
+  .menu-toggle {
+    display: block;
+  }
+}

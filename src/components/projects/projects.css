@@ -1,0 +1,80 @@
+.recent-funerals {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.recent-headings {
+  display: flex;
+  flex-direction: row;
+  align-items: baseline;
+  color: var(--grey-normal);
+  font-size: 22px;
+  padding: 0px 10px 0px 10px;
+  justify-content: space-between;
+}
+
+.recent-headings a {
+  color: var(--grey-normal);
+  font-weight: bold;
+}
+
+.recent-headings a:hover {
+  color: var(--grey-normal-hover);
+  text-decoration: underline;
+}
+
+.funeral-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 30px;
+  padding: 25px;
+  background: linear-gradient(to bottom, #2f3b3d, #273234);
+  border-radius: 15px;
+  color: var(--grey-normal);
+}
+
+.project-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  max-width: 600px;
+  color: var(--grey-normal);
+}
+
+.yearslikes {
+  height: 80%;
+  min-width: 130px;
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  justify-content: space-between;
+  padding: 0;
+  font-size: 14px;
+  margin-left: auto;
+}
+
+.years {
+  font-weight: bold;
+  font-size: 20px;
+}
+
+.btn-likes {
+  width: 70%;
+  border-radius: 10px;
+  justify-content: center;
+  margin: 0 auto;
+  padding: 8px 0px;
+  font-size: 22px;
+  font-weight: bold;
+  display: flex;
+  gap: 15px;
+  color: var(--green-dark);
+  background-color: var(--beige-normal);
+}
+
+.btn-likes:hover {
+  background-color: var(--beige-normal-hover);
+  color: var(--green-dark);
+  cursor: pointer;
+}
