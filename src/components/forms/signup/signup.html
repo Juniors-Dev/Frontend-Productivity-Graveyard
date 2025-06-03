@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Signup | Productivity Graveyard</title>
+    <meta
+      name="description"
+      content="Sign up to join the Productivity Graveyard. Bury your unfinished projects and connect with fellow developers."
+    />
+    <meta name="author" content="Juniors Dev" />
+    <meta property="og:title" content="Signup | Productivity Graveyard" />
+    <meta
+      property="og:description"
+      content="Join the Productivity Graveyard and connect with fellow developers."
+    />
+    <meta property="og:type" content="website" />
+    <meta
+      property="og:url"
+      content="https://productivitygraveyard.dev/signup"
+    />
+    <meta
+      property="og:image"
+      content="https://productivitygraveyard.com/assets/img/og-image.png"
+    />
+    <link rel="stylesheet" href="../../../../css/style.css" />
+    <script type="module">
+      import { renderSignupForm } from "./renderSignupForm.js";
+      const container = document.getElementById("signup-root");
+      renderSignupForm(container);
+    </script>
+  </head>
+
+  <body>
+    <div id="signup-root"></div>
+  </body>
+</html>
