@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login | Productivity Graveyard</title>
+    <meta
+      name="description"
+      content="Log in to the Productivity Graveyard. Bury your unfinished projects and connect with fellow developers."
+    />
+    <meta name="author" content="Juniors Dev" />
+    <meta property="og:title" content="Login | Productivity Graveyard" />
+    <meta
+      property="og:description"
+      content="Log in to the Productivity Graveyard and connect with fellow developers."
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://productivitygraveyard.dev/login" />
+    <meta
+      property="og:image"
+      content="https://productivitygraveyard.com/assets/img/og-image.png"
+    />
+    <link rel="stylesheet" href="../../../../css/style.css" />
+    <script type="module">
+      import { renderLoginForm } from "./renderLoginForm.js";
+      const container = document.getElementById("login-root");
+      renderLoginForm(container);
+    </script>
+  </head>
+
+  <body>
+    <div id="login-root"></div>
+  </body>
+</html>
