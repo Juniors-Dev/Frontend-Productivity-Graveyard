@@ -1,4 +1,4 @@
-function renderProject(project) {
+export function renderProject(project) {
   // Create a new project card container
   const projectCard = document.createElement("div");
   projectCard.classList.add("funeral-card");

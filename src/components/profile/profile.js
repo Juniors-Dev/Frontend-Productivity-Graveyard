@@ -1,4 +1,4 @@
-function renderProfile(profile) {
+export function renderProfile(profile) {
   // Update profile picture
   const profilePicture = document.getElementById("profile-picture");
   profilePicture.src = profile.picture || "./assets/img/noimage.png";
