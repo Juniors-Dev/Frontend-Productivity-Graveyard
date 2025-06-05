@@ -1,3 +1,5 @@
+import { fetchProjects } from "./fetchProjects.js";
+
 export function renderProjectCard(project) {
   // Create card container
   const card = document.createElement("div");
@@ -9,58 +11,61 @@ export function renderProjectCard(project) {
   const img = document.createElement("img");
   img.src = project.image;
   img.alt = project.title;
+  img.width = 120;
+  img.height = 120;
   cardLeft.appendChild(img);
   const title = document.createElement("h3");
   title.className = "project-title";
   title.textContent = project.title;
   cardLeft.appendChild(title);
-  if (project.reason) {
+  if (project.causeOfDeath) {
+    const causeLabel = document.createElement("div");
+    causeLabel.className = "cause-label";
+    causeLabel.innerHTML = "<b>Cause of death:</b>";
+    cardLeft.appendChild(causeLabel);
     const reason = document.createElement("div");
     reason.className = "reason";
-    reason.textContent = project.reason;
+    reason.textContent = project.causeOfDeath;
     cardLeft.appendChild(reason);
+    // Lifespan below cause of death
+    const lifespan = document.createElement("div");
+    lifespan.className = "lifespan";
+    lifespan.textContent = project.lifespan;
+    cardLeft.appendChild(lifespan);
   }
-  const timeauthor = document.createElement("div");
-  timeauthor.className = "timeauthor";
-  const lifespan = document.createElement("div");
-  lifespan.className = "lifespan";
-  lifespan.textContent = project.lifespan;
-  const author = document.createElement("div");
-  author.className = "author";
-  author.textContent = project.author;
-  timeauthor.appendChild(lifespan);
-  timeauthor.appendChild(author);
-  cardLeft.appendChild(timeauthor);
 
   // Right side (card-right)
   const cardRight = document.createElement("div");
   cardRight.className = "card-right";
+  cardRight.style.display = "flex";
+  cardRight.style.flexDirection = "column";
+  cardRight.style.justifyContent = "space-between";
+  cardRight.style.height = "300px"; // Set a fixed height to anchor top and bottom
+
+  // Description at the top
   const descWrap = document.createElement("div");
   descWrap.className = "project-description";
-  const h3 = document.createElement("h3");
-  h3.id = "project-title";
-  h3.textContent = project.title;
+  descWrap.style.marginBottom = "auto"; // Use auto to push infoLikesRow to the bottom
   const p = document.createElement("p");
   p.id = "project-description";
   p.textContent = project.description;
-  descWrap.appendChild(h3);
   descWrap.appendChild(p);
   cardRight.appendChild(descWrap);
 
-  // Project-info and likes row
+  // Project-info and likes row at the bottom
   const infoLikesRow = document.createElement("div");
   infoLikesRow.style.display = "flex";
   infoLikesRow.style.flexDirection = "row";
   infoLikesRow.style.alignItems = "center";
   infoLikesRow.style.gap = "20px";
+  infoLikesRow.style.marginTop = "auto";
 
   // Project-info section (with spans for API population)
   const info = document.createElement("div");
   info.className = "project-info";
   info.innerHTML = `
     <div><b>Burried By:</b> <span class="burried-by" id="burried-by">${project.burriedBy}</span></div>
-    <div><b>Cause of death:</b> <span class="cause-of-death" id="cause-of-death">${project.causeOfDeath}</span></div>
-    <div><b>Lifespan:</b> <span class="lifespan" id="lifespan">${project.lifespan}</span></div>
+    <div class="types"><b>Type:</b> <span id="types">${project.types}</span></div>
   `;
   infoLikesRow.appendChild(info);
 
@@ -83,45 +88,33 @@ export function renderProjectCard(project) {
   if (container) container.appendChild(card);
 }
 
-// Example usage:
-const exampleProject = {
-  image: "./assets/img/skull.png",
-  title: "TODO LIST V9",
-  reason: "Got Bored",
-  lifespan: "2001 - 2002",
-  author: "-RAGE_YOEI",
-  description:
-    "It started like every other side project -- with hope, a clean main branch, and way too many Post-it notes. But after two days of enthusiastic planning and zero follow-through, it was left to rot in my project folder. I still believe in the idea. I just don't believe I'll ever open it again.",
-  burriedBy: "@rage_ypei",
-  causeOfDeath: "Shiny Object Synddasdasdasdasd asdasdrome",
-  likes: 7,
-};
-
-const exampleProject1 = {
-  image: "./assets/img/brain.png",
-  title: "Brainstorm App",
-  reason: "Got lost in the storm",
-  lifespan: "2022 - 2024",
-  author: "-AUTH_OR",
-  description:
-    "A project meant to revolutionize brainstorming sessions but ended up being a collection of half-baked ideas.",
-  burriedBy: "@auth_or",
-  causeOfDeath: "Caught in a shitstorm",
-  likes: 11,
-};
-const exampleProject2 = {
-  image: "./assets/img/clock.png",
-  title: "Time Tracker",
-  reason: "Time's up!",
-  lifespan: "2021 - 2023",
-  author: "-TYMWSTR",
-  description:
-    "An ambitious time-tracking app that ironically ran out of time to be completed.",
-  burriedBy: "@time_waster",
-  causeOfDeath: "Time management issues",
-  likes: 9,
-};
-
-renderProjectCard(exampleProject);
-renderProjectCard(exampleProject1);
-renderProjectCard(exampleProject2);
+// Fetch and render all projects from API on DOMContentLoaded
+document.addEventListener("DOMContentLoaded", () => {
+  fetchProjects()
+    .then((response) => {
+      // The API returns an object with a 'data' array
+      const projects = response.data;
+      if (Array.isArray(projects)) {
+        projects.forEach((apiProject) => {
+          // Map API fields to the expected fields for renderProjectCard
+          renderProjectCard({
+            image: "./assets/img/skull.png", // fallback or map if available
+            title: apiProject.name,
+            reason: apiProject.eulogy || "", // or another field if more appropriate
+            lifespan: `${apiProject.startDate ? apiProject.startDate.slice(0, 4) : ""} - ${apiProject.endDate ? apiProject.endDate.slice(0, 4) : ""}`,
+            author: apiProject.user?.username
+              ? `-${apiProject.user.username}`
+              : "-Unknown",
+            description: apiProject.description,
+            burriedBy: apiProject.user?.username || "Unknown",
+            causeOfDeath: apiProject.causeOfDeath,
+            types: apiProject.types.map((types) => types.name).join(", "),
+            likes: apiProject.upvoteCount || 0,
+          });
+        });
+      }
+    })
+    .catch((error) => {
+      console.error("Failed to fetch and render projects:", error);
+    });
+});
