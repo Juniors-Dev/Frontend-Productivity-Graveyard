@@ -1,9 +1,11 @@
-/* style.css */
-
 @import url("./../src/components/header/header.css");
 @import url("./../src/components/footer/footer.css");
+@import url("./../src/components/forms/forms.css");
 @import url("./../src/components/profile/profile.css");
 @import url("./../src/components/projects/projects.css");
+@import url("./../src/components/projectCard/projectCard.css");
+@import url("./../src/components/forms/forms.css");
+
 
 @font-face {
   font-family: "pirate";
@@ -13,6 +15,11 @@
 @font-face {
   font-family: "roboto";
   src: url("../assets/fonts/Roboto-Regular.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "bebaskai";
+  src: url("../assets/fonts/BebasKai.ttf") format("truetype");
 }
 
 :root {
@@ -27,20 +34,24 @@ body {
   background-color: var(--green-dark);
   font-family: roboto;
   margin: 0px auto;
+  margin-top: 50px;
   max-width: 1440px;
 }
 
 .container {
   display: flex;
+  max-width: 1440px;
+  flex-wrap: wrap;
   flex-direction: row;
   justify-content: space-between;
-  padding-top: 160px;
+  /* padding-top: 160px; */
   padding-bottom: 160px;
   margin: 0 auto;
 }
 
 h1 {
   color: #e0c79e;
+  padding-bottom: 160px;
   font-size: 72px;
   font-family: pirate;
   line-height: 1.25;
