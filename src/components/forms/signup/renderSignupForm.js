@@ -60,10 +60,6 @@ export function renderSignupForm(targetElement = null) {
   signinLinkWrapper.appendChild(signinLink);
   form.appendChild(signinLinkWrapper);
 
-  // create decorative elements
-  const grimReaper = document.createElement("div");
-  grimReaper.className = "grim-reaper";
-
   // build the DOM structure
   formContainerDiv.appendChild(heading);
   formContainerDiv.appendChild(tagline);
@@ -72,7 +68,6 @@ export function renderSignupForm(targetElement = null) {
   containerDiv.appendChild(formContainerDiv);
 
   mainElement.appendChild(containerDiv);
-  mainElement.appendChild(grimReaper);
 
   // If a target element is provided, append or replace
   if (targetElement) {
