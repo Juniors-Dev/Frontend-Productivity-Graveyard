@@ -95,6 +95,10 @@ h1,
   line-height: 1.25;
 }
 
+.heading-1 {
+  margin-top: 2rem;
+}
+
 .tagline {
   font-size: 25px;
   color: #dba567;
