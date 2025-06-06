@@ -11,7 +11,7 @@ const HEADER_CONFIG = {
   ],
 };
 
-class Header {
+export class Header {
   constructor() {
     this.header = document.querySelector("header");
     if (!this.header) {
@@ -132,9 +132,3 @@ class Header {
     document.removeEventListener("click", this.clickHandler);
   }
 }
-
-// Initialize header when DOM is loaded
-document.addEventListener("DOMContentLoaded", () => {
-  const header = new Header();
-  header.init();
-});

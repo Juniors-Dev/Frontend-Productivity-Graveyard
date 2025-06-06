@@ -23,15 +23,16 @@
       property="og:image"
       content="https://productivitygraveyard.com/assets/img/og-image.png"
     />
-    <link rel="stylesheet" href="../../../../css/style.css" />
-    <script type="module">
-      import { renderSignupForm } from "./renderSignupForm.js";
-      const container = document.getElementById("signup-root");
-      renderSignupForm(container);
-    </script>
+    <script type="module" src="./src/main.js" defer></script>
+    <script type="module" src="./src/pages/signup.js" defer></script>
+    <link rel="stylesheet" href="./src/css/style.css" />
   </head>
 
   <body>
-    <div id="signup-root"></div>
+    <header></header>
+    <main>
+      <div id="signup-root"></div>
+    </main>
+    <footer></footer>
   </body>
 </html>
