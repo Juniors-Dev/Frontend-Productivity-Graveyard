@@ -46,12 +46,6 @@ main {
   padding: 2rem;
 }
 
-/* to keep the forms up top despite of the main having a 220px margin top inside the header.css file*/
-.container,
-.form-container {
-  margin-top: -220px;
-}
-
 .container {
   width: 100%;
   max-width: 450px;
