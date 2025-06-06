@@ -6,7 +6,6 @@
 @import url("./../src/components/projectCard/projectCard.css");
 @import url("./../src/components/forms/forms.css");
 
-
 @font-face {
   font-family: "pirate";
   src: url("../assets/fonts/PirateShip.ttf") format("truetype");
@@ -44,14 +43,12 @@ body {
   flex-wrap: wrap;
   flex-direction: row;
   justify-content: space-between;
-  /* padding-top: 160px; */
   padding-bottom: 160px;
   margin: 0 auto;
 }
 
 h1 {
   color: #e0c79e;
-  padding-bottom: 160px;
   font-size: 72px;
   font-family: pirate;
   line-height: 1.25;
