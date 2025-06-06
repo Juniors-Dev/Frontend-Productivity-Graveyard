@@ -20,15 +20,21 @@
       property="og:image"
       content="https://productivitygraveyard.com/assets/img/og-image.png"
     />
-    <link rel="stylesheet" href="../../../../css/style.css" />
-    <script type="module">
+    <script type="module" src="./src/main.js" defer></script>
+    <script type="module" src="./src/pages/login.js" defer></script>
+    <link rel="stylesheet" href="./src/css/style.css" />
+    <!-- <script type="module">
       import { renderLoginForm } from "./renderLoginForm.js";
       const container = document.getElementById("login-root");
       renderLoginForm(container);
-    </script>
+    </script> -->
   </head>
 
   <body>
-    <div id="login-root"></div>
+    <header></header>
+    <main>
+      <div id="login-root"></div>
+    </main>
+    <footer></footer>
   </body>
 </html>

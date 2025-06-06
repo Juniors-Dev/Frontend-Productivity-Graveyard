@@ -1,11 +1,11 @@
-@import url("./../src/components/header/header.css");
-@import url("./../src/components/footer/footer.css");
-@import url("./../src/components/forms/forms.css");
-@import url("./../src/components/profile/profile.css");
-@import url("./../src/components/projects/projects.css");
-@import url("./../src/components/projectCard/projectCard.css");
-@import url("./../src/components/forms/forms.css");
-
+@import url("./../components/ui/header/header.css");
+@import url("./../components/ui/footer/footer.css");
+@import url("./../components/forms/forms.css");
+@import url("./../components/features/profile/profile.css");
+@import url("./../components/features/profileProjectCard/profileProjectCard.css");
+@import url("./../components/features/projectCard/projectCard.css");
+@import url("./../components/forms/forms.css");
+@import url("./../components/forms/signup/terms.css");
 
 @font-face {
   font-family: "pirate";
@@ -87,3 +87,14 @@ p {
   font-weight: regular;
   margin: 0px;
 }
+
+/* header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  width: 100%;
+  height: 50px;
+  background-color: rgb(32, 40, 41, 0.23);
+} */
