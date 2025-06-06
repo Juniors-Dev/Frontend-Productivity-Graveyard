@@ -1,3 +1,3 @@
-import { initUI } from "./components/ui/index.js";
+import { initUI } from "./components/layout/index.js";
 
 initUI();
