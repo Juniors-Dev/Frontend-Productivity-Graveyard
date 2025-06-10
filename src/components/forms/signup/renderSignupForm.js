@@ -54,7 +54,7 @@ export function renderSignupForm(targetElement = null) {
   const signinLinkWrapper = document.createElement("div");
   signinLinkWrapper.className = "text-center signin-link-wrapper";
   const signinLink = document.createElement("a");
-  signinLink.href = "../login/login.html";
+  signinLink.href = "login.html";
   signinLink.className = "signup-link";
   signinLink.textContent = "Already have an account? Sign in";
   signinLinkWrapper.appendChild(signinLink);
