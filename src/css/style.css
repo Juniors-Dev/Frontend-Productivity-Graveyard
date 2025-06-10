@@ -1,10 +1,10 @@
+/* Should this be streamlined more? */
 @import url("./../components/ui/header/header.css");
 @import url("./../components/ui/footer/footer.css");
 @import url("./../components/forms/forms.css");
 @import url("./../components/features/profile/profile.css");
 @import url("./../components/features/profileProjectCard/profileProjectCard.css");
 @import url("./../components/features/projectCard/projectCard.css");
-@import url("./../components/forms/forms.css");
 @import url("./../components/forms/signup/terms.css");
 
 @font-face {
