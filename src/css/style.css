@@ -102,10 +102,21 @@ header {
 #banner {
   position: relative;
   min-height: 100dvh;
-  min-width: 100dvw;
+  width: 100dvw;
+
   overflow: hidden;
   background-color: #191f20;
 }
+
+.banner-container {
+  position: relative;
+  min-height: 100dvh;
+  width: 100dvw;
+  max-width: 1980px;
+  background-color: #191f20;
+  margin: auto;
+}
+
 .banner-grim-reaper,
 .banner-grass {
   position: absolute;
@@ -114,25 +125,62 @@ header {
 .banner-curve {
   position: absolute;
   background: linear-gradient(#2d3839, #202829 35%);
-  width: 400dvw;
-  height: 70dvh;
-  left: -10%;
-  bottom: -30dvh;
+  width: 9000px;
+  height: 880px;
+  left: 4000px;
+  bottom: -880px;
+  border-radius: 100%;
+  transform: translate(-50%, -50%);
+}
+
+.banner-curve::before {
+  content: "";
+  display: block;
+  position: absolute;
+  left: -8700px;
+  background: linear-gradient(#2d3839, #202829 35%);
+  width: 9000px;
+  height: 880px;
   border-radius: 100%;
 }
 
 .banner-grass {
   position: absolute;
-  width: 100%;
-  bottom: 10dvh;
+  bottom: 250px;
+  width: 700px;
+  left: 450px;
+}
+
+.grass-left {
+  transform: scaleX(-1);
+  bottom: 150px;
+  width: 800px;
+  left: -150px;
+}
+
+.grass-left-before {
+  bottom: 50px;
+  width: 800px;
+  left: -650px;
+}
+
+.grass-right {
+  transform: scaleX(-1);
+  bottom: 300px;
+  width: 900px;
+  left: 1100px;
+}
+
+.grass-right-after {
+  bottom: 300px;
+  width: 900px;
+  left: 1800px;
 }
 
 .banner-grim-reaper {
-  bottom: 5dvh;
-  max-height: 50dvh;
-  height: 50%;
-  bottom: 20dvh;
-  left: 50%;
+  height: 65dvh;
+  bottom: 10dvh;
+  left: 53%;
   transform: translateX(-50%);
 }
 
@@ -165,5 +213,19 @@ header {
   font-size: 1.5625rem;
 }
 
-@media (max-width: 900px) {
+@media (max-width: 1200px) {
+  .banner-grim-reaper {
+    max-height: 60dvh;
+    height: 60%;
+    bottom: 8dvh;
+    left: 60%;
+    transform: translateX(-50%);
+  }
+
+  .banner-productivity {
+    font-size: 2rem;
+  }
+  .banner-graveyard {
+    font-size: 3.625rem;
+  }
 }
