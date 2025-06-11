@@ -47,9 +47,31 @@ class ApiClient {
     return this.request("POST", "/auth/register", data);
   }
 
+  // Users
+  getCurrentUser() {
+    return this.request("GET", "/users/me", null, true);
+  }
+
+  updateCurrentUser(data) {
+    return this.request("PUT", "/users/me", data, true);
+  }
+
+  softDeleteCurrentUser() {
+    return this.request("DELETE", "/users/me", null, true);
+  }
+
+  getUserById(id) {
+    return this.request("GET", `/users/${id}`);
+  }
+
   // Projects
-  getAllProjects() {
-    return this.request("GET", "/projects");
+  createProject(data) {
+    return this.request("POST", "/projects", data, true);
+  }
+
+  getAllProjects(params = {}) {
+    const query = new URLSearchParams(params).toString();
+    return this.request("GET", `/projects${query ? `?${query}` : ""}`);
   }
 
   getProject(id) {
@@ -70,6 +92,45 @@ class ApiClient {
 
   deleteProjectType(id) {
     return this.request("DELETE", `/projects/${id}/type`, null, true);
+  }
+
+  //Comments
+  createProjectComment(projectId, data) {
+    return this.request("POST", `/projects/${projectId}/comments`, data, true);
+  }
+
+  getProjectComments(projectId, params = {}) {
+    const query = new URLSearchParams(params).toString();
+    return this.request(
+      "GET",
+      `/projects/${projectId}/comments${query ? `?${query}` : ""}`,
+    );
+  }
+
+  updateComment(commentId, data) {
+    return this.request("PUT", `/comments/${commentId}`, data, true);
+  }
+
+  deleteComment(commentId) {
+    return this.request("DELETE", `/comments/${commentId}`, null, true);
+  }
+
+  // Votes
+  toggleUpvote(projectId) {
+    return this.request("POST", `/votes/${projectId}/toggle`, null, true);
+  }
+
+  // Stats
+  getAllStats() {
+    return this.request("GET", "/stats");
+  }
+
+  getCurrentUserStats() {
+    return this.request("GET", "/stats/user/me", null, true);
+  }
+
+  getUserStats(userId) {
+    return this.request("GET", `/stats/user/${userId}`);
   }
 
   // Misc
