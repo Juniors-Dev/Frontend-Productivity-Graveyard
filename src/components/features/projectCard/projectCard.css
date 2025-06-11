@@ -54,6 +54,10 @@
   color: var(--grey-normal);
 }
 
+.project-card img {
+  max-width: 150px;
+}
+
 .card-right {
   display: flex;
   text-align: left;

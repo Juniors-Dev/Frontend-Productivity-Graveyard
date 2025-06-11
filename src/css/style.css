@@ -35,7 +35,6 @@ body {
   font-family: roboto;
   margin: 0px auto;
   margin-top: 50px;
-  max-width: 1440px;
 }
 
 .container {
@@ -88,13 +87,83 @@ p {
   margin: 0px;
 }
 
-/* header {
+header {
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   z-index: 1000;
   width: 100%;
-  height: 50px;
+  height: 80px;
   background-color: rgb(32, 40, 41, 0.23);
-} */
+}
+
+/* Index */
+#banner {
+  position: relative;
+  min-height: 100dvh;
+  min-width: 100dvw;
+  overflow: hidden;
+  background-color: #191f20;
+}
+.banner-grim-reaper,
+.banner-grass {
+  position: absolute;
+}
+
+.banner-curve {
+  position: absolute;
+  background: linear-gradient(#2d3839, #202829 35%);
+  width: 400dvw;
+  height: 70dvh;
+  left: -10%;
+  bottom: -30dvh;
+  border-radius: 100%;
+}
+
+.banner-grass {
+  position: absolute;
+  width: 100%;
+  bottom: 10dvh;
+}
+
+.banner-grim-reaper {
+  bottom: 5dvh;
+  max-height: 50dvh;
+  height: 50%;
+  bottom: 20dvh;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.banner-text {
+  position: absolute;
+  left: 50%;
+  top: 5%;
+  transform: translateX(-50%);
+}
+
+.banner-h1 {
+  padding-bottom: 0;
+}
+
+.banner-productivity {
+  font-size: 2.375rem;
+}
+.banner-graveyard {
+  font-size: 4.625rem;
+}
+
+.banner-h1 span {
+  display: block;
+}
+
+.banner-caption {
+  font-family: BebasKai;
+  color: var(--beige-normal-hover);
+  text-align: center;
+  font-size: 1.5625rem;
+}
+
+@media (max-width: 900px) {
+}
