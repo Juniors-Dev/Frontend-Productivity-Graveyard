@@ -1,4 +1,4 @@
-import { baseUrl } from "./constants";
+import { baseUrl } from "./constants.js";
 
 class ApiClient {
   constructor() {
@@ -80,7 +80,10 @@ class ApiClient {
   getAllTombstones() {
     return this.request("GET", "/projects/tombstones");
   }
+
+  getAllStats() {
+    return this.request("GET", "/stats");
+  }
 }
 
-const api = new ApiClient();
-export default api;
+export default ApiClient;

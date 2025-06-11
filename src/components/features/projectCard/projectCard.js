@@ -1,3 +1,5 @@
+import { baseUrl } from "../../../utlis/constants.js";
+
 export function renderProjectCard(project) {
   // Create card container
   const card = document.createElement("div");
@@ -7,8 +9,8 @@ export function renderProjectCard(project) {
   const cardLeft = document.createElement("div");
   cardLeft.className = "card-left";
   const img = document.createElement("img");
-  img.src = project.image;
-  img.alt = project.title;
+  img.src = baseUrl + project.tombstone[0].imageUrl;
+  img.alt = project.tombstone[0].name;
   cardLeft.appendChild(img);
   const title = document.createElement("h3");
   title.className = "project-title";
@@ -68,8 +70,8 @@ export function renderProjectCard(project) {
   const likes = document.createElement("div");
   likes.classList.add("btn-likes");
   likes.innerHTML = `
-    <img src="./assets/img/thumb.png" alt="Like Icon" class="like-icon" width="25px" height="25px" />
-    <span>${project.likes}</span>
+    <img src="./src/assets/img/thumb.png" alt="Like Icon" class="like-icon" width="25px" height="25px" />
+    <span>${project.upvoteCount}</span>
   `;
   infoLikesRow.appendChild(likes);
 
@@ -81,4 +83,6 @@ export function renderProjectCard(project) {
   // Append to .container
   const container = document.querySelector(".container");
   if (container) container.appendChild(card);
+
+  return card;
 }
