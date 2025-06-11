@@ -48,8 +48,12 @@ class ApiClient {
   }
 
   // Projects
-  getAllProjects() {
-    return this.request("GET", "/projects");
+  getAllProjects(options) {
+    let queryString = "?";
+    for (const [key, value] of Object.entries(options)) {
+      queryString += "&" + key + "=" + value;
+    }
+    return this.request("GET", "/projects" + queryString);
   }
 
   getProject(id) {
