@@ -24,11 +24,17 @@
 
 :root {
   --green-dark: #202829;
+  --green-darker: #191f20;
   --grey-normal: #a5a5a5;
   --grey-normal-hover: #959595;
   --beige-normal: #e0c79e;
   --beige-normal-hover: #cab38e;
   --light-orange-normal: #dba567;
+  --shadow: #234d3c;
+
+  --section-top-margin: 8rem;
+  --max-content-width: 1440px;
+  --section-border-radius: 40px;
 }
 
 body {

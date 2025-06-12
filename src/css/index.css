@@ -14,6 +14,7 @@
   max-width: 1980px;
   background-color: #191f20;
   margin: auto;
+  z-index: 0;
 }
 
 .banner-grim-reaper,
@@ -30,6 +31,7 @@
   bottom: -880px;
   border-radius: 100%;
   transform: translate(-50%, -50%);
+  z-index: 2;
 }
 
 .banner-curve::before {
@@ -43,11 +45,40 @@
   border-radius: 100%;
 }
 
+.banner-curve-background {
+  animation:
+    bg-shadowing 3s infinite ease-in-out,
+    flicker 3s infinite ease-in-out;
+  z-index: 0;
+}
+
+@keyframes bg-shadowing {
+  0% {
+    box-shadow: 0 0 200px 50px var(--shadow);
+  }
+  20% {
+    box-shadow: 0 0 300px 100px var(--shadow);
+  }
+  40% {
+    box-shadow: 0 0 250px 80px var(--shadow);
+  }
+  60% {
+    box-shadow: 0 0 220px 60px var(--shadow);
+  }
+  80% {
+    box-shadow: 0 0 280px 90px var(--shadow);
+  }
+  100% {
+    box-shadow: 0 0 200px 50px var(--shadow);
+  }
+}
+
 .banner-grass {
   position: absolute;
   bottom: 250px;
   width: 700px;
   left: 450px;
+  z-index: 1;
 }
 
 .grass-left {
@@ -88,10 +119,75 @@
   left: 50%;
   top: 5%;
   transform: translateX(-50%);
+  animation:
+    smokey-shadow 6s infinite ease-in-out,
+    flicker 3s infinite ease-in-out;
 }
 
 .banner-h1 {
   padding-bottom: 0;
+  text-shadow: 0px 10px 10px var(--shadow);
+  animation:
+    smokey-shadow 6s infinite ease-in-out,
+    flicker 3s infinite ease-in-out;
+}
+
+h2 {
+  animation:
+    smokey-shadow 6s infinite ease-in-out,
+    flicker 3s infinite ease-in-out;
+}
+
+@keyframes flicker {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.95;
+  }
+  70% {
+    opacity: 0.98;
+  }
+  90% {
+    opacity: 0.93;
+  }
+}
+
+@keyframes smokey-shadow {
+  0% {
+    text-shadow: 0 10px 10px var(--shadow);
+  }
+  10% {
+    text-shadow: 2px 12px 8px var(--shadow);
+  }
+  20% {
+    text-shadow: -3px 14px 12px #1e3d32;
+  }
+  30% {
+    text-shadow: 1px 9px 9px #2a5e4c;
+  }
+  40% {
+    text-shadow: 4px 11px 13px #1a3b2e;
+  }
+  50% {
+    text-shadow: -2px 10px 8px var(--shadow);
+  }
+  60% {
+    text-shadow: 3px 13px 11px #2f6e59;
+  }
+  70% {
+    text-shadow: -4px 12px 10px #1e3f34;
+  }
+  80% {
+    text-shadow: 2px 10px 14px var(--shadow);
+  }
+  90% {
+    text-shadow: -1px 8px 7px #1c3a2d;
+  }
+  100% {
+    text-shadow: 0 10px 10px var(--shadow);
+  }
 }
 
 .banner-productivity {
@@ -146,28 +242,46 @@
   flex-wrap: wrap;
   gap: 2rem;
   justify-content: center;
-  max-width: 1440px;
+  max-width: var(--max-content-width);
 }
 
+/* Lay to rest */
 #bury-project {
   width: 100%;
   padding: 0 2.5rem;
 }
+
 .bury-project-container {
   background: linear-gradient(to bottom, #2f3b3d, #273234);
   width: 100%;
-  max-width: 1440px;
-  border-radius: 40px;
-  margin-top: 6rem;
+  max-width: var(--max-content-width);
+  border-radius: var(--section-border-radius);
+  margin-top: var(--section-top-margin);
   margin-left: auto;
   margin-right: auto;
   display: flex;
   gap: 2rem;
   padding: 0 2rem;
+  position: relative;
+  overflow: hidden;
+  z-index: 0;
+}
+
+.bury-project-bg-img {
+  position: absolute;
+  width: 100%;
+  left: 0;
+  bottom: 0;
+  z-index: 0;
+}
+
+.bury-project-img {
+  z-index: 1;
 }
 
 .bury-text {
   margin: auto;
+  z-index: 1;
 }
 
 .btn-beige {
@@ -189,6 +303,51 @@
   transition: all 1s ease-out;
 }
 
+/* Explore */
+
+#explore {
+  margin-top: var(--section-top-margin);
+  border: #a5a5a5 5px solid;
+  width: 100%;
+  max-width: var(--max-content-width);
+  border-radius: var(--section-border-radius);
+  padding: 1rem;
+}
+
+.explore-h2 {
+  display: block;
+  width: fit-content;
+  margin: -4.6rem auto;
+  background-color: var(--green-dark);
+  padding: 1rem 2rem;
+}
+
+.explore-container {
+  margin-top: 3rem;
+  padding: 2rem;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.explore-container article {
+  flex: 50%;
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  padding: 3rem;
+  gap: 1rem;
+}
+
+#explore a {
+  margin: 0 auto 2rem auto;
+}
+
+.explore-image-container {
+  padding: 1.25rem;
+  background-color: var(--green-darker);
+  border-radius: var(--section-border-radius);
+}
+
 @media (max-width: 900px) {
   .bury-project-container {
     display: block;
@@ -196,9 +355,18 @@
     width: 100%;
     padding: 1rem;
   }
+
+  .explore-container article {
+    padding: 0;
+    margin-bottom: 3rem;
+  }
 }
 
 @media (max-width: 1200px) {
+  .explore-container {
+    display: block;
+  }
+
   .banner-grim-reaper {
     max-height: 60dvh;
     height: 60%;
