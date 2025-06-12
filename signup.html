@@ -30,9 +30,146 @@
 
   <body>
     <header></header>
+    <!-- SIGNUP FORM -->
     <main>
-      <div id="signup-root"></div>
+      <div class="container">
+        <div class="form-container">
+          <h1 class="heading-1">Signup</h1>
+          <p class="tagline">Final resting place of good intentions.</p>
+
+          <form id="signup-form" novalidate>
+            <!-- Username Field -->
+            <div class="form-group">
+              <label for="username" class="visually-hidden">Username</label>
+              <div class="input-wrapper">
+                <div class="input-icon-container">
+                  <span
+                    class="input-icon username-icon"
+                    aria-hidden="true"
+                  ></span>
+                  <input
+                    type="text"
+                    id="username"
+                    name="username"
+                    placeholder="Username"
+                    required
+                    autocomplete="username"
+                  />
+                </div>
+                <span class="error-message" id="username-error"></span>
+              </div>
+            </div>
+
+            <!-- Email Field -->
+            <div class="form-group">
+              <label for="email" class="visually-hidden">Email</label>
+              <div class="input-wrapper">
+                <div class="input-icon-container">
+                  <span class="input-icon email-icon" aria-hidden="true"></span>
+                  <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    placeholder="Email"
+                    required
+                    autocomplete="email"
+                  />
+                </div>
+                <span class="error-message" id="email-error"></span>
+              </div>
+            </div>
+
+            <!-- Password Field -->
+            <div class="form-group">
+              <label for="password" class="visually-hidden">Password</label>
+              <div class="input-wrapper">
+                <div class="input-icon-container">
+                  <span
+                    class="input-icon password-icon"
+                    aria-hidden="true"
+                  ></span>
+                  <input
+                    type="password"
+                    id="password"
+                    name="password"
+                    placeholder="Password"
+                    required
+                    autocomplete="new-password"
+                  />
+                </div>
+                <span class="error-message" id="password-error"></span>
+              </div>
+            </div>
+
+            <!-- Confirm Password Field -->
+            <div class="form-group">
+              <label for="confirm-password" class="visually-hidden"
+                >Confirm Password</label
+              >
+              <div class="input-wrapper">
+                <div class="input-icon-container">
+                  <span
+                    class="input-icon confirm-password-icon"
+                    aria-hidden="true"
+                  ></span>
+                  <input
+                    type="password"
+                    id="confirm-password"
+                    name="confirmPassword"
+                    placeholder="Confirm Password"
+                    required
+                    autocomplete="new-password"
+                  />
+                </div>
+                <span class="error-message" id="confirm-password-error"></span>
+              </div>
+            </div>
+
+            <!-- Terms Checkbox -->
+            <div class="form-group checkbox-group">
+              <a
+                href="termsofservice.html"
+                class="terms-link"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Read Terms of Service
+              </a>
+              <div class="custom-checkbox">
+                <input type="checkbox" id="terms" name="terms" required />
+                <label for="terms" class="body-text"
+                  >Accept terms and conditions</label
+                >
+              </div>
+              <span class="error-message" id="terms-error"></span>
+            </div>
+
+            <!-- Submit Button -->
+            <button type="submit" class="signup-button body-text">
+              Signup
+            </button>
+
+            <!-- Sign In Link -->
+            <div class="text-center signin-link-wrapper">
+              <a href="login.html" class="signup-link"
+                >Already have an account? Sign in</a
+              >
+            </div>
+          </form>
+        </div>
+      </div>
+      <div class="grim-reaper"></div>
     </main>
+
+    <!-- <script type="module">
+      import { createFormHandler } from "./js/formHandler.js";
+
+      // Initialize form handler when DOM is loaded
+      document.addEventListener('DOMContentLoaded', () => {
+        createFormHandler("#signup-form").init();
+      });
+    </script> -->
+
     <footer></footer>
   </body>
 </html>

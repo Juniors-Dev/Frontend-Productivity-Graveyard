@@ -33,7 +33,87 @@
   <body>
     <header></header>
     <main>
-      <div id="login-root"></div>
+      <!-- LOGIN FORM -->
+      <section>
+        <div class="container">
+          <div class="form-container">
+            <h1 class="heading-1">Login</h1>
+            <p class="tagline">Final resting place of good intentions.</p>
+
+            <form id="login-form" novalidate>
+              <!-- Email Field -->
+              <div class="form-group">
+                <label for="email" class="visually-hidden">Email</label>
+                <div class="input-wrapper">
+                  <div class="input-icon-container">
+                    <span
+                      class="input-icon email-icon"
+                      aria-hidden="true"
+                    ></span>
+                    <input
+                      type="email"
+                      id="email"
+                      name="email"
+                      placeholder="Email"
+                      required
+                      autocomplete="email"
+                    />
+                  </div>
+                  <span class="error-message" id="email-error"></span>
+                </div>
+              </div>
+
+              <!-- Password Field -->
+              <div class="form-group">
+                <label for="password" class="visually-hidden">Password</label>
+                <div class="input-wrapper">
+                  <div class="input-icon-container">
+                    <span
+                      class="input-icon password-icon"
+                      aria-hidden="true"
+                    ></span>
+                    <input
+                      type="password"
+                      id="password"
+                      name="password"
+                      placeholder="Password"
+                      required
+                      autocomplete="current-password"
+                    />
+                  </div>
+                  <span class="error-message" id="password-error"></span>
+                </div>
+              </div>
+
+              <!-- Forgot Password Link -->
+              <div class="text-center forgot-password-wrapper">
+                <a href="#" class="forgot-password-link"
+                  >Forgot your password?</a
+                >
+              </div>
+
+              <!-- Login Button -->
+              <button type="submit" class="login-button body-text">
+                Login
+              </button>
+
+              <!-- Signup Link -->
+              <div class="text-center signup-link-wrapper">
+                <a href="/signup.html" class="signup-link">Or signup</a>
+              </div>
+            </form>
+          </div>
+        </div>
+        <div class="grim-reaper"></div>
+      </section>
+      <!-- <script type="module">
+      import { createFormHandler } from "./js/formHandler.js";
+
+      // Initialize form handler when DOM is loaded
+      document.addEventListener('DOMContentLoaded', () => {
+        createFormHandler("#login-form").init();
+      });
+    </script> -->
     </main>
     <footer></footer>
   </body>
