@@ -6,11 +6,11 @@ import { createFormHandler } from "../formHandler.js";
  */
 export function renderLoginForm(targetElement = null) {
   // Create main container
-  const mainElement = document.createElement("main");
+  const mainElement = document.createElement("section");
 
   // Create container div
   const containerDiv = document.createElement("div");
-  containerDiv.className = "container";
+  containerDiv.className = "login-container";
 
   // Create form container
   const formContainerDiv = document.createElement("div");
@@ -57,7 +57,7 @@ export function renderLoginForm(targetElement = null) {
   signupLinkWrapper.className = "text-center signup-link-wrapper";
 
   const signupLink = document.createElement("a");
-  signupLink.href = "../signup/signup.html";
+  signupLink.href = "/signup.html";
   signupLink.className = "signup-link";
   signupLink.textContent = "Or signup";
 

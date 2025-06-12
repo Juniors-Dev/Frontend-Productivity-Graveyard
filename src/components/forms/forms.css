@@ -1,52 +1,6 @@
-:root {
-  --color-background: #1a1e20;
-  --color-card: #212529;
-  --color-input: #17191c;
-  --color-input-border: #333;
-  --color-primary: #cdb68d;
-  --color-primary-hover: #d9c9a3;
-  --color-text: #fff;
-  --color-text-secondary: rgba(255, 255, 255, 0.7);
-  --color-error: #d64550;
-  --color-input-text: #70888b;
-  --color-link-text: #70888b;
-  --color-accent: #f2c94c;
-  --border-radius: 4px;
-  --transition-speed: 0.3s;
-  --font-heading: "pirate", "roboto", sans-serif;
-  --font-body: "roboto", sans-serif;
-  --font-tagline: "bebaskai", sans-serif;
-}
-
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-body {
-  font-family: var(--font-body);
-  background-color: var(--color-background);
-  color: var(--color-text);
-  min-height: 100vh;
-  line-height: 1.5;
-  overflow-x: hidden;
-  position: relative;
-  font-size: 16px;
-  letter-spacing: 0.5px;
-}
-
 /* Layout */
-main {
-  min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: relative;
-  padding: 2rem;
-}
-
-.container {
+.login-container,
+.signup-container {
   width: 100%;
   max-width: 450px;
   position: relative;
@@ -56,6 +10,7 @@ main {
   align-items: center;
   justify-content: center;
   min-height: 100vh;
+  margin: auto;
 }
 
 .form-container {
@@ -64,7 +19,12 @@ main {
   border-radius: 8px;
   text-align: center;
   box-sizing: border-box;
+  justify-content: center;
+  align-items: center;
+  margin: auto;
+  height: fit-content;
 }
+
 .form-group,
 .input-wrapper {
   text-align: left;
@@ -83,7 +43,6 @@ main {
 }
 
 /* Headings */
-h1,
 .heading-1 {
   font-family: var(--font-heading);
   font-size: 32px;
@@ -362,7 +321,7 @@ input.is-valid {
   background-position: bottom;
   opacity: 0.6;
   z-index: 1;
-  background-image: url("../../../assets/img/grimreaper.png");
+  background-image: url("../../assets/img/grimreaper.png");
 }
 
 /* Loading spinner */
