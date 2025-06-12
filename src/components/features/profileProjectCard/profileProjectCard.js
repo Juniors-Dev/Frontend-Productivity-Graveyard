@@ -43,6 +43,5 @@ export function renderProfileProjectCard(project) {
   projectCard.appendChild(yearsLikes);
 
   // Append the project card to the recent funerals container
-  const recentFuneralsContainer = document.querySelector(".recent-funerals");
-  recentFuneralsContainer.appendChild(projectCard);
+  return projectCard;
 }

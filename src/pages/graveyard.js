@@ -39,6 +39,7 @@ const exampleProject2 = {
   likes: 9,
 };
 
-renderProjectCard(exampleProject);
-renderProjectCard(exampleProject1);
-renderProjectCard(exampleProject2);
+const container = document.querySelector(".container");
+container.append(renderProjectCard(exampleProject));
+container.append(renderProjectCard(exampleProject1));
+container.append(renderProjectCard(exampleProject2));

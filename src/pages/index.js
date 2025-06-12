@@ -16,10 +16,10 @@ if (!projects) {
   localStorage.setItem("stats", JSON.stringify(stats));
 }
 
-const projectsContatiner = document.querySelector("#recent-projects-container");
+const projectsContainer = document.querySelector("#recent-projects-container");
 
 await projects.data.forEach((project) => {
-  projectsContatiner.append(renderProjectCard(project));
+  projectsContainer.append(renderProjectCard(project));
 });
 
 document.getElementById("buried-today").innerText = stats.data.funeralsToday;
