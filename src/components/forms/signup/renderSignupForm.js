@@ -6,12 +6,9 @@ import { createFormHandler } from "../formHandler.js";
  * @returns {HTMLElement} - The main form container element
  */
 export function renderSignupForm(targetElement = null) {
-  //create main container
-  const mainElement = document.createElement("main");
-
   // create container div
   const containerDiv = document.createElement("div");
-  containerDiv.className = "container";
+  containerDiv.className = "signup-container";
 
   // create form container
   const formContainerDiv = document.createElement("div");
@@ -60,10 +57,6 @@ export function renderSignupForm(targetElement = null) {
   signinLinkWrapper.appendChild(signinLink);
   form.appendChild(signinLinkWrapper);
 
-  // create decorative elements
-  const grimReaper = document.createElement("div");
-  grimReaper.className = "grim-reaper";
-
   // build the DOM structure
   formContainerDiv.appendChild(heading);
   formContainerDiv.appendChild(tagline);
@@ -71,16 +64,13 @@ export function renderSignupForm(targetElement = null) {
 
   containerDiv.appendChild(formContainerDiv);
 
-  mainElement.appendChild(containerDiv);
-  mainElement.appendChild(grimReaper);
-
   // If a target element is provided, append or replace
   if (targetElement) {
     // Clear the target element first
     targetElement.innerHTML = "";
-    targetElement.appendChild(mainElement);
+    targetElement.appendChild(containerDiv);
   } else {
-    document.body.appendChild(mainElement);
+    document.body.appendChild(containerDiv);
   }
 
   // Initialize validation and handlers for this form
@@ -97,7 +87,7 @@ export function renderSignupForm(targetElement = null) {
     }
   }, 0);
 
-  return mainElement;
+  return containerDiv;
 }
 
 /**
