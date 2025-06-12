@@ -108,16 +108,18 @@
 }
 
 .banner-grim-reaper {
-  height: 65dvh;
+  height: 60dvh;
   bottom: 10dvh;
   left: 53%;
   transform: translateX(-50%);
+  z-index: 2;
 }
 
 .banner-text {
   position: absolute;
   left: 50%;
   top: 5%;
+  z-index: 4;
   transform: translateX(-50%);
   animation:
     smokey-shadow 6s infinite ease-in-out,
@@ -208,6 +210,11 @@ h2 {
   text-align: center;
   font-size: 1.5625rem;
 }
+/* Graveyard */
+
+#graveyard {
+  background: linear-gradient(#202829, var(--color-background) 95%);
+}
 
 .index-h2 {
   color: var(--beige-normal);
@@ -243,6 +250,7 @@ h2 {
   gap: 2rem;
   justify-content: center;
   max-width: var(--max-content-width);
+  margin: auto;
 }
 
 /* Lay to rest */
@@ -306,6 +314,7 @@ h2 {
 /* Explore */
 
 #explore {
+  margin: auto;
   margin-top: var(--section-top-margin);
   border: #a5a5a5 5px solid;
   width: 100%;
@@ -318,7 +327,7 @@ h2 {
   display: block;
   width: fit-content;
   margin: -4.6rem auto;
-  background-color: var(--green-dark);
+  background-color: var(--color-background);
   padding: 1rem 2rem;
 }
 
