@@ -1,5 +1,4 @@
 import { createFormHandler } from "../formHandler.js";
-
 /**
  * Renders a basic login form and returns the main container element
  * @param {HTMLElement} [targetElement=null] - Optional target element to append to
@@ -64,10 +63,6 @@ export function renderLoginForm(targetElement = null) {
 
   signupLinkWrapper.appendChild(signupLink);
   form.appendChild(signupLinkWrapper);
-
-  // Create decorative elements
-  // const grimReaper = document.createElement("div");
-  // grimReaper.className = "grim-reaper";
 
   // Build the DOM structure
   formContainerDiv.appendChild(heading);
