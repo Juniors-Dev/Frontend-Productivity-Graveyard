@@ -5,6 +5,7 @@ const HEADER_CONFIG = {
     { text: "HOME", href: "index.html" },
     { text: "GRAVEYARD", href: "graveyard.html" },
     { text: "BURY", href: "bury.html" },
+    { text: "STATS", href: "stats.html" },
     { text: "PROFILE", href: "profile.html" },
     { text: "LOGIN", href: "login.html" },
     // { text: 'LOGOUT', href: 'index.html' } when logged in the login becomes logout
