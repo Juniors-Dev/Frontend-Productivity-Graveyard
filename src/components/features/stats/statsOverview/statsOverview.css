@@ -29,14 +29,9 @@
   border-radius: 1.25rem;
   padding: 2.5rem;
   color: var(--grey-normal);
-  width: 35.625rem;
-  height: 11.1875rem;
-}
-
-.stats-grid .stat-card:nth-child(5) {
-  grid-column: 1 / -1;
-  grid-row: 3;
-  justify-self: center;
+  width: 100%;
+  max-width: 35rem;
+  height: auto;;
 }
 
 .stat-content {
