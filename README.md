@@ -58,6 +58,11 @@ This will:
 2. Format code using Prettier.
 3. Start the development server on http://localhost:3000 using http-server.
 
+#### Development API
+
+Base url: https://backend-productivity-graveyard.onrender.com
+Server docs: https://backend-productivity-graveyard.onrender.com/doc/
+
 ### Development Workflow
 
 The project uses several tools to ensure code quality:
@@ -85,6 +90,7 @@ npm run prepare
 ├── src/
 │ └── components/ # Reusable UI components
 │ ├── footer/
+  ├── forms/
 │ ├── header/
 │ ├── profile/
 │ └── projects/
