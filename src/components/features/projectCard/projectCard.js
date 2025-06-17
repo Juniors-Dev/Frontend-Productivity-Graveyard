@@ -86,3 +86,46 @@ export function renderProjectCard(project) {
 
   return card;
 }
+
+export function renderProjectCardSkeleton() {
+  return `<div class="project-card skeleton-card skeleton-container">
+              <div class="card-left">
+                <div class="skeleton skeleton-img"></div>
+                <div class="skeleton skeleton-title"></div>
+                <div class="timeauthor">
+                  <div class="skeleton skeleton-small"></div>
+                  <div class="skeleton skeleton-small"></div>
+                </div>
+              </div>
+              <div class="card-right">
+                <div class="project-description">
+                  <div class="skeleton skeleton-title"></div>
+                  <div class="skeleton skeleton-text"></div>
+                </div>
+                <div
+                  style="
+                    display: flex;
+                    flex-direction: row;
+                    align-items: center;
+                    gap: 20px;
+                  "
+                >
+                  <div class="project-info">
+                    <div class="skeleton skeleton-line"></div>
+                    <div class="skeleton skeleton-line"></div>
+                    <div class="skeleton skeleton-line"></div>
+                  </div>
+                  <div class="btn-likes">
+                    <img
+                      src="./src/assets/img/thumb.png"
+                      alt="Like Icon"
+                      class="like-icon"
+                      width="25px"
+                      height="25px"
+                    />
+                    <div class="skeleton skeleton-tiny"></div>
+                  </div>
+                </div>
+              </div>
+            </div>`;
+}
