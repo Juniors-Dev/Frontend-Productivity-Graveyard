@@ -5,10 +5,19 @@
   gap: 20px;
 }
 
+.project-title {
+  color: var(--grey-normal);
+  font-size: 22px;
+  line-height: 1.25;
+  font-weight: medium;
+  margin: 0px;
+  padding-bottom: 10px;
+  margin-bottom: 0;
+}
+
 .card-left {
   display: flex;
   flex-direction: column;
-  gap: 15px;
   width: 40%;
   min-width: 120px;
   max-width: 260px;
@@ -29,9 +38,21 @@
   bottom: -10px;
   border: 3px solid var(--grey-normal);
   border-radius: 30px;
-  transform: rotate(-3deg);
+  transform: rotate(-4deg);
   z-index: 1;
   pointer-events: none;
+}
+
+.project-card:nth-child(even) .card-left::before {
+  transform: rotate(4deg);
+}
+
+.project-card:nth-child(3n) .card-left::before {
+  transform: rotate(2deg);
+}
+
+.project-card:nth-child(4n) .card-left::before {
+  transform: rotate(-2deg);
 }
 
 .timeauthor {

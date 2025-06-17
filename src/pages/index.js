@@ -1,7 +1,7 @@
 import { api } from "../main.js";
 import {
-  renderProjectCard,
-  renderProjectCardSkeleton,
+  projectCard,
+  projectCardSkeleton,
 } from "../components/features/projectCard/projectCard.js";
 
 const projectsContainer = document.querySelector("#recent-projects-container");
@@ -13,7 +13,7 @@ const statsSpans = {
 
 // Show skeletons while loading
 for (let i = 0; i < 4; i++) {
-  projectsContainer.innerHTML += renderProjectCardSkeleton();
+  projectsContainer.innerHTML += projectCardSkeleton();
 }
 
 try {
@@ -28,7 +28,7 @@ try {
   // Render projects
   if (Array.isArray(projects.data) && projects.data.length > 0) {
     projects.data.forEach((project) => {
-      projectsContainer.append(renderProjectCard(project));
+      projectsContainer.append(projectCard(project));
     });
   } else {
     projectsContainer.innerHTML = `<p>No projects found.</p>`;
