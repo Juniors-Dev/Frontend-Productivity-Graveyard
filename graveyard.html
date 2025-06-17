@@ -7,21 +7,59 @@
     <script type="module" src="/src/main.js" defer></script>
     <script type="module" src="/src/pages/graveyard.js" defer></script>
     <link rel="stylesheet" href="/src/css/style.css" />
+    <link rel="stylesheet" href="/src/css/shared/bannerShared.css" />
+    <link rel="stylesheet" href="/src/css/graveyard.css" />
   </head>
   <body>
     <header></header>
     <main>
-      <h1>GRAVEYARD</h1>
-      <section>
-        <div class="project-header">
+      <section id="banner">
+        <div class="banner-container">
+          <div class="banner-text">
+            <h1 class="banner-h1">GRAVEYARD</h1>
+          </div>
+          <div class="banner-curve banner-curve-background"></div>
+          <img
+            class="banner-grass grass-left-before"
+            src="./src/assets/img/Grass.png"
+            alt="grass"
+          />
+          <img
+            class="banner-grass"
+            src="./src/assets/img/Grass.png"
+            alt="grass"
+          />
+          <img
+            class="banner-grass grass-left"
+            src="./src/assets/img/Grass.png"
+            alt="grass"
+          />
+          <img
+            class="banner-grass grass-right"
+            src="./src/assets/img/Grass.png"
+            alt="grass"
+          />
+          <img
+            class="banner-grass grass-right-after"
+            src="./src/assets/img/Grass.png"
+            alt="grass"
+          />
+          <div class="banner-curve"></div>
+        </div>
+      </section>
+      <section id="graveyard">
+        <div class="graveyard-header">
           <div>
             <h2>Recent Funerals</h2>
-            Light a candle for the funerals you appreciate
+            <p>Light a candle for the funerals you appreciate</p>
           </div>
-          <div class="btn-new-funeral">+ New Funeral</div>
+          <div class="btn-new-funeral">Bury A Project</div>
         </div>
-        <div class="container"></div>
+        <div class="project-filters"></div>
+        <div class="project-container"></div>
+        <div class="pagination"></div>
       </section>
     </main>
+    <footer></footer>
   </body>
 </html>
