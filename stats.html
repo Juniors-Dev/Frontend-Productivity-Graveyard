@@ -7,22 +7,27 @@
     <link rel="stylesheet" href="/src/css/style.css" />
     <link
       rel="stylesheet"
-      href="/src/components/features/stats/statsOverview/statsOverview.css"
+      href="/src/components/features/stats/statsCards.css"
     />
   </head>
   <body>
     <header></header>
-    <main>
-      <h1>STATS</h1>
-      <section id="stats-overview">
-        <div class="stats-header">
-          <p class="stats-quote">
-            "Here lie the numbers of projects that never saw the light of day."
-          </p>
+    <section id="stats-banner">
+      <div class="banner-container">
+        <div class="banner-stats-title">
+          <h1 class="stats-title">STATS</h1>
         </div>
-        <div class="stats-overview-container"></div>
-      </section>
-    </main>
+      </div>
+    </section>
+
+    <section id="stats-overview">
+      <div class="stats-header">
+        <p class="stats-quote">
+          "Here lie the numbers of projects that never saw the light of day."
+        </p>
+      </div>
+      <div class="stats-overview-container"></div>
+    </section>
     <script type="module" src="/src/main.js" defer></script>
     <script type="module" src="/src/pages/stats.js" defer></script>
   </body>

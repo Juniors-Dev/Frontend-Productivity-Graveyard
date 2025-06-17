@@ -1,11 +1,23 @@
-import { renderStatsOverview } from "../components/features/stats/statsOverview/statsOverview.js";
+import { api } from "../main.js";
+import { renderStatsGrid } from "../components/features/stats/statsCards.js";
 
-const mockStatsData = {
-  buriedToday: 6,
-  avgLifespan: "3 MONTHS",
-  totalUsers: 6,
-  totalBuried: 245,
-  totalLikes: 6,
-};
+async function loadStats() {
+  try {
+    const response = await api.getAllStats();
 
-renderStatsOverview(mockStatsData);
+    if (!response.success) {
+      throw new Error(response.message || "Failed to fetch stats");
+    }
+
+    renderStatsGrid(response.data);
+
+  } catch (error) {
+    console.error("Failed to load stats:", error);
+    const container = document.querySelector(".stats-overview-container");
+    if (container) {
+      container.innerHTML = `<p>Failed to load statistics.</p>`;
+    }
+  }
+}
+
+loadStats();
