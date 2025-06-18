@@ -7,7 +7,7 @@ import { api } from "../main.js";
 const projectsContainer = document.querySelector(".project-container");
 const paginationContainer = document.querySelector(".pagination");
 
-const limit = 6;
+const limit = 10;
 let currentPage = 1;
 
 function showSkeletons(count = limit) {

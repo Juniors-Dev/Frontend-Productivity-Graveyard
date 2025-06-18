@@ -1,4 +1,16 @@
 .project-filters {
+  display: flex;
+  gap: 2rem;
+}
+
+.graveyard-header {
+  display: flex;
+  width: 100%;
+}
+
+.btn-new-funeral {
+  margin-left: auto;
+  margin-right: 2rem;
 }
 
 .project-container {
@@ -44,5 +56,11 @@
   background-color: var(--beige-normal-hover);
 }
 
-@media (max-width: 1200px) {
+@media (max-width: 900px) {
+  .graveyard-header {
+    flex-direction: column;
+  }
+  .btn-new-funeral {
+    margin-top: 1rem;
+  }
 }
