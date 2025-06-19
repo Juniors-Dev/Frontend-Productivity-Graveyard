@@ -82,6 +82,8 @@ body {
   /* padding-top: 160px; */
   padding-bottom: 160px;
   margin: 0 auto;
+  padding-left: 1rem;
+  padding-right: 1rem;
 }
 
 h1 {
