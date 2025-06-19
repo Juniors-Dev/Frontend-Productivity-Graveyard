@@ -1,5 +1,6 @@
 .project-filters {
   display: flex;
+  flex-direction: column;
   gap: 2rem;
 }
 
@@ -8,7 +9,7 @@
   width: 100%;
 }
 
-.btn-new-funeral {
+.ml-auto {
   margin-left: auto;
   margin-right: 2rem;
 }
@@ -31,36 +32,43 @@
   background: linear-gradient(#202829, var(--color-background) 75%);
 }
 
-.pagination {
+#project-filters {
   display: flex;
-  justify-content: center;
-  margin: 2rem auto;
-  gap: 0.5rem;
   flex-wrap: wrap;
+  gap: 1rem;
 }
 
-.page-btn {
-  background-color: var(--beige-normal);
-  color: var(--green-dark);
-  border: none;
-  border-radius: 8px;
-  padding: 0.5rem 1rem;
-  cursor: pointer;
-  font-weight: bold;
-  font-size: 1rem;
-  transition: background-color 0.3s ease;
+.order-selectors {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
 }
 
-.page-btn.active,
-.page-btn:hover {
-  background-color: var(--beige-normal-hover);
+#types {
+  display: grid;
+  column-gap: 1rem;
+  row-gap: 1rem;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
+dialog h2 {
+  margin-bottom: 1rem;
+}
+
+@media (max-width: 1100px) {
+  #types {
+    display: grid;
+    column-gap: 1rem;
+    row-gap: 1rem;
+    grid-template-columns: 1fr 1fr;
+  }
 }
 
 @media (max-width: 900px) {
   .graveyard-header {
     flex-direction: column;
   }
-  .btn-new-funeral {
+  .btn-beige {
     margin-top: 1rem;
   }
 }
