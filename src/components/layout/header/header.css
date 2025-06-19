@@ -1,15 +1,3 @@
-/* Reset & Base Styles */
-body {
-  margin: 0;
-  font-family: Arial, sans-serif;
-  background-color: #1a1e23;
-  color: #e6d4ad;
-}
-
-main {
-  margin-top: 220px;
-}
-
 /* Navigation Container */
 .nav-container {
   position: absolute;
@@ -26,7 +14,7 @@ main {
 /* Navigation Links */
 .nav-links {
   list-style: none;
-  padding: 35px 0px 0px 0px;
+  padding: 0px;
   margin: 0;
   display: flex;
   gap: 0px;
