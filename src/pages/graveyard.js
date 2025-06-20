@@ -34,6 +34,9 @@ async function fetchAndRenderProjects(page = 1) {
   showSkeletons();
   try {
     const offset = (page - 1) * limit;
+    const url = new URL(window.location);
+    url.searchParams.set("offset", offset);
+    window.history.pushState({}, "", url);
     let options = { offset, limit, types, order, orderBy };
     query?.length ? (options.query = query) : delete options.query;
     const res = await api.getAllProjects(options);
@@ -71,7 +74,7 @@ async function fetchAndRenderProjects(page = 1) {
   }
 }
 
-fetchAndRenderProjects();
+fetchAndRenderProjects(currentPage);
 
 /* Modal for filter */
 const dialog = document.querySelector("dialog");
