@@ -1,5 +1,4 @@
 import { createFormHandler } from "../formHandler.js";
-
 /**
  * Renders a basic login form and returns the main container element
  * @param {HTMLElement} [targetElement=null] - Optional target element to append to
@@ -7,11 +6,11 @@ import { createFormHandler } from "../formHandler.js";
  */
 export function renderLoginForm(targetElement = null) {
   // Create main container
-  const mainElement = document.createElement("main");
+  const mainElement = document.createElement("section");
 
   // Create container div
   const containerDiv = document.createElement("div");
-  containerDiv.className = "container";
+  containerDiv.className = "login-container";
 
   // Create form container
   const formContainerDiv = document.createElement("div");
@@ -58,16 +57,12 @@ export function renderLoginForm(targetElement = null) {
   signupLinkWrapper.className = "text-center signup-link-wrapper";
 
   const signupLink = document.createElement("a");
-  signupLink.href = "../signup/signup.html";
+  signupLink.href = "/signup.html";
   signupLink.className = "signup-link";
   signupLink.textContent = "Or signup";
 
   signupLinkWrapper.appendChild(signupLink);
   form.appendChild(signupLinkWrapper);
-
-  // Create decorative elements
-  const grimReaper = document.createElement("div");
-  grimReaper.className = "grim-reaper";
 
   // Build the DOM structure
   formContainerDiv.appendChild(heading);
@@ -77,7 +72,6 @@ export function renderLoginForm(targetElement = null) {
   containerDiv.appendChild(formContainerDiv);
 
   mainElement.appendChild(containerDiv);
-  mainElement.appendChild(grimReaper);
 
   // If a target element is provided, append or replace
   if (targetElement) {

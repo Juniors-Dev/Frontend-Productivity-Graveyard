@@ -4,28 +4,64 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Graveyard - Productivity-Graveyard</title>
-    <link rel="stylesheet" href="./css/style.css" />
-    <script src="./src/components/header/header.js" defer></script>
-    <script
-      src="./src/components/projectCard/projectCard.js"
-      type="module"
-    ></script>
-    <script src="./src/components/footer/footer.js" defer></script>
+    <script type="module" src="/src/main.js" defer></script>
+    <script type="module" src="/src/pages/graveyard.js" defer></script>
+    <link rel="stylesheet" href="/src/css/style.css" />
+    <link rel="stylesheet" href="/src/css/shared/bannerShared.css" />
+    <link rel="stylesheet" href="/src/css/graveyard.css" />
   </head>
   <body>
     <header></header>
     <main>
-      <h1>GRAVEYARD</h1>
-      <section>
-        <div class="project-header">
-          <div>
-            <h2>Recent Funerals</h2>
-            Light a candle for the funerals you appreciate
+      <section id="banner">
+        <div class="banner-container">
+          <div class="banner-text">
+            <h1 class="banner-h1">GRAVEYARD</h1>
           </div>
-          <div class="btn-new-funeral">+ New Funeral</div>
+          <div class="banner-curve banner-curve-background"></div>
+          <img
+            class="banner-grass grass-left-before"
+            src="./src/assets/img/Grass.png"
+            alt="grass"
+          />
+          <img
+            class="banner-grass"
+            src="./src/assets/img/Grass.png"
+            alt="grass"
+          />
+          <img
+            class="banner-grass grass-left"
+            src="./src/assets/img/Grass.png"
+            alt="grass"
+          />
+          <img
+            class="banner-grass grass-right"
+            src="./src/assets/img/Grass.png"
+            alt="grass"
+          />
+          <img
+            class="banner-grass grass-right-after"
+            src="./src/assets/img/Grass.png"
+            alt="grass"
+          />
+          <div class="banner-curve"></div>
         </div>
-        <div class="container"></div>
+      </section>
+      <section id="graveyard">
+        <div class="container">
+          <div class="graveyard-header">
+            <div>
+              <h2>Recent Funerals</h2>
+              <p>Light a candle for the funerals you appreciate</p>
+            </div>
+            <a class="btn-new-funeral" href="/bury.html">+ New Funeral</a>
+          </div>
+          <div class="project-filters"></div>
+          <div class="project-container"></div>
+          <div class="pagination"></div>
+        </div>
       </section>
     </main>
+    <footer></footer>
   </body>
 </html>
