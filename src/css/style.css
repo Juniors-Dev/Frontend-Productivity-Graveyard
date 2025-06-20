@@ -160,6 +160,12 @@ header {
   cursor: pointer;
 }
 
+.btn-small {
+  padding: 5px 10px;
+  border-radius: 6px;
+  font-size: 1rem;
+}
+
 .centered {
   text-align: center;
   justify-content: center;
@@ -168,9 +174,6 @@ header {
 
 @media (max-width: 900px) {
   .btn-beige {
-    border-radius: 16px;
-    padding: 12px 17px;
-    font-size: 20px;
     font-weight: bold;
     color: var(--green-dark);
     background-color: var(--beige-normal);

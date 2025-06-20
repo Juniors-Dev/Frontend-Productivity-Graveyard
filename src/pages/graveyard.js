@@ -20,6 +20,59 @@ let currentPage =
       (parseInt(urlParams.get("limit"), 10) || 10),
   ) + 1;
 
+const projectsContainer = document.querySelector(".project-container");
+const paginationContainer = document.querySelector(".pagination");
+
+function showSkeletons(count = limit) {
+  projectsContainer.innerHTML = "";
+  for (let i = 0; i < count; i++) {
+    projectsContainer.innerHTML += projectCardSkeleton();
+  }
+}
+
+async function fetchAndRenderProjects(page = 1) {
+  showSkeletons();
+  try {
+    const offset = (page - 1) * limit;
+    let options = { offset, limit, types, order, orderBy };
+    query?.length ? (options.query = query) : delete options.query;
+    const res = await api.getAllProjects(options);
+
+    console.log(res);
+
+    const projects = res.data || [];
+    const total = res.meta?.total || 0;
+    const totalPages = Math.ceil(total / limit);
+
+    projectsContainer.innerHTML = "";
+
+    if (projects.length === 0) {
+      projectsContainer.innerHTML =
+        "<p>No projects found. Try another page.</p>";
+    } else {
+      projects.forEach((project) => {
+        projectsContainer.append(projectCard(project));
+      });
+    }
+
+    pagination({
+      current: currentPage,
+      total: totalPages,
+      container: paginationContainer,
+      onPageChange: (newPage) => {
+        currentPage = newPage;
+        fetchAndRenderProjects(newPage);
+      },
+    });
+  } catch (err) {
+    console.log(err);
+    projectsContainer.innerHTML =
+      "<p>An error occurred fetching projects, please refresh the page.</p>";
+  }
+}
+
+fetchAndRenderProjects();
+
 /* Modal for filter */
 const dialog = document.querySelector("dialog");
 const typesCheckboxes = document.querySelector("#types");
@@ -70,78 +123,58 @@ typesArray.forEach((type) => {
 
 /* Form Handler */
 const filterForm = document.getElementById("project-filters");
-filterForm.addEventListener("submit", async (e) => {
+const searchForm = document.getElementById("search-form");
+searchForm.query.value = query;
+async function formHandler(e) {
   e.preventDefault();
   const formData = new FormData(filterForm);
+  let searchQuery = searchForm.query.value;
   const data = Object.fromEntries(formData.entries());
+
   const selectedTypes = formData.getAll("types").join(",");
   data.types = selectedTypes;
-
+  if (searchQuery.trim().length > 0) {
+    data.query = searchQuery;
+  } else {
+    delete data.query;
+  }
+  console.log(data.query);
   const url = new URL(window.location);
+  url.searchParams.forEach((_, key) => url.searchParams.delete(key));
   for (const [key, value] of Object.entries(data)) {
     url.searchParams.set(key, value);
   }
+
   window.history.pushState({}, "", url);
   order = data.order;
   orderBy = data.orderBy;
-  query = "";
+  query = data.query;
   types = selectedTypes;
   limit = data.limit;
   currentPage = 1;
 
   fetchAndRenderProjects(currentPage);
   dialog.close();
+}
+
+filterForm.addEventListener("submit", async (e) => {
+  formHandler(e);
 });
 
-const projectsContainer = document.querySelector(".project-container");
-const paginationContainer = document.querySelector(".pagination");
+searchForm.addEventListener("submit", async (e) => {
+  formHandler(e);
+});
 
-function showSkeletons(count = limit) {
-  projectsContainer.innerHTML = "";
-  for (let i = 0; i < count; i++) {
-    projectsContainer.innerHTML += projectCardSkeleton();
-  }
-}
+const clearFilterBtn = document.querySelector("#clear-filters");
+clearFilterBtn.addEventListener("click", async (e) => {
+  filterForm.reset();
+  formHandler(e);
+});
 
-async function fetchAndRenderProjects(page = 1) {
-  showSkeletons();
-  try {
-    const offset = (page - 1) * limit;
-    let options = { offset, limit, types, order, orderBy };
-    query.length ? (options.query = query) : "";
-    const res = await api.getAllProjects(options);
-
-    console.log(res);
-
-    const projects = res.data || [];
-    const total = res.meta?.total || 0;
-    const totalPages = Math.ceil(total / limit);
-
-    projectsContainer.innerHTML = "";
-
-    if (projects.length === 0) {
-      projectsContainer.innerHTML =
-        "<p>No projects found. Try another page.</p>";
-    } else {
-      projects.forEach((project) => {
-        projectsContainer.append(projectCard(project));
-      });
-    }
-
-    pagination({
-      current: currentPage,
-      total: totalPages,
-      container: paginationContainer,
-      onPageChange: (newPage) => {
-        currentPage = newPage;
-        fetchAndRenderProjects(newPage);
-      },
-    });
-  } catch (err) {
-    console.log(err);
-    projectsContainer.innerHTML =
-      "<p>An error occurred fetching projects, please refresh the page.</p>";
-  }
-}
-
-fetchAndRenderProjects();
+const clearSearchBtn = document.querySelector("#clear-search");
+clearSearchBtn.addEventListener("click", async (e) => {
+  searchForm.reset();
+  query = "";
+  formHandler(e);
+  console.log(query);
+});

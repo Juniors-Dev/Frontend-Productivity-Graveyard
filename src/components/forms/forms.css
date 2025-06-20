@@ -112,7 +112,8 @@
 /* Grouped input styles */
 input[type="text"],
 input[type="email"],
-input[type="password"] {
+input[type="password"],
+input[type="search"] {
   width: 100%;
   padding: 1rem 1rem 1rem 3.2rem;
   border: 1px solid var(--color-input-border);
