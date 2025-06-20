@@ -1,4 +1,25 @@
 import { formatLifespan } from "../../../utlis/formatters.js";
+
+/**
+ * Creates a skeleton loading version of a stat card
+ * @returns {string} HTML string for skeleton stat card
+ */
+export function createStatCardSkeleton() {
+  return `
+    <div class="stat-card skeleton-card skeleton-container">
+      <div class="stat-content">
+        <div class="stat-text">
+          <div class="skeleton skeleton-stat-title"></div>
+          <div class="skeleton skeleton-stat-value"></div>
+        </div>
+        <div class="stat-icon">
+          <div class="skeleton skeleton-stat-icon"></div>
+        </div>
+      </div>
+    </div>
+  `;
+}
+
 /**
  * Creates a single stat card component
  * @param {Object} stat - The stat data
@@ -7,7 +28,6 @@ import { formatLifespan } from "../../../utlis/formatters.js";
  * @param {string} stat.icon - The icon path
  * @returns {HTMLElement} The stat card element
  */
-
 function createStatCard({ title, value, icon }) {
   const card = document.createElement("div");
   card.className = "stat-card";

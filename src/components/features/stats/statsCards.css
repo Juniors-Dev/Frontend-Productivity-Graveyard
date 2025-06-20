@@ -1,3 +1,42 @@
+/* Stats Skeleton Loading States */
+
+.skeleton-stats-grid .skeleton-container {
+  opacity: 0.7;
+  animation: skeleton-pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes skeleton-pulse {
+  0%,
+  100% {
+    opacity: 0.7;
+  }
+  50% {
+    opacity: 0.4;
+  }
+}
+
+.skeleton-stat-title {
+  height: 1rem;
+  width: 120px;
+  background-color: #404a4c;
+  border-radius: 4px;
+  margin-bottom: 0.6rem;
+}
+
+.skeleton-stat-value {
+  height: 1.5rem;
+  width: 80px;
+  background-color: #4a5456;
+  border-radius: 4px;
+}
+
+.skeleton-stat-icon {
+  width: 3.85rem;
+  height: 3.85rem;
+  background-color: #404a4c;
+  border-radius: 50%;
+}
+
 /* ---- Header ---- */
 #stats-banner {
   position: relative;
@@ -135,5 +174,14 @@
   .stat-card {
     width: 100%;
     max-width: 35.625rem;
+  }
+
+  .skeleton-stats-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .stats-error-state {
+    min-height: 200px;
+    padding: 1rem;
   }
 }
