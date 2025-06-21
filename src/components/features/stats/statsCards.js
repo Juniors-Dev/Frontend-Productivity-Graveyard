@@ -4,9 +4,11 @@ import { formatLifespan } from "../../../utlis/formatters.js";
  * Creates a skeleton loading version of a stat card
  * @returns {string} HTML string for skeleton stat card
  */
-export function createStatCardSkeleton() {
+export function createStatCardSkeleton(index) {
+  const cardClass = index % 2 === 0 ? "card-even" : "card-odd";
+
   return `
-    <div class="stat-card skeleton-card skeleton-container">
+    <div class="stat-card skeleton-card skeleton-container ${cardClass}">
       <div class="stat-content">
         <div class="stat-text">
           <div class="skeleton skeleton-stat-title"></div>

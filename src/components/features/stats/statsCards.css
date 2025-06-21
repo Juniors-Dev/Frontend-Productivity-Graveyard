@@ -17,17 +17,10 @@
 
 .skeleton-stat-title {
   height: 1rem;
-  width: 120px;
+  width: 200px;
   background-color: #404a4c;
   border-radius: 4px;
   margin-bottom: 0.6rem;
-}
-
-.skeleton-stat-value {
-  height: 1.5rem;
-  width: 80px;
-  background-color: #4a5456;
-  border-radius: 4px;
 }
 
 .skeleton-stat-icon {

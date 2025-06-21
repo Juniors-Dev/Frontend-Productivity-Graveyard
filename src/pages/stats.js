@@ -19,7 +19,7 @@ function showStatsSkeletons(count = cardLimit) {
   skeletonGrid.className = "stats-grid";
 
   for (let i = 0; i < count; i++) {
-    skeletonGrid.innerHTML += createStatCardSkeleton();
+    skeletonGrid.innerHTML += createStatCardSkeleton(i);
   }
 
   container.innerHTML = "";
