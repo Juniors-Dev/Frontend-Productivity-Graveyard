@@ -81,27 +81,27 @@ export function renderStatsGrid(
 
   const statCards = [
     {
-      title: "BURIED TODAY",
+      title: "BURIED TODAY:",
       value: statsData.funeralsToday?.toString() || "0",
       icon: "/src/assets/img/Tombstone_skull.png",
     },
     {
-      title: "AVG LIFESPAN",
+      title: "AVG LIFESPAN:",
       value: formatLifespan(statsData.averageLifespan) || "0 days",
       icon: "/src/assets/img/clock.png",
     },
     {
-      title: "TOTAL USERS",
+      title: "TOTAL USERS:",
       value: statsData.totalUsers?.toString() || "0",
       icon: "/src/assets/img/grimreaper-let.png",
     },
     {
-      title: "TOTAL BURIED",
+      title: "TOTAL BURIED:",
       value: statsData.totalProjects?.toString() || "0",
       icon: "/src/assets/img/Tombstone_Grass.png",
     },
     {
-      title: "TOTAL LIKES GIVEN",
+      title: "TOTAL LIKES GIVEN:",
       value: statsData.totalVotes?.toString() || "0",
       icon: "/src/assets/img/thumb.png",
     },

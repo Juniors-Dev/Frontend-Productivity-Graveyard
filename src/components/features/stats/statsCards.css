@@ -58,20 +58,16 @@
   height: auto;
 }
 
-.stat-card:hover {
-  background: #273031;
-}
-
 .stat-icon img {
-  width: 3.85rem;
-  height: 3.85rem;
-  opacity: 0.8;
+  width: 6rem;
+  height: 6rem;
+  opacity: 0.9;
   transition: opacity 0.2s ease;
 }
 
 .stat-content {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-evenly;
   align-items: center;
   height: 100%;
 }
@@ -82,24 +78,32 @@
 
 .stat-text {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  align-items: baseline;
   gap: 0.6rem;
 }
 
+.stat-title {
+  font-size: 1.6rem;
+  color: var(--grey-normal);
+  font-weight: 500;
+  white-space: nowrap;
+}
+
 .stat-value {
-  font-size: 1.5rem;
+  font-size: 1.8rem;
   font-weight: bold;
   color: var(--beige-normal);
 }
 
-.stat-card:focus {
-  outline: 2px solid #e0c79e;
-  outline-offset: 2px;
-}
+/*.stat-card:hover{}
+.stat-title:hover{}
+.stat-value:hover{}
 
-.stat-card:focus:not(:focus-visible) {
-  outline: none;
-}
+.stat-card:focus {}
+
+.stat-card:focus:not(:focus-visible) {}
+*/
 
 /* ---- Horizontal layout ---- */
 .stats-cards-horizontal {
