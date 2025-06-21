@@ -1,0 +1,42 @@
+#banner,
+.banner-container {
+  min-height: 60dvh;
+}
+
+#stats-overview {
+  background: linear-gradient(#202829, var(--color-background) 75%);
+  padding: 0 0 2rem 0;
+}
+
+.stats-overview-container {
+  padding-top: 1px;
+}
+
+.stats-quote {
+  position: absolute;
+  bottom: 15%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  z-index: 4;
+  font-size: 2.5rem;
+  color: #e0c79e;
+  font-family: "bebaskai", "Roboto", sans-serif;
+  font-weight: 400;
+  text-align: center;
+  letter-spacing: 0;
+  margin: 0;
+  animation:
+    smokey-shadow 6s infinite ease-in-out,
+    flicker 3s infinite ease-in-out;
+}
+
+@media (max-width: 767px) {
+  .stats-quote {
+    font-size: 2rem;
+  }
+
+  #stats-overview {
+    padding: 1rem 0;
+  }
+}

@@ -1,4 +1,4 @@
-/* Stats Skeleton Loading States */
+/* --- Loading States --- */
 
 .skeleton-stats-grid .skeleton-container {
   opacity: 0.7;
@@ -37,22 +37,6 @@
   border-radius: 50%;
 }
 
-/* ---- Header ---- */
-#stats-banner {
-  position: relative;
-  min-height: 30vh;
-  width: 100dvw;
-  overflow: hidden;
-  background-color: #191f20;
-}
-
-.banner-stats-title {
-  position: absolute;
-  top: 10%;
-  left: 50%;
-  transform: translateX(-50%);
-}
-
 /* ---- Main ---- */
 .stats-grid {
   display: grid;
@@ -65,15 +49,6 @@
   justify-items: center;
 }
 
-.stats-quote {
-  font-size: 2.5rem;
-  color: #e0c79e;
-  font-family: "bebaskai";
-  font-weight: 400;
-  text-align: center;
-  letter-spacing: 0;
-}
-
 .stat-card {
   background: linear-gradient(to bottom, #2f3b3d, #273234);
   border-radius: 1.25rem;
@@ -82,10 +57,6 @@
   width: 100%;
   max-width: 35rem;
   height: auto;
-}
-
-.stat-card:hover {
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
 }
 
 .stat-icon img {
@@ -123,7 +94,7 @@
   padding: 1rem 0;
 }
 
-/* Single row layout */
+/* ---- Single row layout ---- */
 .stats-cards-row {
   display: flex;
   flex-direction: row;
@@ -138,7 +109,7 @@
   max-width: 200px;
 }
 
-/* Compact cards for smaller spaces */
+/* ---- Compact cards ---- */
 .stat-card.compact {
   padding: 1.5rem;
   min-height: 80px;
@@ -162,8 +133,6 @@
   font-size: 0.9rem;
 }
 
-/* ---- Loading states ---- */
-
 /* ---- Mobile/tablet view ---- */
 @media (max-width: 767px) {
   .stats-grid {
@@ -178,10 +147,5 @@
 
   .skeleton-stats-grid {
     grid-template-columns: 1fr;
-  }
-
-  .stats-error-state {
-    min-height: 200px;
-    padding: 1rem;
   }
 }
