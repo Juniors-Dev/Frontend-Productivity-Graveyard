@@ -28,9 +28,19 @@ export function createStatCardSkeleton() {
  * @param {string} stat.icon - The icon path
  * @returns {HTMLElement} The stat card element
  */
-function createStatCard({ title, value, icon }) {
+function createStatCard({ title, value, icon }, index) {
   const card = document.createElement("div");
   card.className = "stat-card";
+
+  card.setAttribute("role", "group");
+  card.setAttribute("aria-labelledby", `stat-title-${index}`);
+  card.setAttribute("tabindex", "0");
+
+  if (index % 2 === 0) {
+    card.classList.add("card-even");
+  } else {
+    card.classList.add("card-odd");
+  }
 
   card.innerHTML = `
     <div class="stat-content">
@@ -73,7 +83,7 @@ export function renderStatsGrid(
     {
       title: "BURIED TODAY",
       value: statsData.funeralsToday?.toString() || "0",
-      icon: "/src/assets/img/skull.png",
+      icon: "/src/assets/img/Tombstone_skull.png",
     },
     {
       title: "AVG LIFESPAN",
@@ -83,12 +93,12 @@ export function renderStatsGrid(
     {
       title: "TOTAL USERS",
       value: statsData.totalUsers?.toString() || "0",
-      icon: "/src/assets/img/grimreaper.png",
+      icon: "/src/assets/img/grimreaper-let.png",
     },
     {
       title: "TOTAL BURIED",
       value: statsData.totalProjects?.toString() || "0",
-      icon: "/src/assets/img/thombstone.png",
+      icon: "/src/assets/img/Tombstone_Grass.png",
     },
     {
       title: "TOTAL LIKES GIVEN",
@@ -98,8 +108,8 @@ export function renderStatsGrid(
   ];
 
   //Create and append cards
-  statCards.forEach((stat) => {
-    const card = createStatCard(stat);
+  statCards.forEach((stat, index) => {
+    const card = createStatCard(stat, index);
     statsGrid.appendChild(card);
   });
 

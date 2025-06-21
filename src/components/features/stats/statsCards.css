@@ -37,7 +37,6 @@
   border-radius: 50%;
 }
 
-/* ---- Main ---- */
 .stats-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -59,6 +58,10 @@
   height: auto;
 }
 
+.stat-card:hover {
+  background: #273031;
+}
+
 .stat-icon img {
   width: 3.85rem;
   height: 3.85rem;
@@ -73,6 +76,10 @@
   height: 100%;
 }
 
+.card-odd .stat-content {
+  flex-direction: row-reverse;
+}
+
 .stat-text {
   display: flex;
   flex-direction: column;
@@ -83,6 +90,15 @@
   font-size: 1.5rem;
   font-weight: bold;
   color: var(--beige-normal);
+}
+
+.stat-card:focus {
+  outline: 2px solid #e0c79e;
+  outline-offset: 2px;
+}
+
+.stat-card:focus:not(:focus-visible) {
+  outline: none;
 }
 
 /* ---- Horizontal layout ---- */
