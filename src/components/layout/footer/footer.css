@@ -10,17 +10,24 @@
   position: absolute;
   left: 0;
   right: 0;
-  bottom: 0; /* Add this to position at bottom if needed */
+  bottom: 0; 
   box-sizing: border-box;
   margin: 0; /* Remove any default margins */
 }
 
 .footer-left {
   text-align: left;
+  flex: 1; /* Allow elements to share space evenly */
+}
+
+.footer-middle {
+  text-align: center;
+  flex: 1; /* Allow elements to share space evenly */
+  display: flex;
+  justify-content: center; /* Center horizontally */
 }
 
 .footer-link {
-  text-align: center;
   text-decoration: underline;
   color: var(--grey-normal);
 }
@@ -31,4 +38,6 @@
 
 .footer-right {
   text-align: right;
+  flex: 1; /* Allow elements to share space evenly */
 }
+
