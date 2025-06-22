@@ -364,7 +364,7 @@ input.is-valid {
   background-position: bottom;
   opacity: 0.6;
   z-index: 1;
-  background-image: url("../../../assets/img/grimreaper.png");
+  background-image: url("../../assets/img/grimreaper.png");
 }
 
 /* Loading spinner */

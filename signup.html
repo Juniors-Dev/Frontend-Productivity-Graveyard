@@ -23,9 +23,9 @@
       property="og:image"
       content="https://productivitygraveyard.com/assets/img/og-image.png"
     />
+    <link rel="stylesheet" href="./src/css/style.css" />
     <script type="module" src="./src/main.js" defer></script>
     <script type="module" src="./src/pages/signup.js" defer></script>
-    <link rel="stylesheet" href="./src/css/style.css" />
   </head>
 
   <body>
@@ -57,6 +57,50 @@
                   />
                 </div>
                 <span class="error-message" id="username-error"></span>
+              </div>
+            </div>
+
+            <!-- Firstname Field -->
+            <div class="form-group">
+              <label for="firstName" class="visually-hidden">First Name</label>
+              <div class="input-wrapper">
+                <div class="input-icon-container">
+                  <span
+                    class="input-icon username-icon"
+                    aria-hidden="true"
+                  ></span>
+                  <input
+                    type="text"
+                    id="firstName"
+                    name="firstName"
+                    placeholder="First Name"
+                    required
+                    autocomplete="firstname"
+                  />
+                </div>
+                <span class="error-message" id="firstName-error"></span>
+              </div>
+            </div>
+
+            <!-- Lastname Field -->
+            <div class="form-group">
+              <label for="lastname" class="visually-hidden">Last Name</label>
+              <div class="input-wrapper">
+                <div class="input-icon-container">
+                  <span
+                    class="input-icon username-icon"
+                    aria-hidden="true"
+                  ></span>
+                  <input
+                    type="text"
+                    id="lastName"
+                    name="lastName"
+                    placeholder="Last Name"
+                    required
+                    autocomplete="Lastname"
+                  />
+                </div>
+                <span class="error-message" id="lastName-error"></span>
               </div>
             </div>
 
@@ -160,16 +204,6 @@
       </div>
       <div class="grim-reaper"></div>
     </main>
-
-    <!-- <script type="module">
-      import { createFormHandler } from "./js/formHandler.js";
-
-      // Initialize form handler when DOM is loaded
-      document.addEventListener('DOMContentLoaded', () => {
-        createFormHandler("#signup-form").init();
-      });
-    </script> -->
-
     <footer></footer>
   </body>
 </html>

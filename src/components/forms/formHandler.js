@@ -4,7 +4,10 @@ import {
   validatePassword,
   validateConfirmPassword,
   validateTerms,
+  validateFirstName,
+  validateLastName,
 } from "./validation.js";
+import { authService } from "./authService.js";
 
 /**
  * Form handler factory
@@ -15,15 +18,19 @@ export function createFormHandler(formSelector) {
   const form = document.querySelector(formSelector);
   if (!form) return { init: () => {} };
 
-  // Input elements (may not all exist)
+  // Input elements
   const usernameInput = form.querySelector("#username");
+  const firstNameInput = form.querySelector("#firstName");
+  const lastNameInput = form.querySelector("#lastName");
   const emailInput = form.querySelector("#email");
   const passwordInput = form.querySelector("#password");
   const confirmPasswordInput = form.querySelector("#confirm-password");
   const termsCheckbox = form.querySelector("#terms");
 
-  // Error message elements (may not all exist)
+  // Error message elements
   const usernameError = form.querySelector("#username-error");
+  const firstNameError = form.querySelector("#firstName-error");
+  const lastNameError = form.querySelector("#lastName-error");
   const emailError = form.querySelector("#email-error");
   const passwordError = form.querySelector("#password-error");
   const confirmPasswordError = form.querySelector("#confirm-password-error");
@@ -31,6 +38,9 @@ export function createFormHandler(formSelector) {
 
   // Button (works for both .signup-button and .login-button)
   const submitButton = form.querySelector(".signup-button, .login-button");
+
+  // Determine form type
+  const isSignupForm = submitButton?.classList.contains("signup-button");
 
   // --- UI Feedback ---
   function showError(input, errorElem, result) {
@@ -54,6 +64,16 @@ export function createFormHandler(formSelector) {
         if (usernameInput)
           result = validateUsername(usernameInput.value.trim());
         showError(usernameInput, usernameError, result);
+        break;
+      case "firstName":
+        if (firstNameInput)
+          result = validateFirstName(firstNameInput.value.trim());
+        showError(firstNameInput, firstNameError, result);
+        break;
+      case "lastName":
+        if (lastNameInput)
+          result = validateLastName(lastNameInput.value.trim());
+        showError(lastNameInput, lastNameError, result);
         break;
       case "email":
         if (emailInput) result = validateEmail(emailInput.value.trim());
@@ -90,6 +110,8 @@ export function createFormHandler(formSelector) {
   function validateForm() {
     // Only validate fields that exist in the form
     const usernameValid = usernameInput ? validateField("username") : true;
+    const firstNameValid = firstNameInput ? validateField("firstName") : true;
+    const lastNameValid = lastNameInput ? validateField("lastName") : true;
     const emailValid = emailInput ? validateField("email") : true;
     const passwordValid = passwordInput ? validateField("password") : true;
     const confirmPasswordValid = confirmPasswordInput
@@ -98,6 +120,8 @@ export function createFormHandler(formSelector) {
     const termsValid = termsCheckbox ? validateField("terms") : true;
     return (
       usernameValid &&
+      firstNameValid &&
+      lastNameValid &&
       emailValid &&
       passwordValid &&
       confirmPasswordValid &&
@@ -108,7 +132,9 @@ export function createFormHandler(formSelector) {
   // --- Loading and Message UI ---
   function showLoading() {
     if (!submitButton) return;
-    submitButton.textContent = "Processing...";
+    submitButton.textContent = isSignupForm
+      ? "Creating account..."
+      : "Logging in...";
     submitButton.disabled = true;
     submitButton.classList.add("loading", "active");
   }
@@ -151,38 +177,84 @@ export function createFormHandler(formSelector) {
     );
   }
 
+  function clearValidation() {
+    form.querySelectorAll("input").forEach((input) => {
+      input.classList.remove("is-valid", "is-invalid");
+    });
+  }
+
   // --- Form Submission ---
   async function handleSubmit(event) {
     event.preventDefault();
-    const isValid = validateForm();
-    if (!isValid) {
+
+    if (!validateForm()) {
       const firstError = form.querySelector(".is-invalid");
       if (firstError) firstError.focus();
       return;
     }
+
     showLoading();
+
     try {
-      await new Promise((resolve) => setTimeout(resolve, 1500));
-      showMessage(
-        submitButton.classList.contains("signup-button")
-          ? "Account created successfully! Redirecting to login..."
-          : "Login successful! Redirecting...",
-        false,
-      );
-      form.reset();
-      form.querySelectorAll("input").forEach((input) => {
-        input.classList.remove("is-valid", "is-invalid");
-      });
-      setTimeout(() => {
-        // window.location.href = '/login';
-        console.log("Would redirect to login page");
-      }, 3000);
+      if (isSignupForm) {
+        // Signup
+        const result = await authService.register(
+          usernameInput.value.trim(),
+          firstNameInput.value.trim(),
+          lastNameInput.value.trim(),
+          emailInput.value.trim(),
+          passwordInput.value,
+        );
+
+        const username = result.user?.username || usernameInput.value.trim();
+        showMessage(
+          `Welcome ${username}! Account created successfully. Redirecting to login...`,
+          false,
+        );
+        form.reset();
+        clearValidation();
+
+        setTimeout(() => {
+          window.location.href = "/login.html";
+        }, 2000);
+      } else {
+        // Login
+        const result = await authService.login(
+          emailInput.value.trim(),
+          passwordInput.value,
+        );
+
+        showMessage(
+          `Welcome back, ${result.user?.username || "User"}! Redirecting...`,
+          false,
+        );
+
+        setTimeout(() => {
+          // Redirect til profile page !! Redirect til users/me {id}??!!
+          window.location.href = "/profile.html";
+        }, 2000);
+      }
     } catch (error) {
-      showMessage(
-        error.message || "An error occurred during submission.",
-        true,
-      );
-      console.error("Form error:", error);
+      console.error("Form submission error:", error, error.response);
+
+      // Vis spesifikke feilmeldinger fra backend respons:
+      let errorMessage = error.message;
+
+      if (
+        errorMessage.includes("already exists") ||
+        errorMessage.includes("409")
+      ) {
+        errorMessage = "A user with this email already exists";
+      } else if (
+        errorMessage.includes("invalid") ||
+        errorMessage.includes("401")
+      ) {
+        errorMessage = "Invalid email or password";
+      } else if (!errorMessage || errorMessage === "Failed to tech") {
+        errorMessage = "Unable to connect to server. Please try again.";
+      }
+
+      showMessage(errorMessage, true);
     } finally {
       hideLoading();
     }
@@ -191,7 +263,14 @@ export function createFormHandler(formSelector) {
   // --- Event Listeners ---
   function init() {
     if (!form) return;
+
+    // Initialize auth service (set token if exists)
+    authService.init();
+
+    // Form event listeners
     usernameInput?.addEventListener("input", () => validateField("username"));
+    firstNameInput?.addEventListener("input", () => validateField("firstName"));
+    lastNameInput?.addEventListener("input", () => validateField("lastName"));
     emailInput?.addEventListener("input", () => validateField("email"));
     passwordInput?.addEventListener("input", () => validateField("password"));
     confirmPasswordInput?.addEventListener("input", () =>
