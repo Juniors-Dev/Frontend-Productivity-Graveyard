@@ -1,4 +1,4 @@
-import { baseUrl } from "./constants";
+import { baseUrl } from "./constants.js";
 
 class ApiClient {
   constructor() {
@@ -143,5 +143,4 @@ class ApiClient {
   }
 }
 
-const api = new ApiClient();
-export default api;
+export default ApiClient;
