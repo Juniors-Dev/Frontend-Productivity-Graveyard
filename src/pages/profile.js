@@ -1,18 +1,21 @@
-// import { renderProfileProjectCard } from "../components/features/profileProjectCard/profileProjectCard.js";
+import { renderProfileProjectCard } from "../components/features/profileProjectCard/profileProjectCard.js";
 import { renderProfile } from "../components/features/profile/profile.js";
 import { api } from "../main.js";
 
-// const profileData = {
-//   picture: "src/assets/img/noimage.png",
-//   name: "Johan Nordstrand",
-//   nickname: "@rage_ypei",
-//   location: "Norway",
-//   buriedProjects: 12,
-//   memberSince: "March 31, 2025",
-// };
+let user;
+const urlParams = new URLSearchParams(window.location.search);
+let userId = urlParams.get("id") || null;
 
-const user = await api.getCurrentUser();
-// const userId = user.data.id;
-// const usersProjects = await api.getAllProjects({ userId });
-// const userStats = await api.getUserStats(userId);
+if (userId) {
+  user = await api.getUserById(userId);
+} else {
+  user = await api.getCurrentUser();
+}
+
 renderProfile(user.data);
+
+console.log(user);
+const projectsContainer = document.querySelector(".users-projects");
+user.data.projects.data.forEach((project) => {
+  projectsContainer.append(renderProfileProjectCard(project));
+});
