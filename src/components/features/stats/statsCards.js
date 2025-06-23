@@ -1,36 +1,17 @@
 import { formatLifespan } from "../../../utlis/formatters.js";
 
 /**
- * Creates a skeleton loading version of a stat card
- * @returns {string} HTML string for skeleton stat card
- */
-export function createStatCardSkeleton(index) {
-  const cardClass = index % 2 === 0 ? "card-even" : "card-odd";
-
-  return `
-    <div class="stat-card skeleton-card skeleton-container ${cardClass}">
-      <div class="stat-content">
-        <div class="stat-text">
-          <div class="skeleton skeleton-stat-title"></div>
-          <div class="skeleton skeleton-stat-value"></div>
-        </div>
-        <div class="stat-icon">
-          <div class="skeleton skeleton-stat-icon"></div>
-        </div>
-      </div>
-    </div>
-  `;
-}
-
-/**
- * Creates a single stat card component
+ * Creates a single stat card component with static structure
  * @param {Object} stat - The stat data
  * @param {string} stat.title - The stat title
  * @param {string} stat.value - The stat value
  * @param {string} stat.icon - The icon path
+ * @param {string} stat.id - Identifier for targeting the stat value
+ * @param {number} index - Card index for styling and accessibility IDs
+ * @param {boolean} isLoading - Whether to show loading state
  * @returns {HTMLElement} The stat card element
  */
-function createStatCard({ title, value, icon }, index) {
+function createStatCard({ title, value, icon, id }, index, isLoading = false) {
   const card = document.createElement("div");
   card.className = "stat-card";
 
@@ -38,20 +19,21 @@ function createStatCard({ title, value, icon }, index) {
   card.setAttribute("aria-labelledby", `stat-title-${index}`);
   card.setAttribute("tabindex", "0");
 
-  if (index % 2 === 0) {
-    card.classList.add("card-even");
-  } else {
-    card.classList.add("card-odd");
-  }
+  const cardClass = index % 2 === 0 ? "card-even" : "card-odd";
+  card.classList.add(cardClass);
+
+  const displayValue = isLoading
+    ? '<span class="stat-loading">...</span>'
+    : value || "0";
 
   card.innerHTML = `
     <div class="stat-content">
       <div class="stat-text">
-        <div class="stat-title">${title}</div>
-        <div class="stat-value">${value}</div>
+        <div class="stat-title" id="stat-title-${index}">${title}</div>
+        <div class="stat-value" data-value-target="${id}">${displayValue}</div>
       </div>
       <div class="stat-icon">
-        <img src="${icon}" alt="${title}" onerror="this.style.display='none'" />
+        <img id="stat-icon-${index}" src="${icon}" alt="${title}" onerror="this.style.display='none'" />
       </div>
     </div>
   `;
@@ -60,14 +42,35 @@ function createStatCard({ title, value, icon }, index) {
 }
 
 /**
- * Renders multiple stat cards in a grid layout
- * @param {Object} statsData - The stats data object
+ * Updates a specific stat card's value
+ * @param {string} statId - The stat ID to update
+ * @param {string} value - The new value to display
+ */
+export function updateStatValue(statId, value) {
+  const valueElement = document.querySelector(
+    `[data-value-target="${statId}"]`,
+  );
+  if (valueElement) {
+    valueElement.textContent = value;
+  }
+}
+
+/**
+ * Updates multiple stat values at once
+ * @param {Object} statsData
+ */
+export function updateMultipleStats(statsData) {
+  Object.entries(statsData).forEach(([statId, value]) => {
+    updateStatValue(statId, value);
+  });
+}
+
+/**
+ * Renders the static stats grid with loading states
  * @param {string|HTMLElement} containerSelector - Container selector or element
  * @param {Object} options - Rendering options
  */
-
-export function renderStatsGrid(
-  statsData,
+export function renderStaticStatsGrid(
   containerSelector = ".stats-overview-container",
   options = {},
 ) {
@@ -83,41 +86,110 @@ export function renderStatsGrid(
 
   const statCards = [
     {
+      id: "funeralsToday",
       title: "BURIED TODAY:",
-      value: statsData.funeralsToday?.toString() || "0",
+      value: null,
       icon: "/src/assets/img/Tombstone_skull.png",
     },
     {
+      id: "averageLifespan",
       title: "AVG LIFESPAN:",
-      value: formatLifespan(statsData.averageLifespan) || "0 days",
+      value: null,
       icon: "/src/assets/img/clock.png",
     },
     {
+      id: "totalUsers",
       title: "TOTAL USERS:",
-      value: statsData.totalUsers?.toString() || "0",
+      value: null,
       icon: "/src/assets/img/grimreaper-let.png",
     },
     {
+      id: "totalProjects",
       title: "TOTAL BURIED:",
-      value: statsData.totalProjects?.toString() || "0",
+      value: null,
       icon: "/src/assets/img/Tombstone_Grass.png",
     },
     {
+      id: "totalVotes",
       title: "TOTAL LIKES GIVEN:",
-      value: statsData.totalVotes?.toString() || "0",
+      value: null,
       icon: "/src/assets/img/thumb.png",
+    },
+    {
+      id: "topBurialDay",
+      title: "DEADLIEST DAY:",
+      value: null,
+      icon: "/src/assets/img/skull.png",
+    },
+    {
+      id: "totalComments",
+      title: "TOTAL COMMENTS:",
+      value: null,
+      icon: "/src/assets/img/brain.png",
+    },
+    {
+      id: "topBurialMonth",
+      title: "DEADLIEST MONTH:",
+      value: null,
+      icon: "/src/assets/img/skull.png",
     },
   ];
 
-  //Create and append cards
+  // Create cards in loading state
   statCards.forEach((stat, index) => {
-    const card = createStatCard(stat, index);
+    const card = createStatCard(stat, index, true);
     statsGrid.appendChild(card);
   });
 
-  //Clear container and append grid
   container.innerHTML = "";
   container.appendChild(statsGrid);
+
+  return statsGrid;
+}
+
+/**
+ * Populates the static grid with actual data
+ * @param {Object} statsData - The stats data from API
+ */
+export function populateStatsGrid(statsData) {
+  const updates = {
+    funeralsToday: statsData.funeralsToday?.toString() || "0",
+    averageLifespan: formatLifespan(statsData.averageLifespan) || "0 days",
+    totalUsers: statsData.totalUsers?.toString() || "0",
+    totalProjects: statsData.totalProjects?.toString() || "0",
+    totalVotes: statsData.totalVotes?.toString() || "0",
+    topBurialDay: statsData.topBurialDay?.toString() || "",
+    topBurialMonth: statsData.topBurialMonth?.toString() || "",
+    totalComments: statsData.totalComments?.toString() || "0",
+  };
+
+  updateMultipleStats(updates);
+}
+
+/**
+ * Shows loading state for specific stats
+ * @param {Array<string>} statIds - Array of stat IDs to show loading for
+ */
+export function showStatsLoading(statIds) {
+  statIds.forEach((statId) => {
+    const valueElement = document.querySelector(
+      `[data-value-target="${statId}"]`,
+    );
+    if (valueElement) {
+      valueElement.innerHTML = '<span class="stat-loading">...</span>';
+    }
+  });
+}
+
+/**
+ * Shows error state for all stats in the grid
+ * @param {string} errorText - Error text to display
+ */
+export function showAllStatsError(errorText = "—") {
+  const allValueElements = document.querySelectorAll("[data-value-target]");
+  allValueElements.forEach((element) => {
+    element.innerHTML = `<span class="stat-error">${errorText}</span>`;
+  });
 }
 
 /**
@@ -137,9 +209,8 @@ export function renderStatsCards(statsArray, containerSelector, options = {}) {
   const cardsContainer = document.createElement("div");
   cardsContainer.className = options.containerClass || "stats-cards-container";
 
-  //Create cards from array
-  statsArray.forEach((stat) => {
-    const card = createStatCard(stat);
+  statsArray.forEach((stat, index) => {
+    const card = createStatCard(stat, index);
     if (options.cardClass) {
       card.classList.add(options.cardClass);
     }
