@@ -1,4 +1,6 @@
-import api from "../../utlis/apiClient.js";
+import ApiClient from "../../utlis/apiClient.js";
+
+const api = new ApiClient();
 
 export class AuthService {
   async login(email, password) {
@@ -14,6 +16,7 @@ export class AuthService {
       }
 
       if (Object.keys(user).length > 0) {
+        user.token = token;
         localStorage.setItem("user", JSON.stringify(user));
       }
 

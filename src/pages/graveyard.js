@@ -1,44 +1,135 @@
-import { renderProjectCard } from "../components/features/projectCard/projectCard.js";
+import {
+  projectCard,
+  projectCardSkeleton,
+} from "../components/features/projectCard/projectCard.js";
+import { api } from "../main.js";
 
-// Example usage:
-const exampleProject = {
-  image: "./src/assets/img/skull.png",
-  title: "TODO LIST V9",
-  reason: "Got Bored",
-  lifespan: "2001 - 2002",
-  author: "-RAGE_YOEI",
-  description:
-    "It started like every other side project -- with hope, a clean main branch, and way too many Post-it notes. But after two days of enthusiastic planning and zero follow-through, it was left to rot in my project folder. I still believe in the idea. I just don't believe I'll ever open it again.",
-  burriedBy: "@rage_ypei",
-  causeOfDeath: "Shiny Object Synddasdasdasdasd asdasdrome",
-  likes: 7,
-};
+const projectsContainer = document.querySelector(".project-container");
+const paginationContainer = document.querySelector(".pagination");
 
-const exampleProject1 = {
-  image: "./src/assets/img/brain.png",
-  title: "Brainstorm App",
-  reason: "Got lost in the storm",
-  lifespan: "2022 - 2024",
-  author: "-AUTH_OR",
-  description:
-    "A project meant to revolutionize brainstorming sessions but ended up being a collection of half-baked ideas.",
-  burriedBy: "@auth_or",
-  causeOfDeath: "Caught in a shitstorm",
-  likes: 11,
-};
-const exampleProject2 = {
-  image: "./src/assets/img/clock.png",
-  title: "Time Tracker",
-  reason: "Time's up!",
-  lifespan: "2021 - 2023",
-  author: "-TYMWSTR",
-  description:
-    "An ambitious time-tracking app that ironically ran out of time to be completed.",
-  burriedBy: "@time_waster",
-  causeOfDeath: "Time management issues",
-  likes: 9,
-};
+const limit = 10;
+let currentPage = 1;
 
-renderProjectCard(exampleProject);
-renderProjectCard(exampleProject1);
-renderProjectCard(exampleProject2);
+function showSkeletons(count = limit) {
+  projectsContainer.innerHTML = "";
+  for (let i = 0; i < count; i++) {
+    projectsContainer.innerHTML += projectCardSkeleton();
+  }
+}
+
+async function fetchAndRenderProjects(page = 1) {
+  showSkeletons();
+
+  try {
+    const offset = (page - 1) * limit;
+    const res = await api.getAllProjects({ offset, limit });
+
+    const projects = res.data || [];
+    const total = res.meta?.total || 0;
+    const totalPages = Math.ceil(total / limit);
+
+    projectsContainer.innerHTML = "";
+
+    if (projects.length === 0) {
+      projectsContainer.innerHTML =
+        "<p>No projects found. Try another page.</p>";
+    } else {
+      projects.forEach((project) => {
+        projectsContainer.append(projectCard(project));
+      });
+    }
+
+    renderPagination(page, totalPages);
+  } catch (err) {
+    console.log(err);
+    projectsContainer.innerHTML =
+      "<p>An error occurred fetching projects, please refresh the page.</p>";
+  }
+}
+
+function getPagination(current, total) {
+  const delta = 1;
+  const range = [];
+  const result = [];
+  let l;
+
+  for (let i = 1; i <= total; i++) {
+    if (
+      i === 1 ||
+      i === total ||
+      (i >= current - delta && i <= current + delta)
+    ) {
+      range.push(i);
+    }
+  }
+
+  for (let i of range) {
+    if (l) {
+      if (i - l === 2) {
+        result.push(l + 1);
+      } else if (i - l > 2) {
+        result.push("...");
+      }
+    }
+    result.push(i);
+    l = i;
+  }
+
+  return result;
+}
+
+function renderPagination(current, total) {
+  paginationContainer.innerHTML = "";
+
+  // Add Prev button
+  const prevBtn = document.createElement("button");
+  prevBtn.textContent = "« Prev";
+  prevBtn.classList.add("page-btn");
+  prevBtn.disabled = current === 1;
+  prevBtn.addEventListener("click", () => {
+    if (current > 1) {
+      currentPage = current - 1;
+      fetchAndRenderProjects(currentPage);
+    }
+  });
+  paginationContainer.appendChild(prevBtn);
+
+  // Get compact pagination numbers
+  const pages = getPagination(current, total);
+
+  for (let p of pages) {
+    if (p === "...") {
+      const dots = document.createElement("span");
+      dots.textContent = "...";
+      dots.classList.add("page-ellipsis");
+      paginationContainer.appendChild(dots);
+    } else {
+      const btn = document.createElement("button");
+      btn.textContent = p;
+      btn.classList.add("page-btn");
+      if (p === current) btn.classList.add("active");
+      btn.addEventListener("click", () => {
+        if (currentPage !== p) {
+          currentPage = p;
+          fetchAndRenderProjects(p);
+        }
+      });
+      paginationContainer.appendChild(btn);
+    }
+  }
+
+  // Add Next button
+  const nextBtn = document.createElement("button");
+  nextBtn.textContent = "Next »";
+  nextBtn.classList.add("page-btn");
+  nextBtn.disabled = current === total;
+  nextBtn.addEventListener("click", () => {
+    if (current < total) {
+      currentPage = current + 1;
+      fetchAndRenderProjects(currentPage);
+    }
+  });
+  paginationContainer.appendChild(nextBtn);
+}
+
+fetchAndRenderProjects();

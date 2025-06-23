@@ -1,0 +1,66 @@
+.project-filters {
+  display: flex;
+  gap: 2rem;
+}
+
+.graveyard-header {
+  display: flex;
+  width: 100%;
+}
+
+.btn-new-funeral {
+  margin-left: auto;
+  margin-right: 2rem;
+}
+
+.project-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2rem;
+  max-width: var(--max-content-width);
+  margin: auto;
+}
+
+#banner,
+.banner-container {
+  min-height: 60dvh;
+}
+
+#graveyard {
+  background: linear-gradient(#202829, var(--color-background) 75%);
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  margin: 2rem auto;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.page-btn {
+  background-color: var(--beige-normal);
+  color: var(--green-dark);
+  border: none;
+  border-radius: 8px;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 1rem;
+  transition: background-color 0.3s ease;
+}
+
+.page-btn.active,
+.page-btn:hover {
+  background-color: var(--beige-normal-hover);
+}
+
+@media (max-width: 900px) {
+  .graveyard-header {
+    flex-direction: column;
+  }
+  .btn-new-funeral {
+    margin-top: 1rem;
+  }
+}
