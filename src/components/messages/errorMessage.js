@@ -47,7 +47,6 @@ export function createRetryButton(onRetry) {
 
   button.addEventListener("click", async () => {
     button.disabled = true;
-    button.textContent = "Retrying...";
 
     try {
       await onRetry();

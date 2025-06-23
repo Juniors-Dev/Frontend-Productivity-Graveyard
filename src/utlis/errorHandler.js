@@ -1,12 +1,9 @@
 import { showToast } from "../components/ui/toast.js";
 import { renderErrorMessage } from "../components/messages/errorMessage.js";
 import { renderValidationError } from "../components/messages/validationMessage.js";
-import {
-  clearValidationErrors,
-  findFieldWrapper,
-} from "../components/messages/formHelpers.js";
 
-// ---- MAIN ERROR HANDLER ----
+// ======= MAIN ERROR HANDLER =======
+
 /**
  * Smart error handler that automatically handles any error type based on context
  * @param {*} error - Error to handle (string, Error object, API error, etc.)
@@ -32,12 +29,10 @@ export function handleError(error, context = {}) {
     showErrorToast(errorInfo.message);
   } else if (container) {
     showErrorInContainer(errorInfo, container, retryFn);
-  } else {
-    showErrorToast(errorInfo.message);
   }
 }
 
-// ---- CONVENIENCE FUNCTIONS ----
+// ======= PUBLIC HELPERS =======
 
 /**
  * Shows an error message as a toast notification
@@ -75,7 +70,7 @@ export function showValidationErrors(errors, form) {
   });
 }
 
-// ---- INTERNAL FUNCTIONS ----
+// ======= PRIVATE HELPERS =======
 
 /**
  * Normalizes any error type into a consistent format with message and retry info
@@ -189,7 +184,7 @@ function normalizeApiError(error) {
           canRetry: true,
         };
       }
-      
+
       return {
         message: error.message || "Something went wrong.",
         canRetry: false,
@@ -253,4 +248,44 @@ function addFieldError(input, message) {
     input.setAttribute("aria-describedby", `${input.name}-error`);
     fieldWrapper.appendChild(errorEl);
   }
+}
+
+/**
+ * Removes all validation error messages and styling from a form
+ * @param {HTMLFormElement} form - The form element to clear errors from
+ */
+function clearValidationErrors(form) {
+  if (!form) return;
+
+  const errorMessages = form.querySelectorAll(".field-validation-error");
+  errorMessages.forEach((el) => el.remove());
+
+  const errorInputs = form.querySelectorAll(".field-error");
+  errorInputs.forEach((input) => {
+    input.classList.remove("field-error");
+    input.removeAttribute("aria-invalid");
+    input.removeAttribute("aria-describedby");
+  });
+}
+
+/**
+ * Finds the best container element for displaying validation error messages
+ * @param {HTMLInputElement} input - The input element to find a wrapper for
+ * @returns {HTMLElement} The wrapper element or input's parent if no wrapper found
+ */
+function findFieldWrapper(input) {
+  const selectors = [
+    ".form-group",
+    ".field-wrapper",
+    ".input-group",
+    ".form-field",
+    ".input-wrapper",
+  ];
+
+  for (const selector of selectors) {
+    const wrapper = input.closest(selector);
+    if (wrapper) return wrapper;
+  }
+
+  return input.parentElement;
 }
