@@ -75,15 +75,6 @@ export function showValidationErrors(errors, form) {
   });
 }
 
-/**
- * Clears all validation errors from a form
- * @param {HTMLFormElement} form - Form element to clear errors from
- */
-export function clearFormErrors(form) {
-  if (!form) return;
-  clearValidationErrors(form);
-}
-
 // ---- INTERNAL FUNCTIONS ----
 
 /**
@@ -131,7 +122,6 @@ function isApiError(error) {
  * @returns {Object} Normalized error with appropriate message and retry flag
  */
 function normalizeApiError(error) {
-  // Network/connection errors
   if (error.name === "TypeError" || !navigator.onLine) {
     return {
       message: "Unable to connect. Check your internet connection.",
@@ -148,23 +138,35 @@ function normalizeApiError(error) {
 
   switch (error.statusCode || error.status) {
     case 400:
+      if (
+        error.errors &&
+        Array.isArray(error.errors) &&
+        error.errors.length > 0
+      ) {
+        //validation error from backend
+        return {
+          message: "Please check your input.",
+          canRetry: false,
+          validationErrors: error.errors,
+        };
+      }
       return {
         message: error.message || "Invalid request. Please check your input.",
         canRetry: false,
       };
     case 401:
       return {
-        message: "Please log in to continue.",
+        message: error.message || "Please log in to continue.",
         canRetry: false,
       };
     case 403:
       return {
-        message: "You don't have permission for this action.",
+        message: error.message || "You don't have permission for this action.",
         canRetry: false,
       };
     case 404:
       return {
-        message: "Resource not found.",
+        message: error.message || "Resource not found.",
         canRetry: false,
       };
     case 409:
@@ -172,30 +174,27 @@ function normalizeApiError(error) {
         message: error.message || "This conflicts with existing data.",
         canRetry: false,
       };
-    case 422:
-      return {
-        message: "Please fix the errors below.",
-        canRetry: false,
-        validationErrors: error.errors || [],
-      };
     case 429:
       return {
-        message: "Too many requests. Please wait and try again.",
+        message:
+          error.message || "Too many requests. Please wait and try again.",
         canRetry: true,
       };
-    case 500:
-    case 502:
-    case 503:
-    case 504:
-      return {
-        message: "Server error. Please try again later.",
-        canRetry: true,
-      };
-    default:
+    default: {
+      const statusCode = error.statusCode || error.status;
+
+      if (statusCode >= 500) {
+        return {
+          message: error.message || "Server error. Please try again later.",
+          canRetry: true,
+        };
+      }
+      
       return {
         message: error.message || "Something went wrong.",
-        canRetry: error.statusCode >= 500,
+        canRetry: false,
       };
+    }
   }
 }
 
