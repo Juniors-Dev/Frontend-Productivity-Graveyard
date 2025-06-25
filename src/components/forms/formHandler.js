@@ -8,6 +8,7 @@ import {
   validateLastName,
 } from "./validation.js";
 import { authService } from "./authService.js";
+import { header } from "../layout/index.js";
 
 /**
  * Form handler factory
@@ -206,6 +207,12 @@ export function createFormHandler(formSelector) {
           passwordInput.value,
         );
 
+        if (!result.success) {
+          const error = new Error(result.message || "Registration failed");
+          error.status = result.statusCode;
+          throw error;
+        }
+
         const username = result.user?.username || usernameInput.value.trim();
         showMessage(
           `Welcome ${username}! Account created successfully. Redirecting to login...`,
@@ -224,34 +231,41 @@ export function createFormHandler(formSelector) {
           passwordInput.value,
         );
 
+        if (!result.success) {
+          const error = new Error(result.message || "Login failed");
+          error.status = result.statusCode;
+          throw error;
+        }
+
         showMessage(
           `Welcome back, ${result.user?.username || "User"}! Redirecting...`,
           false,
         );
 
-        setTimeout(() => {
-          // Redirect til profile page !! Redirect til users/me {id}??!!
-          window.location.href = "/profile.html";
-        }, 2000);
+        // after successful login:
+        if (header) {
+          header.renderNavLinks();
+        }
+        window.location.href = "/profile.html?welcome=true";
       }
     } catch (error) {
       console.error("Form submission error:", error, error.response);
 
-      // Vis spesifikke feilmeldinger fra backend respons:
       let errorMessage = error.message;
-
-      if (
-        errorMessage.includes("already exists") ||
-        errorMessage.includes("409")
-      ) {
-        errorMessage = "A user with this email already exists";
-      } else if (
-        errorMessage.includes("invalid") ||
-        errorMessage.includes("401")
-      ) {
-        errorMessage = "Invalid email or password";
-      } else if (!errorMessage || errorMessage === "Failed to tech") {
-        errorMessage = "Unable to connect to server. Please try again.";
+      switch (error.status) {
+        case 409:
+          errorMessage =
+            error.message || "A user with this email already exists";
+          break;
+        case 401:
+          errorMessage = error.message || "Invalid email or password";
+          break;
+        case 400:
+          errorMessage =
+            error.message || "Bad request. Please check your input.";
+          break;
+        default:
+          errorMessage = "Unable to connect to server. Please try again.";
       }
 
       showMessage(errorMessage, true);

@@ -1,6 +1,4 @@
-import ApiClient from "../../utlis/apiClient.js";
-
-const api = new ApiClient();
+import api from "../../utlis/apiClient.js";
 
 export class AuthService {
   async login(email, password) {
@@ -75,5 +73,4 @@ export class AuthService {
   }
 }
 
-// Export singleton instance
 export const authService = new AuthService();
