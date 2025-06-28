@@ -1,4 +1,3 @@
-/* Improved responsive stats page styling */
 #banner,
 .banner-container {
   min-height: 60dvh;
@@ -45,7 +44,6 @@
   text-shadow: 0 0 8px rgba(224, 199, 158, 0.6);
 }
 
-/* Style for the stat cards (assumes they are created by JS) */
 .stat-card {
   background: rgba(32, 40, 41, 0.8);
   border-radius: 12px;
@@ -81,7 +79,6 @@
   line-height: 1.5;
 }
 
-/* Animation keyframes for the stats quote */
 @keyframes smokey-shadow {
   0%, 100% { text-shadow: 0 0 8px rgba(224, 199, 158, 0.6); }
   50% { text-shadow: 0 0 12px rgba(224, 199, 158, 0.8); }
@@ -92,7 +89,7 @@
   50% { opacity: 1; }
 }
 
-/* Enhanced responsive breakpoints */
+
 @media (max-width: 1024px) {
   .stats-overview-container {
     transform: translateY(-15%);

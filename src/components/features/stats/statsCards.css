@@ -16,10 +16,9 @@
   color: var(--grey-normal, #a5a5a5);
   width: 100%;
   max-width: 35rem;
-  /* Set fixed height or min-height to ensure consistent sizing */
-  min-height: 9rem; /* Adjust this value based on your needs */
-  box-sizing: border-box; /* Important for consistent sizing */
-  display: flex; /* Ensure content fills the card */
+  min-height: 9rem;
+  box-sizing: border-box;
+  display: flex;
   flex-direction: column;
   justify-content: center;
 }
@@ -69,10 +68,9 @@
   display: flex;
   justify-content: space-evenly;
   align-items: center;
-  /* Remove height: 100% to avoid sizing issues */
   gap: 1rem;
   flex-wrap: wrap;
-  flex: 1; /* Let it take available space */
+  flex: 1;
 }
 
 .card-odd .stat-content {
@@ -86,8 +84,8 @@
   gap: 0.8rem;
   flex-wrap: wrap;
   justify-content: flex-start;
-  min-width: 60%; /* Ensure text has enough space */
-  flex: 1; /* Allow it to expand */
+  min-width: 60%;
+  flex: 1;
 }
 
 .stat-title {
@@ -95,7 +93,6 @@
   color: var(--grey-normal, #a5a5a5);
   font-weight: 500;
   white-space: nowrap;
-  /* Add minimum width to ensure consistency */
   min-width: max-content;
 }
 
@@ -103,15 +100,8 @@
   font-size: 1.6rem;
   font-weight: bold;
   color: var(--grey-normal, #a5a5a5);
-  min-width: 3ch; /* Minimum width to accommodate most values */
+  min-width: 3ch;
 }
-
-/*.stat-card:hover{}
-.stat-title:hover{}
-.stat-value:hover{}
-.stat-card:focus {}
-.stat-card:focus:not(:focus-visible) {}
-*/
 
 /* ---- Loading states ---- */
 .stat-loading {
@@ -131,9 +121,9 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background: linear-gradient(90deg, 
-    rgba(224, 199, 158, 0.1) 25%, 
-    rgba(224, 199, 158, 0.3) 50%, 
+  background: linear-gradient(90deg,
+    rgba(224, 199, 158, 0.1) 25%,
+    rgba(224, 199, 158, 0.3) 50%,
     rgba(224, 199, 158, 0.1) 75%);
   background-size: 200% 100%;
   animation: loading 1.5s infinite;
@@ -224,7 +214,7 @@
     align-items: flex-start;
     gap: 1rem;
   }
-  
+
   .card-odd .stat-content {
     flex-direction: column !important;
   }
@@ -250,7 +240,7 @@
   .stat-card {
     min-height: 7rem; /* Maintain proportions for smallest screens */
   }
-  
+
   .stat-text {
     flex-direction: column;
     align-items: flex-start;
