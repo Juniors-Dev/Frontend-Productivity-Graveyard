@@ -1,7 +1,6 @@
 import { initUI } from "./components/layout/index.js";
-import ApiClient from "./utlis/apiClient.js";
-
-export let api = new ApiClient();
+import api from "./utlis/apiClient.js";
+export { api };
 
 let user = null;
 
