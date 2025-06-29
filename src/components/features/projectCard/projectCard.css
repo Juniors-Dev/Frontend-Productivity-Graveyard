@@ -117,12 +117,11 @@
 
 @media (max-width: 900px) {
   .project-card {
-    max-width: 100vw;
-    width: 100vw;
+    width: 100%;
     flex-direction: column;
     align-items: center;
-    padding-left: 4vw;
-    padding-right: 4vw;
+    padding-left: 2rem;
+    padding-right: 2rem;
   }
   .card-left,
   .card-right {
