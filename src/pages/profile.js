@@ -14,7 +14,6 @@ if (userId) {
 
 renderProfile(user.data);
 
-console.log(user);
 const projectsContainer = document.querySelector(".users-projects");
 user.data.projects.data.forEach((project) => {
   projectsContainer.append(renderProfileProjectCard(project));

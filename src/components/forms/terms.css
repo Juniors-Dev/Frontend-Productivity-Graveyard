@@ -26,7 +26,7 @@
   --border-radius: 4px;
   --transition-speed: 0.3s;
 }
-
+/* 
 body {
   font-family: var(--font-body);
   background-color: var(--color-background);
@@ -44,7 +44,7 @@ body {
   padding: 2rem;
   position: relative;
   z-index: 2;
-}
+} */
 
 .terms-header {
   text-align: center;
@@ -202,9 +202,9 @@ body {
 
 /* Responsive styles */
 @media (max-width: 768px) {
-  .container {
+  /* .container {
     padding: 1.5rem;
-  }
+  } */
 
   .terms-content {
     padding: 1.5rem;
@@ -244,10 +244,10 @@ body {
 
 /* Print styles */
 @media print {
-  body {
+  /* body {
     background-color: white;
     color: black;
-  }
+  } */
 
   .terms-content {
     background-color: white;
@@ -279,7 +279,7 @@ body {
   }
 }
 
-main {
+/* main {
   min-height: 100vh;
   display: flex;
   justify-content: center;
@@ -292,7 +292,7 @@ main {
 .container {
   display: flex;
   flex-direction: column;
-}
+} */
 .terms-nav {
   justify-content: center;
   gap: 2rem;

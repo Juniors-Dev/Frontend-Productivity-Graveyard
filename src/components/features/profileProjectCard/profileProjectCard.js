@@ -30,12 +30,13 @@ export function renderProfileProjectCard(project) {
 
   // Add years and likes
   const lifespan = calculateLifespan(project);
+  console.log(lifespan);
   const { years, months, days } = lifespan.breakdown;
 
   const yearsLikes = document.createElement("div");
   yearsLikes.classList.add("yearslikes");
   const yearsCont = document.createElement("div");
-  years.innerHTML = `<span class="years">Lifespan: </span><span>${formatUnit(years, "year", "years")}${formatUnit(months, "month", "months")}${formatUnit(days, "day", "days")}</span>`;
+  yearsCont.innerHTML = `<span class="years">Lifespan: </span><span>${formatUnit(years, "year", "years")}${formatUnit(months, "month", "months")}${formatUnit(days, "day", "days")}</span>`;
   const likes = document.createElement("div");
   likes.classList.add("btn-likes");
   likes.innerHTML = `

@@ -1,6 +1,19 @@
 /* profile.css */
+#banner,
+.banner-container {
+  min-height: 60dvh;
+}
+
+#profile {
+  background: linear-gradient(#202829, var(--color-background) 75%);
+}
 
 .profile-container {
+  display: flex;
+  flex-wrap: nowrap;
+}
+
+.profile-details {
   display: flex;
   color: var(--grey-normal);
   background: linear-gradient(to bottom, #2f3b3d, #273234);
