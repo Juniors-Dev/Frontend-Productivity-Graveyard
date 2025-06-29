@@ -16,15 +16,28 @@ dialog {
 
 .dialog-content {
   position: relative;
+  display: flex;
+  flex-direction: column;
   background-color: var(--green-dark);
-  margin: 15% auto; /* 15% from the top and centered */
+  margin: 15% auto;
   padding: 20px;
   border: 1px solid #888;
   width: 80%;
   max-width: 900px;
-  max-height: 75%;
+  height: 80%;
+  max-height: 80%;
   border-radius: var(--border-radius);
-  overflow: auto;
+}
+
+.model-header,
+.model-footer {
+  flex-shrink: 0;
+}
+
+.model-body {
+  flex: 1;
+  overflow-y: auto;
+  min-height: 0;
 }
 
 /* Open state of the dialog  */
@@ -77,5 +90,15 @@ because the nesting selector cannot represent pseudo-elements. */
 @starting-style {
   dialog:open::backdrop {
     background-color: rgb(0 0 0 / 0%);
+  }
+}
+
+@media (max-width: 900px) {
+  .dialog-content {
+    margin: 10% auto;
+    width: 90%;
+    max-width: 900px;
+    height: 90%;
+    max-height: 90%;
   }
 }

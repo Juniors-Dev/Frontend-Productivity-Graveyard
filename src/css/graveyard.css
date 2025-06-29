@@ -1,7 +1,19 @@
 .project-filters {
+  position: relative;
   display: flex;
   flex-direction: column;
   gap: 2rem;
+}
+
+#project-filters {
+  display: flex;
+  flex-direction: column;
+  height: 100%; /* This is key */
+  gap: 0; /* Optional: avoids vertical spacing */
+}
+
+.model-footer {
+  display: flex;
 }
 
 .graveyard-header {
@@ -42,7 +54,10 @@
 .order-selectors {
   width: 100%;
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-between;
+  gap: 1rem;
+  margin: 2rem auto;
 }
 
 #types {
@@ -96,10 +111,11 @@ dialog h2 {
 
 .bury-project-bg-img {
   position: absolute;
+  pointer-events: none;
   width: 100%;
   left: 0;
   bottom: 0;
-  z-index: 0;
+  z-index: -1;
 }
 
 .bury-project-img {
@@ -143,10 +159,19 @@ input[type="search"] {
   .bury-text {
     min-width: 300px;
   }
+
+  .filter-buttons-container {
+    padding: 1rem;
+    margin-bottom: 1rem;
+  }
 }
 
 @media (max-width: 500px) {
   .filter-buttons-container {
     flex-direction: column;
+  }
+
+  #types {
+    grid-template-columns: 1fr;
   }
 }
