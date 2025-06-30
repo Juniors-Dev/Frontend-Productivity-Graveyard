@@ -1,6 +1,19 @@
 .project-filters {
+  position: relative;
   display: flex;
+  flex-direction: column;
   gap: 2rem;
+}
+
+#project-filters {
+  display: flex;
+  flex-direction: column;
+  height: 100%; /* This is key */
+  gap: 0; /* Optional: avoids vertical spacing */
+}
+
+.model-footer {
+  display: flex;
 }
 
 .graveyard-header {
@@ -8,7 +21,7 @@
   width: 100%;
 }
 
-.btn-new-funeral {
+.ml-auto {
   margin-left: auto;
   margin-right: 2rem;
 }
@@ -20,6 +33,7 @@
   gap: 2rem;
   max-width: var(--max-content-width);
   margin: auto;
+  width: 100%;
 }
 
 #banner,
@@ -31,36 +45,133 @@
   background: linear-gradient(#202829, var(--color-background) 75%);
 }
 
-.pagination {
+#project-filters {
   display: flex;
-  justify-content: center;
-  margin: 2rem auto;
-  gap: 0.5rem;
   flex-wrap: wrap;
+  gap: 1rem;
 }
 
-.page-btn {
-  background-color: var(--beige-normal);
-  color: var(--green-dark);
-  border: none;
-  border-radius: 8px;
-  padding: 0.5rem 1rem;
-  cursor: pointer;
-  font-weight: bold;
-  font-size: 1rem;
-  transition: background-color 0.3s ease;
+.order-selectors {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 1rem;
+  margin: 2rem auto;
 }
 
-.page-btn.active,
-.page-btn:hover {
-  background-color: var(--beige-normal-hover);
+#types {
+  display: grid;
+  column-gap: 1rem;
+  row-gap: 1rem;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
+dialog h2 {
+  margin-bottom: 1rem;
+}
+
+@media (max-width: 1100px) {
+  #types {
+    display: grid;
+    column-gap: 1rem;
+    row-gap: 1rem;
+    grid-template-columns: 1fr 1fr;
+  }
 }
 
 @media (max-width: 900px) {
   .graveyard-header {
     flex-direction: column;
   }
-  .btn-new-funeral {
+  .btn-beige {
     margin-top: 1rem;
+  }
+}
+
+#bury-project {
+  width: 100%;
+  padding: 0 2.5rem;
+}
+
+.bury-project-container {
+  background: linear-gradient(to bottom, #2f3b3d, #273234);
+  width: 100%;
+  max-width: var(--max-content-width);
+  border-radius: var(--section-border-radius);
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  gap: 2rem;
+  padding: 0 2rem;
+  position: relative;
+  overflow: hidden;
+  z-index: 0;
+}
+
+.bury-project-bg-img {
+  position: absolute;
+  pointer-events: none;
+  width: 100%;
+  left: 0;
+  bottom: 0;
+  z-index: -1;
+}
+
+.bury-project-img {
+  z-index: 1;
+}
+
+.bury-text {
+  margin: auto;
+  min-width: 350px;
+  z-index: 1;
+}
+
+input[type="search"] {
+  width: 100%;
+}
+
+.search-icon {
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23fff' viewBox='0 0 24 24'%3E%3Cpath d='M15.5 14h-.79l-.28-.27A6.471 6.471 0 0016 9.5 6.5 6.5 0 109.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C8.01 14 6 11.99 6 9.5S8.01 5 10.5 5 15 7.01 15 9.5 12.99 14 10.5 14z'/%3E%3C/svg%3E")
+    no-repeat center center;
+}
+
+.filter-buttons-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin-top: 1rem;
+}
+
+@media (max-width: 900px) {
+  .bury-project-container {
+    display: block;
+    text-align: center;
+    width: 100%;
+    padding: 1rem;
+  }
+
+  .bury-project-img img {
+    width: 100%;
+  }
+
+  .bury-text {
+    min-width: 300px;
+  }
+
+  .filter-buttons-container {
+    padding: 1rem;
+    margin-bottom: 1rem;
+  }
+}
+
+@media (max-width: 500px) {
+  .filter-buttons-container {
+    flex-direction: column;
+  }
+
+  #types {
+    grid-template-columns: 1fr;
   }
 }

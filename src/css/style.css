@@ -7,6 +7,8 @@
 @import url("./../components/features/profileProjectCard/profileProjectCard.css");
 @import url("./../components/features/projectCard/projectCard.css");
 @import url("./../components/forms/forms.css");
+@import url("./shared/modal.css");
+@import url("./../components/features/pagination/pagination.css");
 
 @font-face {
   font-family: "pirate";
@@ -82,6 +84,8 @@ body {
   justify-content: space-between;
   padding-bottom: 160px;
   margin: 0 auto;
+  padding-left: 1rem;
+  padding-right: 1rem;
 }
 
 h1 {
@@ -137,7 +141,8 @@ header {
   background-color: rgb(32, 40, 41, 0.6);
 }
 
-.btn-new-funeral {
+.btn-beige {
+  all: unset;
   border-radius: 16px;
   padding: 12px 17px;
   font-size: 20px;
@@ -148,17 +153,26 @@ header {
   text-decoration: none;
 }
 
-.btn-new-funeral:hover {
+.btn-beige:hover {
   background-color: var(--beige-normal-hover);
   color: var(--green-dark);
   cursor: pointer;
 }
 
+.btn-small {
+  padding: 5px 10px;
+  border-radius: 6px;
+  font-size: 1rem;
+}
+
+.centered {
+  text-align: center;
+  justify-content: center;
+  margin: 0 auto;
+}
+
 @media (max-width: 900px) {
-  .btn-new-funeral {
-    border-radius: 16px;
-    padding: 12px 17px;
-    font-size: 20px;
+  .btn-beige {
     font-weight: bold;
     color: var(--green-dark);
     background-color: var(--beige-normal);
