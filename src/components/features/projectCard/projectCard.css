@@ -103,13 +103,13 @@
   flex: 0 0 70%;
 }
 
-.container {
+/* .container {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   gap: 24px;
   align-items: flex-start;
-}
+} */
 
 .types {
   padding-top: 10px;
@@ -181,7 +181,7 @@
 .skeleton-img {
   width: 150px;
   height: 150px;
-  border-radius: 10px;
+  border-radius: 100%;
 }
 
 .skeleton-title {

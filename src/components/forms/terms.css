@@ -244,10 +244,10 @@
 
 /* Print styles */
 @media print {
-  body {
+  /* body {
     background-color: white;
     color: black;
-  }
+  } */
 
   .terms-content {
     background-color: white;
