@@ -21,6 +21,10 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(224, 199, 158, 0.2);
 }
 
 .stat-icon {
@@ -38,6 +42,8 @@
   opacity: 0.9;
   transition: opacity 0.2s ease;
   object-fit: contain;
+  min-width: 100%;
+  align-items: center;
 }
 
 #stat-icon-0 {
@@ -235,15 +241,81 @@
   }
 }
 
-/* Extra small screens */
+/* Media queries in statsCards.css */
+@media (max-width: 1024px) {
+  .stats-grid {
+    gap: 1rem 3rem;
+  }
+
+  .stat-card {
+    padding: 1.25rem;
+  }
+
+  .stat-title {
+    font-size: 1.4rem;
+  }
+
+  .stat-value {
+    font-size: 1.8rem;
+  }
+}
+
+@media (max-width: 767px) {
+  .stats-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    padding: 0 0.75rem;
+  }
+
+  .stat-card {
+    width: 100%;
+    max-width: 35.625rem;
+    padding: 1.25rem;
+    min-height: 8rem;
+  }
+
+  .stat-content {
+    flex-direction: column !important;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+
+  .card-odd .stat-content {
+    flex-direction: column !important;
+  }
+
+  .stat-icon {
+    width: 4rem;
+    height: 4rem;
+  }
+
+  .stat-icon img {
+    width: 3.5rem;
+    height: 3.5rem;
+  }
+
+  .stat-text {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .stat-title {
+    font-size: 1.3rem;
+  }
+
+  .stat-value {
+    font-size: 1.6rem;
+  }
+}
+
 @media (max-width: 480px) {
   .stat-card {
-    min-height: 7rem; /* Maintain proportions for smallest screens */
+    min-height: 7rem;
   }
 
   .stat-text {
     flex-direction: column;
-    align-items: flex-start;
+    align-items: center;
     gap: 0.4rem;
   }
 

@@ -44,41 +44,6 @@
   text-shadow: 0 0 8px rgba(224, 199, 158, 0.6);
 }
 
-.stat-card {
-  background: rgba(32, 40, 41, 0.8);
-  border-radius: 12px;
-  padding: 1.5rem;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(224, 199, 158, 0.2);
-}
-
-.stat-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
-}
-
-.stat-title {
-  font-family: "bebaskai", "Roboto", sans-serif;
-  font-size: 1.4rem;
-  color: var(--grey-light, #e0e0e0);
-  margin-bottom: 0.75rem;
-}
-
-.stat-value {
-  font-size: 2.5rem;
-  font-weight: 600;
-  color: #e0c79e;
-  margin: 0.5rem 0;
-}
-
-.stat-description {
-  font-size: 0.9rem;
-  color: var(--grey-normal, #a0a0a0);
-  line-height: 1.5;
-}
-
 @keyframes smokey-shadow {
   0%, 100% { text-shadow: 0 0 8px rgba(224, 199, 158, 0.6); }
   50% { text-shadow: 0 0 12px rgba(224, 199, 158, 0.8); }
@@ -112,7 +77,6 @@
 
   .stats-quote {
     font-size: 1.6rem;
-    bottom: 15%;
     width: 95%;
   }
 
