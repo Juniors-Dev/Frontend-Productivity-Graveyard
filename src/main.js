@@ -1,5 +1,5 @@
 import { initUI } from "./components/layout/index.js";
-import api from "./utlis/apiClient.js";
+import api from "./utils/apiClient.js";
 export { api };
 
 let user = null;
