@@ -1,9 +1,7 @@
 /* Navigation Container */
 .nav-container {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
+  max-width: var(--max-content-width);
+  margin: 0 auto;
   z-index: 1000;
   padding: 0 20px;
   display: flex;
@@ -64,16 +62,6 @@
   transform: translate(-30%, -30%);
   pointer-events: none;
 }
-
-/* .moon {
-  top: 0;
-  right: 0;
-
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-position: top right;
-  opacity: 0.4;
-} */
 
 .menu-toggle {
   background: none;

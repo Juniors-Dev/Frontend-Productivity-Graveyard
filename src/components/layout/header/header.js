@@ -140,7 +140,6 @@ export class Header {
 
   init() {
     this.createMoon();
-
     const nav = document.createElement("nav");
     nav.className = "nav-container";
 
