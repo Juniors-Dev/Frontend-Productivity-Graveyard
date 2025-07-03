@@ -1,9 +1,4 @@
 /* profile.css */
-#banner,
-.banner-container {
-  min-height: 60dvh;
-}
-
 #profile {
   background: linear-gradient(#202829, var(--color-background) 75%);
 }
