@@ -1,5 +1,5 @@
-import { baseUrl } from "../../../utlis/constants.js";
-import { calculateLifespan, formatUnit } from "../../../utlis/dateHandlers.js";
+import { baseUrl } from "../../../utils/constants.js";
+import { calculateLifespan, formatUnit } from "../../../utils/dateHandlers.js";
 
 export function profileProjectCard(project) {
   // Create a new project card container
