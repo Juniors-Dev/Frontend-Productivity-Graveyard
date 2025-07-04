@@ -70,7 +70,7 @@ export function projectCard(project) {
   info.className = "project-info";
 
   info.innerHTML = `
-  <div><b>Burried By:</b> <span class="burried-by" id="burried-by">${project.burriedBy}</span></div>
+  <div><b>Burried By:</b> <span class="burried-by" id="burried-by">${project.user?.username || "-"}</span></div>
   <div><b>Cause of death:</b> <span class="cause-of-death" id="cause-of-death">${project.causeOfDeath}</span></div>
   <div><b>Lifespan:</b> <span class="lifespan" id="lifespan">
     ${formatUnit(breakdown.years, "year", "years")}
