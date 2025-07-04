@@ -89,8 +89,12 @@
   color: var(--color-input-text);
   z-index: 2;
 }
-.input-icon + input {
+.input-icon + input,
+.input-icon-container input[type="text"] {
+  width: 100%;
+  min-width: 0;
   padding-left: 3.2rem;
+  box-sizing: border-box;
 }
 
 .username-icon {
