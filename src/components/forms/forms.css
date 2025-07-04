@@ -195,7 +195,8 @@ input.is-valid {
 /* Grouped link styles */
 .terms-link,
 .signup-link,
-.forgot-password-link {
+.forgot-password-link,
+.back-to-graveyard-link {
   display: inline-block;
   margin-bottom: 0.5rem;
   color: var(--color-link-text);
@@ -206,13 +207,15 @@ input.is-valid {
 }
 .terms-link:hover,
 .signup-link:hover,
-.forgot-password-link:hover {
+.forgot-password-link:hover,
+.back-to-graveyard-link:hover {
   color: var(--color-primary-hover);
 }
 
 /* Button styles */
 .signup-button,
-.login-button {
+.login-button,
+.bury-button {
   width: 100%;
   padding: 0.9rem;
   background-color: var(--color-primary);
@@ -229,16 +232,19 @@ input.is-valid {
   letter-spacing: 0.5px;
 }
 .signup-button:hover,
-.login-button:hover {
+.login-button:hover,
+.bury-button:hover {
   background-color: var(--color-primary-hover);
 }
 .signup-button:focus,
-.login-button:focus {
+.login-button:focus,
+.bury-button:focus {
   outline: none;
   box-shadow: 0 0 0 3px rgba(205, 182, 141, 0.4);
 }
 .signup-button:active,
-.login-button:active {
+.login-button:active,
+.bury-button:active {
   transform: scale(0.98);
 }
 
