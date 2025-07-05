@@ -38,7 +38,7 @@ export function projectCard(project) {
 
   const author = document.createElement("div");
   author.className = "author";
-  author.textContent = project.user.username;
+  author.textContent = project.user?.username || "Unknown";
   timeauthor.appendChild(lifespan);
   timeauthor.appendChild(author);
   cardLeft.appendChild(timeauthor);
@@ -56,6 +56,19 @@ export function projectCard(project) {
   p.textContent = project.description;
   descWrap.appendChild(h3);
   descWrap.appendChild(p);
+
+  // Add eulogy if available
+  if (project.eulogy) {
+    const eulogyP = document.createElement("p");
+    eulogyP.id = "project-eulogy";
+    eulogyP.className = "project-eulogy";
+    eulogyP.textContent = `"${project.eulogy}"`;
+    eulogyP.style.fontStyle = "italic";
+    eulogyP.style.marginTop = "0.5rem";
+    eulogyP.style.color = "#cab38e";
+    descWrap.appendChild(eulogyP);
+  }
+
   cardRight.appendChild(descWrap);
 
   // Project-info and likes row
@@ -65,19 +78,27 @@ export function projectCard(project) {
   infoLikesRow.style.alignItems = "center";
   infoLikesRow.style.gap = "20px";
 
-  // Project-info section (with spans for API population)
+  // Project-info section (using textContent for security)
   const info = document.createElement("div");
   info.className = "project-info";
 
-  info.innerHTML = `
-  <div><b>Burried By:</b> <span class="burried-by" id="burried-by">${project.user?.username || "-"}</span></div>
-  <div><b>Cause of death:</b> <span class="cause-of-death" id="cause-of-death">${project.causeOfDeath}</span></div>
-  <div><b>Lifespan:</b> <span class="lifespan" id="lifespan">
+  const buriedByDiv = document.createElement("div");
+  buriedByDiv.innerHTML = `<b>Burried By:</b> <span class="burried-by" id="burried-by">${project.user?.username || "-"}</span>`;
+
+  const causeOfDeathDiv = document.createElement("div");
+  causeOfDeathDiv.innerHTML = `<b>Cause of death:</b> <span class="cause-of-death" id="cause-of-death">${project.causeOfDeath || "-"}</span>`;
+
+  const lifespanDiv = document.createElement("div");
+  lifespanDiv.innerHTML = `<b>Lifespan:</b> <span class="lifespan" id="lifespan">
     ${formatUnit(breakdown.years, "year", "years")}
     ${formatUnit(breakdown.months, "month", "months")}
     ${formatUnit(breakdown.days, "day", "days")}
-  </span></div>
-`;
+  </span>`;
+
+  info.appendChild(buriedByDiv);
+  info.appendChild(causeOfDeathDiv);
+  info.appendChild(lifespanDiv);
+
   infoLikesRow.appendChild(info);
 
   // Likes button
@@ -85,7 +106,7 @@ export function projectCard(project) {
   likes.classList.add("btn-likes");
   likes.innerHTML = `
     <img src="./src/assets/img/thumb.png" alt="Like Icon" class="like-icon" width="25px" height="25px" />
-    <span>${project.upvoteCount}</span>
+    <span>${project.upvoteCount || 0}</span>
   `;
   infoLikesRow.appendChild(likes);
 
@@ -114,6 +135,7 @@ export function projectCardSkeleton() {
               <div class="card-right">
                 <div class="project-description">
                   <div class="skeleton skeleton-title"></div>
+                  <div class="skeleton skeleton-text"></div>
                   <div class="skeleton skeleton-text"></div>
                 </div>
                 <div
