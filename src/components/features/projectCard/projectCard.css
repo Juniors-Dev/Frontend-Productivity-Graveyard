@@ -217,3 +217,100 @@
   width: 25px;
   border-radius: 4px;
 }
+
+.tombstone-card {
+  position: relative;
+  width: 300px; /* Consistent width */
+  height: 420px; /* Consistent height */
+  background: linear-gradient(to bottom, #2f3b3d, #273234);
+  border: 3px solid #a5a5a5; /* grey-normal border */
+  border-radius: 150px 150px 30px 30px / 100px 100px 20px 20px;
+  /* Top corners: big curve, bottom corners: small curve */
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+  color: var(--grey-normal);
+  text-align: center;
+  padding: 40px 20px 30px;
+  margin: 20px auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  overflow: hidden;
+}
+
+.tombstone-card::after {
+  /* Bottom kink for shoulder effect */
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 120%;
+  height: 30px;
+  background: inherit;
+  border-radius: 50% / 20%;
+  transform: translateX(-50%) scaleY(0.5);
+  border-top: 3px solid #a5a5a5;
+  box-shadow: inset 0 -5px 5px rgba(0, 0, 0, 0.2);
+}
+
+.tombstone-icon {
+  width: 80px;
+  height: 80px;
+  margin-top: 10px;
+}
+
+.tombstone-title {
+  font-family: var(--font-heading);
+  font-size: 1.8rem;
+  color: var(--beige-normal);
+  margin: 10px 0;
+}
+
+.tombstone-cause,
+.tombstone-lifespan {
+  font-size: 1.1rem;
+  color: var(--grey-normal-hover);
+  margin: 5px 0;
+}
+
+.tombstone-interactions {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  font-size: 1rem;
+  margin: 15px 0;
+}
+
+.tombstone-interactions .likes,
+.tombstone-interactions .comments {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  color: var(--beige-normal);
+  font-weight: bold;
+}
+
+.btn-view-memorial {
+  display: inline-block;
+  background-color: var(--beige-normal);
+  color: var(--green-dark);
+  font-weight: bold;
+  text-decoration: none;
+  padding: 10px 20px;
+  border-radius: 20px;
+  transition:
+    background-color 0.3s ease,
+    transform 0.2s ease;
+}
+
+.btn-view-memorial:hover {
+  background-color: var(--beige-normal-hover);
+  transform: translateY(-2px);
+}
+
+.tombstone-card:nth-child(odd) {
+  transform: rotate(-2deg);
+}
+.tombstone-card:nth-child(even) {
+  transform: rotate(2deg);
+}
