@@ -1,8 +1,9 @@
-import { baseUrl } from "../../../utlis/constants.js";
-// import { calculateLifespan, formatUnit } from "../../../utlis/dateHandlers.js";
-import { calculateLifespan } from "../../../utlis/dateHandlers.js";
-import { formatLifespan } from "../../../utlis/formatters.js";
-import { createEl } from "../../../utlis/createEl.js";
+import { baseUrl } from "../../../utils/constants.js";
+import {
+  calculateLifespan,
+  formatLifespan,
+} from "../../../utils/dateHandlers.js";
+import { createEl } from "../../../utils/createEl.js";
 
 export function projectCard(project) {
   const wrapper = createEl("div", { class: "tombstone-wrapper" });
