@@ -1,9 +1,7 @@
 /* Navigation Container */
 .nav-container {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
+  max-width: var(--max-content-width);
+  margin: 0 auto;
   z-index: 1000;
   padding: 0 20px;
   display: flex;
@@ -52,13 +50,15 @@
   position: absolute;
   top: 0;
   left: 0;
-  width: 300px;
-  height: 300px;
+  height: 25vh;
+  width: 25vh;
+  max-width: 250px;
+  max-height: 250px;
   background-color: #e6d4ad;
   border-radius: 50%;
-  opacity: 0.9;
+  opacity: 0.5;
   box-shadow: 0 0 50px rgba(230, 212, 173, 0.5);
-  z-index: 900;
+  z-index: 0;
   transform: translate(-30%, -30%);
   pointer-events: none;
 }

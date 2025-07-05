@@ -1,50 +1,14 @@
-:root {
-  /* Colors from the design system */
-  --color-background: #1a1e20;
-  --color-card: #212529;
-  --color-input: #17191c;
-  --color-input-border: #333;
-
-  /* Primary: Beige */
-  --color-primary: #cdb68d;
-  --color-primary-hover: #d9c9a3;
-
-  /* Text colors */
-  --color-text: #fff;
-  --color-text-secondary: rgba(255, 255, 255, 0.7);
-  --color-error: #d64550;
-  --color-input-text: #70888b;
-
-  /* Accent: Yellow */
-  --color-accent: #f2c94c;
-
-  /* Fonts from design system */
-  --font-heading: "pirate", "Roboto", sans-serif;
-  --font-body: "Roboto", sans-serif;
-  --font-tagline: "bebaskai", sans-serif;
-
-  --border-radius: 4px;
-  --transition-speed: 0.3s;
-}
-
-/* body {
-  font-family: var(--font-body);
-  background-color: var(--color-background);
-  color: var(--color-text);
-  line-height: 1.6;
-  font-size: 16px;
-  letter-spacing: 0.3px;
-  margin: 0;
-  padding: 0;
-} */
-
-/* .container {
+.terms-container {
   max-width: 900px;
   margin: 0 auto;
   padding: 2rem;
   position: relative;
   z-index: 2;
-} */
+}
+
+.terms-h1 {
+  margin-top: 8rem;
+}
 
 .terms-header {
   text-align: center;
@@ -173,17 +137,6 @@
   background-image: url("../../assets/img/grimreaper.png");
 }
 
-.moon {
-  top: 0;
-  right: 0;
-  height: 30vh;
-  width: 30vh;
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-position: top right;
-  opacity: 0.4;
-}
-
 /* Active section highlighting */
 .active-section {
   position: relative;
@@ -202,9 +155,9 @@
 
 /* Responsive styles */
 @media (max-width: 768px) {
-  /* .container {
+  .terms-container {
     padding: 1.5rem;
-  } */
+  }
 
   .terms-content {
     padding: 1.5rem;
@@ -244,10 +197,10 @@
 
 /* Print styles */
 @media print {
-  /* body {
+  body {
     background-color: white;
     color: black;
-  } */
+  }
 
   .terms-content {
     background-color: white;
@@ -279,20 +232,6 @@
   }
 }
 
-/* main {
-  min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: relative;
-  padding: 2rem;
-  flex-direction: column;
-  margin-top: 0;
-}
-.container {
-  display: flex;
-  flex-direction: column;
-} */
 .terms-nav {
   justify-content: center;
   gap: 2rem;
