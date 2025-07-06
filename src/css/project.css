@@ -1,0 +1,143 @@
+#comments {
+  background: linear-gradient(#202829, var(--color-background) 75%);
+}
+
+blockquote {
+  width: fit-content;
+  margin: 0 auto;
+  border-left: 4px solid var(--beige-normal); /* or any color */
+  padding-left: 1rem; /* space between border & text */
+  color: var(--beige-normal); /* text color to match theme */
+  font-style: italic; /* optional for “quote” feel */
+}
+
+#banner.small-banner,
+.banner-container {
+  height: auto;
+  min-height: calc(100% + 20rem);
+}
+
+.banner-text.small-banner {
+  height: fit-content;
+  min-height: auto;
+}
+
+.banner-container {
+  display: flex;
+  justify-content: end;
+  flex-direction: column;
+}
+
+.banner-text.small-banner {
+  top: 3rem;
+}
+
+:root {
+  --full-multiplier: 4px;
+}
+
+.memorial-wrapper {
+  margin: 20px auto;
+  margin-top: 17rem;
+  margin-bottom: 3rem;
+  width: calc(300 * var(--full-multiplier));
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: end;
+  position: relative;
+  height: 100%;
+  z-index: 5;
+  justify-content: stretch;
+}
+
+.tombstone-top {
+  width: calc(240 * var(--full-multiplier));
+  height: calc(160 * var(--full-multiplier));
+  background: #1d2526;
+  border: 4px solid #33322b;
+  margin-bottom: calc(-75 * var(--full-multiplier));
+}
+
+.tombstone-top::after,
+.tombstone-top::before {
+  content: "";
+  position: absolute;
+  bottom: calc(56 * var(--full-multiplier));
+  left: -4%;
+  width: calc(35 * var(--full-multiplier));
+  height: calc(30 * var(--full-multiplier));
+  background: inherit;
+  transform: translateX(-50%) scaleY(0.5) rotate(-25deg);
+  border-top: 5px solid #33322b;
+}
+
+.tombstone-top::before {
+  left: 104%;
+  transform: translateX(-50%) scaleY(0.5) rotate(25deg);
+}
+
+.tombstone-body {
+  width: 100%;
+  background: linear-gradient(to bottom, #1d2526, #2d3839);
+  border: 4px solid #33322b;
+  border-top: none;
+  padding: 8rem 2rem;
+  padding-bottom: 15rem;
+  /* box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4); */
+  color: var(--grey-normal);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  z-index: 1;
+}
+
+.tombstone-content {
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+  color: var(--grey-normal);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+}
+
+.tombstone-base {
+  width: 110%;
+  min-height: 30px;
+  padding: 3rem;
+  background: #2f3b3d;
+  border: 4px solid #273234;
+  border-top: 4px solid #33322b;
+  border-radius: 0 0 5px 5px;
+  margin-top: -10px;
+  box-shadow: inset 0 -5px 5px rgba(0, 0, 0, 0.2);
+  z-index: 2;
+}
+
+.tombstone-icon {
+  width: calc(80 * var(--full-multiplier));
+  height: calc(80 * var(--full-multiplier));
+  margin: calc(-90 * var(--full-multiplier)) auto 0 auto;
+  background-color: #3e4b4d;
+  padding: 3px;
+  border-radius: 100%;
+}
+
+.tombstone-cause,
+.tombstone-start,
+.tombstone-end {
+  font-size: 1.1rem;
+  color: var(--beige-normal);
+  margin: 5px 0;
+}
+
+.tombstone-start {
+  margin-bottom: 0;
+}
+
+.tombstone-end {
+  margin-top: 0;
+}
