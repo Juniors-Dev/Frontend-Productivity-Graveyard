@@ -8,6 +8,7 @@
 @import url("./../components/forms/forms.css");
 @import url("./shared/modal.css");
 @import url("./../components/features/pagination/pagination.css");
+@import url("./bury.css");
 
 @font-face {
   font-family: "pirate";
@@ -48,7 +49,7 @@
   --color-error: #d64550;
   --color-input-text: #70888b;
   --color-link-text: #70888b;
-  --color-accent: #f2c94c;
+  --color-accent: rgb(243, 159, 25);
   --border-radius: 4px;
   --transition-speed: 0.3s;
   --font-heading: "pirate", "roboto", sans-serif;
