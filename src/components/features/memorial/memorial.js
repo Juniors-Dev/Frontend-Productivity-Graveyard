@@ -91,13 +91,15 @@ function populateStaticFields(project) {
 function renderTags(types, typesList) {
   if (!typesList) return;
   typesList.innerHTML = "";
+  // Deduplicate - until I find cause
+  const seen = new Set();
   (types || []).forEach((type) => {
-    const li = createEl(
-      "li",
-      { class: "tombstone-type" },
-      typeof type === "object" ? type.name : type,
-    );
-    typesList.appendChild(li);
+    const name = typeof type === "object" ? type.name : type;
+    if (name && !seen.has(name)) {
+      seen.add(name);
+      const li = createEl("li", { class: "tombstone-type" }, name);
+      typesList.appendChild(li);
+    }
   });
 }
 
