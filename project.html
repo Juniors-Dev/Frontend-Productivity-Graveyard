@@ -2,96 +2,90 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>Project Details - Productivity-Graveyard</title>
-    <link rel="stylesheet" href="/src/css/style.css"/>
-    <link rel="stylesheet" href="/src/css/project.css"/>
-    <link rel="stylesheet" href="/src/components/features/projectDetails/projectDetails.css"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Memorial - Productivity-Graveyard</title>
+    <script type="module" src="/src/main.js" defer></script>
+    <script type="module" src="/src/pages/project.js" defer></script>
+    <link rel="stylesheet" href="/src/css/style.css" />
+    <link rel="stylesheet" href="/src/css/project.css" />
   </head>
   <body>
     <header></header>
-    <main id="project-content">
-      <div class="project-memorial-page" id="project-memorial" style="display: none">
-        <section class="hero-section">
-          <div class="hero-background"></div>
-          <div class="hero-content">
-            <h1 class="project-title" id="project-title"></h1>
-            <div class="project-description" id="project-description" style="display: block"></div> <!--swap with eulogy?-->
-            <div class="project-lifespan" id="project-lifespan" style="display: block"></div>
-            <div class="tombstone-container"> <!--move to details, add another img / background-->
-              <img src="" alt="Tombstone" class="tombstone-image" id="tombstone"/>
-            </div>
+    <main>
+      <section id="banner" class="small-banner">
+        <div
+          id="memorial-error"
+          class="error-state"
+          style="display: none"
+        ></div>
+        <div class="banner-container small-banner">
+          <div class="banner-text small-banner">
+            <h1 class="banner-h1">Memorial</h1>
           </div>
-        </section>
-          <div class="project-details-card">
-            <div
-              class="project-status status-archived"
-              id="project-status"
-            ></div>
-            <div class="details-row">
-              <div class="detail-item">
-                <div class="detail-label">Buried by</div>
-                <div class="detail-value">
-                  <div class="buried-by">
-                    <img src="#" alt="User Avatar" class="user-avatar" id="user-avatar"/> <!--add deafult userimg-->
-                    <span class="username" id="username">@unknown</span>
-                  </div>
+          <div class="memorial-wrapper">
+            <div class="tombstone-top"></div>
+            <div class="tombstone-body">
+              <div id="memorial-loading" class="loading-state">
+                <div class="loader"></div>
+              </div>
+              <div class="tombstone-content">
+                <img class="tombstone-icon" />
+                <h2 class="tombstone-title"></h2>
+                <div class="tombstone-buried-by"></div>
+                <p class="tombstone-cause"></p>
+                <div class="tombstone-lifespan-block">
+                  <p class="tombstone-lifespan tombstone-start"></p>
+                  <p class="tombstone-lifespan tombstone-end"></p>
+                </div>
+                <div class="tombstone-description"></div>
+                <div class="tombstone-eulogy-block">
+                  <div class="tombstone-eulogy-title"></div>
+                  <blockquote></blockquote>
                 </div>
               </div>
-
-              <div class="detail-item">
-                <div class="detail-label">Cause of Death</div>
-                <div class="detail-value" id="cause-of-death">Unknown</div>
-              </div>
-
-              <div class="detail-item">
-                <div class="detail-label">Laid to Rest</div>
-                <div class="detail-value" id="laid-to-rest">Unknown</div>
-              </div>
             </div>
-
-            <div class="details-row">
-              <div class="detail-item">
-                <div class="detail-label">Category</div>
-                <div class="detail-value">
-                  <div class="project-types-container" id="project-types">
-                  </div>
-                </div>
+            <div class="tombstone-base">
+              <div class="tombstone-types-container">
+                <ul class="tombstone-types"></ul>
               </div>
-
-              <div class="detail-item">
-                <div class="detail-label">Lifespan</div>
-                <div class="detail-value" id="project-lifespan-detail">Unknown</div>
-              </div>
+              <div class="tombstone-interactions"></div>
             </div>
-
-            <div class="eulogy" id="eulogy-section" style="display: none">
-              <div class="detail-label">Eulogy</div>
-              <div class="detail-value" id="project-eulogy"></div>
-            </div>
+            <div class="memorial-controls right"></div>
+            <img
+              class="banner-grass grass-left-before"
+              src="./src/assets/img/Grass.png"
+              alt="grass"
+            />
+            <img
+              class="banner-grass"
+              src="./src/assets/img/Grass.png"
+              alt="grass"
+            />
+            <img
+              class="banner-grass grass-left"
+              src="./src/assets/img/Grass.png"
+              alt="grass"
+            />
+            <img
+              class="banner-grass grass-right"
+              src="./src/assets/img/Grass.png"
+              alt="grass"
+            />
+            <img
+              class="banner-grass grass-right-after"
+              src="./src/assets/img/Grass.png"
+              alt="grass"
+            />
+            <div class="banner-curve"></div>
           </div>
-
-          <!-- Actions-->
-          <div class="actions-bar">
-            <button class="upvote-button" id="upvote-button" data-project-id="">
-              <span class="candle-icon"></span> <!--remove-->
-              <span id="upvote-text"></span>
-            </button>
-
-            <div class="owner-controls" id="owner-controls" style="display: none" >
-              <button class="control-button" id="edit-button">
-                <span></span> <!--add icon-->
-              </button>
-              <button class="control-button" id="delete-button">
-                <span></span><!--add icon-->
-              </button>
-            </div>
-          </div>
-          <!--Comment Section-->
+        </div>
+      </section>
+      <section id="comments"></section>
+      <div id="comments-loading" class="loading-state">
+        <div class="loader-comments"></div>
       </div>
+      <div id="comments-error" class="error-state" style="display: none"></div>
     </main>
     <footer></footer>
-    <script type="module" src="/src/main.js" defer></script>
-    <script type="module" src="/src/pages/project.js" defer></script>
   </body>
 </html>

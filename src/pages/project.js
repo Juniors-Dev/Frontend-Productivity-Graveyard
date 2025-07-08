@@ -1,35 +1,51 @@
-/**
- * TODO:
- *   Improve error handling
- *   Loading states (skeleton?)
- *   Upvote functionality
- *   Check if owner or not (edit/delete buttons)
- *   Add profile link to username
- *   Comments integration
- */
-
-import {
-  populateProjectDetails,
-  showError,
-} from "../components/features/projectDetails/projectDetails.js";
 import { api } from "../main.js";
+import { renderMemorial } from "../components/features/memorial/memorial.js";
 
-const urlParams = new URLSearchParams(window.location.search);
-const projectId = urlParams.get("id");
+function getProjectIdFromURL() {
+  const params = new URLSearchParams(window.location.search);
+  return params.get("id");
+}
 
-async function fetchAndRenderProject(id) {
+async function loadProject(projectId) {
+  document.getElementById("memorial-loading").style.display = "";
+  document.querySelector(".tombstone-content").style.display = "none";
+  const errorMsg = document.querySelector(".memorial-error");
+  if (errorMsg) errorMsg.style.display = "none";
+
   try {
-    const response = await api.getProject(id);
-
-    if (response.success && response.data) {
-      populateProjectDetails(response.data);
-    } else {
-      showError("Project not found");
+    const res = await api.getProject(projectId);
+    if (!res.success || !res.data) {
+      throw new Error("An error occurred, please refresh the page");
     }
-  } catch (error) {
-    console.error("Error fetching project:", error);
-    showError("Failed to load project");
+    document.getElementById("memorial-loading").style.display = "none";
+    document.querySelector(".tombstone-content").style.display = "";
+    renderMemorial(res.data);
+    return res.data;
+  } catch (err) {
+    document.getElementById("memorial-loading").style.display = "none";
+    if (errorMsg) {
+      errorMsg.textContent = "Failed to load project.";
+      errorMsg.style.display = "";
+    }
+    console.error(err);
   }
 }
 
-fetchAndRenderProject(projectId);
+async function initMemorialPage() {
+  const projectId = getProjectIdFromURL();
+  if (!projectId) {
+    const errorMsg = document.querySelector(".memorial-error");
+    if (errorMsg) {
+      errorMsg.textContent = "No project ID provided.";
+      errorMsg.style.display = "";
+    }
+    return;
+  }
+  try {
+    await loadProject(projectId);
+  } catch (err) {
+    console.error(err);
+  }
+}
+
+initMemorialPage();
