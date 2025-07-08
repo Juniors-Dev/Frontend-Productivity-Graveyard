@@ -59,9 +59,16 @@ function populateStaticFields(project) {
   }
   if (title) title.textContent = project.name || "";
   if (buriedBy) {
-    buriedBy.innerHTML =
-      `<span class="buried-by-label">Buried by </span>` +
-      `<a class="buried-by-link" href="/profile.html?user=${encodeURIComponent(project.user.username)}">@${project.user.username}</a>`;
+    buriedBy.textContent = ""; // Clear existing content
+    const label = createEl("span", { className: "buried-by-label" });
+    label.textContent = "Buried by ";
+    const link = createEl("a", {
+      className: "buried-by-link",
+      href: `/profile.html?user=${encodeURIComponent(project.user.username)}`,
+    });
+    link.textContent = `@${project.user.username}`;
+    buriedBy.appendChild(label);
+    buriedBy.appendChild(link);
   }
   if (cause) {
     cause.innerHTML =
