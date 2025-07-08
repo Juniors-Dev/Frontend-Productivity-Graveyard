@@ -111,6 +111,7 @@ function renderInteractions(project, interactions, errorMsg) {
   const likesBtn = createEl("button", {
     class: `likes upvote-btn${project.userHasVoted ? " voted" : ""}`,
     "aria-label": "Upvote this project",
+    "aria-pressed": project.userHasVoted ? "true" : "false",
     type: "button",
   });
   likesBtn.innerHTML = `
