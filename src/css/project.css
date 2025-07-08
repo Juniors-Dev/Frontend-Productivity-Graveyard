@@ -247,9 +247,10 @@ blockquote {
 
 /*INTERACTIONS*/
 .tombstone-interactions {
+  display: flex;
   justify-content: flex-end;
   align-items: center;
-  gap: 1.1rem;
+  gap: 1rem;
 }
 
 .tombstone-interactions .icon svg {
@@ -262,6 +263,9 @@ blockquote {
   border: none;
   font-size: 1.2rem;
   cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.3em;
 }
 
 .likes.upvote-btn .icon,
@@ -286,6 +290,15 @@ blockquote {
 .comments.comment-btn:disabled {
   opacity: 0.6;
   cursor: not-allowed;
+}
+
+.likes-count,
+.comments-count {
+  font-size: 1.1rem;
+  color: var(--beige-normal);
+  font-weight: bold;
+  text-align: right;
+  display: inline-block;
 }
 
 /*CONTROLS*/
