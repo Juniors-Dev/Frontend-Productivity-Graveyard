@@ -9,7 +9,7 @@ function getProjectIdFromURL() {
 async function loadProject(projectId) {
   document.getElementById("memorial-loading").style.display = "";
   document.querySelector(".tombstone-content").style.display = "none";
-  const errorMsg = document.querySelector(".memorial-error");
+  const errorMsg = document.getElementById("memorial-error");
   if (errorMsg) errorMsg.style.display = "none";
 
   try {
