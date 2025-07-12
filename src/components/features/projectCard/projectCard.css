@@ -1,169 +1,145 @@
-.project-header {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  gap: 20px;
-}
-
-.project-title {
-  color: var(--grey-normal);
-  font-size: 22px;
-  line-height: 1.25;
-  font-weight: medium;
-  margin: 0px;
-  padding-bottom: 10px;
-  margin-bottom: 0;
-}
-
-.project-description {
-  margin-bottom: 1rem;
-}
-
-.project-eulogy {
-  font-style: italic;
-  color: #cab38e;
-  margin-top: 0.5rem;
-  padding: 0.5rem;
-  background: rgba(202, 179, 142, 0.1);
-  border-left: 3px solid #cab38e;
-  border-radius: 0 4px 4px 0;
-  font-size: 0.9rem;
-  line-height: 1.4;
-}
-
-.card-left {
+.tombstone-wrapper {
+  width: 300px;
   display: flex;
   flex-direction: column;
-  width: 40%;
-  min-width: 120px;
-  max-width: 260px;
-  box-sizing: border-box;
-  padding: 20px 30px 20px 30px;
-  border-radius: 30px;
-  margin: 10px 0 10px 10px;
+  align-items: center;
+  margin: 20px auto;
   position: relative;
-  background: transparent;
 }
 
-.card-left::before {
+.tombstone-top {
+  position: relative;
+  width: 240px;
+  height: 160px;
+  background: #2f3b3d;
+  border: 3px solid #a5a5a5;
+  border-bottom: none;
+  border-radius: 100% 100% 0 0;
+  box-shadow: 0 -4px 6px rgba(0, 0, 0, 0.3) inset;
+  margin-bottom: -75px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.tombstone-top::after,
+.tombstone-top::before {
   content: "";
   position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: -10px;
-  border: 3px solid var(--grey-normal);
-  border-radius: 30px;
-  transform: rotate(-4deg);
-  z-index: 1;
-  pointer-events: none;
+  bottom: 56px;
+  left: -4%;
+  width: 35px;
+  height: 30px;
+  background: inherit;
+  transform: translateX(-50%) scaleY(0.5) rotate(-25deg);
+  border-top: 4px solid #a5a5a5;
 }
 
-.project-card:nth-child(even) .card-left::before {
-  transform: rotate(4deg);
+.tombstone-top::before {
+  left: 104%;
+  transform: translateX(-50%) scaleY(0.5) rotate(25deg);
 }
 
-.project-card:nth-child(3n) .card-left::before {
-  transform: rotate(2deg);
-}
-
-.project-card:nth-child(4n) .card-left::before {
-  transform: rotate(-2deg);
-}
-
-.timeauthor {
-  display: flex;
+.tombstone-body {
   width: 100%;
-  margin: 0px auto;
-  align-items: center;
-  flex-direction: row;
-  gap: 10px;
-  justify-content: space-between;
-}
-
-.project-card {
-  display: flex;
-  width: auto;
-  max-width: 650px;
-  min-width: 320px;
-  text-align: center;
-  margin-top: 20px;
-  gap: 15px;
-  padding: 25px;
   background: linear-gradient(to bottom, #2f3b3d, #273234);
-  border-radius: 20px;
+  border: 3px solid #a5a5a5;
+  border-top: none;
+  padding: 40px 20px 30px;
+  /* box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4); */
   color: var(--grey-normal);
-  align-items: flex-start;
-  box-sizing: border-box;
-}
-
-.project-card img {
-  max-width: 150px;
-}
-
-.card-right {
+  text-align: center;
   display: flex;
-  text-align: left;
   flex-direction: column;
-  justify-content: space-between;
-  padding-top: 10px;
-  color: var(--grey-normal);
-  width: 60%;
-  min-width: 180px;
-  max-width: 390px;
-  box-sizing: border-box;
-  margin: 10px 10px 10px 0;
+  gap: 10px;
+  z-index: 1;
 }
 
-.project-info {
-  flex: 0 0 70%;
+.tombstone-base {
+  width: 110%;
+  height: 30px;
+  background: #2f3b3d;
+  border: 3px solid #273234;
+  border-top: 3px solid #a5a5a5;
+  border-radius: 0 0 5px 5px;
+  margin-top: -10px;
+  box-shadow: inset 0 -5px 5px rgba(0, 0, 0, 0.2);
+  z-index: 2;
 }
 
-/* .container {
+.tombstone-icon {
+  width: 140px;
+  height: 140px;
+  margin: -100px auto 0 auto;
+}
+
+.tombstone-title {
+  font-family: var(--font-tagline);
+  text-shadow: 2px 2px 5px #273234;
+  font-weight: 600;
+  font-size: 1.8rem;
+  color: var(--beige-normal);
+  margin: 10px 0;
+}
+
+.tombstone-cause,
+.tombstone-lifespan {
+  font-size: 1.1rem;
+  color: var(--grey-normal-hover);
+  margin: 5px 0;
+}
+
+.tombstone-interactions {
   display: flex;
-  flex-wrap: wrap;
   justify-content: center;
-  gap: 24px;
-  align-items: flex-start;
-} */
+  gap: 20px;
+  font-size: 1rem;
+}
 
-.types {
-  padding-top: 10px;
+.tombstone-interactions .likes,
+.tombstone-interactions .comments {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  color: var(--beige-normal);
+  font-weight: bold;
+}
+
+.btn-view-memorial {
+  display: inline-block;
+  background-color: var(--beige-normal);
+  color: var(--green-dark);
+  font-weight: bold;
+  text-decoration: none;
+  padding: 10px 20px;
+  border-radius: 20px;
+  transition:
+    background-color 0.3s ease,
+    transform 0.2s ease;
+}
+
+.btn-view-memorial:hover {
+  background-color: var(--beige-normal-hover);
+  transform: translateY(-2px);
+}
+
+.tombstone-wrapper:nth-child(odd) {
+  transform: scale(0.9) rotate(-2deg);
+}
+.tombstone-wrapper:nth-child(even) {
+  transform: scale(0.9) rotate(2deg);
+}
+
+.tombstone-wrapper:nth-child(even):hover {
+  transition: all 1s;
+  transform: scale(1.1) rotate(2deg);
+}
+.tombstone-wrapper:nth-child(odd):hover {
+  transition: all 1s;
+
+  transform: scale(1.1) rotate(-2deg);
 }
 
 @media (max-width: 900px) {
-  .project-card {
-    width: 100%;
-    flex-direction: column;
-    align-items: center;
-    padding-left: 2rem;
-    padding-right: 2rem;
-  }
-  .card-left,
-  .card-right {
-    width: 100%;
-    max-width: 100%;
-    margin: 0;
-    padding: 16px;
-  }
-  /* .container {
-    flex-direction: column;
-    align-items: center;
-    width: 100vw;
-    box-sizing: border-box;
-    padding-left: 2vw;
-    padding-right: 2vw;
-  } */
-  .project-header {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 10px;
-    padding-left: 2vw;
-    padding-right: 2vw;
-  }
-  .project-info {
-    padding-top: 30px;
-  }
   .skeleton-container {
     width: 100vw;
   }

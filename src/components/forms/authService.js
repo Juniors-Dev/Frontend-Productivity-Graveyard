@@ -1,4 +1,4 @@
-import api from "../../utlis/apiClient.js";
+import api from "../../utils/apiClient.js";
 
 export class AuthService {
   async login(email, password) {
