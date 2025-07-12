@@ -7,15 +7,14 @@
     <script type="module" src="/src/main.js" defer></script>
     <script type="module" src="/src/pages/graveyard.js" defer></script>
     <link rel="stylesheet" href="/src/css/style.css" />
-    <link rel="stylesheet" href="/src/css/shared/bannerShared.css" />
     <link rel="stylesheet" href="/src/css/graveyard.css" />
   </head>
   <body>
     <header></header>
     <main>
-      <section id="banner">
-        <div class="banner-container">
-          <div class="banner-text">
+      <section id="banner" class="small-banner">
+        <div class="banner-container small-banner">
+          <div class="banner-text small-banner">
             <h1 class="banner-h1">GRAVEYARD</h1>
           </div>
           <div class="banner-curve banner-curve-background"></div>
@@ -54,14 +53,155 @@
               <h2>Recent Funerals</h2>
               <p>Light a candle for the funerals you appreciate</p>
             </div>
-            <a class="btn-new-funeral" href="/bury.html">+ New Funeral</a>
+            <a class="btn-beige ml-auto" href="/bury.html">+ New Funeral</a>
           </div>
-          <div class="project-filters"></div>
+          <div class="bury-project-container">
+            <img
+              class="bury-project-bg-img"
+              src="./src/assets/img/Vector.png"
+              alt="sythe"
+              aria-hidden="true"
+            />
+            <div class="bury-project-img">
+              <img
+                src="./src/assets/img/searching-reaper.png"
+                alt="searching reaper"
+              />
+            </div>
+            <div class="bury-text">
+              <form id="search-form">
+                <h3 class="centered">Search The Graveyard</h3>
+                <label for="query" class="visually-hidden"
+                  >Search Projects</label
+                >
+                <div class="input-wrapper">
+                  <div
+                    class="input-icon-container"
+                    style="
+                      position: relative;
+                      width: 100%;
+                      display: flex;
+                      align-items: center;
+                    "
+                  >
+                    <span
+                      class="input-icon search-icon"
+                      aria-hidden="true"
+                    ></span
+                    ><input
+                      type="search"
+                      id="query"
+                      name="query"
+                      placeholder="Find a grave"
+                    />
+                  </div>
+                  <span class="error-message" id="password-error"></span>
+                </div>
+                <div class="filter-buttons-container">
+                  <button class="btn-beige" type="submit">Search</button>
+                  <button
+                    type="reset"
+                    class="btn-beige btn-small"
+                    id="clear-search"
+                  >
+                    Clear Search
+                  </button>
+                </div>
+                <div class="filter-buttons-container">
+                  <button
+                    class="btn-beige btn-small"
+                    type="button"
+                    id="open-dialog"
+                  >
+                    Open Filters
+                  </button>
+                  <button
+                    type="button"
+                    class="btn-beige btn-small"
+                    id="clear-filters"
+                  >
+                    Clear Filters
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+          <div class="details-container"></div>
           <div class="project-container"></div>
           <div class="pagination"></div>
         </div>
       </section>
     </main>
+    <dialog class="modal-background">
+      <div class="dialog-content">
+        <form id="project-filters">
+          <div class="model-header">
+            <h2 class="centered">Filter Projects</h2>
+          </div>
+          <div class="model-body">
+            <!-- Limit, offset, order, orderBy, status, userId, query, types -->
+            <div class="order-selectors">
+              <div>
+                <label for="order">Order</label>
+                <select name="order" id="order-selector">
+                  <option value="asc">Ascending</option>
+                  <option value="desc" selected>Descending</option>
+                </select>
+              </div>
+              <div>
+                <label for="orderBy">Sort By</label>
+                <select name="orderBy" id="orderby-selector">
+                  <option value="name">Name</option>
+                  <option value="createdAt" selected>Created Date</option>
+                  <option value="startDate">Start Date</option>
+                  <option value="endDate">End Date</option>
+                  <option value="status">Status</option>
+                  <option value="commentCount">Comment Count</option>
+                  <option value="upvoteCount">Upvote Count</option>
+                </select>
+              </div>
+              <div>
+                <label for="limit">Results Per Page</label>
+                <select name="limit" id="limit-selector">
+                  <option value="10" selected>10</option>
+                  <option value="20">20</option>
+                  <option value="30">30</option>
+                  <option value="40">40</option>
+                  <option value="50">50</option>
+                  <option value="60">60</option>
+                  <option value="70">70</option>
+                  <option value="80">80</option>
+                  <option value="90">90</option>
+                  <option value="100">100</option>
+                </select>
+              </div>
+            </div>
+            <div>
+              <h3>Death Types</h3>
+              <div id="types"></div>
+            </div>
+            <!-- <div>
+                  <label for="status">Status</label>
+                  <select name="status">
+                    <option selected>Select Status</option>
+                    <option value="inactive">inactive</option>
+                    <option value="active">active</option>
+                    <option value="buried">buried</option>
+                    <option value="resurrected">resurrected</option>
+                    <option value="completed">completed</option>
+                    <option value="archived">archived</option>
+                  </select>
+                </div> -->
+          </div>
+          <div class="model-footer">
+            <button class="btn-beige" type="submit">Sort Projects</button
+            ><button type="button" class="btn-beige ml-auto" id="close-dialog">
+              Close
+            </button>
+          </div>
+        </form>
+      </div>
+    </dialog>
     <footer></footer>
   </body>
 </html>

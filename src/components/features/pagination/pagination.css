@@ -1,0 +1,25 @@
+.pagination {
+  display: flex;
+  justify-content: center;
+  margin: 2rem auto;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+.page-btn {
+  background-color: var(--beige-normal);
+  color: var(--green-dark);
+  border: none;
+  border-radius: 8px;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 1rem;
+  transition: background-color 0.3s ease;
+}
+
+.page-btn.active,
+.page-btn:hover {
+  background-color: var(--beige-normal-hover);
+}

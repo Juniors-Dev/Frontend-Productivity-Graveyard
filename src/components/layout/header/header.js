@@ -1,3 +1,5 @@
+import { authService } from "../../forms/authService.js";
+
 const HEADER_CONFIG = {
   BREAKPOINT: 815,
   MOON_SIZE: 300,
@@ -6,9 +8,7 @@ const HEADER_CONFIG = {
     { text: "GRAVEYARD", href: "graveyard.html" },
     { text: "BURY", href: "bury.html" },
     { text: "STATS", href: "stats.html" },
-    { text: "PROFILE", href: "profile.html" },
-    { text: "LOGIN", href: "login.html" },
-    // { text: 'LOGOUT', href: 'index.html' } when logged in the login becomes logout
+    // LOGIN/LOGOUT is handled dynamically
   ],
 };
 
@@ -18,7 +18,6 @@ export class Header {
     if (!this.header) {
       throw new Error("Header element not found");
     }
-
     this.menuButton = null;
     this.mobileMenu = null;
     this.navLinksList = null;
@@ -32,6 +31,15 @@ export class Header {
     a.href = link.href;
     a.textContent = link.text;
 
+    if (link.text === "LOGOUT") {
+      a.addEventListener("click", (e) => {
+        e.preventDefault();
+        authService.logout();
+        //update nav links immediately after logout:
+        this.renderNavLinks();
+      });
+    }
+
     const currentPage = window.location.pathname.split("/").pop();
     if (currentPage === link.href) {
       a.classList.add("active");
@@ -39,6 +47,45 @@ export class Header {
 
     li.appendChild(a);
     return li;
+  }
+
+  getNavLinks() {
+    const links = [...HEADER_CONFIG.NAV_LINKS];
+    const isLoggedIn = !!localStorage.getItem("authToken");
+    // Remove LOGIN/LOGOUT if present
+    const filtered = links.filter(
+      (l) => l.text !== "LOGIN" && l.text !== "LOGOUT",
+    );
+    // Add LOGIN or LOGOUT
+    if (isLoggedIn) {
+      filtered.push(
+        { text: "PROFILE", href: "profile.html" },
+        { text: "LOGOUT", href: "#" },
+      );
+    } else {
+      filtered.push({ text: "LOGIN", href: "login.html" });
+    }
+    return filtered;
+  }
+
+  renderNavLinks() {
+    //render nav links (desktop)
+    this.navLinksList.innerHTML = "";
+    this.getNavLinks().forEach((link) => {
+      this.navLinksList.appendChild(this.createNavigationLink(link));
+    });
+    //render nav links (mobile)
+    this.mobileMenu.innerHTML = "";
+    this.getNavLinks().forEach((link) => {
+      this.mobileMenu.appendChild(this.createNavigationLink(link));
+    });
+  }
+
+  createMobileMenu() {
+    this.mobileMenu = document.createElement("ul");
+    this.mobileMenu.className = "mobile-menu";
+    this.mobileMenu.style.display = "none";
+    this.mobileMenu.setAttribute("aria-hidden", "true");
   }
 
   createMoon() {
@@ -49,24 +96,12 @@ export class Header {
     }
   }
 
-  createMobileMenu() {
-    this.mobileMenu = document.createElement("ul");
-    this.mobileMenu.className = "mobile-menu";
-    this.mobileMenu.style.display = "none";
-    this.mobileMenu.setAttribute("aria-hidden", "true");
-
-    HEADER_CONFIG.NAV_LINKS.forEach((link) => {
-      this.mobileMenu.appendChild(this.createNavigationLink(link));
-    });
-  }
-
   createMenuButton() {
     this.menuButton = document.createElement("button");
     this.menuButton.className = "menu-toggle";
     this.menuButton.setAttribute("aria-label", "Open menu");
     this.menuButton.setAttribute("aria-expanded", "false");
     this.menuButton.innerHTML = "&#9776;";
-
     this.menuButton.addEventListener("click", () => this.toggleMenu());
   }
 
@@ -105,20 +140,18 @@ export class Header {
 
   init() {
     this.createMoon();
-
     const nav = document.createElement("nav");
     nav.className = "nav-container";
 
     this.navLinksList = document.createElement("ul");
     this.navLinksList.className = "nav-links";
 
-    HEADER_CONFIG.NAV_LINKS.forEach((link) => {
-      this.navLinksList.appendChild(this.createNavigationLink(link));
-    });
-
-    nav.appendChild(this.navLinksList);
     this.createMenuButton();
     this.createMobileMenu();
+
+    this.renderNavLinks();
+
+    nav.appendChild(this.navLinksList);
     nav.appendChild(this.menuButton);
     nav.appendChild(this.mobileMenu);
     this.header.appendChild(nav);

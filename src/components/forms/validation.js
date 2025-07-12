@@ -16,6 +16,26 @@ export function validateUsername(username) {
   return { isValid: true, message: "" };
 }
 
+export function validateFirstName(firstName) {
+  if (!firstName) return { isValid: false, message: "First name is required" };
+  if (firstName.length < 2)
+    return {
+      isValid: false,
+      message: "First name must be at least 2 characters",
+    };
+  return { isValid: true, message: "" };
+}
+
+export function validateLastName(lastName) {
+  if (!lastName) return { isValid: false, message: "Last name is required" };
+  if (lastName.length < 2)
+    return {
+      isValid: false,
+      message: "Last name must be at least 2 characters",
+    };
+  return { isValid: true, message: "" };
+}
+
 export function validateEmail(email) {
   if (!email) return { isValid: false, message: "Email is required" };
   if (

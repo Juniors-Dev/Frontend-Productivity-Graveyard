@@ -1,46 +1,105 @@
-import { renderProfileProjectCard } from "../components/features/profileProjectCard/profileProjectCard.js";
+import {
+  profileProjectCard,
+  profileProjectCardSkeleton,
+} from "../components/features/profileProjectCard/profileProjectCard.js";
 import { renderProfile } from "../components/features/profile/profile.js";
+import { api } from "../main.js";
+import { pagination } from "../components/features/pagination/pagination.js";
 
-const profileData = {
-  picture: "./src/assets/img/noimage.png",
-  name: "Johan Nordstrand",
-  nickname: "@rage_ypei",
-  location: "Norway",
-  buriedProjects: 12,
-  memberSince: "March 31, 2025",
-};
+const projectsContainer = document.querySelector(".users-projects");
+function showSkeletons(count) {
+  projectsContainer.innerHTML = "";
+  for (let i = 0; i < count; i++) {
+    projectsContainer.innerHTML += profileProjectCardSkeleton();
+  }
+}
+let user;
+let currentPage = 1;
+let limit = 10;
+const paginationContainer = document.querySelector(".pagination");
+try {
+  //check if user id is included
+  const urlParams = new URLSearchParams(window.location.search);
+  let userId = urlParams.get("id") || null;
+  showSkeletons(10);
+  if (userId) {
+    user = await api.getUserById(userId);
+  } else {
+    user = await api.getCurrentUser();
+  }
 
-renderProfile(profileData);
+  if (!user.success) {
+    throw new Error("Failed to fetch user");
+  }
 
-// Example usage:
-const projectSkull = {
-  image: "./src/assets/img/skull.png",
-  title: "TODO LIST V9",
-  description:
-    "It started like every other side project - with hope, a clean main branch, and way too many Post-it notes. But after two days of enthusiastic planning and zero follow-through, it was left to rot in my project folder. I still believe in the idea. I just don't believe I'll ever open it again.",
-  years: "2023–2025",
-  likes: 13,
-};
+  //render users details
+  renderProfile(user.data);
 
-const projectBrain = {
-  image: "./src/assets/img/brain.png",
-  title: "Brainstorm App",
-  description:
-    "A project meant to revolutionize brainstorming sessions but ended up being a collection of half-baked ideas.",
-  years: "2022–2024",
-  likes: 8,
-};
+  //render projects
 
-const projectClock = {
-  image: "./src/assets/img/clock.png",
-  title: "Time Tracker",
-  description:
-    "An ambitious time-tracking app that ironically ran out of time to be completed.",
-  years: "2021–2023",
-  likes: 5,
-};
+  projectsContainer.innerHTML = "";
+  user.data.projects.data.forEach((project) => {
+    projectsContainer.append(profileProjectCard(project));
+  });
 
-// Render all projects
-renderProfileProjectCard(projectSkull);
-renderProfileProjectCard(projectBrain);
-renderProfileProjectCard(projectClock);
+  console.log(user.data.projects);
+
+  const { hasNext, total } = user.data.projects.meta;
+
+  let totalPages = Math.ceil(total / limit);
+
+  if (hasNext) {
+    pagination({
+      current: currentPage,
+      total: totalPages,
+      container: paginationContainer,
+      onPageChange: (newPage) => {
+        currentPage = newPage;
+        fetchAndRenderProjects(newPage);
+      },
+    });
+  }
+} catch (err) {
+  console.log(err);
+  projectsContainer.innerHTML =
+    "<p>An error occurred fetching the user and their projects, please refresh the page.</p>";
+}
+
+async function fetchAndRenderProjects(page) {
+  try {
+    showSkeletons(10);
+    const offset = (page - 1) * limit;
+    const projects = await api.getAllProjects({
+      userId: user.data.id,
+      limit,
+      offset,
+    });
+    if (!projects.success) {
+      projectsContainer.innerHTML =
+        "<p>An error occurred fetching projects, please refresh the page.</p>";
+      return;
+    }
+    projectsContainer.innerHTML = "";
+    if (projects.data.length > 0) {
+      projects.data.forEach((project) => {
+        projectsContainer.append(profileProjectCard(project));
+      });
+      pagination({
+        current: currentPage,
+        total: Math.ceil(projects.meta.total / limit),
+        container: paginationContainer,
+        onPageChange: (newPage) => {
+          currentPage = newPage;
+          fetchAndRenderProjects(newPage);
+        },
+      });
+    } else {
+      projectsContainer.innerHTML =
+        "<p>No projects found, bury a regret today!.</p>";
+    }
+  } catch (err) {
+    console.log(err);
+    projectsContainer.innerHTML =
+      "<p>An error occurred fetching projects, please refresh the page.</p>";
+  }
+}
