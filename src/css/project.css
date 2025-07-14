@@ -437,23 +437,6 @@ blockquote {
   fill: #959595 !important;
 }
 
-.memorial-error {
-  border: 1px solid var(--color-error);
-  background: rgba(214, 69, 80, 0.1);
-  color: var(--color-error);
-  border-radius: 6px;
-  padding: 1rem;
-  font-size: 0.9rem;
-  text-align: center;
-  margin: 1rem 0;
-  backdrop-filter: blur(0.25rem);
-}
-
-.memorial-error::before {
-  content: "💀";
-  margin-right: 0.5rem;
-}
-
 .buried-by-link:focus,
 .likes.upvote-btn:focus,
 .comments.comment-btn:focus,
@@ -462,7 +445,23 @@ blockquote {
   outline-offset: 0.125rem;
 }
 
-/*TODO: add loader, proper error style, curve, grass imgs, shadows, more to @media*/
+.buried-by-link:focus-visible,
+.likes.upvote-btn:focus-visible,
+.comments.comment-btn:focus-visible,
+.btn-icon:focus-visible,
+.error-btn:focus-visible {
+  outline: 0.125rem solid var(--beige-normal);
+  outline-offset: 0.125rem;
+  box-shadow: 0 0 0 0.25rem rgba(224, 199, 158, 0.3);
+}
+
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible,
+button:focus-visible {
+  outline: 0.125rem solid var(--beige-normal);
+  outline-offset: 0.125rem;
+}
 
 @media (max-width: 1300px) {
   .tombstone-top::after,
