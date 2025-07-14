@@ -54,6 +54,10 @@
   border: 4px solid #33322b;
   margin-bottom: calc(-75 * var(--full-multiplier));
   border-radius: 100% 100% 0 0;
+  box-shadow: 
+    0.5rem 0.5rem 2rem rgba(0, 0, 0, 0.4),
+    1.5rem 0.25rem 1.5rem rgba(0, 0, 0, 0.3),
+    -0.25rem 0.25rem 0.75rem rgba(0, 0, 0, 0.2);
 }
 
 .tombstone-top::after,
@@ -90,6 +94,23 @@
   flex-direction: column;
   gap: 10px;
   z-index: 1;
+  position: relative;
+}
+
+.tombstone-body::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 100%; 
+  bottom: 0;
+  width: 3rem; 
+  background: linear-gradient(to right, 
+    rgba(0, 0, 0, 0.4), 
+    rgba(0, 0, 0, 0.3) 30%, 
+    rgba(0, 0, 0, 0.2) 60%, 
+    transparent 
+  );
+  z-index: -1; 
 }
 
 .tombstone-content {
@@ -120,12 +141,17 @@ div.tombstone-lifespan-block {
   border-top: 4px solid #33322b;
   border-radius: 0 0 5px 5px;
   margin-top: -10px;
-  box-shadow:
-    inset 0 -0.3125rem 0.3125rem rgba(0, 0, 0, 0.2),
-    0 0.25rem 0.5rem rgba(0, 0, 0, 0.1);
   z-index: 2;
   display: flex;
   align-items: center;
+  box-shadow: 
+    inset 0 -0.3125rem 0.3125rem rgba(0, 0, 0, 0.2),
+    0.5rem 1rem 1.5rem rgba(0, 0, 0, 0.4),
+    0.5rem 0.5rem 1rem rgba(0, 0, 0, 0.1),
+    1rem 0.75rem 3rem rgba(0, 0, 0, 0.15),
+    0 0.5rem 1rem rgba(0, 0, 0, 0.05),
+    0 0.8rem 1.2rem rgba(0, 0, 0, 0.03),
+    -0.1rem 0.4rem 1rem rgba(0, 0, 0, 0.06);
 }
 
 .tombstone-types-container,
