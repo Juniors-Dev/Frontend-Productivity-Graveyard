@@ -8,6 +8,7 @@
 @import url("./../components/forms/forms.css");
 @import url("./shared/modal.css");
 @import url("./../components/features/pagination/pagination.css");
+@import url("./bury.css");
 
 @font-face {
   font-family: "pirate";
@@ -48,7 +49,7 @@
   --color-error: #d64550;
   --color-input-text: #70888b;
   --color-link-text: #70888b;
-  --color-accent: #f2c94c;
+  --color-accent: rgb(243, 159, 25);
   --border-radius: 4px;
   --transition-speed: 0.3s;
   --font-heading: "pirate", "roboto", sans-serif;
@@ -95,7 +96,6 @@ h1 {
   letter-spacing: 0px;
   font-weight: semi-bold;
   text-align: center;
-  margin-top: 10rem;
 }
 
 h2 {
@@ -176,5 +176,239 @@ header {
     color: var(--green-dark);
     background-color: var(--beige-normal);
     align-self: center;
+  }
+}
+
+/*Banner Styling*/
+
+#banner {
+  position: relative;
+  min-height: 100dvh;
+  width: 100dvw;
+  overflow: hidden;
+  background-color: #191f20;
+}
+
+.banner-container {
+  position: relative;
+  min-height: 100dvh;
+  width: 100dvw;
+  max-width: 1980px;
+  background-color: #191f20;
+  margin: auto;
+  z-index: 0;
+}
+
+.banner-grim-reaper,
+.banner-grass {
+  position: absolute;
+}
+
+.banner-curve {
+  position: absolute;
+  background: linear-gradient(#2d3839, #202829 35%);
+  width: 9000px;
+  height: 880px;
+  left: 4000px;
+  bottom: -980px;
+  border-radius: 100%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+}
+
+.banner-curve::before {
+  content: "";
+  display: block;
+  position: absolute;
+  left: -8700px;
+  background: linear-gradient(#2d3839, #202829 35%);
+  width: 9000px;
+  height: 880px;
+  border-radius: 100%;
+}
+
+.banner-curve-background {
+  animation:
+    bg-shadowing 3s infinite ease-in-out,
+    flicker 3s infinite ease-in-out;
+  z-index: 0;
+}
+
+@keyframes bg-shadowing {
+  0% {
+    box-shadow: 0 0 200px 50px var(--shadow);
+  }
+  20% {
+    box-shadow: 0 0 300px 100px var(--shadow);
+  }
+  40% {
+    box-shadow: 0 0 250px 80px var(--shadow);
+  }
+  60% {
+    box-shadow: 0 0 220px 60px var(--shadow);
+  }
+  80% {
+    box-shadow: 0 0 280px 90px var(--shadow);
+  }
+  100% {
+    box-shadow: 0 0 200px 50px var(--shadow);
+  }
+}
+
+.banner-grass {
+  position: absolute;
+  bottom: 150px;
+  width: 700px;
+  left: 450px;
+  z-index: 1;
+}
+
+.grass-left {
+  transform: scaleX(-1);
+  bottom: -0px;
+  width: 800px;
+  left: -150px;
+}
+
+.grass-left-before {
+  bottom: -50px;
+  width: 800px;
+  left: -650px;
+}
+
+.grass-right {
+  transform: scaleX(-1);
+  bottom: 200px;
+  width: 900px;
+  left: 1100px;
+}
+
+.grass-right-after {
+  bottom: 200px;
+  width: 900px;
+  left: 1800px;
+}
+
+.banner-grim-reaper {
+  height: 60dvh;
+  min-height: 70dvh;
+  max-height: 80dvw;
+  bottom: 0px;
+  left: 53%;
+  transform: translateX(-50%);
+  z-index: 2;
+}
+
+.banner-text {
+  position: absolute;
+  left: 50%;
+  top: 15%;
+  z-index: 4;
+  transform: translateX(-50%);
+  animation:
+    smokey-shadow 6s infinite ease-in-out,
+    flicker 3s infinite ease-in-out;
+}
+
+.banner-h1 {
+  padding-bottom: 0;
+  text-shadow: 0px 10px 10px var(--shadow);
+  animation:
+    smokey-shadow 6s infinite ease-in-out,
+    flicker 3s infinite ease-in-out;
+}
+
+h2 {
+  animation:
+    smokey-shadow 6s infinite ease-in-out,
+    flicker 3s infinite ease-in-out;
+}
+
+@keyframes flicker {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.95;
+  }
+  70% {
+    opacity: 0.98;
+  }
+  90% {
+    opacity: 0.93;
+  }
+}
+
+@keyframes smokey-shadow {
+  0% {
+    text-shadow: 0 10px 10px var(--shadow);
+  }
+  10% {
+    text-shadow: 2px 12px 8px var(--shadow);
+  }
+  20% {
+    text-shadow: -3px 14px 12px #1e3d32;
+  }
+  30% {
+    text-shadow: 1px 9px 9px #2a5e4c;
+  }
+  40% {
+    text-shadow: 4px 11px 13px #1a3b2e;
+  }
+  50% {
+    text-shadow: -2px 10px 8px var(--shadow);
+  }
+  60% {
+    text-shadow: 3px 13px 11px #2f6e59;
+  }
+  70% {
+    text-shadow: -4px 12px 10px #1e3f34;
+  }
+  80% {
+    text-shadow: 2px 10px 14px var(--shadow);
+  }
+  90% {
+    text-shadow: -1px 8px 7px #1c3a2d;
+  }
+  100% {
+    text-shadow: 0 10px 10px var(--shadow);
+  }
+}
+
+.banner-productivity {
+  font-size: 2.375rem;
+}
+
+.banner-graveyard {
+  font-size: 4.625rem;
+}
+
+.banner-h1 span {
+  display: block;
+}
+
+.banner-caption {
+  font-family: BebasKai;
+  color: var(--beige-normal-hover);
+  text-align: center;
+  font-size: 1.5625rem;
+}
+
+/* Small banner styling */
+
+#banner.small-banner,
+.small-banner {
+  height: clamp(400px, 50vh, 700px);
+  min-height: 500px;
+}
+
+.banner-text.small-banner {
+  top: 25%;
+}
+
+@media (max-width: 900px) {
+  .banner-h1 {
+    font-size: 3rem;
   }
 }

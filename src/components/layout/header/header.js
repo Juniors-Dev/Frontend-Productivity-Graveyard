@@ -8,7 +8,6 @@ const HEADER_CONFIG = {
     { text: "GRAVEYARD", href: "graveyard.html" },
     { text: "BURY", href: "bury.html" },
     { text: "STATS", href: "stats.html" },
-    { text: "PROFILE", href: "profile.html" },
     // LOGIN/LOGOUT is handled dynamically
   ],
 };
@@ -59,7 +58,10 @@ export class Header {
     );
     // Add LOGIN or LOGOUT
     if (isLoggedIn) {
-      filtered.push({ text: "LOGOUT", href: "#" });
+      filtered.push(
+        { text: "PROFILE", href: "profile.html" },
+        { text: "LOGOUT", href: "#" },
+      );
     } else {
       filtered.push({ text: "LOGIN", href: "login.html" });
     }
@@ -138,7 +140,6 @@ export class Header {
 
   init() {
     this.createMoon();
-
     const nav = document.createElement("nav");
     nav.className = "nav-container";
 

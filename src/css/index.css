@@ -1,4 +1,4 @@
-#banner {
+/* #banner {
   position: relative;
   min-height: 100dvh;
   width: 100dvw;
@@ -209,7 +209,7 @@ h2 {
   color: var(--beige-normal-hover);
   text-align: center;
   font-size: 1.5625rem;
-}
+} */
 /* Graveyard */
 
 #graveyard {
@@ -374,14 +374,6 @@ h2 {
 @media (max-width: 1200px) {
   .explore-container {
     display: block;
-  }
-
-  .banner-grim-reaper {
-    max-height: 60dvh;
-    height: 60%;
-    bottom: 8dvh;
-    left: 60%;
-    transform: translateX(-50%);
   }
 
   .banner-productivity {

@@ -1,4 +1,4 @@
-import { formatLifespan } from "../../../utlis/formatters.js";
+import { formatLifespan } from "../../../utils/dateHandlers.js";
 
 /**
  * Creates a single stat card component with static structure

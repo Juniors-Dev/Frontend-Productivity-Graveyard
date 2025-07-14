@@ -1,4 +1,4 @@
-import { getPagination } from "../../../utlis/getPagination.js";
+import { getPagination } from "../../../utils/getPagination.js";
 
 export function pagination({ current, total, container, onPageChange }) {
   container.innerHTML = "";
