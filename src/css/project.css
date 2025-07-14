@@ -65,8 +65,8 @@
 .tombstone-top::before {
   content: "";
   position: absolute;
-  bottom: calc( 55 * var(--full-multiplier)); 
-  left: -4%; 
+  bottom: calc(55 * var(--full-multiplier));
+  left: -4%;
   width: calc(35 * var(--full-multiplier));
   height: calc(30 * var(--full-multiplier));
   background: inherit;
@@ -75,7 +75,7 @@
 }
 
 .tombstone-top::before {
-  left: 104%; 
+  left: 104%;
   transform: translateX(-50%) scaleY(0.5) rotate(25deg);
 }
 
@@ -88,7 +88,7 @@
   background: transparent;
   transform: translateX(-20%) scaleY(0.5) rotate(25deg);
   z-index: -1;
-  box-shadow: 
+  box-shadow:
     0 -0.5rem 1rem rgba(0, 0, 0, 0.5),
     0.5rem -0.25rem 0.8rem rgba(0, 0, 0, 0.3),
     2.5rem -0.75rem 2.5rem rgba(0, 0, 0, 0.15);
@@ -115,9 +115,9 @@
   content: "";
   position: absolute;
   top: 0;
-  left: 100%; 
+  left: 100%;
   bottom: 0;
-  width: 3rem; 
+  width: 3rem;
   background: linear-gradient(
     to right,
     rgba(0, 0, 0, 0.2),
@@ -125,7 +125,7 @@
     rgba(0, 0, 0, 0.1) 50%,
     transparent
   );
-  z-index: -1; 
+  z-index: -1;
 }
 
 .tombstone-content {
@@ -478,9 +478,6 @@ button:focus-visible {
 @media (max-width: 950px) {
   :root {
     --full-multiplier: 2px;
-  }
-  .tombstone-interactions {
-    gap: 1rem;
   }
 
   .likes.upvote-btn,
