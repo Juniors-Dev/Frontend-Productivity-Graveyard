@@ -59,7 +59,7 @@ function populateStaticFields(project) {
   }
   if (title) title.textContent = project.name || "";
   if (buriedBy) {
-    buriedBy.textContent = ""; // Clear existing content
+    buriedBy.textContent = ""; 
     const label = createEl("span", { className: "buried-by-label" });
     label.textContent = "Buried by ";
     const link = createEl("a", {
@@ -91,7 +91,7 @@ function populateStaticFields(project) {
 function renderTags(types, typesList) {
   if (!typesList) return;
   typesList.innerHTML = "";
-  // Deduplicate - until I find cause
+  // Deduplicate - (until backend fix)
   const seen = new Set();
   (types || []).forEach((type) => {
     const name = typeof type === "object" ? type.name : type;
