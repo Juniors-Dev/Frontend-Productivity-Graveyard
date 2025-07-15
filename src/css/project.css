@@ -244,8 +244,6 @@ div.tombstone-lifespan-block {
 
 .tombstone-cause .cause-label {
   font-weight: bold;
-  /*color: var(--beige-normal);*/
-  opacity: 0.9;
 }
 
 .tombstone-lifespan-block {
@@ -268,7 +266,6 @@ div.tombstone-lifespan-block {
   text-align: left;
   min-width: 2.7em;
   /*color: var(--beige-normal);*/
-  opacity: 0.9;
 }
 
 /*DESCRIPTION*/
