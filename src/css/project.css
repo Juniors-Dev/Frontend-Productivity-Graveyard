@@ -320,7 +320,7 @@ blockquote {
 .tombstone-type {
   display: inline-block;
   background: var(--beige-normal);
-  color: #2d2b25;
+  color: var(--green-dark);
   font-weight: bold;
   font-size: 0.8rem;
   border-radius: 18px;
