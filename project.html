@@ -88,11 +88,69 @@
           <div class="banner-curve"></div>
         </div>
       </section>
-      <section id="comments"></section>
-      <div id="comments-loading" class="loading-state">
-        <div class="loader-comments"></div>
-      </div>
-      <div id="comments-error" class="error-state" style="display: none"></div>
+      <section id="comments-section">
+        <div class="comments-section-wrapper">
+          <div class="comments-header">
+            <img
+              class="candles-left"
+              src="./src/assets/img/candles_left.png"
+              alt="Memorial candles"
+              aria-hidden="true"
+            />
+            <p class="comments-title">CONDOLENCES</p>
+            <img
+              class="candles-right"
+              src="./src/assets/img/candles_right.png"
+              alt="Memorial candles"
+              aria-hidden="true"
+            />
+          </div>
+          <div
+            id="comment-form-container"
+            class="comment-form"
+            style="display: none"
+          >
+            <form id="main-comment-form">
+              <textarea
+                id="main-comment-textarea"
+                required
+                rows="3"
+                placeholder="Share your thoughts on this fallen project..."
+                maxlength="2000"
+                aria-label="Write a condolence message"
+                aria-describedby="main-comment-error"
+              ></textarea>
+              <button type="submit" class="btn-small" id="new-comment-submit">
+                Post Condolence
+              </button>
+              <div
+                class="form-message error"
+                id="main-comment-error"
+                role="alert"
+                aria-live="polite"
+              ></div>
+            </form>
+          </div>
+          <div
+            id="comments-login-hint"
+            class="comments-login-hint"
+            style="display: none"
+          >
+            <a href="/login.html">Login</a> to leave a condolence.
+          </div>
+          <div id="comments-container"></div>
+          <div
+            id="comments-loading"
+            class="loading-state"
+            style="display: none"
+          ></div>
+          <div
+            id="comments-error"
+            class="error-state"
+            style="display: none"
+          ></div>
+        </div>
+      </section>
     </main>
     <footer></footer>
   </body>
