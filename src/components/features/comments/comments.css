@@ -1,0 +1,561 @@
+/* ==========================================================================
+   COMMENTS SECTION - BASE STYLES
+   ========================================================================== */
+.form-message.error:empty {
+  display: none;
+}
+
+#comments-section {
+  background: linear-gradient(180deg, #202829 0%, #1a1e20 100%);
+  padding: 2rem 0 6rem 0;
+  margin-top: -2rem;
+  position: relative;
+}
+
+.comments-section-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* ==========================================================================
+   COMMENTS HEADER & TITLE
+   ========================================================================== */
+.comments-header {
+  position: relative;
+  display: flex;
+  align-items: center;
+  margin: 0 0 1rem 0;
+  gap: 0.3rem;
+}
+
+.comments-title {
+  color: var(--beige-normal);
+  font-size: 3rem;
+  font-weight: bold;
+  text-align: center;
+  position: relative;
+  margin-top: 3.5rem;
+}
+
+.candles-left,
+.candles-right {
+  height: 100px;
+  width: auto;
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3));
+  transition: opacity 0.3s ease;
+  position: relative;
+  animation: candleGlow 3s infinite ease-in-out;
+}
+
+@keyframes candleGlow {
+  0%,
+  100% {
+    opacity: 0.9;
+    filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3));
+  }
+  50% {
+    opacity: 1;
+    filter: drop-shadow(0 4px 12px rgba(255, 107, 53, 0.2));
+  }
+}
+
+/* ==========================================================================
+   COMMENTS CONTAINER & LIST
+   ========================================================================== */
+#comments-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.comments-list {
+  width: 100%;
+}
+
+.comments-empty {
+  text-align: center;
+  color: var(--grey-normal);
+  font-style: italic;
+  padding: 3rem;
+  font-size: 1.1rem;
+  margin: 2rem auto;
+  max-width: 50rem;
+  width: 100%;
+}
+
+.comments-login-hint {
+  text-align: center;
+  color: var(--grey-normal);
+  background: rgba(224, 199, 158, 0.05);
+  border: 0.0625rem solid rgba(224, 199, 158, 0.2);
+  border-radius: 1rem;
+  padding: 2rem;
+  margin: 2rem auto;
+  max-width: 50rem;
+  width: 100%;
+  font-style: italic;
+}
+
+.comments-login-hint a {
+  color: var(--color-link-text);
+  transition: color 0.3s ease;
+}
+
+.comments-login-hint a:hover {
+  color: var(--color-primary-hover);
+}
+
+/* ==========================================================================
+   INDIVIDUAL COMMENT STYLES
+   ========================================================================== */
+.comment {
+  background: rgba(224, 199, 158, 0.03);
+  border: 0.0625rem solid rgba(224, 199, 158, 0.25);
+  border-radius: 1rem;
+  padding: 1.5rem;
+  margin: 1.5rem auto;
+  max-width: 50rem;
+  position: relative;
+  /*backdrop-filter: blur(0.15rem);*/
+}
+
+.comment::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0.2rem;
+  height: 100%;
+  background: rgba(224, 199, 158, 0.6);
+  border-radius: 0.125rem 0 0 0.125rem;
+}
+
+.comment-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.75rem;
+}
+
+.comment-meta > div:first-child {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.comment-avatar {
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%;
+  border: 0.125rem solid rgba(224, 199, 158, 0.3);
+  object-fit: cover;
+}
+
+.comment-username {
+  color: var(--beige-normal);
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.comment-time {
+  color: var(--grey-normal);
+  font-size: 0.75rem;
+  opacity: 0.7;
+}
+
+.comment-message {
+  color: var(--color-text-secondary);
+  line-height: 1.6;
+  font-size: 0.95rem;
+  margin-bottom: 0.9375rem;
+  padding-left: 0.5rem;
+}
+
+.comment-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 0.9375rem;
+}
+
+.comment-actions > div:first-child {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+}
+
+.comment-actions > div:last-child {
+  display: flex;
+  gap: 0.9375rem;
+}
+
+.comment-actions .btn-small {
+  background: none;
+  border: none;
+  color: var(--grey-normal);
+  cursor: pointer;
+  font-size: 0.75rem;
+  transition: color 0.3s ease;
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.25rem;
+}
+
+.comment-actions > div:first-child .btn-small:hover {
+  color: var(--beige-normal);
+}
+
+.comment-actions > div:last-child .btn-small:nth-child(1):hover {
+  color: var(--light-orange-normal);
+}
+
+.comment-actions > div:last-child .btn-small:nth-child(2):hover {
+  color: #ef4444;
+}
+
+/* ==========================================================================
+   COMMENT REPLIES
+   ========================================================================== */
+.comment-replies {
+  padding-left: 1.5rem;
+  position: relative;
+}
+
+.comment-replies .comment {
+  background: rgba(224, 199, 158, 0.03);
+  border-color: rgba(224, 199, 158, 0.1);
+  margin-bottom: 1rem;
+}
+
+.comment-replies::before {
+  content: "";
+  position: absolute;
+  left: 0.5rem;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: rgba(75, 85, 90, 0.4);
+}
+
+/* ==========================================================================
+   DELETED COMMENTS
+   ========================================================================== */
+.comment.deleted {
+  opacity: 0.6;
+  background: rgba(165, 165, 165, 0.05);
+  border-color: rgba(165, 165, 165, 0.1);
+  padding-top: 0.5rem;
+  padding-bottom: 0;
+}
+
+.comment.deleted::before {
+  background: linear-gradient(180deg, #666, #555);
+}
+
+.comment.deleted > .comment-message {
+  font-style: italic;
+  color: var(--grey-normal);
+  opacity: 0.8;
+}
+
+.comment.deleted > .comment-actions {
+  display: none;
+}
+
+.comment.deleted > .comment-avatar {
+  display: none;
+}
+
+.comment.deleted > .comment-meta {
+  padding-left: 0;
+}
+
+/* ==========================================================================
+   COMMENT FORMS (NEW, REPLY, EDIT)
+   ========================================================================== */
+.comment-form,
+.reply-form,
+.edit-form {
+  background: linear-gradient(135deg, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.1));
+  border: 0.0625rem solid rgba(224, 199, 158, 0.2);
+  border-radius: 1rem;
+  padding: 1.5rem;
+  margin: 2rem auto;
+  max-width: 50rem;
+  width: 100%;
+}
+
+.comment-form textarea {
+  min-height: 8rem;
+}
+
+.reply-form textarea,
+.edit-form textarea {
+  min-height: 6rem;
+}
+
+.comment-form textarea,
+.reply-form textarea,
+.edit-form textarea {
+  width: 100%;
+  background: rgba(0, 0, 0, 0.3);
+  border: 0.0625rem solid rgba(224, 199, 158, 0.2);
+  border-radius: 0.5rem;
+  padding: 1rem;
+  color: var(--color-text);
+  font-family: inherit;
+  font-size: 0.95rem;
+  resize: none;
+  transition: all 0.3s ease;
+}
+
+.comment-form textarea:focus,
+.reply-form textarea:focus,
+.edit-form textarea:focus {
+  outline: none;
+  border-color: var(--beige-normal);
+}
+
+.comment-form textarea::placeholder,
+.reply-form textarea::placeholder,
+.edit-form textarea::placeholder {
+  color: var(--grey-normal);
+  opacity: 0.7;
+}
+
+.comment-form button,
+.reply-form button,
+.edit-form button {
+  border-radius: 0.5rem;
+  font-size: 0.9rem;
+  transition: all 0.3s ease;
+  min-height: 2rem;
+  font-weight: 600;
+  padding: 0.65rem 1.2rem;
+  margin-top: 1rem;
+  margin-right: 0.75rem;
+}
+
+.comment-form button[type="submit"],
+.reply-form button[type="submit"],
+.edit-form button[type="submit"] {
+  background: linear-gradient(135deg, var(--beige-normal), #d4b894);
+  color: var(--green-dark);
+  border: none;
+  cursor: pointer;
+}
+
+.comment-form button[type="submit"]:hover,
+.reply-form button[type="submit"]:hover,
+.edit-form button[type="submit"]:hover {
+  background: linear-gradient(135deg, var(--beige-normal-hover), #e0c79e);
+  box-shadow: 0 0.25rem 0.75rem rgba(0, 0, 0, 0.3);
+}
+
+.reply-form button[type="button"],
+.edit-form button[type="button"] {
+  background: transparent;
+  color: var(--grey-normal);
+  border: 1px solid rgba(165, 165, 165, 0.3);
+  cursor: pointer;
+}
+
+.reply-form button[type="button"]:hover,
+.edit-form button[type="button"]:hover {
+  background: rgba(165, 165, 165, 0.1);
+}
+
+/* ==========================================================================
+   FORM ERROR MESSAGES
+   ========================================================================== */
+.form-message.error {
+  color: var(--color-error);
+  background: rgba(214, 69, 80, 0.1);
+  border: 0.0625rem solid rgba(214, 69, 80, 0.3);
+  border-radius: 0.5rem;
+  padding: 0.75rem;
+  margin-top: 0.5rem;
+  font-size: 0.85rem;
+}
+
+/* ==========================================================================
+   PAGINATION
+   ========================================================================== */
+.pagination {
+  display: flex;
+  justify-content: center;
+  margin: 3rem auto 0;
+  gap: 0.5rem;
+}
+
+.pagination .page-btn {
+  background: rgba(224, 199, 158, 0.1);
+  color: var(--beige-normal);
+  border: 0.0625rem solid rgba(224, 199, 158, 0.2);
+  padding: 0.5rem 1rem;
+  transition: all 0.3s ease;
+}
+
+.pagination .page-btn:hover,
+.pagination .page-btn.active {
+  background: rgba(224, 199, 158, 0.2);
+  border-color: rgba(224, 199, 158, 0.3);
+}
+
+.pagination .page-btn:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+
+/* ==========================================================================
+   RESPONSIVE DESIGN - TABLET
+   ========================================================================== */
+@media (max-width: 768px) {
+  #comments-section {
+    padding: 2rem 1rem 3rem 1rem;
+  }
+
+  .comments-title {
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+  }
+
+  .candles-left,
+  .candles-right {
+    height: 60px;
+  }
+
+  .comments-header {
+    gap: 1rem;
+    margin: 1.5rem 0 2rem 0;
+  }
+
+  .comments-list {
+    padding: 0;
+  }
+
+  .comment {
+    padding: 1rem;
+    margin: 1rem auto;
+  }
+
+  .comment-form,
+  .reply-form,
+  .edit-form {
+    padding: 1rem;
+    margin: 1.5rem auto;
+  }
+
+  .comment-meta {
+    margin-bottom: 0.75rem;
+  }
+
+  .comment-meta > div:first-child {
+    gap: 0.5rem;
+  }
+
+  .comment-avatar {
+    width: 2rem;
+    height: 2rem;
+  }
+
+  .comment-username {
+    font-size: 0.9rem;
+  }
+
+  .comment-message {
+    font-size: 0.9rem;
+    margin-bottom: 0.75rem;
+    padding-left: 0.25rem;
+  }
+
+  .comment-actions {
+    justify-content: space-between;
+    margin-top: 0.75rem;
+  }
+
+  .comment-actions > div:first-child {
+    gap: 0.75rem;
+  }
+
+  .comment-actions > div:last-child {
+    gap: 0.5rem;
+  }
+
+  .comment-actions .btn-small {
+    padding: 0.2rem 0.4rem;
+  }
+
+  .comment-form button,
+  .reply-form button,
+  .edit-form button {
+    font-size: 0.85rem;
+    padding: 0.6rem 1.2rem;
+    margin-top: 0.75rem;
+  }
+
+  .comment.deleted {
+    padding: 0.75rem;
+    margin: 0.75rem auto;
+  }
+
+  .comment.deleted .comment-message {
+    font-size: 0.85rem;
+    margin-bottom: 0;
+  }
+
+  .pagination .page-btn {
+    padding: 0.4rem 0.8rem;
+    font-size: 0.9rem;
+  }
+}
+
+/* ==========================================================================
+   RESPONSIVE DESIGN - MOBILE
+   ========================================================================== */
+@media (max-width: 480px) {
+  #comments-section {
+    padding: 1.5rem 0.75rem 2rem 0.75rem;
+  }
+
+  .comments-title {
+    font-size: 2rem;
+    margin-bottom: 2rem;
+  }
+
+  .candles-left,
+  .candles-right {
+    height: 50px;
+  }
+
+  .comments-header {
+    gap: 0.5rem;
+    margin: 0;
+  }
+
+  .comment {
+    padding: 0.75rem;
+    margin: 0.75rem auto;
+  }
+
+  .comment-time {
+    margin-left: 0;
+    text-align: justify;
+    text-align-last: end;
+  }
+
+  .comment-form textarea {
+    min-height: 6rem;
+  }
+
+  .reply-form textarea,
+  .edit-form textarea {
+    min-height: 4rem;
+  }
+
+  .comment-form textarea,
+  .reply-form textarea,
+  .edit-form textarea {
+    font-size: 0.8rem;
+  }
+}
