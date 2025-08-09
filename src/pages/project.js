@@ -1,5 +1,6 @@
 import { api } from "../main.js";
 import { renderMemorial } from "../components/features/memorial/memorial.js";
+import { initComments } from "../components/features/comments/comments.js";
 
 function getProjectIdFromURL() {
   const params = new URLSearchParams(window.location.search);
@@ -43,6 +44,7 @@ async function initMemorialPage() {
   }
   try {
     await loadProject(projectId);
+    await initComments(projectId);
   } catch (err) {
     console.error(err);
   }
