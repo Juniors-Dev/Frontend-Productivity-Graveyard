@@ -2,6 +2,7 @@ export function createBuryFormHandler(
   formSelector,
   handleBurySubmit,
   validateBuryField,
+  api,
 ) {
   const form = document.querySelector(formSelector);
   if (!form) return { init: () => {} };
@@ -38,7 +39,7 @@ export function createBuryFormHandler(
     });
 
     // Form submission
-    form.addEventListener("submit", handleBurySubmit);
+    form.addEventListener("submit", (event) => handleBurySubmit(event, api));
   }
 
   return { init };

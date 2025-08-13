@@ -2,10 +2,10 @@ import {
   showMessage,
   showLoading,
   hideLoading,
-  showFieldError,
-} from "./formUtils";
+  validateBuryForm,
+} from "./formUtils.js";
 
-export async function handleBurySubmit(api) {
+export async function handleBurySubmit(event, api) {
   event.preventDefault();
 
   if (!validateBuryForm()) {
@@ -74,136 +74,4 @@ export async function handleBurySubmit(api) {
   } finally {
     hideLoading();
   }
-}
-
-export function createBuryFormHandler(formSelector) {
-  const form = document.querySelector(formSelector);
-  if (!form) return { init: () => {} };
-
-  function init() {
-    if (!form) return;
-
-    // Add event listeners for real-time validation
-    const fields = [
-      "name",
-      "description",
-      "eulogy",
-      "causeOfDeath",
-      "startDate",
-      "endDate",
-    ];
-    fields.forEach((field) => {
-      const input = form.querySelector(`[name="${field}"]`);
-      if (input) {
-        input.addEventListener("input", () => validateBuryField(field));
-        input.addEventListener("blur", () => validateBuryField(field));
-      }
-    });
-
-    // Special handling for checkboxes and radio buttons
-    const typeCheckboxes = form.querySelectorAll('input[name="types"]');
-    typeCheckboxes.forEach((cb) => {
-      cb.addEventListener("change", () => validateBuryField("types"));
-    });
-
-    const tombstoneRadios = form.querySelectorAll('input[name="tombstoneId"]');
-    tombstoneRadios.forEach((radio) => {
-      radio.addEventListener("change", () => validateBuryField("tombstoneId"));
-    });
-
-    // Form submission
-    form.addEventListener("submit", handleBurySubmit);
-  }
-
-  return { init };
-}
-
-export function validateBuryField(fieldName) {
-  const form = document.querySelector("#bury-project-form");
-  const input = form.querySelector(`[name="${fieldName}"]`);
-  const errorElem = form.querySelector(`#${fieldName}-error`);
-
-  if (!input || !errorElem) return { isValid: true, message: "" };
-
-  let result = { isValid: true, message: "" };
-
-  switch (fieldName) {
-    case "name":
-      if (!input.value.trim()) {
-        result = { isValid: false, message: "Project name is required" };
-      } else if (input.value.trim().length < 2) {
-        result = {
-          isValid: false,
-          message: "Project name must be at least 2 characters",
-        };
-      }
-      break;
-    case "description":
-      if (!input.value.trim()) {
-        result = { isValid: false, message: "Project description is required" };
-      } else if (input.value.trim().length < 10) {
-        result = {
-          isValid: false,
-          message: "Description must be at least 10 characters",
-        };
-      }
-      break;
-    case "eulogy":
-      if (!input.value.trim()) {
-        result = { isValid: false, message: "Eulogy is required" };
-      } else if (input.value.trim().length < 10) {
-        result = {
-          isValid: false,
-          message: "Eulogy must be at least 10 characters",
-        };
-      }
-      break;
-    case "causeOfDeath":
-      if (!input.value.trim()) {
-        result = { isValid: false, message: "Cause of death is required" };
-      }
-      break;
-    case "startDate":
-      if (!input.value) {
-        result = { isValid: false, message: "Start date is required" };
-      }
-      break;
-    case "endDate":
-      if (!input.value) {
-        result = { isValid: false, message: "End date is required" };
-      }
-      break;
-    case "types": {
-      const checkedTypes = form.querySelectorAll('input[name="types"]:checked');
-      if (checkedTypes.length === 0) {
-        result = {
-          isValid: false,
-          message: "Please select at least one project category for filtering",
-        };
-      }
-      break;
-    }
-    case "tombstoneId":
-      if (!input.value) {
-        result = { isValid: false, message: "Please select a card icon" };
-      }
-      break;
-  }
-
-  showFieldError(input, errorElem, result);
-  return result;
-}
-
-function validateBuryForm() {
-  const fields = [
-    "name",
-    "description",
-    "eulogy",
-    "causeOfDeath",
-    "startDate",
-    "endDate",
-    "types",
-    "tombstoneId",
-  ];
-  return fields.every((field) => validateBuryField(field).isValid);
 }
