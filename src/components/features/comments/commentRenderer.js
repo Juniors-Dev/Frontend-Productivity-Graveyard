@@ -1,5 +1,7 @@
 import { createEl } from '../../../utils/createEl.js';
-import { isCommentDeleted, getUserAvatarUrl, timeAgo } from './commentHelpers.js';
+import { isCommentDeleted, getUserAvatarUrl } from './commentHelpers.js';
+import { timeAgo } from '../../../utils/dateHandlers.js';
+
 
 /**
  * Render a list of comments
