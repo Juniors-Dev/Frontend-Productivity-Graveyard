@@ -3,6 +3,12 @@
   flex-direction: column;
   align-items: center;
 }
+
+/*Turn off banner min heigh so that the bury form isnt pushed down*/
+#banner {
+  min-height: 0 !important;
+}
+
 .description-textarea,
 .eulogy-textarea {
   width: 100%;
