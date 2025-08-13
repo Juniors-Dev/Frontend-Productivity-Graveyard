@@ -76,6 +76,7 @@ export function projectCardSkeleton() {
                 <div class="project-description">
                   <div class="skeleton skeleton-title"></div>
                   <div class="skeleton skeleton-text"></div>
+                  <div class="skeleton skeleton-text"></div>
                 </div>
                 <div
                   style="

@@ -52,10 +52,21 @@ export class Header {
   getNavLinks() {
     const links = [...HEADER_CONFIG.NAV_LINKS];
     const isLoggedIn = !!localStorage.getItem("authToken");
+
     // Remove LOGIN/LOGOUT if present
     const filtered = links.filter(
       (l) => l.text !== "LOGIN" && l.text !== "LOGOUT",
     );
+
+    // Remove PROFILE and BURY links if user is not logged in
+    if (!isLoggedIn) {
+      const protectedLinks = filtered.filter(
+        (l) => l.text !== "PROFILE" && l.text !== "BURY",
+      );
+      filtered.length = 0;
+      filtered.push(...protectedLinks);
+    }
+
     // Add LOGIN or LOGOUT
     if (isLoggedIn) {
       filtered.push(

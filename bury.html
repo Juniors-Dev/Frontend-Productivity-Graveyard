@@ -155,79 +155,22 @@
               </div>
             </div>
 
-            <!-- Project Types (Multi-select) -->
+            <!-- Project Types (Multi-select) dropdown menue -->
             <div class="form-group">
               <fieldset class="project-types-fieldset">
-                <legend class="project-types-legend">Project Type(s)</legend>
-                <div class="checkbox-grid">
-                  <div class="custom-checkbox">
-                    <input
-                      type="checkbox"
-                      id="type-web"
-                      name="types"
-                      value="1"
-                    />
-                    <label for="type-web" class="body-text">Web App</label>
-                  </div>
-                  <div class="custom-checkbox">
-                    <input
-                      type="checkbox"
-                      id="type-mobile"
-                      name="types"
-                      value="2"
-                    />
-                    <label for="type-mobile" class="body-text"
-                      >Mobile App</label
-                    >
-                  </div>
-                  <div class="custom-checkbox">
-                    <input
-                      type="checkbox"
-                      id="type-game"
-                      name="types"
-                      value="3"
-                    />
-                    <label for="type-game" class="body-text">Game</label>
-                  </div>
-                  <div class="custom-checkbox">
-                    <input
-                      type="checkbox"
-                      id="type-desktop"
-                      name="types"
-                      value="4"
-                    />
-                    <label for="type-desktop" class="body-text"
-                      >Desktop App</label
-                    >
-                  </div>
-                  <div class="custom-checkbox">
-                    <input
-                      type="checkbox"
-                      id="type-api"
-                      name="types"
-                      value="5"
-                    />
-                    <label for="type-api" class="body-text">API/Backend</label>
-                  </div>
-                  <div class="custom-checkbox">
-                    <input
-                      type="checkbox"
-                      id="type-library"
-                      name="types"
-                      value="6"
-                    />
-                    <label for="type-library" class="body-text"
-                      >Library/Package</label
-                    >
-                  </div>
-                  <div class="custom-checkbox">
-                    <input
-                      type="checkbox"
-                      id="type-other"
-                      name="types"
-                      value="7"
-                    />
-                    <label for="type-other" class="body-text">Other</label>
+                <legend class="project-types-legend">
+                  Project Categories (for filtering)
+                </legend>
+                <div class="dropdown" id="categoryDropdown">
+                  <button
+                    type="button"
+                    class="dropdown-toggle"
+                    id="categoryDropdownToggle"
+                  >
+                    Select Categories
+                  </button>
+                  <div class="dropdown-menu" id="categoryDropdownMenu">
+                    <!-- Project types will be loaded dynamically as checkboxes here -->
                   </div>
                 </div>
                 <span class="error-message" id="types-error"></span>
@@ -237,59 +180,27 @@
             <!-- Tombstone Selection -->
             <div class="form-group">
               <fieldset class="tombstone-fieldset">
-                <legend class="tombstone-legend">Choose a Tombstone</legend>
-                <div class="tombstone-grid">
-                  <div class="tombstone-option custom-radio">
-                    <input
-                      type="radio"
-                      id="tombstone-1"
-                      name="tombstoneId"
-                      value="1"
-                      required
-                    />
-                    <label for="tombstone-1" class="tombstone-label">
-                      <img
-                        src="/src/assets/img/Tombstone_Grass.png"
-                        alt="Classic Tombstone"
-                        class="tombstone-image"
-                      />
-                      <span class="tombstone-name">Classic</span>
-                    </label>
+                <legend class="tombstone-legend">Choose a Card Icon</legend>
+                <div class="carousel-wrapper">
+                  <button
+                    type="button"
+                    class="carousel-btn carousel-btn-left"
+                    id="carouselLeftBtn"
+                    aria-label="Scroll left"
+                  >
+                    &#8592;
+                  </button>
+                  <div class="tombstone-carousel" id="tombstoneCarousel">
+                    <!-- Tombstones will be loaded dynamically as carousel items -->
                   </div>
-                  <div class="tombstone-option custom-radio">
-                    <input
-                      type="radio"
-                      id="tombstone-2"
-                      name="tombstoneId"
-                      value="2"
-                      required
-                    />
-                    <label for="tombstone-2" class="tombstone-label">
-                      <img
-                        src="/src/assets/img/Tombstone_hand.png"
-                        alt="Gothic Tombstone"
-                        class="tombstone-image"
-                      />
-                      <span class="tombstone-name">Gothic</span>
-                    </label>
-                  </div>
-                  <div class="tombstone-option custom-radio">
-                    <input
-                      type="radio"
-                      id="tombstone-3"
-                      name="tombstoneId"
-                      value="3"
-                      required
-                    />
-                    <label for="tombstone-3" class="tombstone-label">
-                      <img
-                        src="/src/assets/img/Tombstone_skull.png"
-                        alt="Modern Tombstone"
-                        class="tombstone-image"
-                      />
-                      <span class="tombstone-name">Modern</span>
-                    </label>
-                  </div>
+                  <button
+                    type="button"
+                    class="carousel-btn carousel-btn-right"
+                    id="carouselRightBtn"
+                    aria-label="Scroll right"
+                  >
+                    &#8594;
+                  </button>
                 </div>
                 <span class="error-message" id="tombstoneId-error"></span>
               </fieldset>

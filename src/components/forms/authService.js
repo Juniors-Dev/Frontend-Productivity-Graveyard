@@ -74,3 +74,47 @@ export class AuthService {
 }
 
 export const authService = new AuthService();
+
+// Making this function available for other pages to use
+export function checkAuthentication() {
+  if (!authService.isAuthenticated()) {
+    window.location.href = "/login.html";
+    return false;
+  }
+  return true;
+}
+
+// Flexible page protection utility
+export function protectPage(options = {}) {
+  const {
+    redirectUrl = "/login.html",
+    onAuthenticated = null,
+    onUnauthenticated = null,
+  } = options;
+
+  return function () {
+    if (!authService.isAuthenticated()) {
+      if (onUnauthenticated) {
+        onUnauthenticated();
+      } else {
+        window.location.href = redirectUrl;
+      }
+      return false;
+    }
+
+    if (onAuthenticated) {
+      onAuthenticated();
+    }
+    return true;
+  };
+}
+
+// felxible function for pages that needs authentication
+export function requireAuth(pageInitFunction, options = {}) {
+  document.addEventListener("DOMContentLoaded", async () => {
+    const isAuthenticated = protectPage(options)();
+    if (isAuthenticated && pageInitFunction) {
+      await pageInitFunction();
+    }
+  });
+}
