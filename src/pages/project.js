@@ -26,7 +26,7 @@ async function loadProject(projectId) {
   } catch (err) {
     document.getElementById("memorial-loading").style.display = "none";
     if (errorMsg) {
-      errorMsg.textContent = "Unable to load this memorial. Please try refreshing the page.";
+      errorMsg.textContent = "Unable to load this memorial. Please refresh the page or try again later.";
       errorMsg.style.display = "";
     }
     console.error(err);
