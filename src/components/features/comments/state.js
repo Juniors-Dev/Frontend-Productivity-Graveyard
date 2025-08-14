@@ -34,7 +34,7 @@ export function createCommentsState({ projectId, api }) {
         metadata.page = page;
         metadata.totalPages = Math.ceil(metadata.total / metadata.limit);
       } else {
-        throw new Error(response?.message || "Failed to load comments");
+        throw new Error(response?.message || "Unable to load condolences right now. Please refresh the page or try again later.");
       }
       return comments;
     },
