@@ -1,6 +1,7 @@
 import { api } from "../main.js";
 import { renderMemorial } from "../components/features/memorial/memorial.js";
-import { initComments } from "../components/features/comments/comments.js";
+import { initComments } from "../components/features/comments/index.js";
+import { authService } from "../components/forms/authService.js";
 
 function getProjectIdFromURL() {
   const params = new URLSearchParams(window.location.search);
@@ -32,22 +33,33 @@ async function loadProject(projectId) {
   }
 }
 
-async function initMemorialPage() {
-  const projectId = getProjectIdFromURL();
-  if (!projectId) {
-    const errorMsg = document.querySelector(".memorial-error");
-    if (errorMsg) {
-      errorMsg.textContent = "No project ID provided.";
-      errorMsg.style.display = "";
-    }
-    return;
-  }
-  try {
-    await loadProject(projectId);
-    await initComments(projectId);
-  } catch (err) {
-    console.error(err);
-  }
-}
+ async function initMemorialPage() {
+   const projectId = getProjectIdFromURL();
+   if (!projectId) {
+     const errorMsg = document.querySelector(".memorial-error");
+     if (errorMsg) {
+       errorMsg.textContent = "No project ID provided.";
+       errorMsg.style.display = "";
+     }
+     return;
+   }
+   try {
+     await loadProject(projectId);
+     
+     const commentsContainer = document.getElementById("comments-container");
+     const currentUser = authService.getCurrentUser();
 
-initMemorialPage();
+    initComments({
+       projectId,
+       api,
+       container: commentsContainer,
+       currentUser
+     });
+
+   } catch (err) {
+     console.error("Error initializing memorial page:", err);
+   }
+ }
+
+ initMemorialPage();
+
