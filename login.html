@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login | Productivity Graveyard</title>
+    <meta
+      name="description"
+      content="Log in to the Productivity Graveyard. Bury your unfinished projects and connect with fellow developers."
+    />
+    <meta name="author" content="Juniors Dev" />
+    <meta property="og:title" content="Login | Productivity Graveyard" />
+    <meta
+      property="og:description"
+      content="Log in to the Productivity Graveyard and connect with fellow developers."
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://productivitygraveyard.dev/login" />
+    <meta
+      property="og:image"
+      content="https://productivitygraveyard.com/assets/img/og-image.png"
+    />
+    <link rel="stylesheet" href="./src/css/style.css" />
+    <script type="module" src="./src/main.js" defer></script>
+    <script type="module" src="./src/pages/login.js" defer></script>
+  </head>
+
+  <body>
+    <header></header>
+    <main>
+      <!-- LOGIN FORM -->
+      <section>
+        <div class="main-container">
+          <div class="form-container login-container">
+            <h1 class="heading-1">Login</h1>
+            <p class="tagline">Final resting place of good intentions.</p>
+
+            <form id="login-form" novalidate>
+              <!-- Email Field -->
+              <div class="form-group">
+                <label for="email" class="visually-hidden">Email</label>
+                <div class="input-wrapper">
+                  <div class="input-icon-container">
+                    <span
+                      class="input-icon email-icon"
+                      aria-hidden="true"
+                    ></span>
+                    <input
+                      type="email"
+                      id="email"
+                      name="email"
+                      placeholder="Email"
+                      required
+                      autocomplete="email"
+                    />
+                  </div>
+                  <span class="error-message" id="email-error"></span>
+                </div>
+              </div>
+
+              <!-- Password Field -->
+              <div class="form-group">
+                <label for="password" class="visually-hidden">Password</label>
+                <div class="input-wrapper">
+                  <div class="input-icon-container">
+                    <span
+                      class="input-icon password-icon"
+                      aria-hidden="true"
+                    ></span>
+                    <input
+                      type="password"
+                      id="password"
+                      name="password"
+                      placeholder="Password"
+                      required
+                      autocomplete="current-password"
+                    />
+                  </div>
+                  <span class="error-message" id="password-error"></span>
+                </div>
+              </div>
+
+              <!-- Forgot Password Link -->
+              <div class="text-center forgot-password-wrapper">
+                <a href="#" class="forgot-password-link"
+                  >Forgot your password?</a
+                >
+              </div>
+
+              <!-- Login Button -->
+              <button type="submit" class="login-button body-text">
+                Login
+              </button>
+
+              <!-- Signup Link -->
+              <div class="text-center signup-link-wrapper">
+                <a href="/signup.html" class="signup-link">Or signup</a>
+              </div>
+            </form>
+          </div>
+        </div>
+        <div class="grim-reaper"></div>
+      </section>
+    </main>
+    <footer></footer>
+  </body>
+</html>

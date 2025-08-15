@@ -1,0 +1,544 @@
+/* Could this be split and streamlined per page?*/
+@import url("./../components/layout/header/header.css");
+@import url("./../components/layout/footer/footer.css");
+@import url("./../components/forms/forms.css");
+@import url("./../components/forms/terms.css");
+@import url("./../components/features/profileProjectCard/profileProjectCard.css");
+@import url("./../components/features/projectCard/projectCard.css");
+@import url("./../components/forms/forms.css");
+@import url("./shared/modal.css");
+@import url("./../components/features/pagination/pagination.css");
+@import url("./bury.css");
+
+@font-face {
+  font-family: "pirate";
+  src: url("../assets/fonts/PirateShip.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "roboto";
+  src: url("../assets/fonts/Roboto-Regular.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "bebaskai";
+  src: url("../assets/fonts/BebasKai.ttf") format("truetype");
+}
+
+:root {
+  --green-dark: #202829;
+  --green-darker: #191f20;
+  --green-darker: #191f20;
+  --grey-normal: #a5a5a5;
+  --grey-normal-hover: #959595;
+  --beige-normal: #e0c79e;
+  --beige-normal-hover: #cab38e;
+  --light-orange-normal: #dba567;
+  --shadow: #234d3c;
+  --section-top-margin: 8rem;
+  --max-content-width: 1440px;
+  --section-border-radius: 40px;
+  --color-background: #1a1e20;
+  --color-card: #212529;
+  --color-input: #17191c;
+  --color-input-border: #333;
+  --color-primary: #cdb68d;
+  --color-primary-hover: #d9c9a3;
+  --color-text: #fff;
+  --color-text-secondary: rgba(255, 255, 255, 0.7);
+  --color-error: #d64550;
+  --color-input-text: #70888b;
+  --color-link-text: #70888b;
+  --color-accent: rgb(243, 159, 25);
+  --border-radius: 4px;
+  --transition-speed: 0.3s;
+  --font-heading: "pirate", "roboto", sans-serif;
+  --font-body: "roboto", sans-serif;
+  --font-tagline: "bebaskai", sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--color-background);
+  color: var(--color-text);
+  min-height: 100vh;
+  line-height: 1.5;
+  overflow-x: hidden;
+  position: relative;
+  font-size: 16px;
+  letter-spacing: 0.5px;
+  font-family: roboto;
+  margin: 0px auto;
+  margin-top: 50px;
+}
+
+.container {
+  display: flex;
+  max-width: 1440px;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: space-between;
+  padding-bottom: 160px;
+  margin: 0 auto;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+h1 {
+  color: #e0c79e;
+  font-size: 72px;
+  font-family: pirate;
+  line-height: 1.25;
+  letter-spacing: 0px;
+  font-weight: semi-bold;
+  text-align: center;
+}
+
+h2 {
+  color: var(--grey-normal);
+  font-size: 42px;
+  line-height: 1.25;
+  margin-top: 0px;
+  margin-bottom: 0px;
+  letter-spacing: 0px;
+  font-weight: semi-bold;
+}
+
+h3 {
+  color: var(--grey-normal);
+  font-size: 22px;
+  line-height: 1.25;
+  font-weight: medium;
+  margin: 0px;
+  padding-bottom: 10px;
+}
+
+p {
+  color: var(--grey-normal);
+  font-size: 16px;
+  line-height: 1.5;
+  letter-spacing: 0px;
+  font-weight: regular;
+  margin: 0px;
+}
+
+.relative {
+  position: relative;
+}
+
+header {
+  position: fixed;
+  top: 0;
+  right: 0;
+  z-index: 1000;
+  width: 100%;
+  height: 60px;
+  background-color: rgb(32, 40, 41, 0.6);
+}
+
+.btn-beige {
+  all: unset;
+  border-radius: 16px;
+  padding: 12px 17px;
+  font-size: 20px;
+  font-weight: bold;
+  color: var(--green-dark);
+  background-color: var(--beige-normal);
+  align-self: flex-end;
+  text-decoration: none;
+}
+
+.btn-beige:hover {
+  background-color: var(--beige-normal-hover);
+  color: var(--green-dark);
+  cursor: pointer;
+}
+
+.btn-small {
+  padding: 5px 10px;
+  border-radius: 6px;
+  font-size: 1rem;
+}
+
+.centered {
+  text-align: center;
+  justify-content: center;
+  margin: 0 auto;
+}
+
+@media (max-width: 900px) {
+  .btn-beige {
+    font-weight: bold;
+    color: var(--green-dark);
+    background-color: var(--beige-normal);
+    align-self: center;
+  }
+}
+
+/* Dropdown menue for project types */
+.dropdown {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+}
+.dropdown-toggle {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  background: #222;
+  color: #cab38e;
+  border: 1px solid #444;
+  border-radius: 8px;
+  text-align: left;
+  cursor: pointer;
+  font-size: 1rem;
+}
+.dropdown.open .dropdown-toggle {
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+  border-bottom: none;
+}
+.dropdown-menu {
+  display: none;
+  position: absolute;
+  left: 0;
+  right: 0;
+  background: #222;
+  border: 1px solid #444;
+  border-top: none;
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
+  max-height: 250px;
+  overflow-y: auto;
+  z-index: 10;
+  padding: 0.5rem 1rem;
+}
+.dropdown.open .dropdown-menu {
+  display: block;
+}
+.dropdown-checkbox-label {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.25rem 0;
+  cursor: pointer;
+  font-size: 1rem;
+  color: #cab38e;
+}
+.dropdown-checkbox-label input[type="checkbox"] {
+  accent-color: #cab38e;
+}
+
+/* Carousel for tombstone selection */
+.carousel-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  width: 100%;
+  margin: 1rem 0;
+  width: 400px; /* In order to keep the carousel from being too wide */
+}
+.tombstone-carousel {
+  display: flex;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  gap: 1.5rem;
+  padding: 1rem 0;
+  width: 100%;
+  scrollbar-width: none;
+}
+.tombstone-carousel::-webkit-scrollbar {
+  display: none;
+}
+.carousel-btn {
+  background: #222;
+  color: #cab38e;
+  border: 1px solid #444;
+  border-radius: 50%;
+  width: 2.5rem;
+  height: 2.5rem;
+  font-size: 1.5rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s;
+}
+.carousel-btn:hover {
+  background: #cab38e;
+  color: #222;
+}
+.tombstone-carousel .tombstone-option {
+  min-width: 120px;
+  max-width: 140px;
+  flex: 0 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 0.25rem;
+  border-radius: 8px;
+  background: transparent;
+  transition:
+    background 0.2s,
+    box-shadow 0.2s;
+}
+.tombstone-carousel .tombstone-option.selected,
+.tombstone-carousel .tombstone-option input[type="radio"]:checked + label {
+  background: #cab38e22;
+  box-shadow: 0 0 0 2px #cab38e;
+}
+.tombstone-carousel .tombstone-image {
+  width: 64px;
+  height: 64px;
+  object-fit: contain;
+  margin-bottom: 0.25rem;
+}
+.tombstone-carousel .tombstone-label {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+  color: #cab38e;
+  font-size: 0.95rem;
+}
+.tombstone-carousel input[type="radio"] {
+  display: none;
+}
+
+/*Banner Styling*/
+
+#banner {
+  position: relative;
+  min-height: 100dvh;
+  width: 100dvw;
+  overflow: hidden;
+  background-color: #191f20;
+}
+
+.banner-container {
+  position: relative;
+  min-height: 100dvh;
+  width: 100dvw;
+  max-width: 1980px;
+  background-color: #191f20;
+  margin: auto;
+  z-index: 0;
+}
+
+.banner-grim-reaper,
+.banner-grass {
+  position: absolute;
+}
+
+.banner-curve {
+  position: absolute;
+  background: linear-gradient(#2d3839, #202829 35%);
+  width: 9000px;
+  height: 880px;
+  left: 4000px;
+  bottom: -980px;
+  border-radius: 100%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+}
+
+.banner-curve::before {
+  content: "";
+  display: block;
+  position: absolute;
+  left: -8700px;
+  background: linear-gradient(#2d3839, #202829 35%);
+  width: 9000px;
+  height: 880px;
+  border-radius: 100%;
+}
+
+.banner-curve-background {
+  animation:
+    bg-shadowing 3s infinite ease-in-out,
+    flicker 3s infinite ease-in-out;
+  z-index: 0;
+}
+
+@keyframes bg-shadowing {
+  0% {
+    box-shadow: 0 0 200px 50px var(--shadow);
+  }
+  20% {
+    box-shadow: 0 0 300px 100px var(--shadow);
+  }
+  40% {
+    box-shadow: 0 0 250px 80px var(--shadow);
+  }
+  60% {
+    box-shadow: 0 0 220px 60px var(--shadow);
+  }
+  80% {
+    box-shadow: 0 0 280px 90px var(--shadow);
+  }
+  100% {
+    box-shadow: 0 0 200px 50px var(--shadow);
+  }
+}
+
+.banner-grass {
+  position: absolute;
+  bottom: 150px;
+  width: 700px;
+  left: 450px;
+  z-index: 1;
+}
+
+.grass-left {
+  transform: scaleX(-1);
+  bottom: -0px;
+  width: 800px;
+  left: -150px;
+}
+
+.grass-left-before {
+  bottom: -50px;
+  width: 800px;
+  left: -650px;
+}
+
+.grass-right {
+  transform: scaleX(-1);
+  bottom: 200px;
+  width: 900px;
+  left: 1100px;
+}
+
+.grass-right-after {
+  bottom: 200px;
+  width: 900px;
+  left: 1800px;
+}
+
+.banner-grim-reaper {
+  height: 60dvh;
+  min-height: 70dvh;
+  max-height: 80dvw;
+  bottom: 0px;
+  left: 53%;
+  transform: translateX(-50%);
+  z-index: 2;
+}
+
+.banner-text {
+  position: absolute;
+  left: 50%;
+  top: 15%;
+  z-index: 4;
+  transform: translateX(-50%);
+  animation:
+    smokey-shadow 6s infinite ease-in-out,
+    flicker 3s infinite ease-in-out;
+}
+
+.banner-h1 {
+  padding-bottom: 0;
+  text-shadow: 0px 10px 10px var(--shadow);
+  animation:
+    smokey-shadow 6s infinite ease-in-out,
+    flicker 3s infinite ease-in-out;
+}
+
+h2 {
+  animation:
+    smokey-shadow 6s infinite ease-in-out,
+    flicker 3s infinite ease-in-out;
+}
+
+@keyframes flicker {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.95;
+  }
+  70% {
+    opacity: 0.98;
+  }
+  90% {
+    opacity: 0.93;
+  }
+}
+
+@keyframes smokey-shadow {
+  0% {
+    text-shadow: 0 10px 10px var(--shadow);
+  }
+  10% {
+    text-shadow: 2px 12px 8px var(--shadow);
+  }
+  20% {
+    text-shadow: -3px 14px 12px #1e3d32;
+  }
+  30% {
+    text-shadow: 1px 9px 9px #2a5e4c;
+  }
+  40% {
+    text-shadow: 4px 11px 13px #1a3b2e;
+  }
+  50% {
+    text-shadow: -2px 10px 8px var(--shadow);
+  }
+  60% {
+    text-shadow: 3px 13px 11px #2f6e59;
+  }
+  70% {
+    text-shadow: -4px 12px 10px #1e3f34;
+  }
+  80% {
+    text-shadow: 2px 10px 14px var(--shadow);
+  }
+  90% {
+    text-shadow: -1px 8px 7px #1c3a2d;
+  }
+  100% {
+    text-shadow: 0 10px 10px var(--shadow);
+  }
+}
+
+.banner-productivity {
+  font-size: 2.375rem;
+}
+
+.banner-graveyard {
+  font-size: 4.625rem;
+}
+
+.banner-h1 span {
+  display: block;
+}
+
+.banner-caption {
+  font-family: BebasKai;
+  color: var(--beige-normal-hover);
+  text-align: center;
+  font-size: 1.5625rem;
+}
+
+/* Small banner styling */
+
+#banner.small-banner,
+.small-banner {
+  height: clamp(400px, 50vh, 700px);
+  min-height: 500px;
+}
+
+.banner-text.small-banner {
+  top: 25%;
+}
+
+@media (max-width: 900px) {
+  .banner-h1 {
+    font-size: 3rem;
+  }
+}

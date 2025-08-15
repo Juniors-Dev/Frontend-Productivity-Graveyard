@@ -3,20 +3,28 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Profile - Productivity-Graveyard</title>
-    <script type="module" src="/src/main.js" defer></script>
-    <script type="module" src="/src/pages/profile.js" defer></script>
+    <title>Stats - Productivity-Graveyard</title>
     <link rel="stylesheet" href="/src/css/style.css" />
-    <link rel="stylesheet" href="/src/css/profile.css" />
+    <link rel="stylesheet" href="/src/css/stats.css" />
+    <link
+      rel="stylesheet"
+      href="/src/components/features/stats/statsCards.css"
+    />
+    <link rel="preload" as="image" href="/src/assets/img/Tombstone_skull.png" />
+    <link rel="preload" as="image" href="/src/assets/img/clock.png" />
+    <link rel="preload" as="image" href="/src/assets/img/grimreaper-let.png" />
+    <link rel="preload" as="image" href="/src/assets/img/Tombstone_Grass.png" />
+    <link rel="preload" as="image" href="/src/assets/img/thumb.png" />
+    <link rel="preload" as="image" href="/src/assets/img/skull.png" />
+    <link rel="preload" as="image" href="/src/assets/img/brain.png" />
   </head>
-
   <body>
     <header></header>
     <main>
       <section id="banner" class="small-banner">
         <div class="banner-container small-banner">
           <div class="banner-text small-banner">
-            <h1 class="banner-h1">PROFILE</h1>
+            <h1 class="banner-h1">STATS</h1>
           </div>
           <div class="banner-curve banner-curve-background"></div>
           <img
@@ -47,33 +55,16 @@
           <div class="banner-curve"></div>
         </div>
       </section>
-
-      <section id="profile">
-        <div class="profile-container container">
-          <div class="profile-details">
-            <img
-              src=""
-              alt="Profile Picture"
-              class="profile-picture"
-              id="profile-picture"
-            />
-            <div class="profile-info">
-              <span class="profile-name" id="profile-name"></span>
-              <p id="profile-nickname"></p>
-            </div>
-            <div class="location" id="profile-location"></div>
-            <div class="burried" id="profile-burried"></div>
-            <div class="member-since" id="profile-member-since"></div>
-          </div>
-          <div class="recent-funerals">
-            <h2>Your recent funerals</h2>
-            <div class="users-projects"></div>
-            <div class="pagination"></div>
-            <!-- Projects will be dynamically rendered here -->
-          </div>
-        </div>
+      <section id="stats-overview">
+        <p class="stats-quote">
+          "Here lie the numbers of projects that never saw the light of day."
+        </p>
+        <div class="stats-overview-container"></div>
       </section>
     </main>
     <footer></footer>
+
+    <script type="module" src="/src/main.js" defer></script>
+    <script type="module" src="/src/pages/stats.js" defer></script>
   </body>
 </html>

@@ -1,0 +1,544 @@
+:root {
+  --full-multiplier: 3px;
+}
+
+#banner.small-banner,
+.banner-container {
+  height: auto;
+  min-height: calc(100% + 20rem);
+}
+
+.banner-text.small-banner {
+  height: fit-content;
+  min-height: auto;
+  top: 3rem;
+}
+
+.banner-container {
+  display: flex;
+  justify-content: end;
+  flex-direction: column;
+}
+
+.page-subtitle {
+  position: absolute;
+  top: 17rem;
+  left: 50%;
+  transform: translateX(-50%);
+  color: var(--light-orange-normal);
+  font-family: var(--font-tagline);
+  font-size: 1.5rem;
+  letter-spacing: 0.0625rem;
+  text-align: center;
+  z-index: 10;
+}
+
+.memorial-wrapper {
+  margin: 20px auto;
+  margin-top: 27rem;
+  margin-bottom: 3rem;
+  width: calc(300 * var(--full-multiplier));
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  height: 100%;
+  z-index: 5;
+  justify-content: stretch;
+}
+
+.tombstone-top {
+  width: calc(240 * var(--full-multiplier));
+  height: calc(160 * var(--full-multiplier));
+  background: #1d2526;
+  border: 4px solid #33322b;
+  margin-bottom: calc(-75 * var(--full-multiplier));
+  position: relative;
+  border-radius: 100% 100% 0 0;
+  box-shadow:
+    0.5rem 0.5rem 2rem rgba(0, 0, 0, 0.4),
+    1.5rem 0.25rem 1.5rem rgba(0, 0, 0, 0.3),
+    -0.25rem 0.25rem 0.75rem rgba(0, 0, 0, 0.2);
+}
+
+.tombstone-top::after,
+.tombstone-top::before {
+  content: "";
+  position: absolute;
+  bottom: calc(55 * var(--full-multiplier));
+  left: -4%;
+  width: calc(35 * var(--full-multiplier));
+  height: calc(30 * var(--full-multiplier));
+  background: inherit;
+  transform: translateX(-50%) scaleY(0.5) rotate(-25deg);
+  border-top: 5px solid #33322b;
+}
+
+.tombstone-top::before {
+  left: 104%;
+  transform: translateX(-50%) scaleY(0.5) rotate(25deg);
+}
+
+.shadow-line-right {
+  position: absolute;
+  bottom: calc(55 * var(--full-multiplier));
+  left: 102%;
+  width: calc(28 * var(--full-multiplier));
+  height: calc(29 * var(--full-multiplier));
+  background: transparent;
+  transform: translateX(-20%) scaleY(0.5) rotate(25deg);
+  z-index: -1;
+  box-shadow:
+    0 -0.5rem 1rem rgba(0, 0, 0, 0.5),
+    0.5rem -0.25rem 0.8rem rgba(0, 0, 0, 0.3),
+    2.5rem -0.75rem 2.5rem rgba(0, 0, 0, 0.15);
+}
+
+.tombstone-body {
+  width: 100%;
+  background: linear-gradient(to bottom, #1d2526, #2d3839);
+  border: 4px solid #33322b;
+  border-top: none;
+  padding: 4rem 5rem;
+  padding-bottom: 10rem;
+  /* box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4); */
+  color: var(--grey-normal);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  z-index: 1;
+  position: relative;
+}
+
+.tombstone-body::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 100%;
+  bottom: 0;
+  width: 3rem;
+  background: linear-gradient(
+    to right,
+    rgba(0, 0, 0, 0.2),
+    rgba(0, 0, 0, 0.3) 20%,
+    rgba(0, 0, 0, 0.1) 50%,
+    transparent
+  );
+  z-index: -1;
+}
+
+.tombstone-content {
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+  color: var(--grey-normal);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+div.tombstone-lifespan-block {
+  margin-bottom: 2.3rem;
+}
+
+.tombstone-description {
+  margin-bottom: 2.3rem;
+}
+
+.tombstone-base {
+  width: 110%;
+  min-height: 30px;
+  padding: 3rem 2rem;
+  background: #2f3b3d;
+  border: 4px solid #273234;
+  border-top: 4px solid #33322b;
+  border-radius: 0 0 5px 5px;
+  margin-top: -10px;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  box-shadow:
+    inset 0 -0.3125rem 0.3125rem rgba(0, 0, 0, 0.2),
+    0.5rem 1rem 1.5rem rgba(0, 0, 0, 0.4),
+    0.5rem 0.5rem 1rem rgba(0, 0, 0, 0.1),
+    1rem 0.75rem 3rem rgba(0, 0, 0, 0.15),
+    0 0.5rem 1rem rgba(0, 0, 0, 0.05),
+    0 0.8rem 1.2rem rgba(0, 0, 0, 0.03),
+    -0.1rem 0.4rem 1rem rgba(0, 0, 0, 0.06);
+}
+
+.tombstone-types-container,
+.tombstone-interactions {
+  flex-grow: 1;
+}
+
+.tombstone-icon {
+  width: calc(80 * var(--full-multiplier));
+  height: calc(80 * var(--full-multiplier));
+  margin: calc(-90 * var(--full-multiplier)) auto 0 auto;
+  background-color: #3e4b4d;
+  padding: 3px;
+  border-radius: 100%;
+}
+
+.tombstone-title {
+  font-size: 3rem;
+  text-transform: uppercase;
+  font-weight: bold;
+  color: var(--beige-normal);
+  margin: 0 0 0.5rem 0;
+  line-height: 1.1;
+}
+
+/*BURIED BY - PROJECT OWNER*/
+.tombstone-buried-by {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  margin: 0.5rem 0 1.25rem 0;
+  margin-bottom: 2.3rem;
+  padding: 0.5rem 1rem;
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 1.25rem;
+  border: 1px solid rgba(224, 199, 158, 0.2);
+  width: fit-content;
+  margin-left: auto;
+  margin-right: auto;
+  white-space: nowrap;
+}
+
+.buried-by-label {
+  font-style: italic;
+  font-size: 0.85rem;
+  color: var(--grey-normal);
+}
+
+.buried-by-link {
+  color: var(--beige-normal);
+  text-decoration: none;
+  font-weight: bold;
+  font-style: italic;
+  transition: all 0.3s ease;
+  font-size: 0.85rem;
+  padding: 0.1rem 0.3rem;
+  background: rgba(224, 199, 158, 0.1);
+  border-radius: 0.75rem;
+  opacity: 0.9;
+}
+
+.buried-by-link:hover,
+.buried-by-link:focus {
+  color: var(--beige-normal-hover);
+  background: rgba(224, 199, 158, 0.2);
+  box-shadow: 0 0.1rem 0.3rem rgba(224, 199, 158, 0.3);
+}
+
+/*DEATHCAUSE & LIFESPAN*/
+.tombstone-cause {
+  margin-top: 0.5rem;
+  color: var(--beige-normal);
+}
+
+.tombstone-cause .cause-label {
+  font-weight: bold;
+}
+
+.tombstone-lifespan-block {
+  display: inline-block;
+  padding: 0.75rem 1rem;
+}
+
+.tombstone-lifespan {
+  display: grid;
+  grid-template-columns: max-content max-content;
+  justify-content: center;
+  gap: 0.7em;
+  margin: 0;
+  padding: 0;
+  color: var(--beige-normal);
+}
+
+.lifespan-label {
+  font-weight: bold;
+  text-align: left;
+  min-width: 2.7em;
+  /*color: var(--beige-normal);*/
+}
+
+/*DESCRIPTION*/
+.tombstone-description {
+  /*color: var(--color-text-secondary);*/
+  line-height: 1.6;
+}
+
+/*EULOGY*/
+.tombstone-eulogy-block {
+  margin: 1rem 0;
+}
+
+.tombstone-eulogy-title {
+  font-size: 1.2rem;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 0.75rem;
+  letter-spacing: 0.05em;
+  opacity: 0.9;
+}
+
+blockquote {
+  width: fit-content;
+  margin: 0 auto;
+  border-left: 0.25rem solid var(--beige-normal);
+  padding: 0.5rem;
+  padding-left: 0.8rem;
+  color: var(--beige-normal);
+  /*color: var(--color-text-secondary);*/
+  font-style: italic;
+  line-height: 1.6;
+  background: linear-gradient(
+    135deg,
+    rgba(224, 199, 158, 0.1),
+    rgba(224, 199, 158, 0.05)
+  );
+  border-left: 0.25rem solid var(--beige-normal);
+}
+
+/*TYPES/TAGS*/
+.tombstone-types {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5em;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  justify-content: left;
+}
+
+.tombstone-type {
+  display: inline-block;
+  background: var(--beige-normal);
+  color: var(--green-dark);
+  font-weight: bold;
+  font-size: 0.8rem;
+  border-radius: 18px;
+  padding: 0.4em 1em;
+  margin: 0;
+  border: 1.5px solid #e0c79e;
+}
+
+/*INTERACTIONS*/
+.tombstone-interactions {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 1rem;
+}
+
+.tombstone-interactions .icon svg {
+  vertical-align: middle;
+  transition: all 0.3s ease;
+}
+
+.likes.upvote-btn,
+.comments.comment-btn {
+  background: none;
+  border: none;
+  font-size: 1.1rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.3em;
+}
+
+.likes.upvote-btn .icon,
+.comments.comment-btn .icon {
+  margin-right: 0.3em;
+  display: flex;
+  align-items: center;
+}
+
+.likes.upvote-btn:hover .icon svg,
+.likes.upvote-btn:focus .icon svg,
+.comments.comment-btn:hover .icon svg,
+.comments.comment-btn:focus .icon svg {
+  fill: var(--beige-normal-hover) !important;
+}
+
+.likes.upvote-btn.voted .icon svg {
+  fill: var(--light-orange-normal) !important;
+}
+
+.likes.upvote-btn:disabled,
+.comments.comment-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.likes-count,
+.comments-count {
+  font-size: 1rem;
+  color: var(--beige-normal);
+  font-weight: bold;
+  text-align: right;
+  display: inline-block;
+}
+
+/*CONTROLS*/
+.memorial-controls.right {
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 0;
+  width: 110%;
+  z-index: 3;
+  padding-top: 0.5rem;
+}
+
+.btn-icon {
+  background: rgba(0, 0, 0, 0.2);
+  border: 0.0625rem solid rgba(165, 165, 165, 0.2);
+  border-radius: 0.5rem;
+  padding: 4px 6px;
+  min-width: 0;
+  min-height: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(0.25rem);
+}
+
+.btn-icon:hover {
+  background: rgba(0, 0, 0, 0.3);
+}
+
+.btn-icon svg {
+  pointer-events: none;
+  display: block;
+  transition: all 0.3s ease;
+}
+
+.memorial-controls .btn-icon svg {
+  transition: fill 0.3s ease;
+}
+
+.memorial-controls .btn-icon:hover svg,
+.memorial-controls .btn-icon:focus svg {
+  fill: #959595 !important;
+}
+
+.memorial-error {
+  border: 1px solid var(--color-error);
+  background: rgba(214, 69, 80, 0.1);
+  color: var(--color-error);
+  border-radius: 6px;
+  padding: 1rem;
+  font-size: 0.9rem;
+  text-align: center;
+  margin: 1rem 0;
+  backdrop-filter: blur(0.25rem);
+}
+
+.buried-by-link:focus-visible,
+.likes.upvote-btn:focus-visible,
+.comments.comment-btn:focus-visible,
+.btn-icon:focus-visible,
+.error-btn:focus-visible {
+  outline: 0.125rem solid var(--beige-normal);
+  outline-offset: 0.125rem;
+  box-shadow: 0 0 0 0.25rem rgba(224, 199, 158, 0.3);
+}
+
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible,
+button:focus-visible {
+  outline: 0.125rem solid var(--beige-normal);
+  outline-offset: 0.125rem;
+}
+
+
+@media (max-width: 1300px) {
+  .tombstone-top::after,
+  .tombstone-top::before {
+    bottom: calc(54 * var(--full-multiplier));
+  }
+}
+
+@media (max-width: 950px) {
+  :root {
+    --full-multiplier: 2px;
+  }
+
+  .likes.upvote-btn,
+  .comments.comment-btn {
+    padding: 0.5rem 0.75rem;
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 650px) {
+  :root {
+    --full-multiplier: 1.5px;
+  }
+  .tombstone-top::after,
+  .tombstone-top::before {
+    bottom: calc(53 * var(--full-multiplier));
+  }
+
+  .tombstone-title {
+    font-size: 2.5rem;
+  }
+
+  .tombstone-base {
+    flex-direction: column;
+    gap: 1rem;
+    padding: 2rem 1rem;
+  }
+
+  .tombstone-interactions {
+    justify-content: center;
+  }
+
+  .page-subtitle {
+    top: 10rem;
+    font-size: 1.2rem;
+  }
+}
+
+@media (max-width: 550px) {
+  :root {
+    --full-multiplier: 1.2px;
+  }
+
+  .tombstone-title {
+    font-size: 2rem;
+  }
+}
+
+@media (max-width: 460px) {
+  :root {
+    --full-multiplier: 1px;
+  }
+  .memorial-wrapper {
+    margin-top: 17rem;
+  }
+  .tombstone-title {
+    font-size: 1.8rem;
+  }
+
+  .tombstone-body {
+    padding: 3rem 3rem 8rem;
+  }
+
+  .page-subtitle {
+    font-size: 1rem;
+  }
+}

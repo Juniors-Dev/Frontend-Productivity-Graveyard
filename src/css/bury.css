@@ -1,0 +1,155 @@
+.bury-h1-tagline-text {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/*Turn off banner min heigh so that the bury form isnt pushed down*/
+#banner {
+  min-height: 0 !important;
+}
+
+.description-textarea,
+.eulogy-textarea {
+  width: 100%;
+  padding: 12px;
+  font-family: inherit;
+  font-size: inherit;
+  resize: vertical;
+  min-height: 80px;
+  border: 1px solid var(--color-input-border);
+  border-radius: var(--border-radius);
+  background-color: var(--color-input);
+  color: var(--color-input-text);
+}
+
+.character-count {
+  font-size: 0.875rem;
+  color: #666;
+  text-align: right;
+  display: block;
+  margin-top: 0.25rem;
+}
+
+.date-label {
+  font-size: 0.875rem;
+  color: #666;
+  margin-left: 8px;
+}
+
+input[type="date"] {
+  width: 100%;
+  padding: 1rem 1rem 1rem 12px;
+  border: 1px solid var(--color-input-border);
+  border-radius: var(--border-radius);
+  background-color: var(--color-input);
+  color: var(--color-input-text);
+  font-size: 1rem;
+  font-family: var(--font-body);
+  transition:
+    border-color var(--transition-speed),
+    box-shadow var(--transition-speed);
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+  filter: invert(1);
+}
+
+.custom-radio input[type="radio"]:checked + label:before {
+  background-color: var(--color-accent);
+  border-color: var(--color-accent);
+}
+
+.project-types-fieldset,
+.tombstone-fieldset {
+  border: 1px solid;
+  border-color: #333;
+  border-radius: 4px;
+  padding: 1rem;
+  margin: 0;
+}
+
+.project-types-legend,
+.tombstone-legend {
+  font-weight: 600;
+  color: var(--color-primary);
+  padding: 0 0.5rem;
+}
+
+.checkbox-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 0.75rem;
+  margin-top: 0.75rem;
+}
+
+.tombstone-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 1rem;
+  margin-top: 0.75rem;
+}
+
+.tombstone-option {
+  text-align: center;
+}
+
+.tombstone-label {
+  display: block;
+  cursor: pointer;
+  padding: 0.75rem;
+  border: 2px solid transparent;
+  border-radius: 8px;
+  transition: border-color 0.2s ease;
+}
+
+.tombstone-option input:checked + .tombstone-label {
+  border-color: var(--color-primary);
+}
+
+.tombstone-image {
+  width: 60px;
+  height: 60px;
+  object-fit: contain;
+  margin-bottom: 0.5rem;
+}
+
+.tombstone-name {
+  display: block;
+  font-size: 0.875rem;
+  color: var(--color-primary);
+}
+
+.bury-icon {
+  background: url("../assets/img/Tombstone_Grass.png") no-repeat center center;
+  background-size: cover;
+}
+
+.causeOfDeath-icon {
+  background: url("../assets/img/skull.png") no-repeat center center;
+  background-size: cover;
+}
+
+.bury-reaper {
+  background: url("../assets/img/reaper-bury.png") no-repeat;
+  position: absolute;
+  height: 80vh;
+  width: 30vw;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: bottom;
+  opacity: 0.6;
+}
+
+@media (max-width: 1000px) {
+  .bury-reaper {
+    bottom: 0;
+    height: 80vh;
+    width: 40vw;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: bottom;
+    opacity: 0.5;
+    z-index: -1;
+  }
+}

@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Memorial - Productivity-Graveyard</title>
+    <script type="module" src="/src/main.js" defer></script>
+    <script type="module" src="/src/pages/project.js" defer></script>
+    <link rel="stylesheet" href="/src/css/style.css" />
+    <link rel="stylesheet" href="/src/css/project.css" />
+    <link
+      rel="stylesheet"
+      href="/src/components/features/comments/comments.css"
+    />
+  </head>
+  <body>
+    <header></header>
+    <main>
+      <section id="banner" class="small-banner">
+        <div
+          id="memorial-error"
+          class="error-state"
+          style="display: none"
+        ></div>
+        <div class="banner-container small-banner">
+          <div class="banner-text small-banner">
+            <h1 class="banner-h1">Memorial</h1>
+          </div>
+          <p class="page-subtitle">FINAL RESTING PLACE OF GOOD INTENTSIONS</p>
+          <div class="memorial-wrapper">
+            <div class="tombstone-top">
+              <div class="shadow-line-right"></div>
+            </div>
+            <div class="tombstone-body">
+              <div id="memorial-loading" class="loading-state">
+                <div class="loader"></div>
+              </div>
+              <div class="tombstone-content">
+                <img class="tombstone-icon" />
+                <p class="tombstone-title"></p>
+                <div class="tombstone-buried-by"></div>
+                <p class="tombstone-cause"></p>
+                <div class="tombstone-lifespan-block">
+                  <p class="tombstone-lifespan tombstone-start"></p>
+                  <p class="tombstone-lifespan tombstone-end"></p>
+                </div>
+                <div class="tombstone-description"></div>
+                <div class="tombstone-eulogy-block">
+                  <div class="tombstone-eulogy-title"></div>
+                  <blockquote></blockquote>
+                </div>
+              </div>
+            </div>
+            <div class="tombstone-base">
+              <div class="tombstone-types-container">
+                <ul class="tombstone-types"></ul>
+              </div>
+              <div class="tombstone-interactions"></div>
+            </div>
+            <div class="memorial-controls right"></div>
+          </div>
+          <div class="banner-curve banner-curve-background"></div>
+          <img
+            class="banner-grass grass-left-before"
+            src="./src/assets/img/Grass.png"
+            alt="grass"
+          />
+          <img
+            class="banner-grass"
+            src="./src/assets/img/Grass.png"
+            alt="grass"
+          />
+          <img
+            class="banner-grass grass-left"
+            src="./src/assets/img/Grass.png"
+            alt="grass"
+          />
+          <img
+            class="banner-grass grass-right"
+            src="./src/assets/img/Grass.png"
+            alt="grass"
+          />
+          <img
+            class="banner-grass grass-right-after"
+            src="./src/assets/img/Grass.png"
+            alt="grass"
+          />
+          <div class="banner-curve"></div>
+        </div>
+      </section>
+      <section id="comments-section">
+        <div class="comments-section-wrapper container">
+          <div class="comments-header">
+            <h2 class="comments-title">Condolences</h2>
+          </div>          
+          <div id="comments-container"></div>          
+          <div id="comments-error" class="error-state" style="display: none;"></div>
+        </div>
+      </section>
+    </main>
+    <footer></footer>
+  </body>
+</html>

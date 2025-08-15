@@ -1,0 +1,229 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bury Project</title>
+    <link rel="stylesheet" href="/src/css/style.css" />
+    <script type="module" src="/src/main.js" defer></script>
+    <script type="module" src="/src/pages/bury.js" defer></script>
+  </head>
+
+  <body>
+    <header></header>
+    <main>
+      <section id="banner"></section>
+      <section id="stats"></section>
+      <section id="recent-projects"></section>
+      <section id="bury-project">
+        <div class="bury-h1-tagline-text">
+          <h1>Bury your project</h1>
+          <p class="tagline">Another one bites the dust</p>
+        </div>
+        <div class="form-container">
+          <form id="bury-project-form" novalidate>
+            <!-- Project Name Field -->
+            <div class="form-group">
+              <label for="name" class="visually-hidden">Project Name</label>
+              <div class="input-wrapper">
+                <div class="input-icon-container">
+                  <span class="input-icon bury-icon" aria-hidden="true"></span>
+                  <input
+                    type="text"
+                    id="name"
+                    name="name"
+                    placeholder="Project Name"
+                    required
+                    maxlength="100"
+                    autocomplete="off"
+                  />
+                </div>
+                <span class="error-message" id="name-error"></span>
+              </div>
+            </div>
+
+            <!-- Project Description Field -->
+            <div class="form-group">
+              <label for="description" class="visually-hidden"
+                >Project Description</label
+              >
+              <div class="input-wrapper">
+                <textarea
+                  id="description"
+                  name="description"
+                  placeholder="Tell us about your project (what it was supposed to do, technologies used, etc.)"
+                  required
+                  maxlength="500"
+                  rows="4"
+                  class="description-textarea"
+                ></textarea>
+                <span class="error-message" id="description-error"></span>
+                <span class="character-count" id="description-count"
+                  >0/500</span
+                >
+              </div>
+            </div>
+
+            <!-- Eulogy Field -->
+            <div class="form-group">
+              <label for="eulogy" class="visually-hidden">Eulogy</label>
+              <div class="input-wrapper">
+                <textarea
+                  id="eulogy"
+                  name="eulogy"
+                  placeholder="Write a eulogy for your project (funny, dramatic, or heartfelt)"
+                  required
+                  maxlength="300"
+                  rows="3"
+                  class="eulogy-textarea"
+                ></textarea>
+                <span class="error-message" id="eulogy-error"></span>
+                <span class="character-count" id="eulogy-count">0/300</span>
+              </div>
+            </div>
+
+            <!-- Cause of Death Field -->
+            <div class="form-group">
+              <label for="causeOfDeath" class="visually-hidden"
+                >Cause of Death</label
+              >
+              <div class="input-wrapper">
+                <div class="input-icon-container">
+                  <span
+                    class="input-icon causeOfDeath-icon"
+                    aria-hidden="true"
+                  ></span>
+                  <input
+                    type="text"
+                    id="causeOfDeath"
+                    name="causeOfDeath"
+                    placeholder="Cause of Death (e.g., Feature Creep, Scope Creep, Lost Interest)"
+                    required
+                    maxlength="100"
+                    autocomplete="off"
+                  />
+                </div>
+                <span class="error-message" id="causeOfDeath-error"></span>
+              </div>
+            </div>
+
+            <!-- Project Start Date -->
+            <div class="form-group start-date-group">
+              <label for="startDate" class="visually-hidden"
+                >Project Started</label
+              >
+              <div class="input-wrapper">
+                <div class="input-icon-container">
+                  <span
+                    class="input-icon startDate-icon"
+                    aria-hidden="true"
+                  ></span>
+                  <input
+                    type="date"
+                    id="startDate"
+                    name="startDate"
+                    required
+                    max=""
+                  />
+                  <span class="date-label">Project Born</span>
+                </div>
+                <span class="error-message" id="startDate-error"></span>
+              </div>
+            </div>
+
+            <!-- Project End Date -->
+            <div class="form-group end-date-group">
+              <label for="endDate" class="visually-hidden"
+                >Project Abandoned</label
+              >
+              <div class="input-wrapper">
+                <div class="input-icon-container">
+                  <span
+                    class="input-icon endDate-icon"
+                    aria-hidden="true"
+                  ></span>
+                  <input
+                    type="date"
+                    id="endDate"
+                    name="endDate"
+                    required
+                    max=""
+                  />
+                  <span class="date-label">Project Died</span>
+                </div>
+                <span class="error-message" id="endDate-error"></span>
+              </div>
+            </div>
+
+            <!-- Project Types (Multi-select) dropdown menue -->
+            <div class="form-group">
+              <fieldset class="project-types-fieldset">
+                <legend class="project-types-legend">
+                  Project Categories (for filtering)
+                </legend>
+                <div class="dropdown" id="categoryDropdown">
+                  <button
+                    type="button"
+                    class="dropdown-toggle"
+                    id="categoryDropdownToggle"
+                  >
+                    Select Categories
+                  </button>
+                  <div class="dropdown-menu" id="categoryDropdownMenu">
+                    <!-- Project types will be loaded dynamically as checkboxes here -->
+                  </div>
+                </div>
+                <span class="error-message" id="types-error"></span>
+              </fieldset>
+            </div>
+
+            <!-- Tombstone Selection -->
+            <div class="form-group">
+              <fieldset class="tombstone-fieldset">
+                <legend class="tombstone-legend">Choose a Card Icon</legend>
+                <div class="carousel-wrapper">
+                  <button
+                    type="button"
+                    class="carousel-btn carousel-btn-left"
+                    id="carouselLeftBtn"
+                    aria-label="Scroll left"
+                  >
+                    &#8592;
+                  </button>
+                  <div class="tombstone-carousel" id="tombstoneCarousel">
+                    <!-- Tombstones will be loaded dynamically as carousel items -->
+                  </div>
+                  <button
+                    type="button"
+                    class="carousel-btn carousel-btn-right"
+                    id="carouselRightBtn"
+                    aria-label="Scroll right"
+                  >
+                    &#8594;
+                  </button>
+                </div>
+                <span class="error-message" id="tombstoneId-error"></span>
+              </fieldset>
+            </div>
+
+            <!-- Status (Hidden - defaults to archived) -->
+            <input type="hidden" name="status" value="archived" />
+
+            <!-- Submit Button -->
+            <button type="submit" class="bury-button body-text">
+              Bury My Project
+            </button>
+
+            <!-- Back Link -->
+            <div class="text-center back-to-graveyard-link-wrapper">
+              <a href="/graveyard.html" class="back-to-graveyard-link"
+                >Back to Graveyard</a
+              >
+            </div>
+          </form>
+        </div>
+      </section>
+    </main>
+    <footer></footer>
+  </body>
+</html>

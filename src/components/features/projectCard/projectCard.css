@@ -1,0 +1,211 @@
+.tombstone-wrapper {
+  width: 300px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 20px auto;
+  position: relative;
+}
+
+.tombstone-top {
+  position: relative;
+  width: 240px;
+  height: 160px;
+  background: #2f3b3d;
+  border: 3px solid #a5a5a5;
+  border-bottom: none;
+  border-radius: 100% 100% 0 0;
+  box-shadow: 0 -4px 6px rgba(0, 0, 0, 0.3) inset;
+  margin-bottom: -75px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.tombstone-top::after,
+.tombstone-top::before {
+  content: "";
+  position: absolute;
+  bottom: 56px;
+  left: -4%;
+  width: 35px;
+  height: 30px;
+  background: inherit;
+  transform: translateX(-50%) scaleY(0.5) rotate(-25deg);
+  border-top: 4px solid #a5a5a5;
+}
+
+.tombstone-top::before {
+  left: 104%;
+  transform: translateX(-50%) scaleY(0.5) rotate(25deg);
+}
+
+.tombstone-body {
+  width: 100%;
+  background: linear-gradient(to bottom, #2f3b3d, #273234);
+  border: 3px solid #a5a5a5;
+  border-top: none;
+  padding: 40px 20px 30px;
+  /* box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4); */
+  color: var(--grey-normal);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  z-index: 1;
+}
+
+.tombstone-base {
+  width: 110%;
+  height: 30px;
+  background: #2f3b3d;
+  border: 3px solid #273234;
+  border-top: 3px solid #a5a5a5;
+  border-radius: 0 0 5px 5px;
+  margin-top: -10px;
+  box-shadow: inset 0 -5px 5px rgba(0, 0, 0, 0.2);
+  z-index: 2;
+}
+
+.tombstone-icon {
+  width: 140px;
+  height: 140px;
+  margin: -100px auto 0 auto;
+}
+
+.tombstone-title {
+  font-family: var(--font-tagline);
+  text-shadow: 2px 2px 5px #273234;
+  font-weight: 600;
+  font-size: 1.8rem;
+  color: var(--beige-normal);
+  margin: 10px 0;
+}
+
+.tombstone-cause,
+.tombstone-lifespan {
+  font-size: 1.1rem;
+  color: var(--grey-normal-hover);
+  margin: 5px 0;
+}
+
+.tombstone-interactions {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  font-size: 1rem;
+}
+
+.tombstone-interactions .likes,
+.tombstone-interactions .comments {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  color: var(--beige-normal);
+  font-weight: bold;
+}
+
+.btn-view-memorial {
+  display: inline-block;
+  background-color: var(--beige-normal);
+  color: var(--green-dark);
+  font-weight: bold;
+  text-decoration: none;
+  padding: 10px 20px;
+  border-radius: 20px;
+  transition:
+    background-color 0.3s ease,
+    transform 0.2s ease;
+}
+
+.btn-view-memorial:hover {
+  background-color: var(--beige-normal-hover);
+  transform: translateY(-2px);
+}
+
+.tombstone-wrapper:nth-child(odd) {
+  transform: scale(0.9) rotate(-2deg);
+}
+.tombstone-wrapper:nth-child(even) {
+  transform: scale(0.9) rotate(2deg);
+}
+
+.tombstone-wrapper:nth-child(even):hover {
+  transition: all 1s;
+  transform: scale(1.1) rotate(2deg);
+}
+.tombstone-wrapper:nth-child(odd):hover {
+  transition: all 1s;
+
+  transform: scale(1.1) rotate(-2deg);
+}
+
+@media (max-width: 900px) {
+  .skeleton-container {
+    width: 100vw;
+  }
+  .skeleton-text {
+    min-width: 90%;
+  }
+}
+
+/*Skeleton*/
+@keyframes skeleton-loading {
+  0% {
+    background-color: #3c484a;
+  }
+  50% {
+    background-color: #4d5a5c;
+  }
+  100% {
+    background-color: #3c484a;
+  }
+}
+
+.skeleton {
+  animation: skeleton-loading 1.2s infinite ease-in-out;
+  border-radius: 8px;
+  background-color: #3c484a;
+}
+.skeleton-container {
+  width: 650px;
+}
+
+.skeleton-img {
+  width: 150px;
+  height: 150px;
+  border-radius: 100%;
+}
+
+.skeleton-title {
+  height: 24px;
+  width: 120px;
+  margin-top: 10px;
+}
+
+.skeleton-text {
+  height: 48px;
+  width: 200px;
+  margin-top: 10px;
+}
+
+.skeleton-line {
+  height: 16px;
+  width: 180px;
+  margin-top: 8px;
+}
+
+.skeleton-small {
+  height: 14px;
+  width: 80px;
+}
+
+.skeleton-tiny {
+  height: 33px;
+  width: 30px;
+}
+
+.skeleton-icon {
+  height: 25px;
+  width: 25px;
+  border-radius: 4px;
+}
