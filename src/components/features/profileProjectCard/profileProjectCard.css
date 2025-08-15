@@ -33,6 +33,13 @@
   border-radius: 15px;
   color: var(--grey-normal);
   width: 100%;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, filter 0.3s ease;
+}
+
+.funeral-card:hover {
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+  filter: brightness(1.05);
 }
 
 .project-info {
