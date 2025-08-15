@@ -64,7 +64,7 @@ function populateStaticFields(project) {
     label.textContent = "Buried by ";
     const link = createEl("a", {
       className: "buried-by-link",
-      href: `/profile.html?user=${encodeURIComponent(project.user.username)}`,
+      href: `/profile.html?id=${encodeURIComponent(project.user.id)}`,
     });
     link.textContent = `@${project.user.username}`;
     buriedBy.appendChild(label);
