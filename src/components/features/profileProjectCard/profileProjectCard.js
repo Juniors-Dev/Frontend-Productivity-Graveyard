@@ -3,13 +3,9 @@ import { calculateLifespan, formatUnit } from "../../../utils/dateHandlers.js";
 
 export function profileProjectCard(project) {
   // Create a new project card container
-  const projectCard = document.createElement("div");
+  const projectCard = document.createElement("a");
+  projectCard.href = `/project.html?id=${project.id}`;
   projectCard.classList.add("funeral-card");
-
-  // Make card clickable and redirect
-  projectCard.addEventListener("click", () => {
-    window.location.href = `/project.html?id=${project.id}`;
-  });
 
   // Add project image
   const projectImageContainer = document.createElement("div");
@@ -45,6 +41,7 @@ export function profileProjectCard(project) {
   likes.classList.add("btn-likes");
 
   likes.addEventListener("click", (e) => {
+    e.preventDefault();
     e.stopPropagation();
     // Todo: Implement like functionality?
   });
