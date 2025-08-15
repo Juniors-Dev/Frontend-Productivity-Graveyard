@@ -63,45 +63,21 @@ export function projectCard(project) {
 }
 
 export function projectCardSkeleton() {
-  return `<div class="project-card skeleton-card skeleton-container">
-              <div class="card-left">
-                <div class="skeleton skeleton-img"></div>
+  return `
+            <div class="tombstone-wrapper">
+              <div class="tombstone-top"></div>
+              <div class="tombstone-body">
+                <div class="skeleton skeleton-img tombstone-icon"></div>
                 <div class="skeleton skeleton-title"></div>
-                <div class="timeauthor">
-                  <div class="skeleton skeleton-small"></div>
-                  <div class="skeleton skeleton-small"></div>
-                </div>
+                <div class="skeleton skeleton-line tombstone-cause"></div>
+                <div class="skeleton skeleton-line tombstone-lifespan"></div>
+                <div class="tombstone-interactions">
+              <div class="likes">👍 <div class="skeleton skeleton-small"></div></div>
+              <div class="comments">💬<div class="skeleton skeleton-small"></div></div>
               </div>
-              <div class="card-right">
-                <div class="project-description">
-                  <div class="skeleton skeleton-title"></div>
-                  <div class="skeleton skeleton-text"></div>
-                  <div class="skeleton skeleton-text"></div>
-                </div>
-                <div
-                  style="
-                    display: flex;
-                    flex-direction: row;
-                    align-items: center;
-                    gap: 20px;
-                  "
-                >
-                  <div class="project-info">
-                    <div class="skeleton skeleton-line"></div>
-                    <div class="skeleton skeleton-line"></div>
-                    <div class="skeleton skeleton-line"></div>
-                  </div>
-                  <div class="btn-likes">
-                    <img
-                      src="./src/assets/img/thumb.png"
-                      alt="Like Icon"
-                      class="like-icon"
-                      width="25px"
-                      height="25px"
-                    />
-                    <div class="skeleton skeleton-tiny"></div>
-                  </div>
-                </div>
+                <div href="/project.html?class="btn-view-memorial skeleton-button"></div>
               </div>
-            </div>`;
+              <div class="tombstone-base"></div>
+            </div>
+            `;
 }
