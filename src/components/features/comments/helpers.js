@@ -5,37 +5,23 @@ import { avatarApiUrl } from '../../../utils/constants.js';
  * @param {Object} comment - The comment object
  * @returns {boolean} True if comment is deleted
  */
-export function isCommentDeleted(comment) {
-  if (!comment) return true;
-  return comment.isDeleted || comment.message === "[deleted]" || !comment.User;
-}
+export const isCommentDeleted = (comment) => comment?.isDeleted === true;
 
 /**
  * Generate avatar URL for a user
  * @param {Object} user - The user object
  * @returns {string} Avatar URL
  */
-export function getUserAvatarUrl(user) {
-  if (user?.avatarUrl) return user.avatarUrl;
-  const name = user?.fullName || user?.username || "Anonymous";
-  return `${avatarApiUrl}/?name=${encodeURIComponent(name)}&background=random`;
-}
+export const getUserAvatarUrl = (user) => 
+ user?.avatarUrl || `${avatarApiUrl}/?name=${encodeURIComponent(user?.username || "Anonymous")}&background=random`;
 
 /**
- * Check if user can edit/delete a comment
+ * Check if user can modify (edit/delete) a comment
  * @param {Object} comment - Comment object
  * @param {Object|null} currentUser - Authenticated user or null
- * @returns {boolean} True if user owns the comment and it's not deleted
+ * @returns {boolean} True if user owns the comment
  */
-export function canUserModifyComment(comment, currentUser) {
-  return (
-    currentUser &&
-    currentUser.id &&
-    comment.User &&
-    comment.User.id === currentUser.id &&
-    !isCommentDeleted(comment)
-  );
-}
+export const canUserModifyComment = (comment, currentUser) => currentUser?.id === comment?.User?.id;
 
 /**
  * Check if user can reply to a comment
@@ -44,15 +30,13 @@ export function canUserModifyComment(comment, currentUser) {
  * @param {Object|null} currentUser - Authenticated user or null
  * @returns {boolean} True if user can reply to this comment
  */
-export function canUserReply(comment, currentUser) {
-  return (
-    currentUser &&
-    currentUser.id &&
-    comment.parentId === null &&
-    !isCommentDeleted(comment)
-  );
-}
+export const canUserReply = (comment, currentUser) => 
+  currentUser?.id && !comment?.isDeleted && !comment?.parentId;
 
-export function closeAllForms() {
+/**
+ * Close all open comment forms
+ * TODO: Will be used when reply/edit forms are implemented
+ */
+export const closeAllForms = () => {
   document.querySelectorAll(".reply-form, .edit-form").forEach((form) => form.remove());
 }
