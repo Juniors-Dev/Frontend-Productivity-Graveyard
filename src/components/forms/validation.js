@@ -85,3 +85,13 @@ export function validateTerms(checked) {
     };
   return { isValid: true, message: "" };
 }
+
+export function validateComment(message) {
+  if (!message) return { isValid: false, message: "Comment cannot be empty" };
+  if (message.length > 2000)
+    return {
+      isValid: false,
+      message: "Comment is too long (max 2000 characters)",
+    };
+  return { isValid: true, message: "" };
+}
