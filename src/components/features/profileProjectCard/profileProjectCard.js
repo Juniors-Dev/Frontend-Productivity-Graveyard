@@ -3,7 +3,8 @@ import { calculateLifespan, formatUnit } from "../../../utils/dateHandlers.js";
 
 export function profileProjectCard(project) {
   // Create a new project card container
-  const projectCard = document.createElement("div");
+  const projectCard = document.createElement("a");
+  projectCard.href = `/project.html?id=${project.id}`;
   projectCard.classList.add("funeral-card");
 
   // Add project image
@@ -38,6 +39,13 @@ export function profileProjectCard(project) {
   yearsCont.innerHTML = `<span class="years">Lifespan: </span><span>${formatUnit(years, "year", "years")}${formatUnit(months, "month", "months")}${formatUnit(days, "day", "days")}</span>`;
   const likes = document.createElement("button");
   likes.classList.add("btn-likes");
+
+  likes.addEventListener("click", (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    // Todo: Implement like functionality?
+  });
+
   likes.innerHTML = `
       <img src="./src/assets/img/thumb.png" alt="Like Icon" class="like-icon" width="25px" height="25px" />
       <span>${project.upvoteCount}</span>
