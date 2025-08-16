@@ -48,6 +48,7 @@ export function createMainCommentForm({ onSubmit }) {
 
   form.addEventListener("submit", async (e) => {
     e.preventDefault();
+    errorElem.textContent = "";
 
     const value = textarea.value.trim();
     const validation = validateComment(value);
@@ -69,11 +70,11 @@ export function createMainCommentForm({ onSubmit }) {
         textarea.value = "";
         textarea.classList.remove("is-valid", "is-invalid");
       } else {
-        errorElem.textContent = result?.error || "Failed to post comment";
+        errorElem.textContent = result?.error || "Sorry, we couldn't post your condolence. Please try again.";
       }
     } catch (error) {
       console.error("Error submitting comment:", error);
-      errorElem.textContent = "An error occurred. Please try again.";
+      errorElem.textContent = "Something went wrong. Please try again.";
     } finally {
       submitBtn.disabled = false;
       textarea.disabled = false;
