@@ -12,6 +12,9 @@ export function renderProfile(profile) {
   const profileNickname = document.getElementById("profile-nickname");
   profileNickname.textContent = profile.username;
 
+  const profileBio = document.getElementById("profile-bio");
+  profileBio.textContent = profile.bio;
+
   // // Update location
   // const profileLocation = document.getElementById("profile-location");
   // profileLocation.innerHTML = `
