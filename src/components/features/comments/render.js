@@ -1,11 +1,7 @@
 import { createEl } from "../../../utils/createEl.js";
 import { timeAgo } from "../../../utils/dateHandlers.js";
-import {
-  isCommentDeleted,
-  getUserAvatarUrl,
-  canUserModifyComment,
-  canUserReply,
-} from "./helpers.js";
+import { isCommentDeleted, getUserAvatarUrl } from "./helpers.js";
+import { canReply, canModify } from "./permissions.js";
 
 /**
  * Render a list of comments
@@ -102,7 +98,7 @@ function renderCommentActions(comment, options) {
   const leftActions = createEl("div");
   const rightActions = createEl("div");
 
-  if (canUserReply(comment, currentUser)) {
+  if (canReply(comment, currentUser)) {
     const replyBtn = createEl(
       "button",
       { class: "btn-small", "aria-label": "Reply to comment" },
@@ -112,7 +108,7 @@ function renderCommentActions(comment, options) {
     leftActions.appendChild(replyBtn);
   }
 
-  if (canUserModifyComment(comment, currentUser)) {
+  if (canModify(comment, currentUser)) {
     const editBtn = createEl(
       "button",
       { class: "btn-small", "aria-label": "Edit comment" },
@@ -150,7 +146,7 @@ function renderDeletedComment(comment) {
   const userSection = createEl("div");
 
   userSection.appendChild(
-    createEl("span", { class: "comment-username" }, "Comment deleted"),
+    createEl("span", { class: "comment-username" }, "Condolence deleted"),
   );
 
   const time = createEl("span", { class: "comment-time" }, timeAgo(comment.createdAt));
