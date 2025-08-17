@@ -127,6 +127,20 @@ typesArray.forEach((type) => {
 /* Form Handler */
 const filterForm = document.getElementById("project-filters");
 const searchForm = document.getElementById("search-form");
+const searchIcon = document.getElementById("#search-icon");
+searchIcon.addEventListener("click", (e) => {
+  e.preventDefault();
+  searchForm.submit();
+});
+//Reset the page when search is cleared
+const input = document.getElementById("query");
+input.addEventListener("input", (e) => {
+  if (e.target.value === "") {
+    searchForm.reset();
+    query = "";
+    formHandler(e);
+  }
+});
 searchForm.query.value = query;
 async function formHandler(e) {
   e.preventDefault();
@@ -172,12 +186,4 @@ const clearFilterBtn = document.querySelector("#clear-filters");
 clearFilterBtn.addEventListener("click", async (e) => {
   filterForm.reset();
   formHandler(e);
-});
-
-const clearSearchBtn = document.querySelector("#clear-search");
-clearSearchBtn.addEventListener("click", async (e) => {
-  searchForm.reset();
-  query = "";
-  formHandler(e);
-  console.log(query);
 });

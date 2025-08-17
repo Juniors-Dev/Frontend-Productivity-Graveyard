@@ -464,7 +464,6 @@ button:focus-visible {
   outline-offset: 0.125rem;
 }
 
-
 @media (max-width: 1300px) {
   .tombstone-top::after,
   .tombstone-top::before {
@@ -541,4 +540,122 @@ button:focus-visible {
   .page-subtitle {
     font-size: 1rem;
   }
+}
+
+/* edit Memorialm modal*/
+
+.modal {
+  position: fixed;
+  inset: 0;
+  display: none;
+  z-index: 1000;
+}
+.modal.open {
+  display: block;
+}
+
+.modal-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(2px);
+}
+
+.modal-dialog {
+  position: relative;
+  width: min(640px, 92vw);
+  margin: 8vh auto;
+  background: linear-gradient(to bottom, #344244, #2b3739);
+  border: 1px solid #3b494b;
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  color: var(--grey-normal);
+  overflow: hidden;
+}
+
+.modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 16px;
+  border-bottom: 1px solid #3b494b;
+}
+.modal-close {
+  appearance: none;
+  border: 0;
+  background: transparent;
+  color: var(--grey-normal);
+  font-size: 18px;
+  cursor: pointer;
+}
+
+.modal-body {
+  padding: 16px;
+  display: grid;
+  gap: 12px;
+}
+.modal-body label {
+  display: grid;
+  gap: 6px;
+  font-size: 14px;
+}
+.modal-body input[type="text"],
+.modal-body input[type="url"] {
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: 10px;
+  border: 1px solid #415154;
+  background: #233033;
+  color: var(--grey-normal);
+  outline: none;
+}
+.modal-body input:focus {
+  border-color: #6a9ea5;
+  box-shadow: 0 0 0 2px rgba(106, 158, 165, 0.25);
+}
+
+.modal-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 6px;
+}
+#edit-modal-save,
+#edit-modal-cancel {
+  appearance: none;
+  border: 1px solid transparent;
+  background: #4b9aa3;
+  color: #0e1516;
+  padding: 8px 12px;
+  border-radius: 10px;
+  cursor: pointer;
+  font: inherit;
+}
+#edit-modal-cancel {
+  background: #3a4749;
+  color: var(--grey-normal);
+}
+.modal-status {
+  font-size: 14px;
+  opacity: 0.9;
+}
+
+.icon-btn {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  appearance: none;
+  border: 1px solid transparent;
+  background: #3a4749;
+  color: var(--grey-normal);
+  padding: 8px 12px;
+  border-radius: 10px;
+  cursor: pointer;
+  font: inherit;
+}
+.icon-btn:hover {
+  filter: brightness(1.1);
+}
+.profile-details {
+  position: relative;
 }
