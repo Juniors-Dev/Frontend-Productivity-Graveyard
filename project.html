@@ -92,12 +92,113 @@
         <div class="comments-section-wrapper container">
           <div class="comments-header">
             <h2 class="comments-title">Condolences</h2>
-          </div>          
-          <div id="comments-container"></div>          
-          <div id="comments-error" class="error-state" style="display: none;"></div>
+          </div>
+          <div id="comments-container"></div>
+          <div
+            id="comments-error"
+            class="error-state"
+            style="display: none"
+          ></div>
         </div>
       </section>
     </main>
     <footer></footer>
+    <!-- Edit Memorial Modal -->
+    <div
+      id="memorial-edit-modal"
+      class="modal"
+      aria-hidden="true"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="memorial-edit-title"
+    >
+      <div class="modal-backdrop" data-close="true"></div>
+
+      <div class="modal-dialog" role="document">
+        <header class="modal-header">
+          <h2 id="memorial-edit-title">Edit memorial</h2>
+          <button
+            type="button"
+            class="modal-close"
+            id="memorial-edit-close"
+            aria-label="Close"
+          >
+            ✕
+          </button>
+        </header>
+
+        <form id="memorial-edit-form" class="modal-body">
+          <label>
+            Title
+            <input type="text" name="name" id="memorial-edit-name" required />
+          </label>
+
+          <label>
+            Description
+            <textarea
+              name="description"
+              id="memorial-edit-description"
+              rows="4"
+            ></textarea>
+          </label>
+
+          <label>
+            Eulogy
+            <textarea
+              name="eulogy"
+              id="memorial-edit-eulogy"
+              rows="3"
+            ></textarea>
+          </label>
+
+          <label>
+            Cause of Death
+            <input type="text" name="causeOfDeath" id="memorial-edit-cause" />
+          </label>
+
+          <div style="display: grid; gap: 12px; grid-template-columns: 1fr 1fr">
+            <label>
+              Project Born
+              <input type="date" name="startDate" id="memorial-edit-start" />
+            </label>
+            <label>
+              Project Died
+              <input type="date" name="endDate" id="memorial-edit-end" />
+            </label>
+          </div>
+
+          <label>
+            Status
+            <select name="status" class="" id="memorial-edit-status-select">
+              <option value="">Select status</option>
+              <option value="active">active</option>
+              <option value="inactive">inactive</option>
+              <option value="buried">buried</option>
+              <option value="resurrected">resurrected</option>
+              <option value="completed">completed</option>
+              <option value="archived">archived</option>
+            </select>
+          </label>
+
+          <div class="modal-actions">
+            <button
+              type="submit"
+              class="btn-beige btn-small"
+              id="memorial-edit-save"
+            >
+              Save
+            </button>
+            <button
+              type="button"
+              class="btn-beige btn-small"
+              id="memorial-edit-cancel"
+            >
+              Cancel
+            </button>
+            <span id="memorial-edit-status" class="modal-status"></span>
+          </div>
+        </form>
+      </div>
+    </div>
   </body>
 </html>
