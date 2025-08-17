@@ -43,7 +43,7 @@ export function renderComment(comment, options = {}) {
   const message = createEl("div", { class: "comment-message" }, comment.message);
   el.appendChild(message);
 
-  if (currentUser && currentUser.id) {
+  if (currentUser?.id) {
     const actions = renderCommentActions(comment, {
       currentUser,
       onReply,
@@ -86,7 +86,12 @@ function renderCommentMeta(comment) {
 
   userSection.append(avatar, username);
 
-  const time = createEl("span", { class: "comment-time" }, timeAgo(comment.createdAt));
+  const iso = new Date(comment.createdAt).toISOString();
+  const time = createEl(
+    "time",
+    { class: "comment-time", dateTime: iso, title: new Date(comment.createdAt).toLocaleString() },
+    timeAgo(comment.createdAt),
+  );
   metaRow.append(userSection, time);
 
   return metaRow;
@@ -98,10 +103,11 @@ function renderCommentActions(comment, options) {
   const leftActions = createEl("div");
   const rightActions = createEl("div");
 
+  // TODO: Use svg icons instead of text
   if (canReply(comment, currentUser)) {
     const replyBtn = createEl(
       "button",
-      { class: "btn-small", "aria-label": "Reply to comment" },
+      { class: "btn-small", "aria-label": "Reply to comment", "aria-expanded": "false" },
       "Reply",
     );
     replyBtn.onclick = () => onReply?.(comment.id);
@@ -111,7 +117,7 @@ function renderCommentActions(comment, options) {
   if (canModify(comment, currentUser)) {
     const editBtn = createEl(
       "button",
-      { class: "btn-small", "aria-label": "Edit comment" },
+      { class: "btn-small", "aria-label": "Edit comment", "aria-expanded": "false" },
       "Edit",
     );
     editBtn.onclick = () => onEdit?.(comment.id);
@@ -149,7 +155,12 @@ function renderDeletedComment(comment) {
     createEl("span", { class: "comment-username" }, "Condolence deleted"),
   );
 
-  const time = createEl("span", { class: "comment-time" }, timeAgo(comment.createdAt));
+  const iso = new Date(comment.createdAt).toISOString();
+  const time = createEl(
+    "time",
+    { class: "comment-time", dateTime: iso, title: new Date(comment.createdAt).toLocaleString() },
+    timeAgo(comment.createdAt),
+  );
   metaRow.append(userSection, time);
 
   const message = createEl("div", { class: "comment-message" }, "[deleted]");
