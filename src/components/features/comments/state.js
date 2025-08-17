@@ -18,37 +18,43 @@ export function createCommentsState({ projectId, api }) {
 
   const findCommentLocation = (commentId) => {
     // -- Root comments
-    const topIndex = comments.findIndex(c => idsEqual(c.id, commentId));
+    const topIndex = comments.findIndex((c) => idsEqual(c.id, commentId));
     if (topIndex !== -1) {
-      return { 
-        type: 'top', 
-        index: topIndex, 
+      return {
+        type: "top",
+        index: topIndex,
         comment: comments[topIndex],
-        update: (updates) => comments[topIndex] = { ...comments[topIndex], ...updates }
+        update: (updates) =>
+          (comments[topIndex] = { ...comments[topIndex], ...updates }),
       };
     }
-    
-    // -- Replies 
+
+    // -- Replies
     for (let i = 0; i < comments.length; i++) {
-      const reps = Array.isArray(comments[i].replies) ? comments[i].replies : null;
+      const reps = Array.isArray(comments[i].replies)
+        ? comments[i].replies
+        : null;
       if (reps) {
-        const replyIndex = reps.findIndex(r => idsEqual(r.id, commentId));
+        const replyIndex = reps.findIndex((r) => idsEqual(r.id, commentId));
         if (replyIndex !== -1) {
-          return { 
-            type: 'reply', 
-            parentIndex: i, 
-            index: replyIndex, 
+          return {
+            type: "reply",
+            parentIndex: i,
+            index: replyIndex,
             comment: reps[replyIndex],
             update: (updates) => {
-              comments[i].replies[replyIndex] = { ...comments[i].replies[replyIndex], ...updates };
-            }
+              comments[i].replies[replyIndex] = {
+                ...comments[i].replies[replyIndex],
+                ...updates,
+              };
+            },
           };
         }
       }
     }
     return null;
   };
- 
+
   return {
     /**
      * Load comments from API
@@ -63,7 +69,10 @@ export function createCommentsState({ projectId, api }) {
       });
 
       if (!response?.success) {
-        throw new Error(response?.message || "We're having trouble loading the condolences. Please refresh the page or try again in a moment.");
+        throw new Error(
+          response?.message ||
+            "We're having trouble loading the condolences. Please refresh the page or try again in a moment.",
+        );
       }
 
       comments = Array.isArray(response.data) ? response.data : [];
@@ -85,16 +94,18 @@ export function createCommentsState({ projectId, api }) {
         comments.unshift(comment);
         return;
       }
-      const parentLoc  = findCommentLocation(comment.parentId);
-      if (parentLoc  && parentLoc .type === 'top') {
-        const parent = comments[parentLoc .index];
+      const parentLoc = findCommentLocation(comment.parentId);
+      if (parentLoc && parentLoc.type === "top") {
+        const parent = comments[parentLoc.index];
         parent.replies = Array.isArray(parent.replies) ? parent.replies : [];
         parent.replies.unshift(comment);
       }
     },
     update(commentId, updates) {
-      const loc  = findCommentLocation(commentId);
-      if (loc) { loc.update(updates); }
+      const loc = findCommentLocation(commentId);
+      if (loc) {
+        loc.update(updates);
+      }
     },
     remove(commentId) {
       const loc = findCommentLocation(commentId);

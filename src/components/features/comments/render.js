@@ -15,7 +15,9 @@ import { canReply, canModify } from "./permissions.js";
  */
 export function renderCommentsList(comments, options = {}) {
   const list = createEl("div", { class: "comments-list" });
-  comments.forEach((comment) => list.appendChild(renderComment(comment, options)));
+  comments.forEach((comment) =>
+    list.appendChild(renderComment(comment, options)),
+  );
   return list;
 }
 
@@ -40,7 +42,11 @@ export function renderComment(comment, options = {}) {
   const metaRow = renderCommentMeta(comment);
   el.appendChild(metaRow);
 
-  const message = createEl("div", { class: "comment-message" }, comment.message);
+  const message = createEl(
+    "div",
+    { class: "comment-message" },
+    comment.message,
+  );
   el.appendChild(message);
 
   if (currentUser?.id) {
@@ -89,7 +95,11 @@ function renderCommentMeta(comment) {
   const iso = new Date(comment.createdAt).toISOString();
   const time = createEl(
     "time",
-    { class: "comment-time", dateTime: iso, title: new Date(comment.createdAt).toLocaleString() },
+    {
+      class: "comment-time",
+      dateTime: iso,
+      title: new Date(comment.createdAt).toLocaleString(),
+    },
     timeAgo(comment.createdAt),
   );
   metaRow.append(userSection, time);
@@ -107,7 +117,11 @@ function renderCommentActions(comment, options) {
   if (canReply(comment, currentUser)) {
     const replyBtn = createEl(
       "button",
-      { class: "btn-small", "aria-label": "Reply to comment", "aria-expanded": "false" },
+      {
+        class: "btn-small",
+        "aria-label": "Reply to comment",
+        "aria-expanded": "false",
+      },
       "Reply",
     );
     replyBtn.onclick = () => onReply?.(comment.id);
@@ -117,7 +131,11 @@ function renderCommentActions(comment, options) {
   if (canModify(comment, currentUser)) {
     const editBtn = createEl(
       "button",
-      { class: "btn-small", "aria-label": "Edit comment", "aria-expanded": "false" },
+      {
+        class: "btn-small",
+        "aria-label": "Edit comment",
+        "aria-expanded": "false",
+      },
       "Edit",
     );
     editBtn.onclick = () => onEdit?.(comment.id);
@@ -158,7 +176,11 @@ function renderDeletedComment(comment) {
   const iso = new Date(comment.createdAt).toISOString();
   const time = createEl(
     "time",
-    { class: "comment-time", dateTime: iso, title: new Date(comment.createdAt).toLocaleString() },
+    {
+      class: "comment-time",
+      dateTime: iso,
+      title: new Date(comment.createdAt).toLocaleString(),
+    },
     timeAgo(comment.createdAt),
   );
   metaRow.append(userSection, time);

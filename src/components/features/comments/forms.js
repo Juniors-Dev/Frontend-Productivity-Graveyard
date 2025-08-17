@@ -1,5 +1,5 @@
 import { createEl } from "../../../utils/createEl.js";
-import { validateComment } from "../../forms/validation.js";    
+import { validateComment } from "../../forms/validation.js";
 
 /**
  * Create the main comment form for posting new root comments
@@ -8,12 +8,15 @@ import { validateComment } from "../../forms/validation.js";
  * @returns {HTMLFormElement} The main comment form element
  */
 export function createMainCommentForm({ onSubmit }) {
-  const form = createEl("form", { class: "comment-form", id: "main-comment-form" });
+  const form = createEl("form", {
+    class: "comment-form",
+    id: "main-comment-form",
+  });
 
   const textarea = createEl("textarea", {
     id: "main-comment-textarea",
-      placeholder: "Write a condolence...",
-      rows: 4,
+    placeholder: "Write a condolence...",
+    rows: 4,
     required: true,
     "aria-label": "Write a condolence",
   });
@@ -74,7 +77,9 @@ export function createMainCommentForm({ onSubmit }) {
         textarea.value = "";
         textarea.classList.remove("is-valid", "is-invalid");
       } else {
-        errorElem.textContent = result?.error || "Sorry, we couldn't post your condolence. Please try again.";
+        errorElem.textContent =
+          result?.error ||
+          "Sorry, we couldn't post your condolence. Please try again.";
       }
     } catch (err) {
       console.error("Error submitting comment:", err);
@@ -110,7 +115,11 @@ export function createReplyForm({ onSubmit, onCancel, formId }) {
     placeholder: "Write a reply...",
     "aria-label": "Write a reply",
   });
-  const errorElem = createEl("div", { class: "form-message error", role: "alert", "aria-live": "assertive" });
+  const errorElem = createEl("div", {
+    class: "form-message error",
+    role: "alert",
+    "aria-live": "assertive",
+  });
   const submitBtn = createEl(
     "button",
     { type: "submit", class: "btn-beige btn-small" },
@@ -192,7 +201,12 @@ export function createReplyForm({ onSubmit, onCancel, formId }) {
  * @param {string} [config.formId] - Optional ID for the form element
  * @returns {HTMLFormElement} The edit form element
  */
-export function createEditForm({ initialValue = "", onSubmit, onCancel, formId }) {
+export function createEditForm({
+  initialValue = "",
+  onSubmit,
+  onCancel,
+  formId,
+}) {
   const form = createEl("form", {
     class: "edit-form",
     id: formId || undefined,
@@ -204,7 +218,11 @@ export function createEditForm({ initialValue = "", onSubmit, onCancel, formId }
     value: initialValue,
     "aria-label": "Edit comment",
   });
-  const errorElem = createEl("div", { class: "form-message error", role: "alert", "aria-live": "assertive" });
+  const errorElem = createEl("div", {
+    class: "form-message error",
+    role: "alert",
+    "aria-live": "assertive",
+  });
   const saveBtn = createEl(
     "button",
     { type: "submit", class: "btn-beige btn-small" },

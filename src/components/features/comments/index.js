@@ -1,6 +1,15 @@
 import { createCommentsState } from "./state.js";
-import { renderCommentsList, renderEmpty, renderError, renderComment } from "./render.js";
-import { createMainCommentForm, createReplyForm, createEditForm } from "./forms.js";
+import {
+  renderCommentsList,
+  renderEmpty,
+  renderError,
+  renderComment,
+} from "./render.js";
+import {
+  createMainCommentForm,
+  createReplyForm,
+  createEditForm,
+} from "./forms.js";
 import {
   closeAllForms,
   getCommentEl,
@@ -19,7 +28,7 @@ import {
  */
 export async function initComments({ projectId, api, container, currentUser }) {
   if (!container) {
-    console.error("Comments container not found");  
+    console.error("Comments container not found");
     return () => {};
   }
 
@@ -47,7 +56,9 @@ export async function initComments({ projectId, api, container, currentUser }) {
 
           return {
             success: false,
-            error: response?.message || "Unable to share your condolence right now. Please try again in a moment.",
+            error:
+              response?.message ||
+              "Unable to share your condolence right now. Please try again in a moment.",
           };
         },
       });
@@ -145,7 +156,9 @@ export async function initComments({ projectId, api, container, currentUser }) {
                     );
                     const newReplies = temp.querySelector(".comment-replies");
                     if (newReplies) {
-                      replies.replaceChildren(...Array.from(newReplies.childNodes));
+                      replies.replaceChildren(
+                        ...Array.from(newReplies.childNodes),
+                      );
                     }
                   }
                 }
@@ -157,10 +170,16 @@ export async function initComments({ projectId, api, container, currentUser }) {
             }
             return {
               success: false,
-              error: res?.message || "Unable to post your reply right now. Please try again.",
+              error:
+                res?.message ||
+                "Unable to post your reply right now. Please try again.",
             };
           } catch {
-            return { success: false, error: "We're having trouble connecting right now. Please check your internet and try again." };
+            return {
+              success: false,
+              error:
+                "We're having trouble connecting right now. Please check your internet and try again.",
+            };
           }
         },
       });
@@ -208,10 +227,16 @@ export async function initComments({ projectId, api, container, currentUser }) {
             }
             return {
               success: false,
-              error: res?.message || "Unable to save your changes right now. Please try again.",
+              error:
+                res?.message ||
+                "Unable to save your changes right now. Please try again.",
             };
           } catch {
-            return { success: false, error: "We're having trouble connecting right now. Please check your internet and try again." };
+            return {
+              success: false,
+              error:
+                "We're having trouble connecting right now. Please check your internet and try again.",
+            };
           }
         },
       });
@@ -275,7 +300,11 @@ export async function initComments({ projectId, api, container, currentUser }) {
   } catch (err) {
     console.error("Error initializing comments:", err);
     container.innerHTML = "";
-    container.appendChild(renderError("Unable to load condolences right now. Please refresh the page or try again later."));
+    container.appendChild(
+      renderError(
+        "Unable to load condolences right now. Please refresh the page or try again later.",
+      ),
+    );
     return () => {
       container.innerHTML = "";
     };
