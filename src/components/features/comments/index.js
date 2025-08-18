@@ -264,7 +264,7 @@ export async function initComments({ projectId, api, container, currentUser }) {
           const msg = host.querySelector(".comment-message");
           const actions = host.querySelector(".comment-actions");
           if (avatar) avatar.style.display = "none";
-          if (username) username.textContent = "Condolence deleted";
+          if (username) username.textContent = "Comment deleted";
           if (msg) {
             msg.textContent = "[deleted]";
             msg.classList.add("deleted");

@@ -170,7 +170,7 @@ function renderDeletedComment(comment) {
   const userSection = createEl("div");
 
   userSection.appendChild(
-    createEl("span", { class: "comment-username" }, "Condolence deleted"),
+    createEl("span", { class: "comment-username" }, "Comment deleted"),
   );
 
   const iso = new Date(comment.createdAt).toISOString();
