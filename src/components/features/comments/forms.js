@@ -1,205 +1,294 @@
 import { createEl } from "../../../utils/createEl.js";
 import { validateComment } from "../../forms/validation.js";
+import { showFieldError } from "../../forms/formUtils.js";
 
-/**
- * Create the main comment form for posting new root comments
- * @param {Object} config - Configuration object
- * @param {Function} config.onSubmit - Async function called on form submission with message text
- * @returns {HTMLFormElement} The main comment form element
- */
-export function createMainCommentForm({ onSubmit }) {
-  const form = createEl("form", {
-    class: "comment-form",
-    id: "main-comment-form",
-  });
-
-  const textarea = createEl("textarea", {
-    id: "main-comment-textarea",
-    placeholder: "Write a condolence...",
-    rows: 4,
-    required: true,
-    "aria-label": "Write a condolence",
-  });
-
-  const submitBtn = createEl(
-    "button",
-    { type: "submit", class: "btn-beige btn-small", id: "new-comment-submit" },
-    "Post Condolence",
-  );
-
-  const errorElem = createEl("div", {
-    class: "form-message error",
-    id: "main-comment-error",
-    role: "alert",
-    "aria-live": "polite",
-  });
-
-  textarea.addEventListener("input", () => {
-    const result = validateComment(textarea.value.trim());
-    if (result.isValid) {
-      textarea.classList.remove("is-invalid");
-      textarea.classList.add("is-valid");
-      errorElem.textContent = "";
-    } else {
-      textarea.classList.remove("is-valid");
-      textarea.classList.add("is-invalid");
-      errorElem.textContent = result.message;
-    }
-  });
-
-  textarea.addEventListener("blur", () => {
-    if (!textarea.value.trim()) {
-      textarea.classList.remove("is-invalid", "is-valid");
-      errorElem.textContent = "";
-    }
-  });
-
-  form.addEventListener("submit", async (e) => {
-    e.preventDefault();
-    errorElem.textContent = "";
-
-    const value = textarea.value.trim();
-    const validation = validateComment(value);
-
-    if (!validation.isValid) {
-      textarea.classList.add("is-invalid");
-      errorElem.textContent = validation.message;
-      textarea.focus();
-      return;
-    }
-    submitBtn.disabled = true;
-    textarea.disabled = true;
-    errorElem.textContent = "";
-
-    try {
-      const result = await onSubmit(value);
-      if (result?.success) {
-        textarea.value = "";
-        textarea.classList.remove("is-valid", "is-invalid");
-      } else {
-        errorElem.textContent =
-          result?.error ||
-          "Sorry, we couldn't post your condolence. Please try again.";
-      }
-    } catch (err) {
-      console.error("Error submitting comment:", err);
-      errorElem.textContent = "Something went wrong. Please try again.";
-    } finally {
-      submitBtn.disabled = false;
-      textarea.disabled = false;
-      textarea.focus();
-    }
-  });
-
-  form.append(textarea, submitBtn, errorElem);
-  return form;
-}
-
-/**
- * Create a reply form for responding to comments
- * @param {Object} config - Configuration object
- * @param {Function} config.onSubmit - Async function called on form submission with message text
- * @param {Function} config.onCancel - Function called when form is cancelled
- * @param {string} [config.formId] - Optional ID for the form element
- * @returns {HTMLFormElement} The reply form element
- */
-export function createReplyForm({ onSubmit, onCancel, formId }) {
-  const form = createEl("form", {
-    class: "reply-form",
-    id: formId || undefined,
-  });
-
-  const textarea = createEl("textarea", {
-    required: true,
-    rows: 2,
+const FORM_CONFIGS = {
+  reply: {
+    className: "reply-form",
+    textareaRows: 2,
     placeholder: "Write a reply...",
-    "aria-label": "Write a reply",
-  });
-  const errorElem = createEl("div", {
-    class: "form-message error",
-    role: "alert",
-    "aria-live": "assertive",
-  });
-  const submitBtn = createEl(
-    "button",
-    { type: "submit", class: "btn-beige btn-small" },
-    "Reply",
-  );
-  const cancelBtn = createEl(
-    "button",
-    { type: "button", class: "btn-small" },
-    "Cancel",
-  );
+    submitText: "Reply",
+    submitClass: "btn-beige btn-small",
+    ariaLabel: "Write a reply",
+    loadingText: "Posting...",
+    errorMessage: "Unable to post your reply. Please try again.",
+    showCancel: true,
+    caretToEnd: false,
+  },
+  edit: {
+    className: "edit-form",
+    textareaRows: 3,
+    placeholder: "Edit your comment…",
+    submitText: "Save",
+    submitClass: "btn-beige btn-small",
+    ariaLabel: "Edit comment",
+    loadingText: "Saving…",
+    errorMessage: "Unable to save your changes. Please try again.",
+    showCancel: true,
+    caretToEnd: true,
+  },
+};
 
-  form.addEventListener("keydown", (e) => {
-    if (e.key === "Escape") {
+/**
+ * Wire up all form behavior (validation, submission, loading states, etc.)
+ * Shared between factory-created forms and HTML forms
+ *
+ * @param {Object} config - Configuration object
+ * @param {'main'|'reply'|'edit'} config.type - Form type
+ * @param {HTMLTextAreaElement} config.textarea - Textarea element
+ * @param {HTMLButtonElement} config.submitBtn - Submit button element
+ * @param {HTMLElement} config.errorElem - Element for displaying errors
+ * @param {HTMLButtonElement} [config.cancelBtn] - Cancel button (reply/edit only)
+ * @param {HTMLButtonElement} [config.clearBtn] - Clear button (main only)
+ * @param {Function} config.onSubmit - Async function called on form submission
+ * @param {Function} [config.onCancel] - Function called when form is cancelled
+ * @param {Object} config.cfg - Form configuration object
+ * @param {string} [config.initialValue=""] - Initial textarea value (for edit forms)
+ * @returns {Function} Cleanup function to remove event listeners
+ */
+function wireFormBehavior({
+  type,
+  textarea,
+  submitBtn,
+  errorElem,
+  cancelBtn,
+  clearBtn,
+  onSubmit,
+  onCancel,
+  cfg,
+  initialValue = "",
+}) {
+  if (!textarea || !submitBtn || !errorElem) return () => {};
+
+  const handleInput = () => {
+    const res = validateComment(textarea.value.trim());
+    showFieldError(textarea, errorElem, res);
+    if (clearBtn) clearBtn.hidden = !textarea.value.trim();
+  };
+
+  const handleBlur = () => {
+    if (type === "main" && !textarea.value.trim()) {
+      textarea.classList.remove("is-invalid", "is-valid");
+      textarea.setAttribute("aria-invalid", "false");
+      errorElem.textContent = "";
+    }
+  };
+
+  const handleKeydown = (e) => {
+    if (cancelBtn && e.key === "Escape") {
       e.preventDefault();
       errorElem.textContent = "";
       onCancel?.();
     }
-  });
+  };
 
-  textarea.addEventListener("input", () => {
-    const result = validateComment(textarea.value.trim());
-    if (result.isValid) {
-      textarea.classList.remove("is-invalid");
-      textarea.classList.add("is-valid");
-      errorElem.textContent = "";
-    } else {
-      textarea.classList.remove("is-valid");
-      textarea.classList.add("is-invalid");
-      errorElem.textContent = result.message;
-    }
-  });
-
-  cancelBtn.onclick = (e) => {
+  const handleCancel = (e) => {
     e.preventDefault();
+    errorElem.textContent = "";
     onCancel?.();
   };
 
-  form.addEventListener("submit", async (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+
     errorElem.textContent = "";
     const value = textarea.value.trim();
     const validation = validateComment(value);
+
     if (!validation.isValid) {
-      textarea.classList.add("is-invalid");
-      errorElem.textContent = validation.message;
+      showFieldError(textarea, errorElem, validation);
       textarea.focus();
       return;
     }
+
+    showFieldError(textarea, errorElem, { isValid: true, message: "" });
+
+    const prevLabel = submitBtn.textContent;
     submitBtn.disabled = true;
     textarea.disabled = true;
-    const prevLabel = submitBtn.textContent;
-    submitBtn.textContent = "Posting…";
+    if (cancelBtn) cancelBtn.disabled = true;
+    if (clearBtn) clearBtn.disabled = true;
+    submitBtn.textContent = cfg.loadingText;
+
     try {
       const result = await onSubmit?.(value);
       if (result?.success) {
+        if (type === "main") {
+          textarea.value = "";
+          textarea.classList.remove("is-valid", "is-invalid");
+          textarea.setAttribute("aria-invalid", "false");
+          if (clearBtn) clearBtn.hidden = true;
+        }
         return;
       }
-      errorElem.textContent = result?.error || "Could not post reply.";
+      const fallback = cfg.errorMessage || "Something went wrong.";
+      showFieldError(textarea, errorElem, {
+        isValid: false,
+        message: result?.message || fallback,
+      });
     } catch {
-      errorElem.textContent = "Something went wrong.";
+      errorElem.textContent =
+        "We're having trouble connecting. Please check your internet and try again.";
     } finally {
       submitBtn.textContent = prevLabel;
       submitBtn.disabled = false;
       textarea.disabled = false;
+      if (cancelBtn) cancelBtn.disabled = false;
+      if (clearBtn) clearBtn.disabled = false;
+      textarea.focus();
+    }
+  };
+
+  textarea.addEventListener("input", handleInput);
+  textarea.addEventListener("blur", handleBlur);
+  if (cancelBtn) {
+    cancelBtn.addEventListener("click", handleCancel);
+  }
+
+  const form = submitBtn.form || textarea.closest("form");
+  if (form) {
+    form.addEventListener("submit", handleSubmit);
+    if (cancelBtn) {
+      form.addEventListener("keydown", handleKeydown);
+    }
+  }
+
+  requestAnimationFrame(() => {
+    textarea.focus();
+    if (
+      cfg.caretToEnd &&
+      initialValue &&
+      typeof textarea.setSelectionRange === "function"
+    ) {
+      const len = textarea.value.length;
+      textarea.setSelectionRange(len, len);
     }
   });
 
+  return () => {
+    textarea.removeEventListener("input", handleInput);
+    textarea.removeEventListener("blur", handleBlur);
+    if (cancelBtn) {
+      cancelBtn.removeEventListener("click", handleCancel);
+    }
+    if (form) {
+      form.removeEventListener("submit", handleSubmit);
+      if (cancelBtn) {
+        form.removeEventListener("keydown", handleKeydown);
+      }
+    }
+  };
+}
+
+/**
+ * Factory for creating dynamic comment forms
+ *
+ * @param {Object} config - Configuration object
+ * @param {'reply'|'edit'} config.type - Type of form to create
+ * @param {Function} config.onSubmit - Async function called on form submission
+ * @param {Function} config.onCancel - Function called when form is cancelled
+ * @param {string} [config.initialValue=""] - Initial textarea value (for edit forms)
+ * @param {string} [config.formId] - Optional ID for ARIA relationships
+ * @returns {HTMLFormElement} Created form element
+ */
+function createCommentFormFactory({
+  type,
+  onSubmit,
+  onCancel,
+  initialValue = "",
+  formId,
+}) {
+  const cfg = FORM_CONFIGS[type];
+  if (!cfg) throw new Error(`Invalid form type: ${type}`);
+
+  const form = createEl("form", {
+    class: cfg.className,
+    "data-form-type": type,
+    ...(formId && { id: formId }),
+  });
+
+  const errorId = formId ? `${formId}-error` : undefined;
+  const errorElem = createEl("div", {
+    class: "form-message error",
+    role: "alert",
+    "aria-live": "polite",
+    ...(errorId && { id: errorId }),
+  });
+
+  const textarea = createEl("textarea", {
+    required: true,
+    rows: cfg.textareaRows,
+    maxlength: 2000,
+    placeholder: cfg.placeholder,
+    "aria-label": cfg.ariaLabel,
+    "aria-invalid": "false",
+    ...(errorId && { "aria-describedby": errorId }),
+    ...(initialValue ? { value: initialValue } : {}),
+  });
+
+  const submitBtn = createEl(
+    "button",
+    {
+      type: "submit",
+      class: cfg.submitClass,
+    },
+    cfg.submitText,
+  );
+
+  const cancelBtn = createEl(
+    "button",
+    {
+      type: "button",
+      class: "btn-small",
+    },
+    "Cancel",
+  );
+
   form.append(textarea, submitBtn, cancelBtn, errorElem);
-  setTimeout(() => textarea.focus(), 0);
+
+  wireFormBehavior({
+    type,
+    textarea,
+    submitBtn,
+    errorElem,
+    cancelBtn,
+    clearBtn: null,
+    onSubmit,
+    onCancel,
+    cfg,
+    initialValue,
+  });
+
   return form;
 }
 
 /**
- * Create an edit form for modifying existing comments
+ * Create a reply form with cancel button
+ *
  * @param {Object} config - Configuration object
- * @param {string} [config.initialValue=""] - Initial text value for the textarea
- * @param {Function} config.onSubmit - Async function called on form submission with message text
+ * @param {Function} config.onSubmit - Async function called on form submission
  * @param {Function} config.onCancel - Function called when form is cancelled
- * @param {string} [config.formId] - Optional ID for the form element
- * @returns {HTMLFormElement} The edit form element
+ * @param {string} [config.formId] - Optional ID for ARIA relationships
+ * @returns {HTMLFormElement} Reply form element
+ */
+export function createReplyForm({ onSubmit, onCancel, formId }) {
+  return createCommentFormFactory({
+    type: "reply",
+    onSubmit,
+    onCancel,
+    formId,
+  });
+}
+
+/**
+ * Create an edit form with cancel button and caret positioning
+ *
+ * @param {Object} config - Configuration object
+ * @param {string} [config.initialValue=""] - Initial textarea value
+ * @param {Function} config.onSubmit - Async function called on form submission
+ * @param {Function} config.onCancel - Function called when form is cancelled
+ * @param {string} [config.formId] - Optional ID for ARIA relationships
+ * @returns {HTMLFormElement} Edit form element
  */
 export function createEditForm({
   initialValue = "",
@@ -207,94 +296,67 @@ export function createEditForm({
   onCancel,
   formId,
 }) {
-  const form = createEl("form", {
-    class: "edit-form",
-    id: formId || undefined,
+  return createCommentFormFactory({
+    type: "edit",
+    onSubmit,
+    onCancel,
+    initialValue,
+    formId,
   });
+}
 
-  const textarea = createEl("textarea", {
-    required: true,
-    rows: 3,
-    value: initialValue,
-    "aria-label": "Edit comment",
-  });
-  const errorElem = createEl("div", {
-    class: "form-message error",
-    role: "alert",
-    "aria-live": "assertive",
-  });
-  const saveBtn = createEl(
-    "button",
-    { type: "submit", class: "btn-beige btn-small" },
-    "Save",
-  );
-  const cancelBtn = createEl(
-    "button",
-    { type: "button", class: "btn-small" },
-    "Cancel",
-  );
+/**
+ * Setup the main comment form that exists in HTML
+ *
+ * @param {Object} config - Configuration object
+ * @param {Function} config.onSubmit - Async function called on form submission
+ * @returns {Function} Cleanup function to remove event listeners and restore DOM
+ */
+export function setupMainCommentForm({ onSubmit }) {
+  const form = document.getElementById("main-comment-form");
+  const textarea = document.getElementById("main-comment-textarea");
+  const submitBtn = document.getElementById("new-comment-submit");
+  const errorElem = document.getElementById("main-comment-error");
+  const clearBtn = form?.querySelector(".input-clear-btn");
 
-  form.addEventListener("keydown", (e) => {
-    if (e.key === "Escape") {
-      e.preventDefault();
-      errorElem.textContent = "";
-      onCancel?.();
-    }
-  });
+  if (!form || !textarea || !submitBtn || !errorElem) {
+    console.error("Main comment form elements not found in DOM");
+    return () => {};
+  }
 
-  textarea.addEventListener("input", () => {
-    const result = validateComment(textarea.value.trim());
-    if (result.isValid) {
-      textarea.classList.remove("is-invalid");
-      textarea.classList.add("is-valid");
-      errorElem.textContent = "";
-    } else {
-      textarea.classList.remove("is-valid");
-      textarea.classList.add("is-invalid");
-      errorElem.textContent = result.message;
-    }
-  });
-
-  cancelBtn.onclick = (e) => {
+  const handleClearClick = (e) => {
     e.preventDefault();
-    onCancel?.();
-  };
-
-  form.addEventListener("submit", async (e) => {
-    e.preventDefault();
+    textarea.value = "";
+    textarea.classList.remove("is-valid", "is-invalid");
+    textarea.setAttribute("aria-invalid", "false");
     errorElem.textContent = "";
-    const value = textarea.value.trim();
-    const validation = validateComment(value);
-    if (!validation.isValid) {
-      textarea.classList.add("is-invalid");
-      errorElem.textContent = validation.message;
-      textarea.focus();
-      return;
-    }
-    saveBtn.disabled = true;
-    textarea.disabled = true;
-    const prevLabel = saveBtn.textContent;
-    saveBtn.textContent = "Saving…";
-    try {
-      const result = await onSubmit?.(value);
-      if (result?.success) {
-        return;
-      }
-      errorElem.textContent = result?.error || "Could not update comment.";
-    } catch {
-      errorElem.textContent = "Something went wrong.";
-    } finally {
-      saveBtn.textContent = prevLabel;
-      saveBtn.disabled = false;
-      textarea.disabled = false;
-    }
+    clearBtn.hidden = true;
+    textarea.focus();
+  };
+  if (clearBtn) {
+    clearBtn.addEventListener("click", handleClearClick);
+  }
+
+  const behaviorCleanup = wireFormBehavior({
+    type: "main",
+    textarea,
+    submitBtn,
+    errorElem,
+    cancelBtn: null,
+    clearBtn,
+    onSubmit,
+    onCancel: null,
+    cfg: {
+      loadingText: "Posting...",
+      errorMessage: "Could not post your condolence. Please try again.",
+      caretToEnd: false,
+    },
+    initialValue: "",
   });
 
-  form.append(textarea, saveBtn, cancelBtn, errorElem);
-  setTimeout(() => {
-    textarea.focus();
-    const len = textarea.value.length;
-    textarea.setSelectionRange(len, len);
-  }, 0);
-  return form;
+  return () => {
+    behaviorCleanup();
+
+    clearBtn.removeEventListener("click", handleClearClick);
+  };
 }

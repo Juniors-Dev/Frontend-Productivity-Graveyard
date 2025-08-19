@@ -6,10 +6,12 @@ export function showFieldError(input, errorElem, result) {
   if (result.isValid) {
     input.classList.remove("is-invalid");
     input.classList.add("is-valid");
+    input.setAttribute("aria-invalid", "false");
     errorElem.textContent = "";
   } else {
     input.classList.remove("is-valid");
     input.classList.add("is-invalid");
+    input.setAttribute("aria-invalid", "true");
     errorElem.textContent = result.message;
   }
 }

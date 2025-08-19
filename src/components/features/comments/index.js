@@ -6,7 +6,7 @@ import {
   renderComment,
 } from "./render.js";
 import {
-  createMainCommentForm,
+  setupMainCommentForm,
   createReplyForm,
   createEditForm,
 } from "./forms.js";
@@ -35,13 +35,21 @@ export async function initComments({ projectId, api, container, currentUser }) {
   const state = createCommentsState({ projectId, api });
   container.innerHTML = '<div class="comments-empty">Loading...</div>';
 
+  const cleanupFunctions = [];
+
   try {
     await state.load(1);
 
     container.innerHTML = "";
 
+    const formContainer = document.getElementById("comment-form-container");
+    const loginHint = document.getElementById("comments-login-hint");
+
     if (currentUser?.id) {
-      const form = createMainCommentForm({
+      if (formContainer) formContainer.hidden = false;
+      if (loginHint) loginHint.hidden = true;
+
+      const mainFormCleanup = setupMainCommentForm({
         onSubmit: async (message) => {
           const response = await api.createProjectComment(projectId, {
             message,
@@ -56,21 +64,17 @@ export async function initComments({ projectId, api, container, currentUser }) {
 
           return {
             success: false,
-            error:
+            message:
               response?.message ||
               "Unable to share your condolence right now. Please try again in a moment.",
           };
         },
       });
-      container.appendChild(form);
+
+      cleanupFunctions.push(mainFormCleanup);
     } else {
-      const loginPrompt = document.createElement("div");
-      loginPrompt.className = "comments-login-hint";
-      loginPrompt.innerHTML = `
-        Please <a href="/login.html">log in</a> or <a href="/register.html">register</a> 
-        to share your condolences.
-      `;
-      container.appendChild(loginPrompt);
+      if (formContainer) formContainer.hidden = true;
+      if (loginHint) loginHint.hidden = false;
     }
 
     const listContainer = document.createElement("div");
@@ -94,7 +98,7 @@ export async function initComments({ projectId, api, container, currentUser }) {
       }
     }
 
-    // ---- Action handlers  ----
+    // ---- Handlers ----
     async function handleReply(parentId) {
       closeAllForms();
 
@@ -133,51 +137,19 @@ export async function initComments({ projectId, api, container, currentUser }) {
               form.remove();
               setAriaExpanded(opener, { expanded: false });
               opener?.focus();
-              try {
-                const { page, limit } = state.meta();
-                const offset = (page - 1) * limit;
-                const pageRes = await api.getProjectComments(projectId, {
-                  offset,
-                  limit,
-                });
-                if (pageRes?.success && Array.isArray(pageRes.data)) {
-                  const serverParent = pageRes.data.find(
-                    (c) => String(c.id) === String(parentId),
-                  );
-                  if (serverParent) {
-                    const temp = document.createElement("div");
-                    temp.appendChild(
-                      renderComment(serverParent, {
-                        currentUser,
-                        onReply: handleReply,
-                        onEdit: handleEdit,
-                        onDelete: handleDelete,
-                      }),
-                    );
-                    const newReplies = temp.querySelector(".comment-replies");
-                    if (newReplies) {
-                      replies.replaceChildren(
-                        ...Array.from(newReplies.childNodes),
-                      );
-                    }
-                  }
-                }
-              } catch {
-                // Silent catch: doesn't disrupt user experience, server sync will resolve on next load
-              }
 
               return { success: true };
             }
             return {
               success: false,
-              error:
+              message:
                 res?.message ||
                 "Unable to post your reply right now. Please try again.",
             };
           } catch {
             return {
               success: false,
-              error:
+              message:
                 "We're having trouble connecting right now. Please check your internet and try again.",
             };
           }
@@ -227,14 +199,14 @@ export async function initComments({ projectId, api, container, currentUser }) {
             }
             return {
               success: false,
-              error:
+              message:
                 res?.message ||
                 "Unable to save your changes right now. Please try again.",
             };
           } catch {
             return {
               success: false,
-              error:
+              message:
                 "We're having trouble connecting right now. Please check your internet and try again.",
             };
           }
@@ -294,6 +266,7 @@ export async function initComments({ projectId, api, container, currentUser }) {
     updateCommentsList();
 
     return () => {
+      cleanupFunctions.forEach((fn) => fn && fn());
       container.innerHTML = "";
       state.clear?.();
     };
