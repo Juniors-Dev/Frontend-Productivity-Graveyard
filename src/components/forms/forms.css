@@ -89,7 +89,6 @@
   color: var(--color-input-text);
   z-index: 2;
 }
-
 .input-icon + input,
 .input-icon-container input[type="text"] {
   width: 100%;
