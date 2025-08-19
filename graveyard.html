@@ -70,49 +70,58 @@
             </div>
             <div class="bury-text">
               <form id="search-form">
-                <h3 id="search-title" class="centered">Search The Graveyard</h3>
+                <h3 class="centered">Search The Graveyard</h3>
                 <label for="query" class="visually-hidden"
                   >Search Projects</label
                 >
-                <div class="input-filter-container">
-                  <div class="input-wrapper">
-                    <div
-                      class="input-icon-container"
-                      style="
-                        position: relative;
-                        width: 100%;
-                        display: flex;
-                        align-items: center;
-                      "
-                    >
-                      <span
-                        id="search-icon"
-                        class="input-icon search-icon"
-                        aria-hidden="true"
-                      ></span>
-
-                      <input
-                        type="search"
-                        id="query"
-                        name="query"
-                        placeholder="Find a grave"
-                      />
-                    </div>
-                    <span class="error-message" id="password-error"></span>
+                <div class="input-wrapper">
+                  <div
+                    class="input-icon-container"
+                    style="
+                      position: relative;
+                      width: 100%;
+                      display: flex;
+                      align-items: center;
+                    "
+                  >
+                    <span
+                      class="input-icon search-icon"
+                      aria-hidden="true"
+                    ></span
+                    ><input
+                      type="search"
+                      id="query"
+                      name="query"
+                      placeholder="Find a grave"
+                    />
                   </div>
-                  <!-- <div class="filter-buttons-container">
-                   <button class="btn-beige btn-small" type="submit">Search</button>
-                  
-                </div> -->
-                  <div class="filter-buttons-container">
-                    <button
-                      class="btn-beige btn-small"
-                      type="button"
-                      id="open-dialog"
-                    >
-                      Filters
-                    </button>
-                  </div>
+                  <span class="error-message" id="password-error"></span>
+                </div>
+                <div class="filter-buttons-container">
+                  <button class="btn-beige" type="submit">Search</button>
+                  <button
+                    type="reset"
+                    class="btn-beige btn-small"
+                    id="clear-search"
+                  >
+                    Clear Search
+                  </button>
+                </div>
+                <div class="filter-buttons-container">
+                  <button
+                    class="btn-beige btn-small"
+                    type="button"
+                    id="open-dialog"
+                  >
+                    Open Filters
+                  </button>
+                  <button
+                    type="button"
+                    class="btn-beige btn-small"
+                    id="clear-filters"
+                  >
+                    Clear Filters
+                  </button>
                 </div>
               </form>
             </div>
