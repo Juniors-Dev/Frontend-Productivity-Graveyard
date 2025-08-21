@@ -34,14 +34,12 @@ export async function initComments({ projectId, api, container, currentUser }) {
 
   const state = createCommentsState({ projectId, api });
   container.innerHTML = '<div class="comments-empty">Loading...</div>';
-
   const cleanupFunctions = [];
 
   try {
     await state.load(1);
 
     container.innerHTML = "";
-
     const formContainer = document.getElementById("comment-form-container");
     const loginHint = document.getElementById("comments-login-hint");
 
@@ -51,23 +49,39 @@ export async function initComments({ projectId, api, container, currentUser }) {
 
       const mainFormCleanup = setupMainCommentForm({
         onSubmit: async (message) => {
-          const response = await api.createProjectComment(projectId, {
-            message,
-            parentId: null,
-          });
+          try {
+            const response = await api.createProjectComment(projectId, {
+              message,
+              parentId: null,
+            });
 
-          if (response?.success && response.data) {
-            state.add(response.data);
-            updateCommentsList();
-            return { success: true };
+            if (response?.success === false) {
+              return {
+                success: false,
+                message:
+                  response?.message ||
+                  "Unable to share your condolence right now. Please try again.",
+              };
+            }
+
+            if (response?.success && response.data) {
+              state.add(response.data);
+              updateCommentsList();
+              return { success: true };
+            }
+
+            return {
+              success: false,
+              message: "Something went wrong. Please try again.",
+            };
+          } catch (err) {
+            console.error("Comment submission failed:", err);
+            return {
+              success: false,
+              message:
+                "Connection failed. Please check your internet and try again.",
+            };
           }
-
-          return {
-            success: false,
-            message:
-              response?.message ||
-              "Unable to share your condolence right now. Please try again in a moment.",
-          };
         },
       });
 
@@ -150,7 +164,7 @@ export async function initComments({ projectId, api, container, currentUser }) {
             return {
               success: false,
               message:
-                "We're having trouble connecting right now. Please check your internet and try again.",
+                "Connection failed. Please check your internet and try again.",
             };
           }
         },
@@ -188,9 +202,10 @@ export async function initComments({ projectId, api, container, currentUser }) {
         onSubmit: async (message) => {
           try {
             const res = await api.updateComment(commentId, { message });
-            if (res?.success) {
-              messageEl.textContent = res.data?.message ?? message;
-              state.update(commentId, res.data ?? { message });
+
+            if (res?.success && res.data) {
+              messageEl.textContent = res.data.message;
+              state.update(commentId, res.data);
               form.remove();
               messageEl.style.display = "";
               setAriaExpanded(opener, { expanded: false });
@@ -207,7 +222,7 @@ export async function initComments({ projectId, api, container, currentUser }) {
             return {
               success: false,
               message:
-                "We're having trouble connecting right now. Please check your internet and try again.",
+                "Connection failed. Please check your internet and try again.",
             };
           }
         },
@@ -236,7 +251,7 @@ export async function initComments({ projectId, api, container, currentUser }) {
           const msg = host.querySelector(".comment-message");
           const actions = host.querySelector(".comment-actions");
           if (avatar) avatar.style.display = "none";
-          if (username) username.textContent = "Comment deleted";
+          if (username) username.style.display = "none";
           if (msg) {
             msg.textContent = "[deleted]";
             msg.classList.add("deleted");
