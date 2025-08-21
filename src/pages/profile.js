@@ -1,7 +1,5 @@
-import {
-  profileProjectCard,
-  profileProjectCardSkeleton,
-} from "../components/features/profileProjectCard/profileProjectCard.js";
+import { projectCard } from "../components/features/projectCard/projectCard.js";
+import { profileProjectCardSkeleton } from "../components/features/profileProjectCard/profileProjectCard.js";
 import { renderProfile } from "../components/features/profile/profile.js";
 import { api } from "../main.js";
 import { pagination } from "../components/features/pagination/pagination.js";
@@ -38,7 +36,7 @@ async function fetchAndRenderProjects(page) {
     projectsContainer.innerHTML = "";
     if (projects.data.length > 0) {
       projects.data.forEach((project) => {
-        projectsContainer.append(profileProjectCard(project));
+        projectsContainer.append(projectCard(project));
       });
       pagination({
         current: currentPage,
@@ -85,7 +83,7 @@ async function initProfilePage() {
     // Render projects
     projectsContainer.innerHTML = "";
     user.data.projects.data.forEach((project) => {
-      projectsContainer.append(profileProjectCard(project));
+      projectsContainer.append(projectCard(project));
     });
 
     console.log(user.data.projects);
