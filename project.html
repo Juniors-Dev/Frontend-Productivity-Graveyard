@@ -4,6 +4,10 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Memorial - Productivity-Graveyard</title>
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="manifest" href="/site.webmanifest" />
     <script type="module" src="/src/main.js" defer></script>
     <script type="module" src="/src/pages/project.js" defer></script>
     <link rel="stylesheet" href="/src/css/style.css" />
@@ -13,6 +17,7 @@
       href="/src/components/features/comments/comments.css"
     />
   </head>
+
   <body>
     <header></header>
     <main>
@@ -92,9 +97,13 @@
         <div class="comments-section-wrapper container">
           <div class="comments-header">
             <h2 class="comments-title">Condolences</h2>
-          </div>          
-          <div id="comments-container"></div>          
-          <div id="comments-error" class="error-state" style="display: none;"></div>
+          </div>
+          <div id="comments-container"></div>
+          <div
+            id="comments-error"
+            class="error-state"
+            style="display: none"
+          ></div>
         </div>
       </section>
     </main>
