@@ -118,6 +118,54 @@
             class="error-state"
             style="display: none"
           ></div>
+          <div id="comment-form-container" class="comment-form" hidden>
+            <form id="main-comment-form">
+              <div class="comment-input-wrapper">
+                <textarea
+                  id="main-comment-textarea"
+                  required
+                  rows="4"
+                  maxlength="2000"
+                  placeholder="Write a condolence..."
+                  aria-label="Write a condolence"
+                  aria-describedby="main-comment-error"
+                  aria-invalid="false"
+                ></textarea>
+                <button
+                  type="button"
+                  class="input-clear-btn"
+                  aria-label="Clear condolence text"
+                  title="Clear"
+                  hidden
+                >
+                  ✕
+                </button>
+              </div>
+              <button
+                type="submit"
+                class="btn-beige btn-small"
+                id="new-comment-submit"
+              >
+                Post Condolence
+              </button>
+              <div
+                class="form-message error"
+                id="main-comment-error"
+                role="alert"
+                aria-live="polite"
+              ></div>
+            </form>
+          </div>
+          <div id="comments-login-hint" class="comments-login-hint" hidden>
+            Please <a href="/login.html">log in</a> or
+            <a href="/signup.html">register</a>
+            to share your condolences.
+          </div>
+          <div id="comments-container"></div>
+          <div id="comments-loading" class="loading-state" hidden>
+            <div class="loader-comments"></div>
+          </div>
+          <div id="comments-error" class="error-state" hidden></div>
         </div>
       </section>
     </main>
