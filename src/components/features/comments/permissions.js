@@ -1,8 +1,11 @@
-export const isOwner = (comment, user) => !!(user?.id && comment?.User?.id && user.id === comment.User.id);
+export const isOwner = (comment, user) =>
+  !!(user?.id && comment?.User?.id && user.id === comment.User.id);
 
-export const canReply = (comment, user) => !!(user?.id && comment?.parentId === null && !comment?.isDeleted);
+export const canReply = (comment, user) =>
+  !!(user?.id && comment?.parentId === null && !comment?.isDeleted);
 
-export const canModify = (comment, user) =>  !comment?.isDeleted && isOwner(comment, user);
+export const canModify = (comment, user) =>
+  !comment?.isDeleted && isOwner(comment, user);
 
 /*-- Future:
 const canEdit 
