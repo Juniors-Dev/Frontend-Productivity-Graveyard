@@ -1,5 +1,5 @@
 import { projectCard } from "../components/features/projectCard/projectCard.js";
-import { profileProjectCardSkeleton } from "../components/features/profileProjectCard/profileProjectCard.js";
+import { projectCardSkeleton } from "../components/features/projectCard/projectCard.js";
 import { renderProfile } from "../components/features/profile/profile.js";
 import { api } from "../main.js";
 import { pagination } from "../components/features/pagination/pagination.js";
@@ -15,7 +15,7 @@ let limit = 10;
 function showSkeletons(count) {
   projectsContainer.innerHTML = "";
   for (let i = 0; i < count; i++) {
-    projectsContainer.innerHTML += profileProjectCardSkeleton();
+    projectsContainer.innerHTML += projectCardSkeleton();
   }
 }
 
