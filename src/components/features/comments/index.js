@@ -278,10 +278,10 @@ export async function initComments({ projectId, api, container, currentUser }) {
         if (res?.success) {
           state.remove(commentId);
 
-          const deletedComment  = state.find(commentId);
-          if (!deletedComment ) return;
+          const deletedComment = state.find(commentId);
+          if (!deletedComment) return;
 
-          const newCommentEl = renderComment(deletedComment , {
+          const newCommentEl = renderComment(deletedComment, {
             currentUser,
             onReply: handleReply,
             onEdit: handleEdit,
@@ -289,7 +289,7 @@ export async function initComments({ projectId, api, container, currentUser }) {
           });
 
           host.replaceWith(newCommentEl);
-          
+
           renderPager();
 
           setAriaExpanded(opener, { expanded: false });

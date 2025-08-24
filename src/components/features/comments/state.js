@@ -23,7 +23,11 @@ export function createCommentsState({ projectId, api }) {
       indexMap.set(stringifyId(c.id), { type: "top", index: i });
       const reps = Array.isArray(c.replies) ? c.replies : null;
       reps?.forEach((r, j) => {
-        indexMap.set(stringifyId(r.id), { type: "reply", parentIndex: i, index: j });
+        indexMap.set(stringifyId(r.id), {
+          type: "reply",
+          parentIndex: i,
+          index: j,
+        });
       });
     });
   }
