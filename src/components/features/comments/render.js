@@ -31,7 +31,7 @@ export function renderComment(comment, options = {}) {
   const { currentUser, onReply, onEdit, onDelete } = options;
 
   if (isCommentDeleted(comment)) {
-    return renderDeletedComment(comment);
+    return renderDeletedComment(comment, options);
   }
 
   const el = createEl("div", {
@@ -160,7 +160,7 @@ function renderCommentActions(comment, options) {
   return actions;
 }
 
-function renderDeletedComment(comment) {
+function renderDeletedComment(comment, options = {}) {
   const el = createEl("div", {
     class: "comment deleted",
     "data-comment-id": comment.id,
@@ -168,10 +168,6 @@ function renderDeletedComment(comment) {
 
   const metaRow = createEl("div", { class: "comment-meta" });
   const userSection = createEl("div");
-
-  userSection.appendChild(
-    createEl("span", { class: "comment-username" }, "Comment deleted"),
-  );
 
   const iso = new Date(comment.createdAt).toISOString();
   const time = createEl(
@@ -191,7 +187,7 @@ function renderDeletedComment(comment) {
   if (comment.replies && comment.replies.length > 0) {
     const repliesContainer = createEl("div", { class: "comment-replies" });
     comment.replies.forEach((reply) => {
-      repliesContainer.appendChild(renderDeletedComment(reply));
+      repliesContainer.appendChild(renderComment(reply, options));
     });
     el.appendChild(repliesContainer);
   }
