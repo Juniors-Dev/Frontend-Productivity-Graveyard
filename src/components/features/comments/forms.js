@@ -44,6 +44,8 @@ const FORM_CONFIGS = {
  * @param {Function} [config.onCancel] - Function called when form is cancelled
  * @param {Object} config.cfg - Form configuration object
  * @param {string} [config.initialValue=""] - Initial textarea value (for edit forms)
+ * @param {boolean} [config.shouldFocusOnLoad=true] - Whether to focus the textarea
+ *        automatically when the form is initialized (reply/edit: true, main: false)
  * @returns {Function} Cleanup function to remove event listeners
  */
 function wireFormBehavior({
@@ -57,6 +59,7 @@ function wireFormBehavior({
   onCancel,
   cfg,
   initialValue = "",
+  shouldFocusOnLoad = true,
 }) {
   if (!textarea || !submitBtn || !errorElem) return () => {};
 
@@ -153,17 +156,19 @@ function wireFormBehavior({
     }
   }
 
-  requestAnimationFrame(() => {
-    textarea.focus();
-    if (
-      cfg.caretToEnd &&
-      initialValue &&
-      typeof textarea.setSelectionRange === "function"
-    ) {
-      const len = textarea.value.length;
-      textarea.setSelectionRange(len, len);
-    }
-  });
+  if (shouldFocusOnLoad) {
+    requestAnimationFrame(() => {
+      textarea.focus();
+      if (
+        cfg.caretToEnd &&
+        initialValue &&
+        typeof textarea.setSelectionRange === "function"
+      ) {
+        const len = textarea.value.length;
+        textarea.setSelectionRange(len, len);
+      }
+    });
+  }
 
   return () => {
     textarea.removeEventListener("input", handleInput);
@@ -352,11 +357,14 @@ export function setupMainCommentForm({ onSubmit }) {
       caretToEnd: false,
     },
     initialValue: "",
+    shouldFocusOnLoad: false,
   });
 
   return () => {
     behaviorCleanup();
 
-    clearBtn.removeEventListener("click", handleClearClick);
+    if (clearBtn) {
+      clearBtn.removeEventListener("click", handleClearClick);
+    }
   };
 }
