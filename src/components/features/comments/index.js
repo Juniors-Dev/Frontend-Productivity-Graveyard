@@ -16,6 +16,7 @@ import {
   ensureRepliesContainer,
   setAriaExpanded,
 } from "./helpers.js";
+import { pagination } from "../pagination/pagination.js";
 
 /**
  * Initialize the comments system
@@ -37,11 +38,58 @@ export async function initComments({ projectId, api, container, currentUser }) {
   const cleanupFunctions = [];
 
   try {
-    await state.load(1);
-
     container.innerHTML = "";
     const formContainer = document.getElementById("comment-form-container");
     const loginHint = document.getElementById("comments-login-hint");
+
+    const listContainer = document.createElement("div");
+    const pagerContainer = document.createElement("div");
+    pagerContainer.className = "pagination-wrapper";
+    container.appendChild(listContainer);
+    container.appendChild(pagerContainer);
+
+    async function loadCommentsPage(page = 1) {
+      await state.load(page);
+      updateCommentsList();
+    }
+
+    function renderPager() {
+      const meta = state.meta();
+      pagerContainer.innerHTML = "";
+      if (meta.totalPages <= 1) return;
+
+      pagination({
+        current: meta.page,
+        total: meta.totalPages,
+        container: pagerContainer,
+        onPageChange: async (newPage) => {
+          closeAllForms();
+          await loadCommentsPage(newPage);
+        },
+      });
+    }
+
+    function updateCommentsList() {
+      listContainer.innerHTML = "";
+      const comments = state.get();
+      const meta = state.meta();
+
+      if (!comments.length && meta.page === 1) {
+        listContainer.appendChild(renderEmpty());
+      } else {
+        listContainer.appendChild(
+          renderCommentsList(comments, {
+            currentUser,
+            onReply: handleReply,
+            onEdit: handleEdit,
+            onDelete: handleDelete,
+          }),
+        );
+      }
+      renderPager();
+    }
+
+    await loadCommentsPage(1);
 
     if (currentUser?.id) {
       if (formContainer) formContainer.hidden = false;
@@ -65,8 +113,12 @@ export async function initComments({ projectId, api, container, currentUser }) {
             }
 
             if (response?.success && response.data) {
-              state.add(response.data);
-              updateCommentsList();
+              if (state.meta().page !== 1) {
+                await loadCommentsPage(1);
+              } else {
+                state.add(response.data);
+                updateCommentsList();
+              }
               return { success: true };
             }
 
@@ -89,27 +141,6 @@ export async function initComments({ projectId, api, container, currentUser }) {
     } else {
       if (formContainer) formContainer.hidden = true;
       if (loginHint) loginHint.hidden = false;
-    }
-
-    const listContainer = document.createElement("div");
-    container.appendChild(listContainer);
-
-    function updateCommentsList() {
-      listContainer.innerHTML = "";
-      const comments = state.get();
-
-      if (!comments.length) {
-        listContainer.appendChild(renderEmpty());
-      } else {
-        listContainer.appendChild(
-          renderCommentsList(comments, {
-            currentUser,
-            onReply: handleReply,
-            onEdit: handleEdit,
-            onDelete: handleDelete,
-          }),
-        );
-      }
     }
 
     // ---- Handlers ----
@@ -245,28 +276,29 @@ export async function initComments({ projectId, api, container, currentUser }) {
       try {
         const res = await api.deleteComment(commentId);
         if (res?.success) {
-          host.classList.add("deleted");
-          const avatar = host.querySelector(".comment-avatar");
-          const username = host.querySelector(".comment-username");
-          const msg = host.querySelector(".comment-message");
-          const actions = host.querySelector(".comment-actions");
-          if (avatar) avatar.style.display = "none";
-          if (username) username.style.display = "none";
-          if (msg) {
-            msg.textContent = "[deleted]";
-            msg.classList.add("deleted");
-          }
-          if (actions) actions.style.display = "none";
-
           state.remove(commentId);
+
+          const deletedComment  = state.find(commentId);
+          if (!deletedComment ) return;
+
+          const newCommentEl = renderComment(deletedComment , {
+            currentUser,
+            onReply: handleReply,
+            onEdit: handleEdit,
+            onDelete: handleDelete,
+          });
+
+          host.replaceWith(newCommentEl);
+          
+          renderPager();
 
           setAriaExpanded(opener, { expanded: false });
           if (opener && document.contains(opener)) {
             opener.focus();
           } else {
-            host.setAttribute("tabindex", "-1");
-            host.focus();
-            setTimeout(() => host.removeAttribute("tabindex"), 0);
+            newCommentEl.setAttribute("tabindex", "-1");
+            newCommentEl.focus();
+            setTimeout(() => newCommentEl.removeAttribute("tabindex"), 0);
           }
         } else {
           console.error(res?.message || "Delete failed");
@@ -277,8 +309,6 @@ export async function initComments({ projectId, api, container, currentUser }) {
         closeAllForms();
       }
     }
-
-    updateCommentsList();
 
     return () => {
       cleanupFunctions.forEach((fn) => fn && fn());
