@@ -1,9 +1,5 @@
 import { createCommentsState } from "./state.js";
-import {
-  renderCommentsList,
-  renderEmpty,
-  renderComment,
-} from "./render.js";
+import { renderCommentsList, renderEmpty, renderComment } from "./render.js";
 import {
   setupMainCommentForm,
   createReplyForm,
@@ -61,7 +57,9 @@ export async function initComments({ projectId, api, container, currentUser }) {
         updateCommentsList();
       } catch (err) {
         console.error("loadCommentsPage failed:", err);
-        showError("Unable to load comments. Please refresh the page or try again later.");
+        showError(
+          "Unable to load comments. Please refresh the page or try again later.",
+        );
       } finally {
         hideLoading();
       }
@@ -334,7 +332,7 @@ export async function initComments({ projectId, api, container, currentUser }) {
     container.innerHTML = "";
     hideLoading();
     showError(
-      "Unable to load condolences right now. Please refresh the page or try again later."
+      "Unable to load condolences right now. Please refresh the page or try again later.",
     );
     return () => {
       container.innerHTML = "";

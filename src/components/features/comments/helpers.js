@@ -91,9 +91,9 @@ export function showError(message) {
   if (indicators?.loadingEl) {
     indicators.loadingEl.hidden = true;
   }
-  
+
   if (!indicators?.errorEl) return;
-  indicators.errorEl.textContent = 
+  indicators.errorEl.textContent =
     message ?? "Unable to load comments. Please try again.";
   indicators.errorEl.hidden = false;
 }
