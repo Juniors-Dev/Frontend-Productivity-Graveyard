@@ -4,6 +4,7 @@ import { renderProfile } from "../components/features/profile/profile.js";
 import { api } from "../main.js";
 import { pagination } from "../components/features/pagination/pagination.js";
 import { requireAuth } from "../components/forms/authService.js";
+import { setupEditProfileUI } from "../components/features/profile/setupEditProfileUI.js";
 
 const projectsContainer = document.querySelector(".users-projects");
 const paginationContainer = document.querySelector(".pagination");
@@ -79,6 +80,10 @@ async function initProfilePage() {
 
     // Render user details
     renderProfile(user.data);
+    const viewingOwnProfile = !userId;
+
+    //render the setupEditProfileUI
+    setupEditProfileUI(user.data, viewingOwnProfile, api, renderProfile);
 
     // Render projects
     projectsContainer.innerHTML = "";

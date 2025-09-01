@@ -69,6 +69,9 @@
       <section id="profile">
         <div class="profile-container container">
           <div class="profile-details">
+            <button id="edit-profile-btn" type="button" class="icon-btn">
+              Edit profile
+            </button>
             <img
               alt="Profile Picture"
               class="profile-picture"
@@ -77,6 +80,9 @@
             <div class="profile-info">
               <span class="profile-name" id="profile-name"></span>
               <p id="profile-nickname"></p>
+            </div>
+            <div class="location" id="profile-location">
+              <p id="profile-bio"></p>
             </div>
             <div class="location" id="profile-location"></div>
             <div class="burried" id="profile-burried"></div>
@@ -92,5 +98,63 @@
       </section>
     </main>
     <footer></footer>
+    <!-- Edit Profile Modal -->
+    <div
+      id="edit-modal"
+      class="modal"
+      aria-hidden="true"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="edit-modal-title"
+    >
+      <div class="modal-backdrop" data-close="true"></div>
+
+      <div class="modal-dialog" role="document">
+        <header class="modal-header">
+          <h2 id="edit-modal-title">Edit profile</h2>
+          <button
+            type="button"
+            class="modal-close"
+            id="edit-modal-close"
+            aria-label="Close"
+          >
+            ✕
+          </button>
+        </header>
+
+        <form id="edit-modal-form" class="modal-body">
+          <label>
+            First name
+            <input type="text" name="firstName" id="modal-firstName" />
+          </label>
+
+          <label>
+            Last name
+            <input type="text" name="lastName" id="modal-lastName" />
+          </label>
+
+          <label>
+            Username
+            <input type="text" name="username" id="modal-username" />
+          </label>
+
+          <label>
+            Bio
+            <input type="text" name="bio" id="modal-bio" />
+          </label>
+
+          <label>
+            Avatar URL
+            <input type="url" name="avatarUrl" id="modal-avatarUrl" />
+          </label>
+
+          <div class="modal-actions">
+            <button type="submit" id="edit-modal-save">Save</button>
+            <button type="button" id="edit-modal-cancel">Cancel</button>
+            <span id="edit-modal-status" class="modal-status"></span>
+          </div>
+        </form>
+      </div>
+    </div>
   </body>
 </html>
