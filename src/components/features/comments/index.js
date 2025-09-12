@@ -41,7 +41,9 @@ export async function initComments({ projectId, api, container, currentUser }) {
 
           return {
             success: false,
-            error: response?.message || "Sorry, we couldn't post your condolence. Please try again.",
+            error:
+              response?.message ||
+              "Sorry, we couldn't post your condolence. Please try again.",
           };
         },
       });
@@ -84,7 +86,11 @@ export async function initComments({ projectId, api, container, currentUser }) {
   } catch (error) {
     console.error("Error initializing comments:", error);
     container.innerHTML = "";
-    container.appendChild(renderError("Unable to load condolences right now. Please refresh the page or try again later."));
+    container.appendChild(
+      renderError(
+        "Unable to load condolences right now. Please refresh the page or try again later.",
+      ),
+    );
     return () => {
       container.innerHTML = "";
     };

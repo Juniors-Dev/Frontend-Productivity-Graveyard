@@ -100,35 +100,38 @@
             class="modal-close"
             id="edit-modal-close"
             aria-label="Close"
-          >
-            ✕
-          </button>
+          ></button>
         </header>
 
         <form id="edit-modal-form" class="modal-body">
           <label>
             First name
             <input type="text" name="firstName" id="modal-firstName" />
+            <span class="error-message" id="error-firstName"></span>
           </label>
 
           <label>
             Last name
             <input type="text" name="lastName" id="modal-lastName" />
+            <span class="error-message" id="error-lastName"></span>
           </label>
 
           <label>
             Username
             <input type="text" name="username" id="modal-username" />
+            <span class="error-message" id="error-username"></span>
           </label>
 
           <label>
             Bio
             <input type="text" name="bio" id="modal-bio" />
+            <span class="error-message" id="error-bio"></span>
           </label>
 
           <label>
             Avatar URL
             <input type="url" name="avatarUrl" id="modal-avatarUrl" />
+            <span class="error-message" id="error-avatarUrl"></span>
           </label>
 
           <div class="modal-actions">

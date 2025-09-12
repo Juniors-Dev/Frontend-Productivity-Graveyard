@@ -79,9 +79,10 @@ async function initProfilePage() {
     if (!user.success) {
       throw new Error("Failed to fetch user");
     }
-
+    console.log(user.data);
     // Render user details
     renderProfile(user.data);
+
     const viewingOwnProfile = !userId;
 
     //render the setupEditProfileUI

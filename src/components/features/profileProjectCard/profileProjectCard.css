@@ -34,7 +34,10 @@
   color: var(--grey-normal);
   width: 100%;
   cursor: pointer;
-  transition: transform 0.3s ease, box-shadow 0.3s ease, filter 0.3s ease;
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease,
+    filter 0.3s ease;
   text-decoration: none;
 }
 

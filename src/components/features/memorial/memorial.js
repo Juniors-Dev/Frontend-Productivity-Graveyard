@@ -59,7 +59,7 @@ function populateStaticFields(project) {
   }
   if (title) title.textContent = project.name || "";
   if (buriedBy) {
-    buriedBy.textContent = ""; 
+    buriedBy.textContent = "";
     const label = createEl("span", { className: "buried-by-label" });
     label.textContent = "Buried by ";
     const link = createEl("a", {

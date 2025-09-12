@@ -17,7 +17,9 @@ async function loadProject(projectId) {
   try {
     const res = await api.getProject(projectId);
     if (!res.success || !res.data) {
-      throw new Error("Something went wrong. Please refresh the page or try again later.");
+      throw new Error(
+        "Something went wrong. Please refresh the page or try again later.",
+      );
     }
     document.getElementById("memorial-loading").style.display = "none";
     document.querySelector(".tombstone-content").style.display = "";
@@ -26,43 +28,42 @@ async function loadProject(projectId) {
   } catch (err) {
     document.getElementById("memorial-loading").style.display = "none";
     if (errorMsg) {
-      errorMsg.textContent = "Unable to load this memorial. Please refresh the page or try again later.";
+      errorMsg.textContent =
+        "Unable to load this memorial. Please refresh the page or try again later.";
       errorMsg.style.display = "";
     }
     console.error(err);
   }
 }
 
- async function initMemorialPage() {
-   const projectId = getProjectIdFromURL();
-   if (!projectId) {
-     const errorMsg = document.querySelector(".memorial-error");
-     if (errorMsg) {
-        errorMsg.innerHTML = `
+async function initMemorialPage() {
+  const projectId = getProjectIdFromURL();
+  if (!projectId) {
+    const errorMsg = document.querySelector(".memorial-error");
+    if (errorMsg) {
+      errorMsg.innerHTML = `
         <p>We couldn't find this memorial.</p>
         <a href="/graveyard.html" class="btn-beige btn-small">Browse all memorials</a>
         `;
-       errorMsg.style.display = "";
-     }
-     return;
-   }
-   try {
-     await loadProject(projectId);
-     
-     const commentsContainer = document.getElementById("comments-container");
-     const currentUser = authService.getCurrentUser();
+      errorMsg.style.display = "";
+    }
+    return;
+  }
+  try {
+    await loadProject(projectId);
+
+    const commentsContainer = document.getElementById("comments-container");
+    const currentUser = authService.getCurrentUser();
 
     initComments({
-       projectId,
-       api,
-       container: commentsContainer,
-       currentUser
-     });
+      projectId,
+      api,
+      container: commentsContainer,
+      currentUser,
+    });
+  } catch (err) {
+    console.error("Error initializing memorial page:", err);
+  }
+}
 
-   } catch (err) {
-     console.error("Error initializing memorial page:", err);
-   }
- }
-
- initMemorialPage();
-
+initMemorialPage();

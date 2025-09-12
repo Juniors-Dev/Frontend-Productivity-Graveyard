@@ -15,7 +15,9 @@ import { canReply, canModify } from "./permissions.js";
  */
 export function renderCommentsList(comments, options = {}) {
   const list = createEl("div", { class: "comments-list" });
-  comments.forEach((comment) => list.appendChild(renderComment(comment, options)));
+  comments.forEach((comment) =>
+    list.appendChild(renderComment(comment, options)),
+  );
   return list;
 }
 
@@ -40,7 +42,11 @@ export function renderComment(comment, options = {}) {
   const metaRow = renderCommentMeta(comment);
   el.appendChild(metaRow);
 
-  const message = createEl("div", { class: "comment-message" }, comment.message);
+  const message = createEl(
+    "div",
+    { class: "comment-message" },
+    comment.message,
+  );
   el.appendChild(message);
 
   if (currentUser && currentUser.id) {
@@ -86,7 +92,11 @@ function renderCommentMeta(comment) {
 
   userSection.append(avatar, username);
 
-  const time = createEl("span", { class: "comment-time" }, timeAgo(comment.createdAt));
+  const time = createEl(
+    "span",
+    { class: "comment-time" },
+    timeAgo(comment.createdAt),
+  );
   metaRow.append(userSection, time);
 
   return metaRow;
@@ -149,7 +159,11 @@ function renderDeletedComment(comment) {
     createEl("span", { class: "comment-username" }, "Condolence deleted"),
   );
 
-  const time = createEl("span", { class: "comment-time" }, timeAgo(comment.createdAt));
+  const time = createEl(
+    "span",
+    { class: "comment-time" },
+    timeAgo(comment.createdAt),
+  );
   metaRow.append(userSection, time);
 
   const message = createEl("div", { class: "comment-message" }, "[deleted]");

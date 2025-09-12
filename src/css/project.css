@@ -464,7 +464,6 @@ button:focus-visible {
   outline-offset: 0.125rem;
 }
 
-
 @media (max-width: 1300px) {
   .tombstone-top::after,
   .tombstone-top::before {

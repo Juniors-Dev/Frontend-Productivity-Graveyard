@@ -69,19 +69,46 @@ export function setupEditProfileUI(
     statusEl.textContent = "Saving...";
     saveBtn.disabled = true;
 
+    function isValidUrl(url) {
+      try {
+        new URL(url);
+        return true;
+      } catch {
+        return false;
+      }
+    }
+
+    const avatar = inAvatar.value.trim();
+
     const payload = {
       firstName: inFirst.value.trim(),
       lastName: inLast.value.trim(),
       username: inUser.value.trim(),
-      bio: inBio.value.trim(),
-      avatarUrl: inAvatar.value.trim(),
+      ...(inBio.value.trim() && { bio: inBio.value.trim() }),
+      avatarUrl: avatar ? (isValidUrl(avatar) ? avatar : null) : "",
     };
 
     try {
       const res = await api.updateCurrentUser(payload);
 
       if (!res?.success) {
-        statusEl.textContent = res?.message || "Failed to save.";
+        let statusMessage = res.message || "Failed to save.";
+
+        if (Array.isArray(res.errors)) {
+          statusMessage = `Validation failed: ${res.errors.length} error(s)`;
+
+          res.errors.forEach((err) => {
+            const field = err.field;
+            const message = err.message || err.msg || "Invalid value";
+
+            const errorElem = document.querySelector(`#error-${field}`);
+            if (errorElem) {
+              errorElem.textContent = message;
+            }
+          });
+        }
+
+        statusEl.textContent = statusMessage;
         console.warn("Update response:", res);
         return;
       }

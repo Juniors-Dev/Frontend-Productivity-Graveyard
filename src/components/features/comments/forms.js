@@ -2,12 +2,15 @@ import { createEl } from "../../../utils/createEl.js";
 import { validateComment } from "../../forms/validation.js";
 
 export function createMainCommentForm({ onSubmit }) {
-  const form = createEl("form", { class: "comment-form", id: "main-comment-form" });
+  const form = createEl("form", {
+    class: "comment-form",
+    id: "main-comment-form",
+  });
 
   const textarea = createEl("textarea", {
     id: "main-comment-textarea",
-      placeholder: "Write a condolence...",
-      rows: 4,
+    placeholder: "Write a condolence...",
+    rows: 4,
     maxlength: 2000,
     required: true,
     "aria-label": "Write a condolence",
@@ -70,7 +73,9 @@ export function createMainCommentForm({ onSubmit }) {
         textarea.value = "";
         textarea.classList.remove("is-valid", "is-invalid");
       } else {
-        errorElem.textContent = result?.error || "Sorry, we couldn't post your condolence. Please try again.";
+        errorElem.textContent =
+          result?.error ||
+          "Sorry, we couldn't post your condolence. Please try again.";
       }
     } catch (error) {
       console.error("Error submitting comment:", error);

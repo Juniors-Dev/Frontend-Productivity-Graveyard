@@ -1,4 +1,4 @@
-import { avatarApiUrl } from '../../../utils/constants.js';
+import { avatarApiUrl } from "../../../utils/constants.js";
 
 /**
  * Check if a comment is deleted
@@ -12,13 +12,16 @@ export const isCommentDeleted = (comment) => comment?.isDeleted === true;
  * @param {Object} user - The user object
  * @returns {string} Avatar URL
  */
-export const getUserAvatarUrl = (user) => 
- user?.avatarUrl || `${avatarApiUrl}/?name=${encodeURIComponent(user?.username || "Anonymous")}&background=random`;
+export const getUserAvatarUrl = (user) =>
+  user?.avatarUrl ||
+  `${avatarApiUrl}/?name=${encodeURIComponent(user?.username || "Anonymous")}&background=random`;
 
 /**
  * Close all open comment forms
  * TODO: Will be used when reply/edit forms are implemented
  */
 export const closeAllForms = () => {
-  document.querySelectorAll(".reply-form, .edit-form").forEach((form) => form.remove());
-}
+  document
+    .querySelectorAll(".reply-form, .edit-form")
+    .forEach((form) => form.remove());
+};
