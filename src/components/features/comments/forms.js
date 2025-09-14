@@ -8,7 +8,7 @@ const FORM_CONFIGS = {
     textareaRows: 2,
     placeholder: "Write a reply...",
     submitText: "Reply",
-    submitClass: "btn-beige btn-small",
+    submitClass: "btn-small btn-submit",
     ariaLabel: "Write a reply",
     loadingText: "Posting...",
     errorMessage: "Unable to post your reply. Please try again.",
@@ -20,7 +20,7 @@ const FORM_CONFIGS = {
     textareaRows: 3,
     placeholder: "Edit your comment…",
     submitText: "Save",
-    submitClass: "btn-beige btn-small",
+    submitClass: "btn-small btn-submit",
     ariaLabel: "Edit comment",
     loadingText: "Saving…",
     errorMessage: "Unable to save your changes. Please try again.",
@@ -244,12 +244,14 @@ function createCommentFormFactory({
     "button",
     {
       type: "button",
-      class: "btn-small",
+      class: "btn-small btn-cancel",
     },
     "Cancel",
   );
 
-  form.append(textarea, submitBtn, cancelBtn, errorElem);
+  const actions = createEl("div", { class: "form-actions" });
+  actions.append(submitBtn, cancelBtn);
+  form.append(textarea, actions, errorElem);
 
   wireFormBehavior({
     type,
