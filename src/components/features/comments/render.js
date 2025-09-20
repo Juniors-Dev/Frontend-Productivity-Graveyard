@@ -2,6 +2,7 @@ import { createEl } from "../../../utils/createEl.js";
 import { timeAgo } from "../../../utils/dateHandlers.js";
 import { isCommentDeleted, getUserAvatarUrl } from "./helpers.js";
 import { canReply, canModify } from "./permissions.js";
+import { createIcon } from "../../ui/icon.js";
 
 /**
  * Render a list of comments
@@ -14,7 +15,7 @@ import { canReply, canModify } from "./permissions.js";
  * @returns {HTMLElement} Comments list container
  */
 export function renderCommentsList(comments, options = {}) {
-  const list = createEl("div", { class: "comments-list" });
+  const list = createEl("div", { class: "comments-list", role: "list" });
   comments.forEach((comment) =>
     list.appendChild(renderComment(comment, options)),
   );
@@ -36,6 +37,7 @@ export function renderComment(comment, options = {}) {
 
   const el = createEl("div", {
     class: "comment",
+    role: "listitem",
     "data-comment-id": comment.id,
   });
 
@@ -113,43 +115,47 @@ function renderCommentActions(comment, options) {
   const leftActions = createEl("div");
   const rightActions = createEl("div");
 
-  // TODO: Use svg icons instead of text
   if (canReply(comment, currentUser)) {
-    const replyBtn = createEl(
-      "button",
-      {
-        class: "btn-small",
-        "aria-label": "Reply to comment",
-        "aria-expanded": "false",
-      },
-      "Reply",
-    );
-    replyBtn.onclick = () => onReply?.(comment.id);
+    const replyBtn = createEl("button", {
+      class: "btn-small btn-with-icon",
+      type: "button",
+      "aria-label": "Reply to comment",
+    });
+
+    const icon = createIcon("reply");
+    if (icon) replyBtn.appendChild(icon);
+    replyBtn.appendChild(createEl("span", { class: "btn-label" }, "Reply"));
+
+    replyBtn.addEventListener("click", () => onReply?.(comment.id));
     leftActions.appendChild(replyBtn);
   }
 
   if (canModify(comment, currentUser)) {
-    const editBtn = createEl(
-      "button",
-      {
-        class: "btn-small",
-        "aria-label": "Edit comment",
-        "aria-expanded": "false",
-      },
-      "Edit",
-    );
-    editBtn.onclick = () => onEdit?.(comment.id);
+    const editBtn = createEl("button", {
+      class: "btn-small btn-with-icon",
+      type: "button",
+      "aria-label": "Edit comment",
+    });
 
-    const deleteBtn = createEl(
-      "button",
-      { class: "btn-small", "aria-label": "Delete comment" },
-      "Delete",
-    );
-    deleteBtn.onclick = () => {
+    const editIcon = createIcon("edit");
+    if (editIcon) editBtn.appendChild(editIcon);
+    editBtn.appendChild(createEl("span", { class: "btn-label" }, "Edit"));
+    editBtn.addEventListener("click", () => onEdit?.(comment.id));
+
+    const deleteBtn = createEl("button", {
+      class: "btn-small btn-with-icon btn-danger",
+      type: "button",
+      "aria-label": "Delete comment",
+    });
+
+    const deleteIcon = createIcon("delete");
+    if (deleteIcon) deleteBtn.appendChild(deleteIcon);
+    deleteBtn.appendChild(createEl("span", { class: "btn-label" }, "Delete"));
+    deleteBtn.addEventListener("click", () => {
       if (confirm("Are you sure you want to delete this comment?")) {
         onDelete?.(comment.id);
       }
-    };
+    });
 
     rightActions.append(editBtn, deleteBtn);
   }
