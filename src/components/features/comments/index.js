@@ -340,7 +340,7 @@ export async function initComments({ projectId, api, container, currentUser }) {
     container.innerHTML = "";
     hideLoading();
     showError(
-      "Unable to load condolences right now. Please refresh the page or try again later.",
+      "Unable to load comments right now. Please refresh the page or try again later.",
     );
     return () => {
       container.innerHTML = "";
