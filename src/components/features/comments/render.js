@@ -45,7 +45,7 @@ export function renderComment(comment, options = {}) {
   el.appendChild(metaRow);
 
   const message = createEl(
-    "div",
+    "p",
     { class: "comment-message" },
     comment.message,
   );
@@ -187,7 +187,7 @@ function renderDeletedComment(comment, options = {}) {
   );
   metaRow.append(userSection, time);
 
-  const message = createEl("div", { class: "comment-message" }, "[deleted]");
+  const message = createEl("p", { class: "comment-message" }, "[deleted]");
   el.append(metaRow, message);
 
   if (comment.replies && comment.replies.length > 0) {
