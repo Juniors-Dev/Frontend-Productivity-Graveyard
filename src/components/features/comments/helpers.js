@@ -121,46 +121,39 @@ export const getUserAvatarUrl = (user) =>
    UI INDICATORS (LOADING / ERROR)
    ------------------------------------------------------------------------- */
 
-let indicators = null;
-
 /**
- * Cache indicator elements (idempotent).
- * @returns {{loadingEl: HTMLElement|null, errorEl: HTMLElement|null}}
+ * Initialize loading/error indicators for comments.
+ * @param {Document|HTMLElement} [root=document] - Root node to query within
+ * @returns {{
+ *   showLoading: () => void,
+ *   hideLoading: () => void,
+ *   showError: (message?: string) => void,
+ *   hideError: () => void
+ * }}
  */
-export function initIndicators() {
-  indicators = {
-    loadingEl: document.getElementById("comments-loading"),
-    errorEl: document.getElementById("comments-error"),
+export function initIndicators(root = document) {
+  const loadingEl = root.querySelector("#comments-loading");
+  const errorEl   = root.querySelector("#comments-error");
+
+  return {
+    showLoading() {
+      if (loadingEl) loadingEl.hidden = false;
+    },
+    hideLoading() {
+      if (loadingEl) loadingEl.hidden = true;
+    },
+    showError(message = "Unable to load comments. Please try again.") {
+      if (loadingEl) loadingEl.hidden = true;
+      if (errorEl) {
+        errorEl.textContent = message;
+        errorEl.hidden = false;
+      }
+    },
+    hideError() {
+      if (errorEl) {
+        errorEl.textContent = "";
+        errorEl.hidden = true;
+      }
+    },
   };
-  return indicators;
-}
-
-export function showLoading() {
-  if (!indicators?.loadingEl) return;
-  indicators.loadingEl.hidden = false;
-}
-
-export function hideLoading() {
-  if (!indicators?.loadingEl) return;
-  indicators.loadingEl.hidden = true;
-}
-
-/**
- * Show an error message and ensure loading is hidden.
- * @param {string} [message]
- */
-export function showError(message) {
-  if (indicators?.loadingEl) {
-    indicators.loadingEl.hidden = true;
-  }
-  if (!indicators?.errorEl) return;
-  indicators.errorEl.textContent =
-    message ?? "Unable to load comments. Please try again.";
-  indicators.errorEl.hidden = false;
-}
-
-export function hideError() {
-  if (!indicators?.errorEl) return;
-  indicators.errorEl.textContent = "";
-  indicators.errorEl.hidden = true;
 }
