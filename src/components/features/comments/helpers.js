@@ -66,3 +66,30 @@ export function setAriaExpanded(btn, { expanded, controlsId } = {}) {
     btn.removeAttribute("aria-controls");
   }
 }
+
+export function initIndicators(root = document) {
+  const loadingEl = root.querySelector("#comments-loading");
+  const errorEl   = root.querySelector("#comments-error");
+
+  return {
+    showLoading() {
+      if (loadingEl) loadingEl.hidden = false;
+    },
+    hideLoading() {
+      if (loadingEl) loadingEl.hidden = true;
+    },
+    showError(message = "Unable to load comments. Please try again.") {
+      if (loadingEl) loadingEl.hidden = true;
+      if (errorEl) {
+        errorEl.textContent = message;
+        errorEl.hidden = false;
+      }
+    },
+    hideError() {
+      if (errorEl) {
+        errorEl.textContent = "";
+        errorEl.hidden = true;
+      }
+    },
+  };
+}

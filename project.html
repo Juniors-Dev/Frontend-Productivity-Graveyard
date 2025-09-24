@@ -155,11 +155,25 @@
             <a href="/signup.html">register</a>
             to share your condolences.
           </div>
-          <div id="comments-container"></div>
-          <div id="comments-loading" class="loading-state" hidden>
-            <div class="loader-comments"></div>
+          <div
+            id="comments-loading"
+            class="loading-state"
+            role="status"
+            aria-live="polite"
+            aria-atomic="true"
+            hidden
+          >
+            <div class="loader-comments" aria-hidden="true"></div>
+            <span class="sr-only">Loading condolences…</span>
           </div>
-          <div id="comments-error" class="error-state" hidden></div>
+          <div
+            id="comments-error"
+            class="error-state"
+            role="alert"
+            aria-live="polite"
+            hidden
+          ></div>
+          <div id="comments-container"></div>
         </div>
       </section>
     </main>

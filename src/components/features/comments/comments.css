@@ -1,0 +1,35 @@
+#comments-loading[hidden],
+#comments-error[hidden] {
+  display: none;
+}
+
+.error-state {
+  text-align: center;
+  padding: 2rem;
+  color: var(--color-error);
+  background: rgba(214, 69, 80, 0.1);
+  border: 1px solid var(--color-error);
+  border-radius: 8px;
+  margin: 1rem 0;
+}
+
+.loading-state {
+  display: flex;
+  justify-content: center;
+  padding: 2rem;
+}
+
+.loader-comments {
+  width: 40px;
+  height: 40px;
+  border: 3px solid rgba(224, 199, 158, 0.2);
+  border-top-color: var(--beige-normal);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}

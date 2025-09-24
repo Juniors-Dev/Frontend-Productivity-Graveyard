@@ -198,7 +198,3 @@ function renderDeletedComment(comment, options = {}) {
 export function renderEmpty() {
   return createEl("div", { class: "comments-empty" }, "No condolences yet.");
 }
-
-export function renderError(message = "Something went wrong") {
-  return createEl("div", { class: "error-state" }, message);
-}
