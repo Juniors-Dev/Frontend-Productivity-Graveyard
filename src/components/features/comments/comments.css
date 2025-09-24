@@ -210,6 +210,7 @@
   padding-left: 0.5rem;
   margin-bottom: 0.8rem;
   white-space: pre-wrap;
+  overflow-wrap: anywhere;
 }
 
 /* Comment Actions */
