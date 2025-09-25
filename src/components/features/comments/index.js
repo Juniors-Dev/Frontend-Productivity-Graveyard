@@ -11,10 +11,6 @@ import {
   ensureRepliesContainer,
   setAriaExpanded,
   initIndicators,
-  showLoading,
-  hideLoading,
-  showError,
-  hideError,
 } from "./helpers.js";
 import { pagination } from "../pagination/pagination.js";
 
@@ -33,9 +29,9 @@ export async function initComments({ projectId, api, container, currentUser }) {
     return () => {};
   }
 
-  initIndicators();
-  showLoading();
-  hideError();
+  const ui = initIndicators();
+  ui.showLoading();
+  ui.hideError();
   container.innerHTML = "";
 
   const state = createCommentsState({ projectId, api });
@@ -50,18 +46,18 @@ export async function initComments({ projectId, api, container, currentUser }) {
     container.append(listContainer, pagerContainer);
 
     async function loadCommentsPage(page = 1) {
-      showLoading();
-      hideError();
+      ui.showLoading();
+      ui.hideError();
       try {
         await state.load(page);
         updateCommentsList();
       } catch (err) {
         console.error("loadCommentsPage failed:", err);
-        showError(
+        ui.showError(
           "Unable to load comments. Please refresh the page or try again later.",
         );
       } finally {
-        hideLoading();
+        ui.hideLoading();
       }
     }
 
@@ -330,8 +326,8 @@ export async function initComments({ projectId, api, container, currentUser }) {
   } catch (err) {
     console.error("Error initializing comments:", err);
     container.innerHTML = "";
-    hideLoading();
-    showError(
+    ui.hideLoading();
+    ui.showError(
       "Unable to load condolences right now. Please refresh the page or try again later.",
     );
     return () => {
