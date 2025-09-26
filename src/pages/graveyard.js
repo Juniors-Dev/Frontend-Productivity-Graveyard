@@ -5,20 +5,27 @@ import {
 import { pagination } from "../components/features/pagination/pagination.js";
 import { api } from "../main.js";
 
-const urlParams = new URLSearchParams(window.location.search);
-let order = urlParams.get("order") || "desc";
-let orderBy = urlParams.get("orderBy") || "createdAt";
-let query = urlParams.get("query") || "";
-let types = urlParams.get("types") || "";
-let limit = parseInt(urlParams.get("limit"), 10) || 10;
-if (limit > 100) {
-  limit = 100;
+function getPageState() {
+  const params = new URLSearchParams(window.location.search);
+
+  let limit = Number(params.get("limit")) || 10;
+  limit = Math.min(100, Math.max(1, limit));
+
+  const offset = Number(params.get("offset")) || 0;
+  const currentPage = Math.floor(offset / limit) + 1;
+
+  return {
+    order: params.get("order") || "desc",
+    orderBy: params.get("orderBy") || "createdAt",
+    query: params.get("query") || "",
+    types: params.get("types") || "",
+    limit,
+    offset,
+    currentPage,
+  };
 }
-let currentPage =
-  Math.floor(
-    (parseInt(urlParams.get("offset"), 10) || 0) /
-      (parseInt(urlParams.get("limit"), 10) || 10),
-  ) + 1;
+let { order, orderBy, query, types, limit, offset, currentPage } =
+  getPageState();
 
 const projectsContainer = document.querySelector(".project-container");
 const paginationContainer = document.querySelector(".pagination");
@@ -33,7 +40,7 @@ function showSkeletons(count = limit) {
 async function fetchAndRenderProjects(page = 1) {
   showSkeletons();
   try {
-    const offset = (page - 1) * limit;
+    offset = (page - 1) * limit;
     const url = new URL(window.location);
     url.searchParams.set("offset", offset);
     window.history.pushState({}, "", url);
@@ -180,4 +187,10 @@ clearSearchBtn.addEventListener("click", async (e) => {
   query = "";
   formHandler(e);
   console.log(query);
+});
+
+addEventListener("popstate", () => {
+  [order, orderBy, query, types, limit, offset, currentPage] =
+    Object.values(getPageState());
+  fetchAndRenderProjects(currentPage);
 });
