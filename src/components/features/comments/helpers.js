@@ -1,8 +1,6 @@
 import { avatarApiUrl } from "../../../utils/constants.js";
 
-/* -------------------------------------------------------------------------
-   COMMENT STATE HELPERS 
-   ------------------------------------------------------------------------- */
+/* ------------------------ STATE HELPERS ------------------------ */
 
 /**
  * Toggle visual/interaction state on a single comment host.
@@ -51,9 +49,7 @@ export const closeAllForms = (container) => {
   resetAllCommentStates(container);
 };
 
-/* -------------------------------------------------------------------------
-   DOM HELPERS  - Element selection and structure manipulation
-   ------------------------------------------------------------------------- */
+/* ------------------------- DOM HELPERS   -------------------------- */
 
 /**
  * Find a comment element by its id within a root container.
@@ -95,9 +91,7 @@ export function setAriaExpanded(btn, { expanded, controlsId } = {}) {
   }
 }
 
-/* -------------------------------------------------------------------------
-   COMMENT METADATA / UTILITIES
-   ------------------------------------------------------------------------- */
+/* ------------------- COMMENT METADATA / UTILITIES -------------------- */
 
 /**
  * Check if a comment is soft-deleted.
@@ -117,9 +111,7 @@ export const getUserAvatarUrl = (user) =>
     user?.username || "Anonymous",
   )}&background=random`;
 
-/* -------------------------------------------------------------------------
-   UI INDICATORS (LOADING / ERROR)
-   ------------------------------------------------------------------------- */
+/* ------------------ UI INDICATORS (LOADING / ERROR) ------------------*/
 
 /**
  * Initialize loading/error indicators for comments.
