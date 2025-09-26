@@ -7,6 +7,7 @@ import {
 } from "./forms.js";
 import {
   closeAllForms,
+  setCommentFormState,
   getCommentEl,
   ensureRepliesContainer,
   setAriaExpanded,
@@ -71,7 +72,7 @@ export async function initComments({ projectId, api, container, currentUser }) {
         total: meta.totalPages,
         container: pagerContainer,
         onPageChange: async (newPage) => {
-          closeAllForms();
+          closeAllForms(container);
           await loadCommentsPage(newPage);
         },
       });
@@ -153,7 +154,7 @@ export async function initComments({ projectId, api, container, currentUser }) {
 
     // ---- Handlers ----
     async function handleReply(parentId) {
-      closeAllForms();
+      closeAllForms(container);
 
       const host = getCommentEl(container, parentId);
       if (!host) return;
@@ -165,14 +166,18 @@ export async function initComments({ projectId, api, container, currentUser }) {
           : null;
       const formId = `reply-form-${parentId}-${Date.now()}`;
 
+      setCommentFormState(host, "replying");
+
       const form = createReplyForm({
         formId,
         onCancel: () => {
           form.remove();
+          setCommentFormState(host, null);
           setAriaExpanded(opener, { expanded: false });
-          opener?.focus();
+          (opener ?? host)?.focus();
         },
         onSubmit: async (message) => {
+          host.setAttribute("aria-busy", "true");
           try {
             const res = await api.createProjectComment(projectId, {
               message,
@@ -188,9 +193,9 @@ export async function initComments({ projectId, api, container, currentUser }) {
               replies.prepend(newReplyEl);
               state.add(res.data);
               form.remove();
+              setCommentFormState(host, null);
               setAriaExpanded(opener, { expanded: false });
-              opener?.focus();
-
+              (opener ?? host)?.focus();
               return { success: true };
             }
             return {
@@ -205,6 +210,8 @@ export async function initComments({ projectId, api, container, currentUser }) {
               message:
                 "Connection failed. Please check your internet and try again.",
             };
+          } finally {
+            host.removeAttribute("aria-busy");
           }
         },
       });
@@ -214,8 +221,7 @@ export async function initComments({ projectId, api, container, currentUser }) {
     }
 
     async function handleEdit(commentId) {
-      closeAllForms();
-
+      closeAllForms(container);
       const host = getCommentEl(container, commentId);
       if (!host) return;
       const comment = state.find(commentId);
@@ -229,26 +235,28 @@ export async function initComments({ projectId, api, container, currentUser }) {
           : null;
       const formId = `edit-form-${commentId}-${Date.now()}`;
 
+      setCommentFormState(host, "editing");
+
       const form = createEditForm({
         formId,
         initialValue: comment.message,
         onCancel: () => {
           form.remove();
-          messageEl.style.display = "";
+          setCommentFormState(host, null);
           setAriaExpanded(opener, { expanded: false });
-          opener?.focus();
+          (opener ?? host)?.focus();
         },
         onSubmit: async (message) => {
+          host.setAttribute("aria-busy", "true");
           try {
             const res = await api.updateComment(commentId, { message });
-
             if (res?.success && res.data) {
               messageEl.textContent = res.data.message;
               state.update(commentId, res.data);
               form.remove();
-              messageEl.style.display = "";
+              setCommentFormState(host, null);
               setAriaExpanded(opener, { expanded: false });
-              opener?.focus();
+              (opener ?? host)?.focus();
               return { success: true };
             }
             return {
@@ -263,11 +271,11 @@ export async function initComments({ projectId, api, container, currentUser }) {
               message:
                 "Connection failed. Please check your internet and try again.",
             };
+          } finally {
+            host.removeAttribute("aria-busy");
           }
         },
       });
-
-      messageEl.style.display = "none";
       messageEl.after(form);
       setAriaExpanded(opener, { expanded: true, controlsId: formId });
     }
@@ -314,7 +322,7 @@ export async function initComments({ projectId, api, container, currentUser }) {
       } catch (err) {
         console.error("Delete failed", err);
       } finally {
-        closeAllForms();
+        closeAllForms(container);
       }
     }
 
@@ -328,7 +336,7 @@ export async function initComments({ projectId, api, container, currentUser }) {
     container.innerHTML = "";
     ui.hideLoading();
     ui.showError(
-      "Unable to load condolences right now. Please refresh the page or try again later.",
+      "Unable to load comments right now. Please refresh the page or try again later.",
     );
     return () => {
       container.innerHTML = "";
