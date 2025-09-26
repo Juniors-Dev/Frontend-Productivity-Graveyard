@@ -260,7 +260,7 @@
   display: block;
 }
 
-.comment-actions .btn-with-icon span {
+.comment-actions .btn-with-icon .btn-label {
   line-height: 1;
   font-weight: 500;
   overflow: hidden;
