@@ -1,10 +1,5 @@
 import { createCommentsState } from "./state.js";
-import {
-  renderCommentsList,
-  renderEmpty,
-  renderError,
-  renderComment,
-} from "./render.js";
+import { renderCommentsList, renderEmpty, renderComment } from "./render.js";
 import {
   setupMainCommentForm,
   createReplyForm,
@@ -15,6 +10,7 @@ import {
   getCommentEl,
   ensureRepliesContainer,
   setAriaExpanded,
+  initIndicators,
 } from "./helpers.js";
 import { pagination } from "../pagination/pagination.js";
 
@@ -33,24 +29,36 @@ export async function initComments({ projectId, api, container, currentUser }) {
     return () => {};
   }
 
+  const ui = initIndicators();
+  ui.showLoading();
+  ui.hideError();
+  container.innerHTML = "";
+
   const state = createCommentsState({ projectId, api });
-  container.innerHTML = '<div class="comments-empty">Loading...</div>';
   const cleanupFunctions = [];
 
   try {
-    container.innerHTML = "";
     const formContainer = document.getElementById("comment-form-container");
     const loginHint = document.getElementById("comments-login-hint");
-
     const listContainer = document.createElement("div");
     const pagerContainer = document.createElement("div");
     pagerContainer.className = "pagination-wrapper";
-    container.appendChild(listContainer);
-    container.appendChild(pagerContainer);
+    container.append(listContainer, pagerContainer);
 
     async function loadCommentsPage(page = 1) {
-      await state.load(page);
-      updateCommentsList();
+      ui.showLoading();
+      ui.hideError();
+      try {
+        await state.load(page);
+        updateCommentsList();
+      } catch (err) {
+        console.error("loadCommentsPage failed:", err);
+        ui.showError(
+          "Unable to load comments. Please refresh the page or try again later.",
+        );
+      } finally {
+        ui.hideLoading();
+      }
     }
 
     function renderPager() {
@@ -318,10 +326,9 @@ export async function initComments({ projectId, api, container, currentUser }) {
   } catch (err) {
     console.error("Error initializing comments:", err);
     container.innerHTML = "";
-    container.appendChild(
-      renderError(
-        "Unable to load condolences right now. Please refresh the page or try again later.",
-      ),
+    ui.hideLoading();
+    ui.showError(
+      "Unable to load condolences right now. Please refresh the page or try again later.",
     );
     return () => {
       container.innerHTML = "";
