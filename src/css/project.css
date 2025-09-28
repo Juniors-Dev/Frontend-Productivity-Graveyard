@@ -457,7 +457,8 @@ blockquote {
 }
 
 #memorial-loading[hidden],
-#memorial-error[hidden] {
+#memorial-error[hidden],
+#page-error[hidden] {
   display: none;
 }
 
