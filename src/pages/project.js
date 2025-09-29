@@ -2,9 +2,7 @@ import { api } from "../main.js";
 import { renderMemorial } from "../components/features/memorial/memorial.js";
 import { initComments } from "../components/features/comments/index.js";
 import { authService } from "../components/forms/authService.js";
-import { initErrorFallback, showPageError } from "../utils/errorFallback.js";
-
-initErrorFallback();
+import { showPageError } from "../utils/errorFallback.js";
 
 function getProjectIdFromURL() {
   const params = new URLSearchParams(window.location.search);
