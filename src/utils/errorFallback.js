@@ -6,11 +6,3 @@ export function showPageError(
   el.textContent = message;
   el.hidden = false;
 }
-
-export function initErrorFallback() {
-  if (window.__hasErrorFallback) return;
-  window.__hasErrorFallback = true;
-
-  window.addEventListener("error", () => showPageError());
-  window.addEventListener("unhandledrejection", () => showPageError());
-}
