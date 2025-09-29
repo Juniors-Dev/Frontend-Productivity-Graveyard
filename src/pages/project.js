@@ -67,7 +67,24 @@ async function initMemorialPage() {
     const commentsContainer = document.getElementById("comments-container");
     const currentUser = authService.getCurrentUser();
 
-    initComments({ projectId, api, container: commentsContainer, currentUser });
+    try {
+      initComments({
+        projectId,
+        api,
+        container: commentsContainer,
+        currentUser,
+      });
+    } catch (err) {
+      console.error("Error initializing comments:", err);
+      const commentsErr = document.getElementById("comments-error");
+      if (commentsErr) {
+        commentsErr.textContent =
+          "Unexpected error. Please refresh and try again.";
+        commentsErr.hidden = false;
+      } else if (!commentsErr) {
+        showPageError();
+      }
+    }
   } catch (err) {
     console.error("Error initializing memorial page:", err);
     showPageError();
