@@ -357,6 +357,14 @@ h2 {
   border-radius: var(--section-border-radius);
 }
 
+@media (max-width: 450px) {
+  .explore-container article {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+  }
+}
+
 @media (max-width: 900px) {
   .bury-project-container {
     display: block;
