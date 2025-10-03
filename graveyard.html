@@ -88,10 +88,8 @@
               />
             </div>
             <div class="bury-text">
-              <form id="search-form">
-                <h3 class="centered">Search The Graveyard</h3>
-
-                <!-- Query input -->
+              <form id="filters-form">
+                <h3 class="centered">Search the Graveyard</h3>
                 <div class="input-wrapper">
                   <div class="input-icon-container">
                     <span
@@ -105,83 +103,69 @@
                       placeholder="Find a grave"
                     />
                   </div>
-                  <span class="error-message" id="query-error"></span>
                 </div>
 
-                <!-- Filter buttons -->
+                <!-- order, orderBy, limit -->
+                <div class="order-selectors">
+                  <label
+                    >Order
+                    <select name="order" id="order-selector">
+                      <option value="asc">Ascending</option>
+                      <option value="desc" selected>Descending</option>
+                    </select>
+                  </label>
+                  <label
+                    >Sort By
+                    <select name="orderBy" id="orderby-selector">
+                      <option value="name">Name</option>
+                      <option value="createdAt" selected>Created Date</option>
+                      <option value="startDate">Start Date</option>
+                      <option value="endDate">End Date</option>
+                      <option value="status">Status</option>
+                      <option value="commentCount">Comment Count</option>
+                      <option value="upvoteCount">Upvote Count</option>
+                    </select>
+                  </label>
+                  <label
+                    >Results Per Page
+                    <select name="limit" id="limit-selector">
+                      <option value="10" selected>10</option>
+                      <option value="20">20</option>
+                      <option value="30">30</option>
+                    </select>
+                  </label>
+                </div>
+
+                <!-- project types -->
+                <div class="form-group">
+                  <fieldset class="project-types-fieldset">
+                    <legend class="project-types-legend">
+                      Project Categories
+                    </legend>
+                    <div class="dropdown" id="categoryDropdown">
+                      <button
+                        type="button"
+                        class="dropdown-toggle"
+                        id="categoryDropdownToggle"
+                      >
+                        Select Categories
+                      </button>
+                      <div class="dropdown-menu" id="categoryDropdownMenu">
+                        <!-- checkboxes get injected here -->
+                      </div>
+                    </div>
+                    <span class="error-message" id="types-error"></span>
+                  </fieldset>
+                </div>
                 <div class="filter-buttons-container">
-                  <button class="btn-beige" type="submit">Search</button>
+                  <button class="btn-beige" type="submit">Apply</button>
                   <button
                     type="reset"
                     class="btn-beige btn-small"
-                    id="clear-search"
+                    id="clear-filters"
                   >
-                    Clear Search
+                    Clear
                   </button>
-                  <button
-                    type="button"
-                    class="btn-beige btn-small"
-                    id="toggle-filters"
-                  >
-                    Advanced Filters ▾
-                  </button>
-                </div>
-
-                <!-- Advanced filters collapsible -->
-                <div id="advanced-filters">
-                  <div class="order-selectors">
-                    <div>
-                      <label for="order-selector">Order</label>
-                      <select name="order" id="order-selector">
-                        <option value="asc">Ascending</option>
-                        <option value="desc" selected>Descending</option>
-                      </select>
-                    </div>
-                    <div>
-                      <label for="orderby-selector">Sort By</label>
-                      <select name="orderBy" id="orderby-selector">
-                        <option value="name">Name</option>
-                        <option value="createdAt" selected>Created Date</option>
-                        <option value="startDate">Start Date</option>
-                        <option value="endDate">End Date</option>
-                        <option value="status">Status</option>
-                        <option value="commentCount">Comment Count</option>
-                        <option value="upvoteCount">Upvote Count</option>
-                      </select>
-                    </div>
-                    <div>
-                      <label for="limit-selector">Results Per Page</label>
-                      <select name="limit" id="limit-selector">
-                        <option value="10" selected>10</option>
-                        <option value="20">20</option>
-                        <option value="30">30</option>
-                        <option value="50">50</option>
-                        <option value="100">100</option>
-                      </select>
-                    </div>
-                  </div>
-
-                  <!-- Project types -->
-                  <div class="form-group">
-                    <fieldset class="project-types-fieldset">
-                      <legend class="project-types-legend">
-                        Project Categories
-                      </legend>
-                      <div class="dropdown" id="categoryDropdown">
-                        <button
-                          type="button"
-                          class="dropdown-toggle"
-                          id="categoryDropdownToggle"
-                        >
-                          Select Categories
-                        </button>
-                        <div class="dropdown-menu" id="categoryDropdownMenu">
-                          <!-- Dynamically filled with checkboxes -->
-                        </div>
-                      </div>
-                      <span class="error-message" id="types-error"></span>
-                    </fieldset>
-                  </div>
                 </div>
               </form>
             </div>

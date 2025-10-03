@@ -6,42 +6,24 @@ import {
 
 fetchAndRenderProjects();
 setupGraveyardForms();
-const toggleFiltersBtn = document.getElementById("toggle-filters");
-const advancedFilters = document.getElementById("advanced-filters");
-
-toggleFiltersBtn.addEventListener("click", () => {
-  advancedFilters.classList.toggle("open");
-  const isOpen = advancedFilters.classList.contains("open");
-  toggleFiltersBtn.textContent = isOpen
-    ? "Advanced Filters ▴"
-    : "Advanced Filters ▾";
-});
 
 /* Form Handler */
-const filterForm = document.getElementById("project-filters");
-const searchForm = document.getElementById("search-form");
+const filterForm = document.getElementById("filters-form");
+
 async function formHandler(e) {
   e.preventDefault();
   const formData = new FormData(filterForm);
   const data = Object.fromEntries(formData.entries());
-  const selectedTypes = [...formData.getAll("types")].join(",");
-  data.types = selectedTypes;
-  const searchQuery = searchForm.query.value.trim();
-  if (searchQuery) data.query = searchQuery;
 
-  setPageState(data, () => {
-    fetchAndRenderProjects();
-  });
+  data.types = formData.getAll("types").join(",");
+  if (data.query && !data.query.trim()) delete data.query;
+
+  setPageState(data, fetchAndRenderProjects);
 }
 
-searchForm.addEventListener("submit", async (e) => {
-  formHandler(e);
-});
-
-const clearSearchBtn = document.querySelector("#clear-search");
-clearSearchBtn.addEventListener("click", async (e) => {
-  searchForm.reset();
-  formHandler(e);
+filterForm.addEventListener("submit", formHandler);
+filterForm.addEventListener("reset", () => {
+  setPageState({}, fetchAndRenderProjects);
 });
 
 addEventListener("popstate", () => {
