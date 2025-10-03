@@ -19,40 +19,36 @@ import { getPageState } from "./getPageState.js";
  */
 export async function setupGraveyardForms() {
   let { order, orderBy, types, limit, query } = getPageState();
-  const orderSelector = document.querySelector("#order-selector");
-  orderSelector.value = order;
-  const orderBySelector = document.querySelector("#orderby-selector");
-  orderBySelector.value = orderBy;
-  const limitSelector = document.querySelector("#limit-selector");
-  limitSelector.value = limit;
-  const typesCheckboxes = document.querySelector("#types");
-  const searchForm = document.getElementById("search-form");
-  searchForm.query.value = query;
+
+  const orderSel = document.querySelector("#order-selector");
+  if (orderSel) orderSel.value = order;
+
+  const orderBySel = document.querySelector("#orderby-selector");
+  if (orderBySel) orderBySel.value = orderBy;
+
+  const limitSel = document.querySelector("#limit-selector");
+  if (limitSel) limitSel.value = limit;
+  document.getElementById("search-form").query.value = query;
 
   const typesRes = await api.getAllTypes();
-  let typesArray = [];
-  if (typesRes.success) {
-    typesArray = typesRes.data;
+  if (typesRes.success && typesRes.data) {
+    const dropdownMenu = document.getElementById("categoryDropdownMenu");
+    dropdownMenu.innerHTML = "";
+
+    typesRes.data.forEach((type) => {
+      const label = document.createElement("label");
+      label.className = "dropdown-checkbox-label";
+      label.innerHTML = `
+        <input type="checkbox" value="${type.id}" name="types" class="dropdown-checkbox" />
+        ${type.name}
+      `;
+
+      // pre-check any saved filters
+      if (types.split(",").includes(String(type.id))) {
+        label.querySelector("input").checked = true;
+      }
+
+      dropdownMenu.appendChild(label);
+    });
   }
-
-  typesArray.forEach((type) => {
-    const label = document.createElement("label");
-    label.setAttribute("for", `type-${type.id}`);
-    label.style.display = "block"; // if you want each on a new line
-
-    const checkbox = document.createElement("input");
-    checkbox.type = "checkbox";
-    checkbox.name = "types";
-    checkbox.value = type.id;
-    checkbox.id = `type-${type.id}`;
-
-    const selectTypes = types.split(",");
-    if (selectTypes.includes(`${type.id}`)) {
-      checkbox.checked = true;
-    }
-
-    label.appendChild(checkbox);
-    label.append(` ${type.name}`);
-    typesCheckboxes.appendChild(label);
-  });
 }

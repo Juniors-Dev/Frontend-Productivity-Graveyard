@@ -1,5 +1,6 @@
 import { getPageState } from "./getPageState.js";
 import { setPageState } from "./setPageState.js";
+import { renderIndicators } from "./renderIndicators.js";
 import {
   projectCard,
   projectCardSkeleton,
@@ -29,6 +30,7 @@ export async function fetchAndRenderProjects() {
   const paginationContainer = document.querySelector(".pagination");
   const { order, orderBy, query, types, limit, offset, currentPage } =
     getPageState();
+  renderIndicators();
   showSkeletons(limit, projectsContainer, projectCardSkeleton);
   try {
     const options = { offset, limit, types, order, orderBy };

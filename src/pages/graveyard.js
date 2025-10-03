@@ -5,22 +5,17 @@ import {
 } from "../components/features/graveyard/index.js";
 
 fetchAndRenderProjects();
-
-/* Modal for filter */
-const dialog = document.querySelector("dialog");
-const dialogCloseBtn = document.querySelector("#close-dialog");
-const dialogOpenBtn = document.querySelector("#open-dialog");
-dialogOpenBtn.addEventListener("click", () => {
-  dialog.showModal();
-});
-
-dialogCloseBtn.addEventListener("click", () => {
-  dialog.close();
-});
-
-/* Form Setup */
-
 setupGraveyardForms();
+const toggleFiltersBtn = document.getElementById("toggle-filters");
+const advancedFilters = document.getElementById("advanced-filters");
+
+toggleFiltersBtn.addEventListener("click", () => {
+  advancedFilters.classList.toggle("open");
+  const isOpen = advancedFilters.classList.contains("open");
+  toggleFiltersBtn.textContent = isOpen
+    ? "Advanced Filters ▴"
+    : "Advanced Filters ▾";
+});
 
 /* Form Handler */
 const filterForm = document.getElementById("project-filters");
@@ -29,27 +24,17 @@ async function formHandler(e) {
   e.preventDefault();
   const formData = new FormData(filterForm);
   const data = Object.fromEntries(formData.entries());
-  data.types = formData.getAll("types").join(",");
+  const selectedTypes = [...formData.getAll("types")].join(",");
+  data.types = selectedTypes;
   const searchQuery = searchForm.query.value.trim();
   if (searchQuery) data.query = searchQuery;
 
   setPageState(data, () => {
     fetchAndRenderProjects();
-    dialog.close();
   });
 }
 
-filterForm.addEventListener("submit", async (e) => {
-  formHandler(e);
-});
-
 searchForm.addEventListener("submit", async (e) => {
-  formHandler(e);
-});
-
-const clearFilterBtn = document.querySelector("#clear-filters");
-clearFilterBtn.addEventListener("click", async (e) => {
-  filterForm.reset();
   formHandler(e);
 });
 

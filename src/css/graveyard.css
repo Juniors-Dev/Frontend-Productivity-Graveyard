@@ -139,6 +139,37 @@ input[type="search"] {
   margin-top: 1rem;
 }
 
+.results-indicators {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  margin: 1rem 0;
+  padding: 0.75rem 1rem;
+  background: var(--color-card);
+  border-radius: var(--border-radius);
+  font-size: 0.9rem;
+  color: var(--color-text-secondary);
+  gap: 1rem;
+  width: 100%;
+}
+.results-indicators span {
+  white-space: nowrap;
+}
+
+#advanced-filters {
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  transition:
+    max-height 0.8s ease,
+    opacity 0.4s ease;
+}
+
+#advanced-filters.open {
+  max-height: 500px; /* pick a value larger than your content */
+  opacity: 1;
+}
+
 @media (max-width: 900px) {
   .bury-project-container {
     display: block;
